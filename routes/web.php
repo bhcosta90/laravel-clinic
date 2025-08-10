@@ -1,0 +1,31 @@
+<?php
+
+use App\Http\Controllers\Admin\Api;
+use App\Http\Middleware\ImpersonateMiddleware;
+use Illuminate\Support\Facades\Route;
+
+Route::view('/', 'welcome')->name('welcome');
+
+Route::middleware(['auth', ImpersonateMiddleware::class])->as('admin.')->prefix('admin')->group(function (): void {
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+
+    Route::prefix('v1')->name('v1.')->group(function () {
+        Route::as('people.')->prefix('people')->group(base_path('routes/admin/v1/people.php'));
+        Route::as('registration.')->prefix('registration')->group(base_path('routes/admin/v1/registration.php'));
+        Route::as('transactions.')->prefix('transaction')->group(base_path('routes/admin/v1/transaction.php'));
+        Route::as('appointments.')->prefix('appointment')->group(base_path('routes/admin/v1/appointment.php'));
+
+        Route::prefix('api')->as('api.')->group(function (): void {
+            Route::get('roles/search', [Api\RoleController::class, 'search'])->name('roles.search');
+            Route::get('agreements/search', [Api\AgreementController::class, 'search'])->name('agreement.search');
+            Route::get('anamnesis-group/search', [Api\AnamnesisGroupController::class, 'search'])->name('anamnesis-group.search');
+            Route::get('permissions/search', [Api\PermissionController::class, 'search'])->name('permission.search');
+            Route::get('customers/search', [Api\CustomerController::class, 'search'])->name('customer.search');
+            Route::get('procedures/search', [Api\ProcedureController::class, 'search'])->name('procedure.search');
+            Route::get('payment-methods/search', [Api\PaymentMethodController::class, 'search'])->name('payment-method.search');
+            Route::get('users/search', [Api\UserController::class, 'search'])->name('user.search');
+        });
+    });
+});
+
+require __DIR__.'/auth.php';
