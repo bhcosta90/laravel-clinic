@@ -25,12 +25,16 @@ final class Status extends Component
         return (string) auth()->id();
     }
 
+    // Provide dynamic placeholder for private Echo channel
+    public function getReportIdProperty(): string
+    {
+        return (string) $this->report?->id;
+    }
+
     // Listen to the authenticated user's private channel for this event
-    #[On('echo-private:App.Models.User.{userId},ReportFinishEvent')]
+    #[On('echo-private:App.Models.Report.{userId}.{reportId},ReportFinishEvent')]
     public function handleJobFinished($payload): void
     {
-        Log::info($payload);
-
         if ($this->report) {
             $this->report->refresh();
         }

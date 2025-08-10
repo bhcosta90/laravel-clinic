@@ -20,7 +20,7 @@ final class UserSeeder extends Seeder
             User::factory(23)->create();
 
             User::factory()->create([
-                'id' => '1CRzgsDy2Rv4Po1JPS4CQX',
+                'id' => 'ACRzgsDy2Rv4Po1JPS4CQX',
                 'name'        => 'Test User',
                 'email'       => 'test@example.com',
                 'is_employee' => null,

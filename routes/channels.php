@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    \Illuminate\Support\Facades\Log::info('Broadcast auth check', [
-        'user_id' => (string) $user->id,
-        'channel_id' => (string) $id,
-    ]);
     return (string) $user->id === (string) $id;
+});
+
+
+Broadcast::channel('App.Models.Report.{userId}.{reportId}', function ($user, $userId, $reportId) {
+    return (string) $user->id === (string) $userId
+        && $user->reports()->where('id', $reportId)->exists();
 });
