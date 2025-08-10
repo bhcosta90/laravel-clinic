@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -19,18 +19,18 @@ final class Report extends Model
         'user_id',
     ];
 
+    public function fileUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => when($this->file, fn () => Storage::url("storage/{$this->file}")),
+        );
+    }
+
     protected function casts(): array
     {
         return [
             'key'    => 'string',
             'status' => Status::class,
         ];
-    }
-
-    public function fileUrl(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => when($this->file, fn () => Storage::url("storage/{$this->file}")),
-        );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,16 +26,16 @@ final class User extends Authenticatable implements Auditable
     use CastsDatesToUserTimezone;
     use HasFactory;
     use HashCode;
+    use HasUlids;
     use NodeTrait;
     use Notifiable;
-    use HasUlids;
     use \OwenIt\Auditing\Auditable;
+    public $incrementing = false;
 
     /**
      * The primary key is a ULID string.
      */
     protected $keyType = 'string';
-    public $incrementing = false;
 
     protected $fillable = [
         'name',

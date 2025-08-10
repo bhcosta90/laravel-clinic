@@ -1,14 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\LazilyRefreshDatabase::class)
     ->in('Feature');
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
+expect()->extend('toBeOne', fn () => $this->toBe(1));
 
-function something()
+function something(): void
 {
     // ..
 }

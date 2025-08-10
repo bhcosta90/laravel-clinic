@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 return [
 
     // All other configuration options are the same as the default.

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Database\Seeders;
 
@@ -15,15 +15,15 @@ final class RoleSeeder extends Seeder
     {
         DB::transaction(function (): void {
             $role = Role::create([
-                'name'      => 'Administrador',
-                'children'  => [
+                'name'     => 'Administrador',
+                'children' => [
                     ['name' => 'Testing'],
                     ['name' => 'Clínico Geral'],
                     ['name' => 'Recepcionista'],
                     ['name' => 'Faxineira'],
                     [
-                        'name'      => 'Enfermeira',
-                        'children'  => [
+                        'name'     => 'Enfermeira',
+                        'children' => [
                             ['name' => 'Técnica de enfermagem'],
                         ]],
                     ['name' => 'Fonoaudióloga'],

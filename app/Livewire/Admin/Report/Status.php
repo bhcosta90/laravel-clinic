@@ -1,11 +1,10 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Report;
 
 use App\Models\Report;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -33,7 +32,7 @@ final class Status extends Component
 
     public function getListeners(): array
     {
-        if(blank($this->report)){
+        if (blank($this->report)) {
             return [];
         }
 
@@ -42,10 +41,10 @@ final class Status extends Component
         ];
     }
 
-//    #[On('echo-private:App.Models.Report.{userId}.{reportId},ReportFinishEvent')]
+    //    #[On('echo-private:App.Models.Report.{userId}.{reportId},ReportFinishEvent')]
     public function handleJobFinished(): void
     {
-        if ($this->report) {
+        if ($this->report instanceof Report) {
             $this->report->refresh();
         }
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use App\Http\Controllers\Admin\Api;
 use App\Http\Middleware\ImpersonateMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -9,7 +11,7 @@ Route::view('/', 'welcome')->name('welcome');
 Route::middleware(['auth', ImpersonateMiddleware::class])->as('admin.')->prefix('admin')->group(function (): void {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-    Route::prefix('v1')->name('v1.')->group(function () {
+    Route::prefix('v1')->name('v1.')->group(function (): void {
         Route::as('people.')->prefix('people')->group(base_path('routes/admin/v1/people.php'));
         Route::as('registration.')->prefix('registration')->group(base_path('routes/admin/v1/registration.php'));
         Route::as('transactions.')->prefix('transaction')->group(base_path('routes/admin/v1/transaction.php'));
@@ -28,4 +30,4 @@ Route::middleware(['auth', ImpersonateMiddleware::class])->as('admin.')->prefix(
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

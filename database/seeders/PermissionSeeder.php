@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Database\Seeders;
 
@@ -12,7 +12,7 @@ final class PermissionSeeder extends Seeder
 {
     public function run(): void
     {
-        $permission = array_map(fn ($p) => ['slug' => $p], Can::cases());
+        $permission = array_map(fn ($p): array => ['slug' => $p], Can::cases());
         Permission::upsert($permission, ['slug']);
     }
 }

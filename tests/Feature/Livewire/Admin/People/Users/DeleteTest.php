@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use App\Livewire\Admin\People\Users\Delete;
 use App\Models\User;

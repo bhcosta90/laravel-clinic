@@ -39,7 +39,8 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-laravel": "^3.2"
+        "pestphp/pest-plugin-laravel": "^3.2",
+        "rector/rector": "^2.1"
     },
     "autoload": {
         "psr-4": {
@@ -76,7 +77,10 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#8b5cf6,#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan reverb:start --debug --port=8150\" \"php artisan serve --port=8100\" \"php artisan queue:listen --queue=low,priority,long,medium --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=reverb,server,queue,logs,vite"
         ],
-        "format": "./vendor/bin/pint",
+        "format": [
+            "./vendor/bin/pint",
+            "./vendor/bin/rector process"
+        ],
         "analyse": "./vendor/bin/phpstan analyse",
         "test": "./vendor/bin/pest --parallel",
         "ci": [

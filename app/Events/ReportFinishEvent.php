@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
@@ -7,7 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class ReportFinishEvent implements ShouldBroadcastNow
+final class ReportFinishEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
 

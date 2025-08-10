@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Appointments\Appointments;
 
@@ -45,7 +45,7 @@ final class Report extends Component
     #[Computed(persist: true)]
     public function status(): array
     {
-        return array_map(fn (Status $item) => [
+        return array_map(fn (Status $item): array => [
             'name'  => __($item->label()),
             'value' => $item->value,
         ], Status::cases());

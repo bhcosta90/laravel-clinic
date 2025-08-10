@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Jobs;
 
 use App\Enums\Models\Report\Status;
@@ -11,9 +13,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
-class GenerateReportByPdfJob implements ShouldQueue
+final class GenerateReportByPdfJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -38,8 +39,8 @@ class GenerateReportByPdfJob implements ShouldQueue
         sleep(10);
 
         $report->status = Status::Completed;
-        $report->file = 'path/to/generated/report.pdf';
-        $report->type = 'pdf';
+        $report->file   = 'path/to/generated/report.pdf';
+        $report->type   = 'pdf';
         $report->save();
 
         // Notify the specific user via private channel

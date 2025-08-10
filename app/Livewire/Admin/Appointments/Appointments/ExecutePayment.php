@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Appointments\Appointments;
 
@@ -73,7 +73,7 @@ final class ExecutePayment extends Component
         $this->dispatch('updated');
     }
 
-    protected function rules(): array
+    private function rules(): array
     {
         return [
             'value'             => ['required', 'min:0'],
