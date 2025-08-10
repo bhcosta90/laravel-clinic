@@ -33,7 +33,7 @@ class GenerateReportByPdfJob implements ShouldQueue
 
         broadcast(new ReportFinishEvent($this->reportId));
 
-        sleep(2);
+        sleep(10);
 
         $report->status = Status::Completed;
         $report->file = 'path/to/generated/report.pdf';
