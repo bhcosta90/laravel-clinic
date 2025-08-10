@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Agreement;
 use App\Models\Appointment;
+use App\Models\Customer;
 use App\Models\Procedure;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -15,7 +16,7 @@ final class AppointmentSeeder extends Seeder
     public function run(): void
     {
         $usersId      = User::whereIsEmployee(true)->pluck('id')->toArray();
-        $customersId  = User::whereIsEmployee(true)->pluck('id')->toArray();
+        $customersId  = Customer::pluck('id')->toArray();
         $proceduresId = Procedure::pluck('id')->toArray();
         $agreementsId = Agreement::pluck('id')->toArray();
 
