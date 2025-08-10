@@ -95,11 +95,6 @@ final class User extends Authenticatable implements Auditable
         return $response;
     }
 
-    public function reports(): HasMany
-    {
-        return $this->hasMany(Report::class);
-    }
-
     protected function casts(): array
     {
         return [

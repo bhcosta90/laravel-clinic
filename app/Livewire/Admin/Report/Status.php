@@ -31,9 +31,19 @@ final class Status extends Component
         return (string) $this->report?->id;
     }
 
-    // Listen to the authenticated user's private channel for this event
-    #[On('echo-private:App.Models.Report.{userId}.{reportId},ReportFinishEvent')]
-    public function handleJobFinished($payload): void
+    public function getListeners(): array
+    {
+        if(blank($this->report)){
+            return [];
+        }
+
+        return [
+            'echo-private:App.Models.Report.{userId}.{reportId},ReportFinishEvent' => 'handleJobFinished',
+        ];
+    }
+
+//    #[On('echo-private:App.Models.Report.{userId}.{reportId},ReportFinishEvent')]
+    public function handleJobFinished(): void
     {
         if ($this->report) {
             $this->report->refresh();

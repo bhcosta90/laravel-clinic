@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Report;
 use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
@@ -9,5 +10,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 
 Broadcast::channel('App.Models.Report.{userId}.{reportId}', function ($user, $userId, $reportId) {
     return (string) $user->id === (string) $userId
-        && $user->reports()->where('id', $reportId)->exists();
+        && Report::whereUserId($userId)->where('id', $reportId)->exists();
 });
