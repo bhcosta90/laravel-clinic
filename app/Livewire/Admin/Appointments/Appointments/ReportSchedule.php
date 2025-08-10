@@ -12,7 +12,7 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-final class Report extends Component
+final class ReportSchedule extends Component
 {
     public ?\App\Models\Report $report = null;
 
@@ -33,10 +33,10 @@ final class Report extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.appointments.appointments.report');
+        return view('livewire.admin.appointments.appointments.report-schedule');
     }
 
-    #[On('appointment::show-report')]
+    #[On('appointment::appointment::report-schedule')]
     public function load(): void
     {
         $this->modal = true;
@@ -64,7 +64,7 @@ final class Report extends Component
     {
         $this->report = $generateReportByPdf->execute(
             user: auth()->user(),
-            name: __('Appointments Report'),
+            name: __('Appointments ReportSchedule'),
             model: new Appointment(),
         );
     }

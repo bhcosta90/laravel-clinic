@@ -20,6 +20,6 @@ final class ReportFinishEvent implements ShouldBroadcastNow
     public function broadcastOn(): Channel
     {
         // Broadcast to the authenticated user's private channel
-        return new PrivateChannel('App.Models.Report.' . $this->userId . '.' . $this->reportId);
+        return new PrivateChannel('App.Models.ReportSchedule.' . $this->userId . '.' . $this->reportId);
     }
 }

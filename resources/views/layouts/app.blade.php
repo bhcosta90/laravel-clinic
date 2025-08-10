@@ -54,7 +54,8 @@
             <livewire:admin.people.user.remove-impersonate/>
         @endif
         <livewire:admin.financial.transactions.receipt-agreement.index/>
-        <livewire:admin.appointments.appointments.report />
+        <livewire:admin.appointments.appointments.report-schedule />
+        <livewire:admin.appointments.appointments.report-procedure />
     </x-slot:header>
     <x-slot:menu>
         <x-side-bar smart collapsible>
@@ -161,22 +162,23 @@
                              :visible="
                     auth()->user()->can('viewAny', Appointment::class)
                     || auth()->user()->can('generateReport', Appointment::class)
-                    || auth()->user()->can('generateReport', Procedure::class)
                 "
             >
                 <x-side-bar.item :text="__('Appointments')"
                                  :route="route('admin.v1.appointments.appointments.index')"
                                  :visible="auth()->user()->can('viewAny', Appointment::class)"/>
 
-                <x-side-bar.item :text="__('Scheduling report')"
-                                 x-on:click="$dispatch('appointment::show-report')"
-                                 href="#"
-                                 :visible="auth()->user()->can('viewAny', Appointment::class)"/>
+                @can('viewAny', Appointment::class)
+                    <x-side-bar.item :text="__('Scheduling report')"
+                                     x-on:click="$dispatch('appointment::appointment::report-schedule')"
+                                     href="#"
+                    />
 
-                <x-side-bar.item :text="__('Procedure report')"
-                                 x-on:click="$dispatch('procedure::show-report')"
-                                 href="#"
-                                 :visible="auth()->user()->can('generateReport', Procedure::class)"/>
+                    <x-side-bar.item :text="__('Procedure report')"
+                                     x-on:click="$dispatch('appointment::appointment::report-procedure')"
+                                     href="#"
+                    />
+                @endcan
 
             </x-side-bar.item>
 

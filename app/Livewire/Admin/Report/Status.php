@@ -37,11 +37,11 @@ final class Status extends Component
         }
 
         return [
-            'echo-private:App.Models.Report.{userId}.{reportId},ReportFinishEvent' => 'handleJobFinished',
+            'echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportFinishEvent' => 'handleJobFinished',
         ];
     }
 
-    //    #[On('echo-private:App.Models.Report.{userId}.{reportId},ReportFinishEvent')]
+    //    #[On('echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportFinishEvent')]
     public function handleJobFinished(): void
     {
         if ($this->report instanceof Report) {
