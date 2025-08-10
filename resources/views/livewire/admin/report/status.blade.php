@@ -12,7 +12,9 @@
                 @break
             @case(Status::Completed)
                 <div
-                    class="bg-green-400 border-green-600 rounded p-3 text-center text-white-50 border-1 ">@lang('Successful report')</div>
+                    class="bg-green-400 border-green-600 rounded p-3 text-center text-white-50 border-1 ">@lang('Successful report. <a href=":link">Click here to see the report</a>', [
+                        'link' => $report->file_url,
+                    ])</div>
                 @break
             @default
                 <div

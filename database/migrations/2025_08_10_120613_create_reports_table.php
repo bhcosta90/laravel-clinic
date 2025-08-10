@@ -16,6 +16,8 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('model');
             $table->unsignedBigInteger('status')->nullable();
+            $table->string('file')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

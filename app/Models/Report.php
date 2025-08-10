@@ -6,6 +6,8 @@ namespace App\Models;
 
 use App\Abstracts\Model;
 use App\Enums\Models\Report\Status;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Storage;
 
 final class Report extends Model
 {
@@ -23,5 +25,12 @@ final class Report extends Model
             'key'    => 'string',
             'status' => Status::class,
         ];
+    }
+
+    public function fileUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => when($this->file, fn () => Storage::url("storage/{$this->file}")),
+        );
     }
 }
