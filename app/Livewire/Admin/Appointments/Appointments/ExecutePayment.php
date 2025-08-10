@@ -19,7 +19,7 @@ final class ExecutePayment extends Component
 
     public Appointment $appointment;
 
-    public int $user_id;
+    public string $user_id;
 
     public float $value;
 
@@ -35,7 +35,7 @@ final class ExecutePayment extends Component
 
     public function mount(): void
     {
-        $this->user_id = $this->appointment->user_id;
+        $this->user_id = (string) $this->appointment->user_id;
         $this->value   = $this->appointment->procedure->price;
         $this->date    = now()->format('Y-m-d');
     }

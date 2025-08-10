@@ -14,7 +14,7 @@ return new class () extends Migration {
             $table->string('name');
             $table->foreignId('agreement_id')->nullable()->constrained('agreements');
             $table->foreignId('customer_id')->nullable()->constrained('customers');
-            $table->foreignId('user_id')->nullable()->constrained('customers');
+            $table->foreignUlid('user_id')->nullable()->constrained('users');
             $table->foreignId('payment_method_id')->nullable()->constrained('payment_methods');
             $table->string('model_type')->nullable();
             $table->unsignedBigInteger('model_id')->nullable();

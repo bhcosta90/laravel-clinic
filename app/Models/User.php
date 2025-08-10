@@ -11,6 +11,7 @@ use App\Traits\Models\CastsDatesToUserTimezone;
 use App\Traits\Models\HashCode;
 use App\Traits\Models\NodeTrait;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -27,7 +28,14 @@ final class User extends Authenticatable implements Auditable
     use HashCode;
     use NodeTrait;
     use Notifiable;
+    use HasUlids;
     use \OwenIt\Auditing\Auditable;
+
+    /**
+     * The primary key is a ULID string.
+     */
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
         'name',

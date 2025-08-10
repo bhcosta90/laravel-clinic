@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class GenerateReportByPdfJob implements ShouldQueue
 {
@@ -32,7 +33,7 @@ class GenerateReportByPdfJob implements ShouldQueue
         $report->save();
 
         // Notify the specific user via private channel
-        broadcast(new ReportFinishEvent($this->reportId, $report->user_id));
+        broadcast(new ReportFinishEvent($this->reportId, (string) $report->user_id));
 
         sleep(10);
 
@@ -42,7 +43,7 @@ class GenerateReportByPdfJob implements ShouldQueue
         $report->save();
 
         // Notify the specific user via private channel
-        broadcast(new ReportFinishEvent($this->reportId, $report->user_id));
+        broadcast(new ReportFinishEvent($this->reportId, (string) $report->user_id));
 
     }
 }

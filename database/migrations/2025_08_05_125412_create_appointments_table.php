@@ -12,7 +12,7 @@ return new class () extends Migration {
         Schema::create('appointments', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('customer_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignUlid('user_id')->constrained();
             $table->foreignId('procedure_id')->constrained();
             $table->foreignId('transaction_id')->nullable()->constrained();
             $table->foreignId('agreement_id')->nullable()->constrained();

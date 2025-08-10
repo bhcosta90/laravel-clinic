@@ -20,9 +20,9 @@ final class Status extends Component
     }
 
     // Provide dynamic placeholder for private Echo channel
-    public function getUserIdProperty(): int
+    public function getUserIdProperty(): string
     {
-        return (int) auth()->id();
+        return (string) auth()->id();
     }
 
     // Listen to the authenticated user's private channel for this event
