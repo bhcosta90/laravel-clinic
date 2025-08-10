@@ -31,7 +31,8 @@ class GenerateReportByPdfJob implements ShouldQueue
         $report->status = Status::Processing;
         $report->save();
 
-        broadcast(new ReportFinishEvent($this->reportId));
+        // Notify the specific user via private channel
+        broadcast(new ReportFinishEvent($this->reportId, $report->user_id));
 
         sleep(10);
 
@@ -40,7 +41,8 @@ class GenerateReportByPdfJob implements ShouldQueue
         $report->type = 'pdf';
         $report->save();
 
-        broadcast(new ReportFinishEvent($this->reportId));
+        // Notify the specific user via private channel
+        broadcast(new ReportFinishEvent($this->reportId, $report->user_id));
 
     }
 }

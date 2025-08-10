@@ -19,7 +19,14 @@ final class Status extends Component
         return view('livewire.admin.report.status');
     }
 
-    #[On('echo:report,ReportFinishEvent')]
+    // Provide dynamic placeholder for private Echo channel
+    public function getUserIdProperty(): int
+    {
+        return (int) auth()->id();
+    }
+
+    // Listen to the authenticated user's private channel for this event
+    #[On('echo-private:App.Models.User.{userId},ReportFinishEvent')]
     public function handleJobFinished($payload): void
     {
         Log::info($payload);
