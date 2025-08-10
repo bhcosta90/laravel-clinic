@@ -16,7 +16,7 @@ final class Report extends Component
 {
     public ?\App\Models\Report $report = null;
 
-    public bool $modal        = true;
+    public bool $modal        = false;
     public string $date_start = '';
     public string $date_end   = '';
     public ?int $status       = null;
