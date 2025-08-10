@@ -11,11 +11,11 @@ return new class () extends Migration {
     {
         Schema::create('appointments', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('customer_id')->constrained();
-            $table->foreignUlid('user_id')->constrained();
-            $table->foreignId('procedure_id')->constrained();
-            $table->foreignId('transaction_id')->nullable()->constrained();
-            $table->foreignId('agreement_id')->nullable()->constrained();
+            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignUlid('user_id')->constrained('users');
+            $table->foreignId('procedure_id')->constrained('procedures');
+            $table->foreignId('transaction_id')->nullable()->constrained('transactions');
+            $table->foreignId('agreement_id')->nullable()->constrained('agreements');
             $table->dateTime('date');
             $table->boolean('is_return')->nullable();
             $table->boolean('is_paid')->nullable();

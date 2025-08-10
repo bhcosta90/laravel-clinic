@@ -12,7 +12,7 @@ return new class () extends Migration {
         Schema::create('anamnesis_items', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
-            $table->foreignId('anamnesis_group_id')->constrained();
+            $table->foreignId('anamnesis_group_id')->constrained('anamnesis_groups');
             $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

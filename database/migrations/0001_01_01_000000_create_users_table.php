@@ -14,7 +14,7 @@ return new class () extends Migration {
             $table->unsignedInteger('nested_parent')->nullable();
             $table->unsignedInteger('nested_left');
             $table->unsignedInteger('nested_right');
-            $table->foreignId('role_id')->nullable()->constrained();
+            $table->foreignId('role_id')->nullable()->constrained('roles');
             $table->string('name');
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
