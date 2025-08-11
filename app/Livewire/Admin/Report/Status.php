@@ -6,7 +6,6 @@ namespace App\Livewire\Admin\Report;
 
 use App\Models\Report;
 use Illuminate\View\View;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 final class Status extends Component
@@ -37,11 +36,10 @@ final class Status extends Component
         }
 
         return [
-            'echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportFinishEvent' => 'handleJobFinished',
+            'echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportStatusEvent' => 'handleJobFinished',
         ];
     }
 
-    //    #[On('echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportFinishEvent')]
     public function handleJobFinished(): void
     {
         if ($this->report instanceof Report) {

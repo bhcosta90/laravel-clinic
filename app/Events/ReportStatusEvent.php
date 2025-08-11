@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 
-final class ReportFinishEvent implements ShouldBroadcastNow
+final class ReportStatusEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
 
