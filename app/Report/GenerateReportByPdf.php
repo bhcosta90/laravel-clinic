@@ -13,6 +13,7 @@ final class GenerateReportByPdf
     public function execute(
         User $user,
         string $name,
+        string $view,
         string $model,
         array $filters = []
     ): Report {
@@ -22,7 +23,7 @@ final class GenerateReportByPdf
             'key'     => str()->uuid(),
         ]);
 
-        dispatch(new GenerateReportByPdfJob($report->id, $model, $filters));
+        dispatch(new GenerateReportByPdfJob($report->id, $view, $model, $filters));
 
         return $report;
     }

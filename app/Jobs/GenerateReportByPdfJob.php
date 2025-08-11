@@ -23,8 +23,12 @@ final class GenerateReportByPdfJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public function __construct(public int $reportId, public string $model, public array $filters = [])
-    {
+    public function __construct(
+        public int $reportId,
+        public string $view,
+        public string $model,
+        public array $filters = []
+    ) {
         $this->onQueue(Queue::Low);
     }
 
@@ -50,7 +54,7 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
     protected function generatePdf(string $model, array $filters, string $id): string
     {
-        $content = Pdf::loadView('pdf.report.default')
+        $content = Pdf::loadView($this->view)
             ->stream();
 
         Storage::put($nameFile = "report/{$id}.pdf", $content->getContent());
