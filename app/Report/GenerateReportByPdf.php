@@ -22,7 +22,7 @@ final class GenerateReportByPdf
         $report = Report::create([
             'user_id' => $user->id,
             'name'    => $name,
-            'key'     => $id = str()->uuid(),
+            'key'     => str()->uuid(),
             'model'   => $modelObject->getMorphClass(),
         ]);
 
