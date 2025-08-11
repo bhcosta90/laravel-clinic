@@ -8,12 +8,13 @@ use App\Enums\Models\Report\Status;
 use App\Enums\Queue\Queue;
 use App\Events\ReportFinishEvent;
 use App\Models\Report;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Spatie\LaravelPdf\Facades\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 final class GenerateReportByPdfJob implements ShouldQueue
 {
@@ -49,8 +50,10 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
     protected function generatePdf(string $model, array $filters, string $id): string
     {
-        Pdf::view('pdf.report.default')
-            ->save($nameFile = "report/{$id}.pdf");
+        $content = Pdf::loadView('pdf.report.default')
+            ->stream();
+
+        Storage::put($nameFile = "report/{$id}.pdf", $content->getContent());
 
         return $nameFile;
     }

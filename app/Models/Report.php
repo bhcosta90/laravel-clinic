@@ -22,7 +22,7 @@ final class Report extends Model
     public function fileUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => when($this->file, fn () => Storage::url("storage/{$this->file}")),
+            get: fn () => when($this->file, fn () => Storage::url($this->file)),
         );
     }
 

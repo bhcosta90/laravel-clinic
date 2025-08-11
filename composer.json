@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.1",
         "kalnoy/nestedset": "^6.0",
         "laravel/framework": "^12.0",
         "laravel/reverb": "^1.5",
@@ -25,7 +26,6 @@
         "livewire/livewire": "^3.0.0",
         "owen-it/laravel-auditing": "^14.0",
         "quantumtecnology/controller-basics-extension": "dev-release/3.x",
-        "spatie/laravel-pdf": "^1.6",
         "tallstackui/tallstackui": "^2.0.0",
         "vinkla/hashids": "^13.0"
     },
