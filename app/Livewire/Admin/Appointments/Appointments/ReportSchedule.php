@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Appointments\Appointments;
 
 use App\Enums\Models\Appointment\Status;
-use App\Models\Appointment;
+use App\Models\Agreement;
 use App\Report\GenerateReportByPdf;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
@@ -62,10 +62,13 @@ final class ReportSchedule extends Component
 
     public function save(GenerateReportByPdf $generateReportByPdf): void
     {
+        $filters = [];
+
         $this->report = $generateReportByPdf->execute(
             user: auth()->user(),
             name: 'report.schedule',
-            model: new Appointment(),
+            model: Agreement::class,
+            filters: $filters,
         );
     }
 }

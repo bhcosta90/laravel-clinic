@@ -13,6 +13,8 @@ final class GenerateReportByPdf
     public function execute(
         User $user,
         string $name,
+        string $model,
+        array $filters = []
     ): Report {
         $report = Report::create([
             'user_id' => $user->id,
@@ -20,7 +22,7 @@ final class GenerateReportByPdf
             'key'     => str()->uuid(),
         ]);
 
-        dispatch(new GenerateReportByPdfJob($report->id));
+        dispatch(new GenerateReportByPdfJob($report->id, $model, $filters));
 
         return $report;
     }

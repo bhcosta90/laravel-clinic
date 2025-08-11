@@ -13,6 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Spatie\LaravelPdf\Facades\Pdf;
 
 final class GenerateReportByPdfJob implements ShouldQueue
 {
@@ -21,7 +22,7 @@ final class GenerateReportByPdfJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public function __construct(public int $reportId)
+    public function __construct(public int $reportId, public string $model, public array $filters = [])
     {
         $this->onQueue(Queue::Low);
     }
@@ -35,14 +36,22 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
         broadcast(new ReportFinishEvent($this->reportId, (string) $report->user_id));
 
-        sleep(10);
+        $nameFile = $this->generatePdf($this->model, $this->filters, sha1((string) $this->reportId));
 
         $report->status = Status::Completed;
-        $report->file   = 'path/to/generated/report.pdf';
+        $report->file   = $nameFile;
         $report->type   = 'pdf';
         $report->save();
 
         broadcast(new ReportFinishEvent($this->reportId, (string) $report->user_id));
 
+    }
+
+    protected function generatePdf(string $model, array $filters, string $id): string
+    {
+        Pdf::view('pdf.report.default')
+            ->save($nameFile = "report/{$id}.pdf");
+
+        return $nameFile;
     }
 }

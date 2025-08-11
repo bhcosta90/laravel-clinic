@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Livewire\Admin\Appointments\Appointments;
 
-use App\Models\Appointment;
+use App\Models\Agreement;
 use App\Report\GenerateReportByPdf;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class ReportProcedure extends Component
+final class ReportProcedure extends Component
 {
     public ?\App\Models\Report $report = null;
 
@@ -31,10 +33,13 @@ class ReportProcedure extends Component
 
     public function save(GenerateReportByPdf $generateReportByPdf): void
     {
+        $filters = [];
+
         $this->report = $generateReportByPdf->execute(
             user: auth()->user(),
             name: 'report.procedure',
-            model: new Appointment(),
+            model: Agreement::class,
+            filters: $filters,
         );
     }
 }
