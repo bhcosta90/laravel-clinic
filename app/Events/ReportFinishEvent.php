@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -17,9 +16,11 @@ final class ReportFinishEvent implements ShouldBroadcastNow
     {
     }
 
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        // Broadcast to the authenticated user's private channel
-        return new PrivateChannel('App.Models.ReportSchedule.' . $this->userId . '.' . $this->reportId);
+        return [
+            new PrivateChannel('App.Models.ReportSchedule.' . $this->userId),
+            new PrivateChannel('App.Models.ReportSchedule.' . $this->userId . '.' . $this->reportId),
+        ];
     }
 }
