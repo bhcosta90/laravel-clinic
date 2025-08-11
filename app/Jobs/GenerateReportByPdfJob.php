@@ -15,6 +15,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class GenerateReportByPdfJob implements ShouldQueue
 {
@@ -41,10 +42,10 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
         broadcast(new ReportFinishEvent($this->reportId, (string) $report->user_id));
 
-        $nameFile = $this->generatePdf($this->model, $this->filters, sha1((string) $this->reportId));
+        //        $nameFile = $this->generatePdf($this->model, $this->filters, sha1((string) $this->reportId));
 
         $report->status = Status::Completed;
-        $report->file   = $nameFile;
+        $report->file   = $nameFile ?? 'nothing-' . sha1((string) $this->reportId);
         $report->type   = 'pdf';
         $report->save();
 
@@ -54,7 +55,11 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
     protected function generatePdf(string $model, array $filters, string $id): string
     {
-        $content = Pdf::loadView($this->view)
+        $result = app(BuilderQuery::class)
+            ->execute(new $model(), [], $filters)
+            ->get();
+
+        $content = Pdf::loadView($this->view, compact('result'))
             ->stream();
 
         Storage::put($nameFile = "report/{$id}.pdf", $content->getContent());
