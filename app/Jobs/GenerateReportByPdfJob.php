@@ -26,9 +26,12 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
     public function __construct(
         public int $reportId,
+        public string $name,
         public string $view,
         public string $model,
-        public array $filters = []
+        public array $filters,
+        public ?string $orderColumn,
+        public ?string $orderDirection,
     ) {
         $this->onQueue(Queue::Low);
     }
@@ -42,7 +45,7 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
         broadcast(new ReportFinishEvent($this->reportId, (string) $report->user_id));
 
-        //        $nameFile = $this->generatePdf($this->model, $this->filters, sha1((string) $this->reportId));
+        $nameFile = $this->generatePdf();
 
         $report->status = Status::Completed;
         $report->file   = $nameFile ?? 'nothing-' . sha1((string) $this->reportId);
@@ -53,16 +56,26 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
     }
 
-    protected function generatePdf(string $model, array $filters, string $id): string
+    protected function generatePdf(): string
     {
-        $result = app(BuilderQuery::class)
-            ->execute(new $model(), [], $filters)
-            ->get();
+        $model = $this->model;
+
+        $query = app(BuilderQuery::class)
+            ->execute(new $model(), [], $this->filters);
+
+        if ($this->orderColumn) {
+            $query->orderBy($this->orderColumn, $this->orderDirection);
+        }
+
+        $result = $query->get();
 
         $content = Pdf::loadView($this->view, compact('result'))
             ->stream();
 
-        Storage::put($nameFile = "report/{$id}.pdf", $content->getContent());
+        $name = sha1($this->name);
+        $id   = sha1((string) $this->reportId);
+
+        Storage::put($nameFile = "report/{$name}/{$id}.pdf", $content->getContent());
 
         return $nameFile;
     }

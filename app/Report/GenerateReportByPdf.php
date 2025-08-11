@@ -15,14 +15,24 @@ final class GenerateReportByPdf
         string $name,
         string $view,
         string $model,
-        array $filters = []
+        array $filters = [],
+        ?string $orderColumn = null,
+        ?string $orderDirection = null,
     ): Report {
         $report = Report::create([
             'user_id' => $user->id,
             'name'    => $name,
         ]);
 
-        dispatch(new GenerateReportByPdfJob($report->id, $view, $model, $filters));
+        dispatch(new GenerateReportByPdfJob(
+            $report->id,
+            $name,
+            $view,
+            $model,
+            $filters,
+            $orderColumn,
+            $orderDirection
+        ));
 
         return $report;
     }

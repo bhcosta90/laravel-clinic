@@ -70,6 +70,8 @@ final class ReportSchedule extends Component
             view: 'pdf.report.schedule',
             model: Agreement::class,
             filters: $filters,
+            orderColumn: 'date',
+            orderDirection: 'desc'
         );
     }
 }
