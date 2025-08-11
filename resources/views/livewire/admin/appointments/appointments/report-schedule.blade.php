@@ -45,6 +45,10 @@
 
     <livewire:admin.report.status :$report wire:key="report-{{ $report?->id }}" />
 
+    @if($modal)
+        <livewire:admin.report.index name="report.schedule" />
+    @endif
+
     <x-slot:footer>
         <x-button type="submit" form="report-{{ $id }}">
             @lang('Generate PDF Report')

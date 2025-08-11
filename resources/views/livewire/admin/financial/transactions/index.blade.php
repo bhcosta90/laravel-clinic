@@ -13,7 +13,7 @@
 
         <x-table :headers="$this->headers" :$sort :rows="$this->rows" paginate simple-pagination filter loading :quantity="[2, 5, 15, 25]">
             @interact('column_created_at', $row)
-                <span class="text-gray-500 dark:text-dark-300 text-sm">{{ $row->created_at->diffForHumans() }}</span>
+                <x-ui.created_at :date="$row->created_at" />
             @endinteract
 
             @interact('column_action', $row)

@@ -20,6 +20,8 @@ return new class() extends Migration {
             $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['user_id', 'name']);
         });
     }
 
