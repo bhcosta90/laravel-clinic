@@ -47,7 +47,7 @@
         <livewire:admin.report.status :$report wire:key="report-{{ $report?->id }}" />
 
         @if($modal)
-            <livewire:admin.report.report name="report.schedule" />
+            <livewire:admin.report.report name="report.schedule" @saved="$refresh" />
         @endif
     </div>
 
