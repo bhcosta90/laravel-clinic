@@ -14,7 +14,6 @@ return new class() extends Migration {
             $table->foreignUlid('user_id')->constrained('users');
             $table->uuid('key');
             $table->string('name');
-            $table->string('model');
             $table->unsignedBigInteger('status')->nullable();
             $table->string('file')->nullable();
             $table->string('type')->nullable();
