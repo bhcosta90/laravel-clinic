@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Storage;
 final class Report extends Model
 {
     protected $fillable = [
-        'key',
         'name',
         'status',
         'model',

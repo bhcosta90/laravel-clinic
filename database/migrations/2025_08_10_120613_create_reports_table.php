@@ -12,7 +12,6 @@ return new class() extends Migration {
         Schema::create('reports', function (Blueprint $table): void {
             $table->id();
             $table->foreignUlid('user_id')->constrained('users');
-            $table->uuid('key');
             $table->string('name');
             $table->unsignedBigInteger('status')->nullable();
             $table->string('file')->nullable();
