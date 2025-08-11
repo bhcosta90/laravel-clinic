@@ -7,6 +7,7 @@ namespace App\Livewire\Admin\Report;
 use App\Models\Report as ModelReport;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -41,6 +42,7 @@ final class Report extends Component
     }
 
     #[Computed]
+    #[On('report::index')]
     public function rows()
     {
         return app(BuilderQuery::class)->execute(new ModelReport(), [], [

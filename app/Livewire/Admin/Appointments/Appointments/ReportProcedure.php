@@ -42,5 +42,7 @@ final class ReportProcedure extends Component
             model: Agreement::class,
             filters: $filters,
         );
+
+        $this->dispatch('report::index');
     }
 }
