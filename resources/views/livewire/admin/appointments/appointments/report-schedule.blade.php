@@ -43,11 +43,13 @@
         </div>
     </form>
 
-    <livewire:admin.report.status :$report wire:key="report-{{ $report?->id }}" />
+    <div class="space-y-4">
+        <livewire:admin.report.status :$report wire:key="report-{{ $report?->id }}" />
 
-    @if($modal)
-        <livewire:admin.report.index name="report.schedule" />
-    @endif
+        @if($modal)
+            <livewire:admin.report.report name="report.schedule" />
+        @endif
+    </div>
 
     <x-slot:footer>
         <x-button type="submit" form="report-{{ $id }}">

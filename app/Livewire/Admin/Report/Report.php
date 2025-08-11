@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Report;
 
-use App\Models\Report;
+use App\Models\Report as ModelReport;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -12,7 +12,7 @@ use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
-final class Index extends Component
+final class Report extends Component
 {
     use WithoutUrlPagination;
     use WithPagination;
@@ -26,7 +26,7 @@ final class Index extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.report.index');
+        return view('livewire.admin.report.report');
     }
 
     #[Computed(persist: true)]
@@ -43,7 +43,7 @@ final class Index extends Component
     #[Computed]
     public function rows()
     {
-        return app(BuilderQuery::class)->execute(new Report(), [], [
+        return app(BuilderQuery::class)->execute(new ModelReport(), [], [
             '(user_id)' => auth()->id(),
             '(name)'    => $this->name,
         ])
