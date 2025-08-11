@@ -64,7 +64,7 @@ final class ReportSchedule extends Component
     {
         $this->report = $generateReportByPdf->execute(
             user: auth()->user(),
-            name: __('Appointments ReportSchedule'),
+            name: 'report.schedule',
             model: new Appointment(),
         );
     }

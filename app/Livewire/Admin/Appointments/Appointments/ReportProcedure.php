@@ -33,7 +33,7 @@ class ReportProcedure extends Component
     {
         $this->report = $generateReportByPdf->execute(
             user: auth()->user(),
-            name: __('Appointments ReportSchedule'),
+            name: 'report.procedure',
             model: new Appointment(),
         );
     }
