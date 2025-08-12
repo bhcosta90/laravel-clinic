@@ -31,6 +31,7 @@ final class Report extends Component
     }
 
     #[Computed(persist: true)]
+    #[On('report::index')]
     public function headers(): array
     {
         return [
@@ -43,6 +44,7 @@ final class Report extends Component
 
     #[Computed]
     #[On('report::index')]
+    #[On('saved')]
     public function rows()
     {
         return app(BuilderQuery::class)->execute(new ModelReport(), [], [

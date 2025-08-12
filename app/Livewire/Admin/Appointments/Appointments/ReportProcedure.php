@@ -43,6 +43,6 @@ final class ReportProcedure extends Component
             filters: $filters,
         );
 
-        $this->dispatch('saved');
+        $this->dispatch('report::index');
     }
 }

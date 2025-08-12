@@ -74,6 +74,6 @@ final class ReportSchedule extends Component
             orderDirection: 'desc'
         );
 
-        $this->dispatch('saved');
+        $this->dispatch('report::index');
     }
 }
