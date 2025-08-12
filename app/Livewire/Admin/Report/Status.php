@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Report;
 
+use App\Enums\Models\Report\Status as StatusEnum;
 use App\Models\Report;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -11,6 +12,8 @@ use Livewire\Component;
 final class Status extends Component
 {
     public ?Report $report = null;
+
+    public bool $min = false;
 
     public function render(): View
     {
@@ -31,7 +34,7 @@ final class Status extends Component
 
     public function getListeners(): array
     {
-        if (blank($this->report)) {
+        if (blank($this->report) || StatusEnum::Completed !== $this->report->status) {
             return [];
         }
 
