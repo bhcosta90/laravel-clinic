@@ -21,8 +21,8 @@ return new class() extends Migration {
 
             $table->bigIncrements('id');
             $table->string($morphPrefix . '_type')->nullable();
-            $table->ulid($morphPrefix . '_id')->nullable();
-            $table->foreignUlid('impersonate_user_id')->nullable();
+            $table->uuid($morphPrefix . '_id')->nullable();
+            $table->foreignUuid('impersonate_user_id')->nullable();
             $table->string('event');
             $table->morphs('auditable');
             $table->text('old_values')->nullable();

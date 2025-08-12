@@ -10,7 +10,7 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table): void {
-            $table->ulid('id')->primary();
+            $table->uuid('id')->primary();
             $table->unsignedInteger('nested_parent')->nullable();
             $table->unsignedInteger('nested_left');
             $table->unsignedInteger('nested_right');

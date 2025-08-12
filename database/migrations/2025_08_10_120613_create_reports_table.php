@@ -11,7 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('reports', function (Blueprint $table): void {
             $table->id();
-            $table->foreignUlid('user_id')->constrained('users');
+            $table->foreignUuid('user_id')->constrained('users');
             $table->string('name');
             $table->string('view');
             $table->json('filters')->nullable();
