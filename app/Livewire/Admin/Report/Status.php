@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Report;
 
-use App\Enums\Models\Report\Status as StatusEnum;
 use App\Models\Report;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -34,12 +33,12 @@ final class Status extends Component
 
     public function getListeners(): array
     {
-        if (blank($this->report) || StatusEnum::Completed !== $this->report->status) {
+        if (blank($this->report)) {
             return [];
         }
 
         return [
-            'echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportStatusEvent' => 'handleJobFinished',
+            'echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportFinishEvent' => 'handleJobFinished',
         ];
     }
 

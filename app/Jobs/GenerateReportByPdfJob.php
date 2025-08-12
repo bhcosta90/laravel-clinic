@@ -6,7 +6,7 @@ namespace App\Jobs;
 
 use App\Enums\Models\Report\Status;
 use App\Enums\Queue\Queue;
-use App\Events\ReportStatusEvent;
+use App\Events\ReportFinishEvent;
 use App\Models\Report;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
@@ -43,16 +43,16 @@ final class GenerateReportByPdfJob implements ShouldQueue
         $report->status = Status::Processing;
         $report->save();
 
-        broadcast(new ReportStatusEvent($this->reportId, (string) $report->user_id));
+        $event = new ReportFinishEvent($report->user_id, $this->reportId);
 
-        $nameFile = $this->generatePdf();
+        broadcast($event);
 
         $report->status = Status::Completed;
-        $report->file   = $nameFile ?? 'nothing-' . sha1((string) $this->reportId);
+        $report->file   = $this->generatePdf();
         $report->type   = 'pdf';
         $report->save();
 
-        broadcast(new ReportStatusEvent($this->reportId, (string) $report->user_id));
+        broadcast($event);
 
     }
 
