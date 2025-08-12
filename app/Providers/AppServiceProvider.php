@@ -52,7 +52,7 @@ final class AppServiceProvider extends ServiceProvider
                 }
             }
 
-            auth()->loginUsingId($userId);
+            auth()->onceUsingId($userId);
         });
     }
 }
