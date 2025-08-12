@@ -24,7 +24,7 @@ final class CreateTransactionJob implements ShouldQueue
 
     public function __construct(
         public string $name,
-        public ?int $user_id,
+        public ?string $user_id,
         public ?int $agreement_id,
         public ?int $customer_id,
         public ?int $payment_method_id,
