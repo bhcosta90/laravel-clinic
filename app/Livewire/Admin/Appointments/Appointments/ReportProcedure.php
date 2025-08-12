@@ -15,8 +15,8 @@ final class ReportProcedure extends Component
     public ?\App\Models\Report $report = null;
 
     public bool $modal          = false;
-    public string $date_start   = '';
-    public string $date_end     = '';
+    public ?string $date_start  = null;
+    public ?string $date_end    = null;
     public ?int $procedure_id   = null;
     public ?string $employee_id = null;
 
@@ -68,5 +68,12 @@ final class ReportProcedure extends Component
         );
 
         $this->dispatch('report::index');
+    }
+
+    public function updatedModal(): void
+    {
+        $this->resetExcept('modal');
+        $this->date_start = now()->format('Y-m-d');
+        $this->date_end   = now()->format('Y-m-d');
     }
 }

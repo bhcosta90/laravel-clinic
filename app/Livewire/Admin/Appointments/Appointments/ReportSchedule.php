@@ -17,19 +17,13 @@ final class ReportSchedule extends Component
     public ?\App\Models\Report $report = null;
 
     public bool $modal                       = false;
-    public string $date_start                = '';
-    public string $date_end                  = '';
+    public ?string $date_start               = null;
+    public ?string $date_end                 = null;
     public ?int $status                      = null;
     public ?int $is_payed                    = null;
     public string | int | null $agreement_id = null;
     public ?int $procedure_id                = null;
     public ?string $employee_id              = null;
-
-    public function mount(): void
-    {
-        $this->date_start = now()->format('Y-m-d');
-        $this->date_end   = now()->format('Y-m-d');
-    }
 
     public function render(): View
     {
@@ -103,5 +97,12 @@ final class ReportSchedule extends Component
         );
 
         $this->dispatch('report::index');
+    }
+
+    public function updatedModal(): void
+    {
+        $this->resetExcept('modal');
+        $this->date_start = now()->format('Y-m-d');
+        $this->date_end   = now()->format('Y-m-d');
     }
 }
