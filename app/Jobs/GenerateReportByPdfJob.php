@@ -34,7 +34,7 @@ final class GenerateReportByPdfJob implements ShouldQueue
         public ?string $orderColumn,
         public ?string $orderDirection,
     ) {
-        $this->onQueue(Queue::Low);
+        $this->onQueue(Queue::Report);
     }
 
     public function handle(): void
