@@ -21,6 +21,7 @@ return new class() extends Migration {
             $table->unsignedBigInteger('status')->nullable();
             $table->string('file')->nullable();
             $table->string('type')->nullable();
+            $table->boolean('can_shared')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

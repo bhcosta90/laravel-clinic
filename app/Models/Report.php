@@ -21,6 +21,7 @@ final class Report extends Model
         'view',
         'filters',
         'filesystem',
+        'can_shared',
     ];
 
     public function fileUrl(): Attribute
@@ -40,9 +41,10 @@ final class Report extends Model
     protected function casts(): array
     {
         return [
-            'key'     => 'string',
-            'status'  => Status::class,
-            'filters' => 'array',
+            'key'        => 'string',
+            'status'     => Status::class,
+            'filters'    => 'array',
+            'can_shared' => 'boolean',
         ];
     }
 }
