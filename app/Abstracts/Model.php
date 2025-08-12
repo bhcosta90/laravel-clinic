@@ -7,6 +7,7 @@ namespace App\Abstracts;
 use App\Traits\Models\CastsDatesToUserTimezone;
 use App\Traits\Models\HashCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 abstract class Model extends \Illuminate\Database\Eloquent\Model implements Auditable
@@ -15,4 +16,5 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model implements Audi
     use HasFactory;
     use HashCode;
     use \OwenIt\Auditing\Auditable;
+    use SoftDeletes;
 }
