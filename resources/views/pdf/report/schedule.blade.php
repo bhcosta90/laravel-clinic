@@ -1,9 +1,26 @@
-<table>
-    <tbody>
-    @foreach($result as $rs)
+<x-report-layout>
+    <table class="table">
+        <thead>
         <tr>
-            <td>{{ $rs->id }}</td>
+            <th>@lang('Procedure')</th>
+            <th>@lang('Value')</th>
+            <th>@lang('Doctor')</th>
+            <th>@lang('Patient')</th>
+            <th>@lang('Date')</th>
+            <th>@lang('Hour')</th>
         </tr>
-    @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach($result as $rs)
+            <tr>
+                <td>{{ $rs->procedure->name }}</td>
+                <td>{{ $rs->procedure->price }}</td>
+                <td>{{ $rs->user->name }}</td>
+                <td>{{ $rs->customer->name }}</td>
+                <td>{{ $rs->date->format('d/m/Y') }}</td>
+                <td>{{ $rs->date->format('H:i') }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</x-report-layout>
