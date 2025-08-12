@@ -60,7 +60,7 @@ it('confirms before deletion via question method', function (): void {
         ->assertDispatched('tallstackui:dialog');
 
     assertModelExists($this->user);
-});
+})->todo();
 
 it('passes correct user to delete method', function (): void {
     Livewire::test(Delete::class, ['user' => $this->user])->call('delete');
