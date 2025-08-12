@@ -8,6 +8,7 @@
             <th>@lang('Patient')</th>
             <th>@lang('Date')</th>
             <th>@lang('Hour')</th>
+            <th>@lang('Agreement')</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td>{{ $rs->customer->name }}</td>
                 <td>{{ $rs->date->format('d/m/Y') }}</td>
                 <td>{{ $rs->date->format('H:i') }}</td>
+                <td>{{ $rs->agreementName }}</td>
             </tr>
         @endforeach
         </tbody>

@@ -57,6 +57,13 @@ final class Appointment extends Model
         );
     }
 
+    public function agreementName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->agreement?->name ?: __('Particular'),
+        );
+    }
+
     protected function casts(): array
     {
         return [

@@ -73,7 +73,7 @@ final class ExecutePayment extends Component
         $this->dispatch('updated');
     }
 
-    private function rules(): array
+    public function rules(): array
     {
         return [
             'value'             => ['required', 'min:0'],
