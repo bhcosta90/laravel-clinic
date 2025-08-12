@@ -11,15 +11,12 @@ return new class() extends Migration {
     {
         Schema::create('model_permissions', function (Blueprint $table): void {
             $table->id();
-            $table->string('model_id');
+            $table->unsignedBigInteger('model_id');
             $table->string('model_type');
             $table->string('integration_code')->nullable();
             $table->foreignId('permission_id')->constrained('permissions');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->unique(['model_id', 'model_type', 'permission_id'], 'unique_1');
-            $table->unique(['model_id', 'model_type', 'integration_code', 'permission_id'], 'unique_2');
         });
     }
 
