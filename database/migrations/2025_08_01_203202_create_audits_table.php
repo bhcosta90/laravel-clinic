@@ -21,10 +21,11 @@ return new class() extends Migration {
 
             $table->bigIncrements('id');
             $table->string($morphPrefix . '_type')->nullable();
-            $table->uuid($morphPrefix . '_id')->nullable();
-            $table->foreignUuid('impersonate_user_id')->nullable();
+            $table->string($morphPrefix . '_id')->nullable();
+            $table->string('impersonate_user_id')->nullable();
             $table->string('event');
-            $table->morphs('auditable');
+            $table->string('auditable_type');
+            $table->string('auditable_id');
             $table->text('old_values')->nullable();
             $table->text('new_values')->nullable();
             $table->text('url')->nullable();

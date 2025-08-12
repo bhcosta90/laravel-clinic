@@ -21,14 +21,16 @@ final class UserSeeder extends Seeder
 
             User::factory()->create([
                 'id'          => 'ca59667e-0529-4dcc-a0e2-ca0e517d4e7f',
-                'name'        => 'Test User',
-                'email'       => 'test@example.com',
+                'name'        => 'Bruno Henrique da Costa',
+                'email'       => 'bhcosta90@gmail.com',
+                'password'    => '$2y$12$aUphOqrVHIEwiGY8r8U5c.9EnQtP1Mx7ejfY2VIfbIm1F21OgPHb.',
                 'is_employee' => null,
                 'role_id'     => $role->id,
             ]);
 
             User::factory()->create([
-                'role_id'      => null,
+                'id'           => '0059667e-0529-4dcc-a0e2-ca0e517d4e7f',
+                'role_id'      => $role->id,
                 'name'         => 'Administrador de usuário',
                 'email'        => 'test2@example.com',
                 'is_employee'  => true,

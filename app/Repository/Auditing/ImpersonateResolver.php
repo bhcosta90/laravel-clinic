@@ -12,6 +12,6 @@ final class ImpersonateResolver implements Resolver
 {
     public static function resolve(Auditable $auditable): ?string
     {
-        return Cache::get('impersonate_new');
+        return Cache::get('impersonate_actual');
     }
 }
