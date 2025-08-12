@@ -30,7 +30,7 @@ Route::middleware(['auth', ImpersonateMiddleware::class])->as('admin.')->prefix(
             Route::get('procedures/search', [Api\ProcedureController::class, 'search'])->name('procedure.search');
             Route::get('payment-methods/search', [Api\PaymentMethodController::class, 'search'])->name('payment-method.search');
             Route::get('users/search', [Api\UserController::class, 'search'])->name('user.search');
-            Route::get('report/view-report', [Api\UserController::class, 'search'])->name('report.view-report');
+            Route::get('report/{report:code}/view-report', [Api\ReportController::class, 'byCode'])->name('report.view-report');
         });
     });
 });

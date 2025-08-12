@@ -11,10 +11,12 @@ return new class() extends Migration {
     {
         Schema::create('reports', function (Blueprint $table): void {
             $table->id();
+            $table->ulid('code')->unique();
             $table->uuid('tenant_id')->index();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
             $table->string('view');
+            $table->string('filesystem');
             $table->json('filters')->nullable();
             $table->unsignedBigInteger('status')->nullable();
             $table->string('file')->nullable();
