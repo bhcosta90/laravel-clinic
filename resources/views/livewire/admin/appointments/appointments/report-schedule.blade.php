@@ -1,5 +1,5 @@
 <x-admin.report.base-report title="Scheduling report" view="pdf.report.schedule">
-    <div class="space-y-3">
+    <div class="space-y-4">
         <div class="bg-gray-50 p-4 rounded-lg space-y-4">
             <div class="gap-4 grid grid-cols-1 md:grid-cols-2">
                 <x-select.styled
