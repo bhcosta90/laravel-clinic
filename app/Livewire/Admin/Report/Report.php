@@ -55,4 +55,14 @@ final class Report extends Component
             ->orderBy('id', 'desc')
             ->simplePaginate(perPage: 3);
     }
+
+    public function toggleCanShared(int | string $id): void
+    {
+        $report = ModelReport::query()->findOrFail($id);
+
+        $this->authorize('update', $report);
+
+        $report->can_shared = !$report->can_shared;
+        $report->save();
+    }
 }

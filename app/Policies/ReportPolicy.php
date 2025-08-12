@@ -12,8 +12,13 @@ final class ReportPolicy
 {
     use HandlesAuthorization;
 
-    public function showFile(User $user, Report $report): bool
+    public function update(User $user, Report $report): bool
     {
         return $user->id === $report->user_id;
+    }
+
+    public function showFile(User $user, Report $report): bool
+    {
+        return $user->id === $report->user_id || $report->can_shared;
     }
 }
