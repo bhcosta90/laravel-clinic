@@ -1,6 +1,6 @@
 <x-report-layout>
-    <table class="table">
-        <thead>
+    <table class="table table-striped table-sm">
+        <thead class="thead-dark">
         <tr>
             <th>@lang('Procedure')</th>
             <th>@lang('Value')</th>
