@@ -66,20 +66,20 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
     }
 
-    protected function generatePdf(): string
+    private function generatePdf(): string
     {
         $model = $this->model;
 
         $query = app(BuilderQuery::class)
             ->execute(new $model(), [], $this->filters);
 
-        if ($this->orderColumn) {
+        if ($this->orderColumn !== null && $this->orderColumn !== '' && $this->orderColumn !== '0') {
             $query->orderBy($this->orderColumn, $this->orderDirection);
         }
 
         $result = $query->get();
 
-        $content = Pdf::loadView($this->view, compact('result'))
+        $content = Pdf::loadView($this->view, ['result' => $result])
             ->stream();
 
         $name = sha1($this->name);

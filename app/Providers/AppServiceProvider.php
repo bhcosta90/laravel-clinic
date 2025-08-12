@@ -30,7 +30,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->configureJob();
     }
 
-    protected function configureJob(): void
+    private function configureJob(): void
     {
         Queue::createPayloadUsing(function (): array {
             $customer = auth()->user()->id;

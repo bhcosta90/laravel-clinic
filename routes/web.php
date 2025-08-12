@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
 
-Route::middleware([ImpersonateMiddleware::class])->group(function () {
+Route::middleware([ImpersonateMiddleware::class])->group(function (): void {
     Route::get('report/{report:code}/view-file', [Api\ReportController::class, 'viewFile'])->name('report.view-file');
 
     Route::middleware(['auth', ImpersonateMiddleware::class])->as('admin.')->prefix('admin')->group(function (): void {

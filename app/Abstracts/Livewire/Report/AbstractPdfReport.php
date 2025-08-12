@@ -86,11 +86,11 @@ abstract class AbstractPdfReport extends Component
     {
         $filters = [];
 
-        if ($this->date_start) {
+        if ($this->date_start !== null && $this->date_start !== '' && $this->date_start !== '0') {
             $filters['(date,>=)'] = $this->date_start . ' 00:00:00';
         }
 
-        if ($this->date_end) {
+        if ($this->date_end !== null && $this->date_end !== '' && $this->date_end !== '0') {
             $filters['(date,<=)'] = $this->date_end . ' 23:59:59';
         }
 

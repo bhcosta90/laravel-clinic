@@ -53,9 +53,9 @@ final class CreateTransactionJob implements ShouldQueue
             'type'              => $this->type,
         ];
 
-        if ($this->model) {
+        if ($this->model instanceof \Illuminate\Database\Eloquent\Model) {
             /** @var Model $class */
-            $class = app(get_class($this->model));
+            $class = app($this->model::class);
 
             $data['model_type'] = $class->getMorphClass();
             $data['model_id']   = $this->model->getKey();
