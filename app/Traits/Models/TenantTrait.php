@@ -9,7 +9,9 @@ trait TenantTrait
     protected static function bootTenantTrait(): void
     {
         static::creating(function ($model): void {
-            $model->tenant_id = auth()->user()->tenant_id;
+            if (blank($model->tenant_id) && auth()->check()) {
+                $model->tenant_id = auth()->user()->tenant_id;
+            }
         });
     }
 }

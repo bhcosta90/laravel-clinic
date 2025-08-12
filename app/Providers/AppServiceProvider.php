@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Queue\Queue;
+use Illuminate\Queue\QueueManager;
 use Illuminate\Support\ServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
@@ -21,5 +23,31 @@ final class AppServiceProvider extends ServiceProvider
         //                'web',
         //                InitializeTenancyBySubdomain::class, // or whatever tenancy middleware you use
         //            ));
+    }
+
+    protected function configureJob(): void
+    {
+        Queue::createPayloadUsing(function (): array {
+            $customer = auth()->user()->id;
+
+            return [
+                'user_id' => $customer,
+            ];
+        });
+
+        app(QueueManager::class)->before(function ($event): void {
+            $payload = $event->job?->payload();
+            $userId  = $payload['user_id'] ?? null;
+
+            if (isset($payload['data']['command']) && blank($userId)) {
+                $command = unserialize($payload['data']['command']);
+
+                if (isset($command->user_id)) {
+                    $userId = $command->user_id;
+                }
+            }
+
+            auth()->loginUsingId($userId);
+        });
     }
 }
