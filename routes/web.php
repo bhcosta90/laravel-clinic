@@ -11,6 +11,10 @@ Route::view('/', 'welcome')->name('welcome');
 Route::middleware(['auth', ImpersonateMiddleware::class])->as('admin.')->prefix('admin')->group(function (): void {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
+    if (file_exists(base_path('routes/admin/testIgnore.php'))) {
+        Route::prefix('test')->as('test.')->group(base_path('routes/admin/testIgnore.php'));
+    }
+
     Route::prefix('v1')->name('v1.')->group(function (): void {
         Route::as('people.')->prefix('people')->group(base_path('routes/admin/v1/people.php'));
         Route::as('registration.')->prefix('registration')->group(base_path('routes/admin/v1/registration.php'));

@@ -23,6 +23,7 @@ final class AppServiceProvider extends ServiceProvider
         //                'web',
         //                InitializeTenancyBySubdomain::class, // or whatever tenancy middleware you use
         //            ));
+        $this->configureJob();
     }
 
     protected function configureJob(): void
