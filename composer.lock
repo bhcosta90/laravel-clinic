@@ -4359,12 +4359,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Quantum-Tecnology/Controller-Basics-Extension.git",
-                "reference": "e03b19d1eda8a896c7454b2e1d41416e452f9812"
+                "reference": "541d848d108542b45670bbc545b1c28054ea1e58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Quantum-Tecnology/Controller-Basics-Extension/zipball/e03b19d1eda8a896c7454b2e1d41416e452f9812",
-                "reference": "e03b19d1eda8a896c7454b2e1d41416e452f9812",
+                "url": "https://api.github.com/repos/Quantum-Tecnology/Controller-Basics-Extension/zipball/541d848d108542b45670bbc545b1c28054ea1e58",
+                "reference": "541d848d108542b45670bbc545b1c28054ea1e58",
                 "shasum": ""
             },
             "require": {
@@ -4423,7 +4423,7 @@
                 "issues": "https://github.com/Quantum-Tecnology/Controller-Basics-Extension/issues",
                 "source": "https://github.com/Quantum-Tecnology/Controller-Basics-Extension/tree/release/3.x"
             },
-            "time": "2025-08-09T15:07:52+00:00"
+            "time": "2025-08-12T13:30:10+00:00"
         },
         {
             "name": "quantumtecnology/enum-basics-extension",
@@ -4641,16 +4641,16 @@
         },
         {
             "name": "quantumtecnology/service-basics-extension",
-            "version": "2.6.5",
+            "version": "2.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Quantum-Tecnology/Service-Basics-Extension.git",
-                "reference": "cdb927dc0433411e0d8c5af8ef9b93ca1a2615d0"
+                "reference": "7eefba62710b30c26726deb5ddcce51bd91bcdf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Quantum-Tecnology/Service-Basics-Extension/zipball/cdb927dc0433411e0d8c5af8ef9b93ca1a2615d0",
-                "reference": "cdb927dc0433411e0d8c5af8ef9b93ca1a2615d0",
+                "url": "https://api.github.com/repos/Quantum-Tecnology/Service-Basics-Extension/zipball/7eefba62710b30c26726deb5ddcce51bd91bcdf0",
+                "reference": "7eefba62710b30c26726deb5ddcce51bd91bcdf0",
                 "shasum": ""
             },
             "require": {
@@ -4693,9 +4693,9 @@
             "support": {
                 "email": "gustavo-computacao@hotmail.com",
                 "issues": "https://github.com/Quantum-Tecnology/Service-Basics-Extension/issues",
-                "source": "https://github.com/Quantum-Tecnology/Service-Basics-Extension/tree/2.6.5"
+                "source": "https://github.com/Quantum-Tecnology/Service-Basics-Extension/tree/2.6.8"
             },
-            "time": "2025-08-10T19:25:43+00:00"
+            "time": "2025-08-11T13:51:39+00:00"
         },
         {
             "name": "quantumtecnology/validate-trait",
