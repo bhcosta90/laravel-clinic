@@ -16,6 +16,8 @@ final class Report extends Model
         'status',
         'model',
         'user_id',
+        'view',
+        'filters',
     ];
 
     public function fileUrl(): Attribute
@@ -28,8 +30,9 @@ final class Report extends Model
     protected function casts(): array
     {
         return [
-            'key'    => 'string',
-            'status' => Status::class,
+            'key'     => 'string',
+            'status'  => Status::class,
+            'filters' => 'array',
         ];
     }
 }

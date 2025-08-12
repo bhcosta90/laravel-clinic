@@ -37,7 +37,7 @@ final class ReportProcedure extends Component
 
         $this->report = $generateReportByPdf->execute(
             user: auth()->user(),
-            name: 'report.procedure',
+            name: 'Report procedure',
             view: 'pdf.report.procedure',
             model: Appointment::class,
             filters: $filters,

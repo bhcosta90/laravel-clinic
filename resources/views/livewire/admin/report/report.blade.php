@@ -1,5 +1,9 @@
 <div>
     <x-table :headers="$this->headers" :rows="$this->rows" paginate simple-pagination loading>
+        @interact('column_name', $row)
+        @lang($row->name)
+        @endinteract
+
         @interact('column_status', $row)
             <livewire:admin.report.status :min="true" :report="$row" wire:key="report-status-{{ str()->uuid() }}" />
         @endinteract

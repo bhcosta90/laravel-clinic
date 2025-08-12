@@ -66,7 +66,7 @@ final class ReportSchedule extends Component
 
         $this->report = $generateReportByPdf->execute(
             user: auth()->user(),
-            name: 'report.schedule',
+            name: 'Report schedule',
             view: 'pdf.report.schedule',
             model: Appointment::class,
             filters: $filters,

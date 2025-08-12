@@ -22,6 +22,7 @@ final class GenerateReportByPdf
         $report = Report::create([
             'user_id' => $user->id,
             'name'    => $name,
+            'view'    => $view,
         ]);
 
         dispatch(new GenerateReportByPdfJob(

@@ -13,13 +13,15 @@ return new class() extends Migration {
             $table->id();
             $table->foreignUlid('user_id')->constrained('users');
             $table->string('name');
+            $table->string('view');
+            $table->json('filters')->nullable();
             $table->unsignedBigInteger('status')->nullable();
             $table->string('file')->nullable();
             $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['user_id', 'name']);
+            $table->index(['user_id', 'view']);
         });
     }
 
