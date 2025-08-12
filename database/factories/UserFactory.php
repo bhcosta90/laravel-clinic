@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -15,6 +16,7 @@ final class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'tenant_id'         => DatabaseSeeder::TenantId,
             'name'              => fake()->name(),
             'email'             => fake()->unique()->freeEmail(),
             'is_employee'       => fake()->boolean(),

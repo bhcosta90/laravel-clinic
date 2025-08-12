@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('transactions', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->string('name');
             $table->foreignId('agreement_id')->nullable()->constrained('agreements');
             $table->foreignId('customer_id')->nullable()->constrained('customers');

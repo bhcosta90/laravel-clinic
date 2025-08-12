@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('appointments', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignId('procedure_id')->constrained('procedures');

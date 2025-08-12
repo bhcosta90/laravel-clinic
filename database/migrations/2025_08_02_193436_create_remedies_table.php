@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('remedies', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->string('name');
             $table->string('quantity');
             $table->string('description');

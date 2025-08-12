@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('users', function (Blueprint $table): void {
             $table->uuid('id')->primary();
+            $table->uuid('tenant_id')->index();
             $table->unsignedInteger('nested_parent')->nullable();
             $table->unsignedInteger('nested_left');
             $table->unsignedInteger('nested_right');

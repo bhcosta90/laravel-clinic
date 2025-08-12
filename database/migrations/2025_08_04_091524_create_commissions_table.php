@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('commissions', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->foreignUuid('user_id')->constrained('users');
             $table->decimal('value');
             $table->date('due_date');

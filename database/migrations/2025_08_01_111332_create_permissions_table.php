@@ -11,11 +11,12 @@ return new class() extends Migration {
     {
         Schema::create('permissions', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->string('slug');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['slug'], 'permissions_slug_tenant_id_unique');
+            $table->unique(['slug', 'tenant_id'], 'permissions_slug_tenant_id_unique');
         });
     }
 

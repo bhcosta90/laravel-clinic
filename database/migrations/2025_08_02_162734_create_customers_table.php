@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('customers', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->string('name');
             $table->date('birthday')->nullable();
             $table->string('document')->nullable();

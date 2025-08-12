@@ -38,6 +38,7 @@ final class User extends Authenticatable implements Auditable
     protected $keyType = 'string';
 
     protected $fillable = [
+        'tenant_id',
         'name',
         'email',
         'role_id',
