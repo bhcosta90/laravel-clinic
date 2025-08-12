@@ -16,6 +16,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
+use Throwable;
 
 final class GenerateReportByPdfJob implements ShouldQueue
 {
@@ -47,12 +48,21 @@ final class GenerateReportByPdfJob implements ShouldQueue
 
         broadcast($event);
 
-        $report->status = Status::Completed;
-        $report->file   = $this->generatePdf();
-        $report->type   = 'pdf';
-        $report->save();
+        try {
+            $report->status = Status::Completed;
+            $report->file   = $this->generatePdf();
+            $report->type   = 'pdf';
+            $report->save();
 
-        broadcast($event);
+            broadcast($event);
+        } catch (Throwable $e) {
+            $report->status = Status::Error;
+            $report->save();
+
+            broadcast($event);
+
+            throw $e;
+        }
 
     }
 

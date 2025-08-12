@@ -16,7 +16,7 @@ final class AgreementController
         $search = $request->get('search');
         $field  = $request->get('field', 'name');
 
-        return app(BuilderQuery::class)
+        $results = app(BuilderQuery::class)
             ->execute(new Agreement(), [], [
                 '(' . $field . ',like)' => $search,
             ])
@@ -28,5 +28,14 @@ final class AgreementController
                 'label' => $user->{$field},
                 'value' => $user->id,
             ]);
+
+        if ($request->has('is_particular') && $request->get('is_particular')) {
+            $results->prepend([
+                'label' => __('Particular'),
+                'value' => 'particular',
+            ]);
+        }
+
+        return $results;
     }
 }

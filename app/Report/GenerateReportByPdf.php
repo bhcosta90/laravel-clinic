@@ -23,6 +23,7 @@ final class GenerateReportByPdf
             'user_id' => $user->id,
             'name'    => $name,
             'view'    => $view,
+            'filters' => $filters,
         ]);
 
         dispatch(new GenerateReportByPdfJob(

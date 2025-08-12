@@ -14,11 +14,11 @@ final class ReportProcedure extends Component
 {
     public ?\App\Models\Report $report = null;
 
-    public bool $modal        = false;
-    public string $date_start = '';
-    public string $date_end   = '';
-    public ?int $procedure_id = null;
-    public ?int $employee_id  = null;
+    public bool $modal          = false;
+    public string $date_start   = '';
+    public string $date_end     = '';
+    public ?int $procedure_id   = null;
+    public ?string $employee_id = null;
 
     public function mount(): void
     {

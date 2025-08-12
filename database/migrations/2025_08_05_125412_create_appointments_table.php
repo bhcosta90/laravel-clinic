@@ -19,7 +19,7 @@ return new class() extends Migration {
             $table->dateTime('date');
             $table->boolean('is_return')->nullable();
             $table->boolean('is_paid')->nullable();
-            $table->unsignedTinyInteger('status')->nullable();
+            $table->unsignedTinyInteger('status');
             $table->string('exam_withdrawal_date')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

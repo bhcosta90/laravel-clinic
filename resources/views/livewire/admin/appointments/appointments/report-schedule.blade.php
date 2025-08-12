@@ -30,6 +30,7 @@
 
                     <div class="gap-4 grid grid-cols-1 md:grid-cols-3">
                         <x-select.agreement
+                            :is-particular="true"
                             wire:model="agreement_id"
                         />
                         <x-select.procedure

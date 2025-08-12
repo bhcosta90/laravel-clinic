@@ -17,7 +17,7 @@
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8 4a1 1 0 100-2 1 1 0 000 2zm1-8a1 1 0 10-2 0v5a1 1 0 102 0V6z" clip-rule="evenodd" />
                         </svg>
                         <div class="text-sm">
-                            <p class="font-medium">@lang('ReportSchedule resulted in a processing error')</p>
+                            <p class="font-medium">@lang('Report resulted in a processing error')</p>
                             <p class="mt-1 text-red-600/80">@lang('Please try again or contact support if the problem persists.')</p>
                         </div>
                     </div>
