@@ -14,7 +14,7 @@
         @foreach($result as $rs)
             <tr>
                 <td>{{ $rs->procedure->name }}</td>
-                <td>{{ $rs->procedure->price }}</td>
+                <td>{{ numberFormat($rs->procedure->price) }}</td>
                 <td>{{ $rs->user->name }}</td>
                 <td>{{ $rs->customer->name }}</td>
                 <td>{{ $rs->date->format('d/m/Y') }}</td>
