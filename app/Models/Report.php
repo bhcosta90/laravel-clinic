@@ -26,7 +26,7 @@ final class Report extends Model
     public function fileUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => when($this->file, fn () => route('admin.v1.api.report.view-report', $this->code)),
+            get: fn () => when($this->file, fn () => route('admin.v1.report.view-file', $this->code)),
         );
     }
 

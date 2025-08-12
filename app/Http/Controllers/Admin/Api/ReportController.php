@@ -12,7 +12,7 @@ final class ReportController
 {
     use AuthorizesRequests;
 
-    public function byCode(Report $report)
+    public function viewFile(Report $report)
     {
         $this->authorize('show-file', $report);
 

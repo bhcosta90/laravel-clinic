@@ -21,6 +21,8 @@ Route::middleware(['auth', ImpersonateMiddleware::class])->as('admin.')->prefix(
         Route::as('transactions.')->prefix('transaction')->group(base_path('routes/admin/v1/transaction.php'));
         Route::as('appointments.')->prefix('appointment')->group(base_path('routes/admin/v1/appointment.php'));
 
+        Route::get('report/{report:code}/view-file', [Api\ReportController::class, 'viewFile'])->name('report.view-file');
+
         Route::prefix('api')->as('api.')->group(function (): void {
             Route::get('roles/search', [Api\RoleController::class, 'search'])->name('roles.search');
             Route::get('agreements/search', [Api\AgreementController::class, 'search'])->name('agreement.search');
@@ -30,7 +32,6 @@ Route::middleware(['auth', ImpersonateMiddleware::class])->as('admin.')->prefix(
             Route::get('procedures/search', [Api\ProcedureController::class, 'search'])->name('procedure.search');
             Route::get('payment-methods/search', [Api\PaymentMethodController::class, 'search'])->name('payment-method.search');
             Route::get('users/search', [Api\UserController::class, 'search'])->name('user.search');
-            Route::get('report/{report:code}/view-report', [Api\ReportController::class, 'byCode'])->name('report.view-report');
         });
     });
 });
