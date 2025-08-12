@@ -40,11 +40,11 @@ final class ReportProcedure extends AbstractPdfReport
     {
         $filters = [];
 
-        if ($this->procedure_id !== null && $this->procedure_id !== 0) {
+        if (null !== $this->procedure_id && 0 !== $this->procedure_id) {
             $filters['(procedure_id)'] = $this->procedure_id;
         }
 
-        if ($this->employee_id !== null && $this->employee_id !== '' && $this->employee_id !== '0') {
+        if (null !== $this->employee_id && '' !== $this->employee_id && '0' !== $this->employee_id) {
             $filters['(user_id)'] = $this->employee_id;
         }
 

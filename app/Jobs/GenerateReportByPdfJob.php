@@ -73,7 +73,7 @@ final class GenerateReportByPdfJob implements ShouldQueue
         $query = app(BuilderQuery::class)
             ->execute(new $model(), [], $this->filters);
 
-        if ($this->orderColumn !== null && $this->orderColumn !== '' && $this->orderColumn !== '0') {
+        if (null !== $this->orderColumn && '' !== $this->orderColumn && '0' !== $this->orderColumn) {
             $query->orderBy($this->orderColumn, $this->orderDirection);
         }
 

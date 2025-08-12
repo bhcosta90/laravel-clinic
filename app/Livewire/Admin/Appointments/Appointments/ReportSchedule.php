@@ -63,11 +63,11 @@ final class ReportSchedule extends AbstractPdfReport
     {
         $filters = [];
 
-        if ($this->procedure_id !== null && $this->procedure_id !== 0) {
+        if (null !== $this->procedure_id && 0 !== $this->procedure_id) {
             $filters['(procedure_id)'] = $this->procedure_id;
         }
 
-        if ($this->employee_id !== null && $this->employee_id !== '' && $this->employee_id !== '0') {
+        if (null !== $this->employee_id && '' !== $this->employee_id && '0' !== $this->employee_id) {
             $filters['(user_id)'] = $this->employee_id;
         }
 
@@ -75,11 +75,11 @@ final class ReportSchedule extends AbstractPdfReport
             $filters['(byPayed)'] = $this->is_payed;
         }
 
-        if ($this->status !== null && $this->status !== 0) {
+        if (null !== $this->status && 0 !== $this->status) {
             $filters['(status)'] = $this->status;
         }
 
-        if ($this->agreement_id !== '' && $this->agreement_id !== '0' && $this->agreement_id !== 0) {
+        if ('' !== $this->agreement_id && '0' !== $this->agreement_id && 0 !== $this->agreement_id) {
             $filters['(byAgreement)'] = $this->agreement_id;
         }
 
