@@ -43,7 +43,7 @@ final class GenerateReportByPdfJob implements ShouldQueue
         $report->status = Status::Processing;
         $report->save();
 
-        $event = new ReportFinishEvent($report->user_id, $this->reportId);
+        $event = new ReportFinishEvent(mb_trim($report->user_id), $this->reportId);
 
         broadcast($event);
 

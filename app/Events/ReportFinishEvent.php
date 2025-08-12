@@ -19,6 +19,6 @@ final class ReportFinishEvent implements ShouldBroadcastNow
 
     public function broadcastOn(): Channel
     {
-        return new PrivateChannel('App.Models.ReportSchedule.' . $this->userId . '.' . $this->reportId);
+        return new PrivateChannel('App.Models.ReportSchedule.' . mb_trim($this->userId) . '.' . $this->reportId);
     }
 }

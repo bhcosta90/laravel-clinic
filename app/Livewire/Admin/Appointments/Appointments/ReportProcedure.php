@@ -20,6 +20,12 @@ final class ReportProcedure extends Component
     public ?int $procedure_id = null;
     public ?int $employee_id  = null;
 
+    public function mount(): void
+    {
+        $this->date_start = now()->format('Y-m-d');
+        $this->date_end   = now()->format('Y-m-d');
+    }
+
     public function render(): View
     {
         return view('livewire.admin.appointments.appointments.report-procedure');
@@ -34,6 +40,22 @@ final class ReportProcedure extends Component
     public function save(GenerateReportByPdf $generateReportByPdf): void
     {
         $filters = [];
+
+        if ($this->date_start) {
+            $filters['(date,>=)'] = $this->date_start . ' 00:00:00';
+        }
+
+        if ($this->date_end) {
+            $filters['(date,<=)'] = $this->date_end . ' 23:59:59';
+        }
+
+        if ($this->procedure_id) {
+            $filters['(procedure_id)'] = $this->procedure_id;
+        }
+
+        if ($this->employee_id) {
+            $filters['(user_id)'] = $this->employee_id;
+        }
 
         $this->report = $generateReportByPdf->execute(
             user: auth()->user(),
