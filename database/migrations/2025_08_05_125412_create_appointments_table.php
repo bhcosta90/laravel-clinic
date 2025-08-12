@@ -13,7 +13,7 @@ return new class() extends Migration {
             $table->id();
             $table->uuid('tenant_id')->index();
             $table->foreignId('customer_id')->constrained('customers');
-            $table->foreignUuid('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('procedure_id')->constrained('procedures');
             $table->foreignId('transaction_id')->nullable()->constrained('transactions');
             $table->foreignId('agreement_id')->nullable()->constrained('agreements');

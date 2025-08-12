@@ -20,9 +20,9 @@ final class Status extends Component
     }
 
     // Provide dynamic placeholder for private Echo channel
-    public function getUserIdProperty(): string
+    public function getUserIdProperty(): int
     {
-        return (string) mb_trim(auth()->id());
+        return (int) auth()->id();
     }
 
     // Provide dynamic placeholder for private Echo channel

@@ -11,7 +11,6 @@ use App\Traits\Models\CastsDatesToUserTimezone;
 use App\Traits\Models\HashCode;
 use App\Traits\Models\NodeTrait;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -26,7 +25,6 @@ final class User extends Authenticatable implements Auditable
     use CastsDatesToUserTimezone;
     use HasFactory;
     use HashCode;
-    use HasUuids;
     use NodeTrait;
     use Notifiable;
     use \OwenIt\Auditing\Auditable;

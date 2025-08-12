@@ -20,7 +20,6 @@ final class UserSeeder extends Seeder
             User::factory(23)->create();
 
             User::factory()->create([
-                'id'          => 'ca59667e-0529-4dcc-a0e2-ca0e517d4e7f',
                 'name'        => 'Bruno Henrique da Costa',
                 'email'       => 'bhcosta90@gmail.com',
                 'password'    => '$2y$12$aUphOqrVHIEwiGY8r8U5c.9EnQtP1Mx7ejfY2VIfbIm1F21OgPHb.',
@@ -29,7 +28,6 @@ final class UserSeeder extends Seeder
             ]);
 
             User::factory()->create([
-                'id'           => '0059667e-0529-4dcc-a0e2-ca0e517d4e7f',
                 'role_id'      => $role->id,
                 'name'         => 'Administrador de usuário',
                 'email'        => 'test2@example.com',

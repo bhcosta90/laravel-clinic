@@ -22,7 +22,7 @@ return new class() extends Migration {
             $table->bigIncrements('id');
             $table->string($morphPrefix . '_type')->nullable();
             $table->string($morphPrefix . '_id')->nullable();
-            $table->string('impersonate_user_id')->nullable();
+            $table->unsignedBigInteger('impersonate_user_id')->nullable();
             $table->string('event');
             $table->string('auditable_type');
             $table->string('auditable_id');

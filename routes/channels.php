@@ -5,7 +5,7 @@ declare(strict_types = 1);
 use App\Models\Report;
 use Illuminate\Support\Facades\Broadcast;
 
-Broadcast::channel('App.Models.User.{id}', fn ($user, $id): bool => (string) $user->id === (string) $id);
+Broadcast::channel('App.Models.User.{id}', fn ($user, $id): bool => (int) $user->id === (int) $id);
 
-Broadcast::channel('App.Models.ReportSchedule.{userId}.{reportId}', fn ($user, $userId, $reportId): bool => (string) $user->id === (string) $userId
+Broadcast::channel('App.Models.ReportSchedule.{userId}.{reportId}', fn ($user, $userId, $reportId): bool => (int) $user->id === (int) $userId
     && Report::whereUserId($userId)->where('id', $reportId)->exists());

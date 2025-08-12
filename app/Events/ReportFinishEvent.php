@@ -13,12 +13,12 @@ final class ReportFinishEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
 
-    public function __construct(public string $userId, public int $reportId)
+    public function __construct(public int $userId, public int $reportId)
     {
     }
 
     public function broadcastOn(): Channel
     {
-        return new PrivateChannel('App.Models.ReportSchedule.' . mb_trim($this->userId) . '.' . $this->reportId);
+        return new PrivateChannel('App.Models.ReportSchedule.' . $this->userId . '.' . $this->reportId);
     }
 }
