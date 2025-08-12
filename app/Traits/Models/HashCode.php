@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Traits\Models;
 
+use InvalidArgumentException;
 use Vinkla\Hashids\Facades\Hashids;
 
 trait HashCode
@@ -13,7 +14,7 @@ trait HashCode
         $decoded = Hashids::connection('code')->decode($hashCode);
 
         if (empty($decoded)) {
-            return 0;
+            throw new InvalidArgumentException('Invalid hash code provided.');
         }
 
         return (int) $decoded[0];
