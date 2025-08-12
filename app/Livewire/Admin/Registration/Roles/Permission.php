@@ -16,4 +16,10 @@ final class Permission extends Component
     {
         return view('livewire.admin.registration.roles.permission');
     }
+
+    public function mount(): void
+    {
+        $this->role = Role::findOrFail(Role::decodeHashCode(request()->route('role_hash')));
+        $this->authorize('permissions', $this->role);
+    }
 }
