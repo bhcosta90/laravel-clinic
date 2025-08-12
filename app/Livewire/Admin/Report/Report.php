@@ -38,6 +38,7 @@ final class Report extends Component
             ['index' => 'name', 'label' => __('Name'), 'sortable' => false],
             ['index' => 'status', 'label' => __('Status'), 'sortable' => false],
             ['index' => 'created_at', 'label' => __('Created'), 'sortable' => false],
+            ['index' => 'can_shared', 'label' => __('Can shared') . '?', 'sortable' => false],
             ['index' => 'action', 'sortable' => false],
         ];
     }
