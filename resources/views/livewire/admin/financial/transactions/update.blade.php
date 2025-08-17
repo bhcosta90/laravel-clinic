@@ -1,5 +1,5 @@
 <div>
-    @if($this->form->model)
+    @if($modal)
         <x-modal size="4xl" :title="__('Update '.mb_ucfirst($this->form->type->label()).': #:id', ['id' => $this->form->model->id])" wire>
             <form id="transaction-update-{{ $this->form->model->id }}" wire:submit="save" class="space-y-4">
                 <x-admin.financial.transactions.form />
