@@ -10,10 +10,12 @@ use App\Observers\ClearCacheObserver;
 use App\Traits\Models\CastsDatesToUserTimezone;
 use App\Traits\Models\HashCode;
 use App\Traits\Models\NodeTrait;
+use App\Traits\Models\TenantTrait;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
@@ -28,12 +30,8 @@ final class User extends Authenticatable implements Auditable
     use NodeTrait;
     use Notifiable;
     use \OwenIt\Auditing\Auditable;
-    public $incrementing = false;
-
-    /**
-     * The primary key is a ULID string.
-     */
-    protected $keyType = 'string';
+    use SoftDeletes;
+    use TenantTrait;
 
     protected $fillable = [
         'tenant_id',

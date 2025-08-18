@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 use App\Livewire\Admin\People\Users\Create;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
 use function Pest\Laravel\assertDatabaseHas;
@@ -23,6 +24,8 @@ it('initializes with a new user', function (): void {
 });
 
 it('validates user creation with valid data', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
+
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -39,7 +42,7 @@ it('validates user creation with valid data', function (): void {
         'name'  => 'John Doe',
         'email' => 'john@example.com',
     ]);
-})->todo();
+});
 
 it('requires name', function (): void {
     Livewire::test(Create::class)
@@ -52,6 +55,7 @@ it('requires name', function (): void {
 });
 
 it('requires unique email', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     User::create([
         'name'     => 'Existing User',
         'email'    => 'existing@example.com',
@@ -65,7 +69,7 @@ it('requires unique email', function (): void {
         ->set('form.password_confirmation', 'password123')
         ->call('save')
         ->assertHasErrors(['form.email' => 'unique']);
-})->todo();
+});
 
 it('validates email format', function (): void {
     Livewire::test(Create::class)
@@ -88,6 +92,7 @@ it('requires password confirmation', function (): void {
 });
 
 it('sets email verified at when creating user', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -102,9 +107,10 @@ it('sets email verified at when creating user', function (): void {
     $user = User::where('email', 'john@example.com')->first();
 
     expect($user->email_verified_at)->toBeNull();
-})->todo();
+});
 
 it('resets form after successful creation', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -117,9 +123,10 @@ it('resets form after successful creation', function (): void {
         ->call('save')
         ->assertSet('form.password', null)
         ->assertSet('form.password_confirmation', null);
-})->todo();
+});
 
 it('dispatches created event', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -131,4 +138,4 @@ it('dispatches created event', function (): void {
         ->set($data)
         ->call('save')
         ->assertDispatched('created');
-})->todo();
+});

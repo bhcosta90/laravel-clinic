@@ -51,7 +51,7 @@ it('updates user name and email', function (): void {
         ->toBe('Updated Name')
         ->and($updated->email)
         ->toBe('updated@example.com');
-})->todo();
+});
 
 it('requires name', function (): void {
     Livewire::test(Update::class)
@@ -87,7 +87,7 @@ it('updates password when provided', function (): void {
     $updated = User::find($this->original->id);
 
     expect($updated->password)->not()->toBe($old);
-})->todo();
+});
 
 it('does not update password when not provided', function (): void {
     $old = $this->original->password;
@@ -101,7 +101,7 @@ it('does not update password when not provided', function (): void {
     $updated = User::find($this->original->id);
 
     expect($updated->password)->toBe($old);
-})->todo();
+});
 
 it('requires password confirmation', function (): void {
     Livewire::test(Update::class)
@@ -118,7 +118,7 @@ it('dispatches updated event', function (): void {
         ->set('form.name', 'Updated Name')
         ->call('save')
         ->assertDispatched('updated');
-})->todo();
+});
 
 it('resets form after successful update', function (): void {
     Livewire::test(Update::class)

@@ -55,7 +55,7 @@ it('allows updating name without changing password', function (): void {
         ->assertDispatched('updated');
 
     expect($this->user->refresh()->name)->toBe('Updated Name');
-})->todo();
+});
 
 it('updates password when provided', function (): void {
     Hash::shouldReceive('isHashed')
@@ -73,7 +73,7 @@ it('updates password when provided', function (): void {
         ->assertDispatched('updated');
 
     expect($this->user->refresh()->password)->toBe('hashed-password');
-})->todo();
+});
 
 it('does not update password when null', function (): void {
     $originalPassword = $this->user->password;
@@ -84,7 +84,7 @@ it('does not update password when null', function (): void {
         ->assertHasNoErrors();
 
     expect($this->user->fresh()->password)->toBe($originalPassword);
-})->todo();
+});
 
 it('dispatches success alert after saving', function (): void {
     Livewire::test(Profile::class)
@@ -92,10 +92,11 @@ it('dispatches success alert after saving', function (): void {
         ->call('save')
         ->assertDispatched('updated')
         ->assertDispatched('tallstackui:dialog', fn (string $event, array $params): bool => 'tallstackui:dialog' === $event
-            && 'success' === $params['type']
-            && 'Done!' === $params['title']
-            && 'Task completed successfully.' === $params['description']);
-})->todo();
+             && 'success' === __($params['type'])
+             && __('Done!') === $params['title']
+             && __('Task completed successfully.') === $params['description']
+        );
+});
 
 it('resets password fields after saving', function (): void {
     Livewire::test(Profile::class)
@@ -104,4 +105,4 @@ it('resets password fields after saving', function (): void {
         ->call('save')
         ->assertSet('password', null)
         ->assertSet('password_confirmation', null);
-})->todo();
+});

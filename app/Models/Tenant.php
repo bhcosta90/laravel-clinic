@@ -4,11 +4,13 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use App\Abstracts\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 final class Tenant extends Model
 {
+    use HasFactory;
     use HasUuids;
 
     protected $fillable = [

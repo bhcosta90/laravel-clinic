@@ -58,9 +58,11 @@ it('fetches paginated users excluding authenticated user', function (): void {
 });
 
 it('filters users by search term', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     $user = User::factory()->create([
-        'name'  => 'John Unique Searchable',
-        'email' => 'john.unique@example.com',
+        'tenant_id' => auth()->user()->tenant_id,
+        'name'      => 'John Unique Searchable',
+        'email'     => 'john.unique@example.com',
     ]);
 
     $component = Livewire::test(Index::class)
@@ -72,9 +74,10 @@ it('filters users by search term', function (): void {
         ->toBe(1)
         ->and($rows->first()->id)
         ->toBe($user->id);
-})->todo();
+});
 
 it('supports searching by email', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     $user = User::factory()->create([
         'name'  => 'Unique Search User',
         'email' => 'unique.searchable@example.com',
@@ -88,7 +91,7 @@ it('supports searching by email', function (): void {
         ->toBe(1)
         ->and($rows->first()->id)
         ->toBe($user->id);
-})->todo();
+});
 
 it('supports changing pagination quantity', function (): void {
     $component = Livewire::test(Index::class)->set('quantity', 5);

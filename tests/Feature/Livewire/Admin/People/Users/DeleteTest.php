@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 use App\Livewire\Admin\People\Users\Delete;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
-use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\assertModelExists;
-use function Pest\Laravel\assertModelMissing;
+use function Pest\Laravel\assertSoftDeleted;
 
 beforeEach(fn () => $this->user = User::factory()->create());
 
@@ -30,7 +30,7 @@ it('deletes user successfully', function (): void {
 
     $component->call('delete');
 
-    assertDatabaseMissing('users', ['id' => $this->user->id]);
+    assertSoftDeleted('users', ['id' => $this->user->id]);
 
     $component->assertDispatched('deleted');
 });
@@ -43,27 +43,30 @@ it('handles deleting non-existent user', function (): void {
 
     $component->call('delete');
 
-    assertDatabaseMissing('users', ['id' => $user->id]);
+    assertSoftDeleted('users', ['id' => $user->id]);
 });
 
 it('dispatches success after deletion', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     Livewire::test(Delete::class, ['user' => $this->user])
         ->call('delete')
         ->assertDispatched('tallstackui:dialog');
 
-    assertModelMissing($this->user);
+    assertSoftDeleted($this->user);
 });
 
 it('confirms before deletion via question method', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     Livewire::test(Delete::class, ['user' => $this->user])
         ->call('confirm')
         ->assertDispatched('tallstackui:dialog');
 
     assertModelExists($this->user);
-})->todo();
+});
 
 it('passes correct user to delete method', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     Livewire::test(Delete::class, ['user' => $this->user])->call('delete');
 
-    assertDatabaseMissing('users', ['id' => $this->user->id]);
+    assertSoftDeleted('users', ['id' => $this->user->id]);
 });
