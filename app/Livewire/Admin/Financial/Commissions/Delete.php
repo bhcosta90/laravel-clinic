@@ -4,41 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Financial\Commissions;
 
-use App\Livewire\Traits\Alert;
 use App\Models\Commission;
-use Livewire\Attributes\Renderless;
-use Livewire\Component;
 
-final class Delete extends Component
+final class Delete extends \App\Abstracts\Livewire\Components\Delete
 {
-    use Alert;
-
-    public Commission $commission;
-
-    public function render(): string
+    protected function model(): Commission
     {
-        return <<<'HTML'
-        <div>
-            <x-button.circle icon="trash" color="red" wire:click="confirm" />
-        </div>
-        HTML;
-    }
-
-    #[Renderless]
-    public function confirm(): void
-    {
-        $this->question()
-            ->confirm(method: 'delete')
-            ->cancel()
-            ->send();
-    }
-
-    public function delete(): void
-    {
-        $this->commission->delete();
-
-        $this->dispatch('deleted');
-
-        $this->success();
+        return new Commission();
     }
 }
