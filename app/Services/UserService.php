@@ -24,8 +24,11 @@ final class UserService
             ->where('id', '!=', $user->id);
     }
 
-    protected function login(string $username, string $password, bool $remember = false): bool
-    {
+    protected function login(
+        string $username,
+        string $password,
+        bool $remember = false
+    ): bool {
         return Auth::attempt([
             'email'    => $username,
             'password' => $password,
