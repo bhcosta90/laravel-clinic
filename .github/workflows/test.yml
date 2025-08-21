@@ -6,13 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
-    inputs:
-      mode:
-        description: 'Choose Action mode'
-        required: true
-        type: choice
-        options: [finalize-package, finalize-release]
-        default: finalize-package
 
 jobs:
   laravel-tests:
@@ -41,8 +34,21 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: composer ci
-    - name: Run Gitflow Versioning
-      uses: bhcosta90/gitflow-versioning-action@main
+    - name: Run Versioning Action (auto)
+      uses: bhcosta90/gitflow-versioning-action@1.0.0
       with:
-        mode: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.mode || github.ref == 'refs/heads/main' && 'dev' || startsWith(github.ref, 'refs/heads/hotfix') && 'hotfix-patch' || startsWith(github.ref, 'refs/heads/release') && 'release-patch' }}
-        changelog_entry: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.changelog_entry || '' }}
+        mode: auto
+
+  finalize:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Versioning Action (package)
+        uses: bhcosta90/gitflow-versioning-action@1.0.0
+        with:
+          mode: package
