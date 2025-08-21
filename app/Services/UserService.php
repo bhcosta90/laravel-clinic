@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Services;
 
+use App\Http\Requests\User\StoreRequest;
 use App\Models\User;
 use App\Traits\Services\HandlesWithDependencies;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -13,6 +14,11 @@ use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 final class UserService
 {
     use HandlesWithDependencies;
+
+    public function store()
+    {
+        $this->validate(StoreRequest::class);
+    }
 
     protected function index(#[CurrentUser] $user, ?string $search)
     {
