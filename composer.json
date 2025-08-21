@@ -25,7 +25,7 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.0.0",
         "owen-it/laravel-auditing": "^14.0",
-        "quantumtecnology/controller-basics-extension": "dev-release/3.x",
+        "quantumtecnology/controller-basics-extension": "^3.0",
         "tallstackui/tallstackui": "^2.0.0",
         "vinkla/hashids": "^13.0"
     },
