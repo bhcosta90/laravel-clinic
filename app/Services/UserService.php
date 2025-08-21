@@ -20,8 +20,7 @@ final class UserService
             'role' => ['name'],
         ], [
             '(byFilter,name;email)' => $search,
-        ])
-            ->where('id', '!=', $user->id);
+        ])->where('id', '!=', $user->id);
     }
 
     protected function login(
