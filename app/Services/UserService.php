@@ -14,14 +14,6 @@ final class UserService
 {
     use HandlesWithDependencies;
 
-    protected function login(string $username, string $password, bool $remember = false): bool
-    {
-        return Auth::attempt([
-            'email'    => $username,
-            'password' => $password,
-        ], $remember);
-    }
-
     protected function index(#[CurrentUser] $user, ?string $search)
     {
         return app(BuilderQuery::class)->execute(new User(), [
@@ -30,5 +22,13 @@ final class UserService
             '(byFilter,name;email)' => $search,
         ])
             ->where('id', '!=', $user->id);
+    }
+
+    protected function login(string $username, string $password, bool $remember = false): bool
+    {
+        return Auth::attempt([
+            'email'    => $username,
+            'password' => $password,
+        ], $remember);
     }
 }
