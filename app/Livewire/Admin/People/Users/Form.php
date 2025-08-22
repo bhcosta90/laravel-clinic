@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\People\Users;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
@@ -49,7 +50,7 @@ final class Form extends \Livewire\Form
             return $this->model;
         }
 
-        return User::create($data);
+        return app(UserService::class)->handle('store', $data + ['password_confirmation' => $this->password_confirmation]);
     }
 
     public function rules(): array

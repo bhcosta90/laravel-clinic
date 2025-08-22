@@ -27,7 +27,7 @@ trait HandlesWithDependencies
                 $resolved[$parameter->name] = $params[$index];
             }
 
-            return $resolved;
+            return $reflection->invokeArgs($this, $resolved);
         }
 
         foreach ($parameters as $parameter) {

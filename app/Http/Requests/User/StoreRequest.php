@@ -6,18 +6,14 @@ namespace App\Http\Requests\User;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Traits\Requests\ModelRequestTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 final class StoreRequest extends FormRequest
 {
-    private ?User $model = null;
-
-    public function setModel(?User $model): void
-    {
-        $this->model = $model;
-    }
+    use ModelRequestTrait;
 
     public function rules(): array
     {
