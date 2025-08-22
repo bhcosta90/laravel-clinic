@@ -15,17 +15,17 @@ final class UserService
 {
     use HandlesWithDependencies;
 
-    public function store(array $data): User
+    protected function store(array $data): User
     {
         return app(RelationshipService::class)->execute(new User(), $data);
     }
 
-    public function update(User $user, array $data): User
+    protected function update(User $user, array $data): User
     {
         return app(RelationshipService::class)->execute($user, $data);
     }
 
-    public function delete(User $user): bool
+    protected function delete(User $user): bool
     {
         return $user->delete();
     }
