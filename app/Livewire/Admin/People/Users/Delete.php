@@ -36,7 +36,7 @@ final class Delete extends Component
 
     public function delete(): void
     {
-        app(UserService::class)->handle('delete', $this->model);
+        app(UserService::class)->handle('delete', $this->user);
 
         $this->dispatch('deleted');
 
