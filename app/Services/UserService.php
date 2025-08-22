@@ -34,6 +34,11 @@ final class UserService extends Service
         ];
     }
 
+    protected function includes(): array
+    {
+        return ['role' => []];
+    }
+
     protected function login(
         string $username,
         string $password,

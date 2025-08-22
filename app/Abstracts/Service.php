@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace App\Abstracts;
 
-use App\Models\User;
 use App\Traits\Services\HandlesWithDependencies;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 use QuantumTecnology\ControllerBasicsExtension\Services\RelationshipService;
@@ -16,6 +15,11 @@ abstract class Service
     abstract protected function model();
 
     abstract protected function search();
+
+    protected function includes(): array
+    {
+        return [];
+    }
 
     protected function index(?string $search, ?array $filters = [])
     {
@@ -38,7 +42,7 @@ abstract class Service
             $newFilters['(' . $key . ')'] = $value;
         }
 
-        return app(BuilderQuery::class)->execute(new User(), ['role' => []], $newFilters);
+        return app(BuilderQuery::class)->execute($this->model(), $this->includes(), $newFilters);
     }
 
     protected function store(array $data)
