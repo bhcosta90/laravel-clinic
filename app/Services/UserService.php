@@ -22,9 +22,7 @@ final class UserService extends Service
 
     protected function index(#[CurrentUser] $user, ?string $search)
     {
-        return app(BuilderQuery::class)->execute(new User(), [
-            'role' => ['name'],
-        ], [
+        return app(BuilderQuery::class)->execute(new User(), [], [
             '(byFilter,name;email)' => $search,
         ])->where('id', '!=', $user->id);
     }
