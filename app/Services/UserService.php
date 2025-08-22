@@ -4,30 +4,20 @@ declare(strict_types = 1);
 
 namespace App\Services;
 
+use App\Abstracts\Service;
 use App\Models\User;
 use App\Traits\Services\HandlesWithDependencies;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Auth;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
-use QuantumTecnology\ControllerBasicsExtension\Services\RelationshipService;
 
-final class UserService
+final class UserService extends Service
 {
     use HandlesWithDependencies;
 
-    protected function store(array $data): User
+    protected function model(): User
     {
-        return app(RelationshipService::class)->execute(new User(), $data);
-    }
-
-    protected function update(User $user, array $data): User
-    {
-        return app(RelationshipService::class)->execute($user, $data);
-    }
-
-    protected function delete(User $user): bool
-    {
-        return $user->delete();
+        return new User();
     }
 
     protected function index(#[CurrentUser] $user, ?string $search)
