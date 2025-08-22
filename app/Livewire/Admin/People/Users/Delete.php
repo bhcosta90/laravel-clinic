@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\People\Users;
 
 use App\Livewire\Traits\Alert;
 use App\Models\User;
+use App\Services\UserService;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
@@ -35,7 +36,7 @@ final class Delete extends Component
 
     public function delete(): void
     {
-        $this->user->delete();
+        app(UserService::class)->handle('delete', $this->model);
 
         $this->dispatch('deleted');
 

@@ -45,7 +45,7 @@ final class Form extends \Livewire\Form
                 unset($data['password']);
             }
 
-            $this->model->update($data);
+            app(UserService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
