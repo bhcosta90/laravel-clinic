@@ -47,8 +47,8 @@ final class Index extends Component
     #[Computed]
     public function rows(): Paginator
     {
+
         return app(UserService::class)->handle('index', $this->search)
-            ->where('id', '!=', auth()->id())
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();

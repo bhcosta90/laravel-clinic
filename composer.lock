@@ -4435,16 +4435,16 @@
         },
         {
             "name": "quantumtecnology/controller-basics-extension",
-            "version": "3.0.0.2",
+            "version": "3.0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Quantum-Tecnology/Controller-Basics-Extension.git",
-                "reference": "9fb6068fe72fab5624df861b7ad31f15a15e1715"
+                "reference": "e889d7fa50e09c0051c6996b8a5eba67e44b0afc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Quantum-Tecnology/Controller-Basics-Extension/zipball/9fb6068fe72fab5624df861b7ad31f15a15e1715",
-                "reference": "9fb6068fe72fab5624df861b7ad31f15a15e1715",
+                "url": "https://api.github.com/repos/Quantum-Tecnology/Controller-Basics-Extension/zipball/e889d7fa50e09c0051c6996b8a5eba67e44b0afc",
+                "reference": "e889d7fa50e09c0051c6996b8a5eba67e44b0afc",
                 "shasum": ""
             },
             "require": {
@@ -4499,9 +4499,9 @@
             "support": {
                 "email": "gustavo-computacao@hotmail.com",
                 "issues": "https://github.com/Quantum-Tecnology/Controller-Basics-Extension/issues",
-                "source": "https://github.com/Quantum-Tecnology/Controller-Basics-Extension/tree/3.0.0.2"
+                "source": "https://github.com/Quantum-Tecnology/Controller-Basics-Extension/tree/3.0.0.3"
             },
-            "time": "2025-08-21T21:04:12+00:00"
+            "time": "2025-08-22T11:50:59+00:00"
         },
         {
             "name": "quantumtecnology/enum-basics-extension",

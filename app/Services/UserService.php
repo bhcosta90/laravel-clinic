@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Traits\Services\HandlesWithDependencies;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Auth;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class UserService extends Service
 {
@@ -20,11 +19,19 @@ final class UserService extends Service
         return new User();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, array $filters = []): array
+    protected function search(): array
     {
-        return app(BuilderQuery::class)->execute(new User(), ['role' => []], [
-            '(byFilter,name;email)' => $search,
-        ] + $filters)->where('id', '!=', $user->id);
+        return [
+            'name',
+            'email',
+        ];
+    }
+
+    protected function filters(#[CurrentUser] $user): array
+    {
+        return [
+            'id,!=' => $user->id,
+        ];
     }
 
     protected function login(
