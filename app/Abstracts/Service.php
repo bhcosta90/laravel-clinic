@@ -12,38 +12,38 @@ abstract class Service
 {
     use HandlesWithDependencies;
 
-    abstract protected function model();
+    //    abstract protected function model();
+    //
+    //    abstract protected function search();
+    //
+    //    protected function includes(): array
+    //    {
+    //        return [];
+    //    }
 
-    abstract protected function search();
-
-    protected function includes(): array
-    {
-        return [];
-    }
-
-    protected function index(?string $search, ?array $filters = [])
-    {
-
-        if (null === $filters) {
-            $filters = [];
-        }
-
-        if ($search) {
-            $filters['byFilter,' . implode(';', $this->search())] = $search;
-        }
-
-        if (method_exists($this, 'filters') && $data = $this->handle('filters')) {
-            $filters = array_merge($filters, $data);
-        }
-
-        $newFilters = [];
-
-        foreach ($filters as $key => $value) {
-            $newFilters['(' . $key . ')'] = $value;
-        }
-
-        return app(BuilderQuery::class)->execute($this->model(), $this->includes(), $newFilters);
-    }
+    //    protected function index(?string $search, ?array $filters = [])
+    //    {
+    //
+    //        if (null === $filters) {
+    //            $filters = [];
+    //        }
+    //
+    //        if ($search) {
+    //            $filters['byFilter,' . implode(';', $this->search())] = $search;
+    //        }
+    //
+    //        if (method_exists($this, 'filters') && $data = $this->handle('filters')) {
+    //            $filters = array_merge($filters, $data);
+    //        }
+    //
+    //        $newFilters = [];
+    //
+    //        foreach ($filters as $key => $value) {
+    //            $newFilters['(' . $key . ')'] = $value;
+    //        }
+    //
+    //        return app(BuilderQuery::class)->execute($this->model(), $this->includes(), $newFilters);
+    //    }
 
     protected function store(array $data)
     {
