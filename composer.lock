@@ -1249,16 +1249,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c"
+                "reference": "481557b130ef3790cf82b713667b43030dc9c957"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/7c69f28996b0a6920945dd20b3857e499d9ca96c",
-                "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/481557b130ef3790cf82b713667b43030dc9c957",
+                "reference": "481557b130ef3790cf82b713667b43030dc9c957",
                 "shasum": ""
             },
             "require": {
@@ -1266,7 +1266,7 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
+                "phpunit/phpunit": "^8.5.44 || ^9.6.25"
             },
             "type": "library",
             "extra": {
@@ -1312,7 +1312,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.2.0"
+                "source": "https://github.com/guzzle/promises/tree/2.3.0"
             },
             "funding": [
                 {
@@ -1328,7 +1328,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-27T13:27:01+00:00"
+            "time": "2025-08-22T14:34:08+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -1448,16 +1448,16 @@
         },
         {
             "name": "guzzlehttp/uri-template",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/uri-template.git",
-                "reference": "30e286560c137526eccd4ce21b2de477ab0676d2"
+                "reference": "4f4bbd4e7172148801e76e3decc1e559bdee34e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/30e286560c137526eccd4ce21b2de477ab0676d2",
-                "reference": "30e286560c137526eccd4ce21b2de477ab0676d2",
+                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/4f4bbd4e7172148801e76e3decc1e559bdee34e1",
+                "reference": "4f4bbd4e7172148801e76e3decc1e559bdee34e1",
                 "shasum": ""
             },
             "require": {
@@ -1466,7 +1466,7 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "phpunit/phpunit": "^8.5.36 || ^9.6.15",
+                "phpunit/phpunit": "^8.5.44 || ^9.6.25",
                 "uri-template/tests": "1.0.0"
             },
             "type": "library",
@@ -1514,7 +1514,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/uri-template/issues",
-                "source": "https://github.com/guzzle/uri-template/tree/v1.0.4"
+                "source": "https://github.com/guzzle/uri-template/tree/v1.0.5"
             },
             "funding": [
                 {
@@ -1530,7 +1530,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-03T10:55:03+00:00"
+            "time": "2025-08-22T14:27:06+00:00"
         },
         {
             "name": "hashids/hashids",
@@ -4719,16 +4719,16 @@
         },
         {
             "name": "quantumtecnology/service-basics-extension",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Quantum-Tecnology/Service-Basics-Extension.git",
-                "reference": "aaef3309848e79f5434e202cd6cb97bc7457b9d7"
+                "reference": "df1ac7a719360e8bb4b54d4fb11c2d41d847692f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Quantum-Tecnology/Service-Basics-Extension/zipball/aaef3309848e79f5434e202cd6cb97bc7457b9d7",
-                "reference": "aaef3309848e79f5434e202cd6cb97bc7457b9d7",
+                "url": "https://api.github.com/repos/Quantum-Tecnology/Service-Basics-Extension/zipball/df1ac7a719360e8bb4b54d4fb11c2d41d847692f",
+                "reference": "df1ac7a719360e8bb4b54d4fb11c2d41d847692f",
                 "shasum": ""
             },
             "require": {
@@ -4771,22 +4771,22 @@
             "support": {
                 "email": "gustavo-computacao@hotmail.com",
                 "issues": "https://github.com/Quantum-Tecnology/Service-Basics-Extension/issues",
-                "source": "https://github.com/Quantum-Tecnology/Service-Basics-Extension/tree/3.0.0"
+                "source": "https://github.com/Quantum-Tecnology/Service-Basics-Extension/tree/3.0.1"
             },
-            "time": "2025-08-20T00:03:32+00:00"
+            "time": "2025-08-22T19:18:48+00:00"
         },
         {
             "name": "quantumtecnology/validate-trait",
-            "version": "2.3.4",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Quantum-Tecnology/Validate-Trait.git",
-                "reference": "bc74a57a5dfe5fea9989261d7eafbd4752328b98"
+                "reference": "15ee9c3424de7de4d15a4bd8e446590c0e8290e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Quantum-Tecnology/Validate-Trait/zipball/bc74a57a5dfe5fea9989261d7eafbd4752328b98",
-                "reference": "bc74a57a5dfe5fea9989261d7eafbd4752328b98",
+                "url": "https://api.github.com/repos/Quantum-Tecnology/Validate-Trait/zipball/15ee9c3424de7de4d15a4bd8e446590c0e8290e0",
+                "reference": "15ee9c3424de7de4d15a4bd8e446590c0e8290e0",
                 "shasum": ""
             },
             "require": {
@@ -4827,9 +4827,9 @@
             "support": {
                 "email": "gustavo-computacao@hotmail.com",
                 "issues": "https://github.com/Quantum-Tecnology/Validate-Trait/issues",
-                "source": "https://github.com/Quantum-Tecnology/Validate-Trait/tree/2.3.4"
+                "source": "https://github.com/Quantum-Tecnology/Validate-Trait/tree/2.3.5"
             },
-            "time": "2025-08-06T20:30:26+00:00"
+            "time": "2025-08-22T18:39:46+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
