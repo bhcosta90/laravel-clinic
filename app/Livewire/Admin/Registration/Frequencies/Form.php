@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Registration\Frequencies;
 
 use App\Models\Frequency;
+use App\Services\FrequencyService;
 
 final class Form extends \Livewire\Form
 {
@@ -25,17 +26,12 @@ final class Form extends \Livewire\Form
         $data = $this->validate();
 
         if ($this->model?->id) {
-            $this->model->fill($data);
-            $this->model->save();
+            app(FrequencyService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
 
-        $model = new Frequency();
-        $model->fill($data);
-        $model->save();
-
-        return $model;
+        return app(FrequencyService::class)->handle('store', $data);
     }
 
     public function rules(): array

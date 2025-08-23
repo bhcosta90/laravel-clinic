@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Registration\AnamnesisGroup;
 
 use App\Models\AnamnesisGroup as AnamnesisGroupModel;
+use App\Services\AnamnesisGroupService;
 
 final class Form extends \Livewire\Form
 {
@@ -25,17 +26,12 @@ final class Form extends \Livewire\Form
         $data = $this->validate();
 
         if ($this->model?->id) {
-            $this->model->fill($data);
-            $this->model->save();
+            app(AnamnesisGroupService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
 
-        $model = new AnamnesisGroupModel();
-        $model->fill($data);
-        $model->save();
-
-        return $model;
+        return app(AnamnesisGroupService::class)->handle('store', $data);
     }
 
     public function rules(): array

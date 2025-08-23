@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Registration\AnamnesisGroup;
 
 use App\Livewire\Traits\Alert;
 use App\Models\AnamnesisGroup;
+use App\Services\AnamnesisGroupService;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
@@ -35,7 +36,7 @@ final class Delete extends Component
 
     public function delete(): void
     {
-        $this->agreement->delete();
+        app(AnamnesisGroupService::class)->handle('delete', $this->agreement);
 
         $this->dispatch('deleted');
 

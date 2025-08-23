@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Registration\Rooms;
 
 use App\Models\Room;
+use App\Services\RoomService;
 
 final class Form extends \Livewire\Form
 {
@@ -23,17 +24,12 @@ final class Form extends \Livewire\Form
         $data = $this->validate();
 
         if ($this->model?->id) {
-            $this->model->fill($data);
-            $this->model->save();
+            app(RoomService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
 
-        $model = new Room();
-        $model->fill($data);
-        $model->save();
-
-        return $model;
+        return app(RoomService::class)->handle('store', $data);
     }
 
     public function rules(): array

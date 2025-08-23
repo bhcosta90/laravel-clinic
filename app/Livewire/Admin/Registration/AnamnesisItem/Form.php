@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Registration\AnamnesisItem;
 
 use App\Models\AnamnesisGroup;
 use App\Models\AnamnesisItem as AnamnesisItemModel;
+use App\Services\AnamnesisItemService;
 use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
@@ -29,17 +30,12 @@ final class Form extends \Livewire\Form
         $data = $this->validate();
 
         if ($this->model?->id) {
-            $this->model->fill($data);
-            $this->model->save();
+            app(AnamnesisItemService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
 
-        $model = new AnamnesisItemModel();
-        $model->fill($data);
-        $model->save();
-
-        return $model;
+        return app(AnamnesisItemService::class)->handle('store', $data);
     }
 
     public function rules(): array

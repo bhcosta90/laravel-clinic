@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Registration\Rooms;
 
 use App\Livewire\Traits\Alert;
 use App\Models\Room;
+use App\Services\RoomService;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
@@ -35,7 +36,7 @@ final class Delete extends Component
 
     public function delete(): void
     {
-        $this->room->delete();
+        app(RoomService::class)->handle('delete', $this->room);
 
         $this->dispatch('deleted');
 
