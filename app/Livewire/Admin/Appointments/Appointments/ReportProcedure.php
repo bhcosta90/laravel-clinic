@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Appointments\Appointments;
 
 use App\Models\Agreement;
+use App\Models\Appointment;
 use App\Report\GenerateReportByPdf;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
@@ -39,7 +40,7 @@ final class ReportProcedure extends Component
             user: auth()->user(),
             name: 'report.procedure',
             view: 'pdf.report.procedure',
-            model: Agreement::class,
+            model: Appointment::class,
             filters: $filters,
         );
 

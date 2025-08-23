@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Appointments\Appointments;
 
 use App\Enums\Models\Appointment\Status;
 use App\Models\Agreement;
+use App\Models\Appointment;
 use App\Report\GenerateReportByPdf;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
@@ -68,7 +69,7 @@ final class ReportSchedule extends Component
             user: auth()->user(),
             name: 'report.schedule',
             view: 'pdf.report.schedule',
-            model: Agreement::class,
+            model: Appointment::class,
             filters: $filters,
             orderColumn: 'date',
             orderDirection: 'desc'
