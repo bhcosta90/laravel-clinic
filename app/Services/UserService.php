@@ -19,6 +19,7 @@ final class UserService extends Service
         return ['name', 'email'];
     }
 
+    #[\Override]
     protected function includes(): array
     {
         return ['role' => []];
