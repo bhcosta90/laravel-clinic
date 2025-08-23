@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Models\User;
+use Override;
 
 final class UserService extends Service
 {
@@ -19,7 +20,7 @@ final class UserService extends Service
         return ['name', 'email'];
     }
 
-    #[\Override]
+    #[Override]
     protected function includes(): array
     {
         return ['role' => []];
