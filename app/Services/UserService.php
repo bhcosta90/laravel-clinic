@@ -13,8 +13,6 @@ use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class UserService extends Service
 {
-    use HandlesWithDependencies;
-
     protected function model(): User
     {
         return new User();
