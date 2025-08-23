@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\People\Customers;
 
 use App\Models\Customer;
+use App\Services\CustomerService;
 
 final class Form extends \Livewire\Form
 {
@@ -27,12 +28,12 @@ final class Form extends \Livewire\Form
         $data = $this->validate();
 
         if ($this->model?->id) {
-            $this->model->update($data);
+            app(CustomerService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
 
-        return Customer::create($data);
+        return app(CustomerService::class)->handle('store', $data);
     }
 
     public function rules(): array

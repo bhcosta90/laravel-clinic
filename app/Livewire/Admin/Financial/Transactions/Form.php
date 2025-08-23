@@ -5,12 +5,12 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Financial\Transactions;
 
 use App\Enums\Models\Transaction\Type;
-use App\Jobs\Transaction\CreateTransactionJob;
 use App\Models\Agreement;
 use App\Models\Customer;
 use App\Models\PaymentMethod;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Services\TransactionService;
 use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
@@ -48,23 +48,12 @@ final class Form extends \Livewire\Form
         $data = $this->validate();
 
         if ($this->model?->id) {
-            $this->model->update($data);
+            app(TransactionService::class)->handle('update', $this->model, $data);
 
             return;
         }
 
-        dispatch_sync(new CreateTransactionJob(
-            name: $data['name'],
-            user_id: $data['user_id'],
-            agreement_id: $data['agreement_id'],
-            customer_id: $data['customer_id'],
-            payment_method_id: $data['payment_method_id'],
-            value: (float) $data['value'],
-            description: $data['description'],
-            due_date: now()->parse($data['due_date']),
-            payment_date: when($data['due_date'] ?? null, now()->parse($data['payment_date'])),
-            type: $this->type,
-        ));
+        app(TransactionService::class)->handle('store', $data);
     }
 
     public function rules(): array

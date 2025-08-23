@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\People\Employees;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
@@ -40,12 +41,16 @@ final class Form extends \Livewire\Form
         $data = $this->validate();
 
         if ($this->model?->id) {
-            $this->model->update($data);
+            if (blank($data['password'] ?? null)) {
+                unset($data['password']);
+            }
+
+            app(UserService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
 
-        return User::create($data + ['is_employee' => true]);
+        return app(UserService::class)->handle('store', $data + ['is_employee' => true]);
     }
 
     public function rules(): array

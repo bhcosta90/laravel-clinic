@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Financial\Commissions;
 
 use App\Models\Commission;
 use App\Models\User;
+use App\Services\CommissionService;
 use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
@@ -31,12 +32,12 @@ final class Form extends \Livewire\Form
         $data = $this->validate();
 
         if ($this->model?->id) {
-            $this->model->update($data);
+            app(CommissionService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
 
-        return Commission::create($data);
+        return app(CommissionService::class)->handle('store', $data);
     }
 
     public function rules(): array
