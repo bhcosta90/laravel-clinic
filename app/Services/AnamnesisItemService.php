@@ -9,12 +9,12 @@ use App\Models\AnamnesisItem;
 
 final class AnamnesisItemService extends Service
 {
-    protected function model()
+    protected function model(): \App\Models\AnamnesisItem
     {
         return new AnamnesisItem();
     }
 
-    protected function search()
+    protected function search(): array
     {
         return ['name'];
     }

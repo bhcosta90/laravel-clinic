@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 
 final class DatabaseSeeder extends Seeder
 {
-    public const TenantId = '9c97475a-6867-4f75-a1e4-3ac81eebcf2c';
+    public const string TenantId = '9c97475a-6867-4f75-a1e4-3ac81eebcf2c';
 
     public function run(): void
     {

@@ -14,6 +14,7 @@ use Livewire\Livewire;
 
 final class AppServiceProvider extends ServiceProvider
 {
+    #[\Override]
     public function register(): void
     {
         Carbon::macro('localFormat', fn ($format = 'd/m/Y H:i') => $this->timezone(config('app.client_timezone'))->format($format));

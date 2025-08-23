@@ -9,14 +9,13 @@ use App\Models\Room;
 
 final class RoomService extends Service
 {
-    protected function model()
+    protected function model(): \App\Models\Room
     {
         return new Room();
     }
 
-    protected function search()
+    protected function search(): array
     {
         return ['name'];
     }
-
 }

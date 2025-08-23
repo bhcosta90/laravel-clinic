@@ -9,12 +9,12 @@ use App\Models\Transaction;
 
 final class TransactionService extends Service
 {
-    protected function model()
+    protected function model(): \App\Models\Transaction
     {
         return new Transaction();
     }
 
-    protected function search()
+    protected function search(): array
     {
         return [];
     }
