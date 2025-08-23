@@ -18,4 +18,9 @@ final class UserService extends Service
     {
         return ['name'];
     }
+
+    protected function includes(): array
+    {
+        return ['role' => []];
+    }
 }
