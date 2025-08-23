@@ -5,7 +5,18 @@ declare(strict_types = 1);
 namespace App\Services;
 
 use App\Abstracts\Service;
+use App\Models\Room;
 
 final class RoomService extends Service
 {
+    protected function model()
+    {
+        return new Room();
+    }
+
+    protected function search()
+    {
+        return ['name'];
+    }
+
 }
