@@ -135,7 +135,9 @@
                 @endinteract
 
                 <x-slot name="footer">
-                    {{ $this->rows->links('tallstack-ui::components.table.paginators', ['simplePagination' => true]) }}
+                    <div class="mr-4">
+                        {{ $this->rows->links('tallstack-ui::components.table.paginators', ['simplePagination' => true]) }}
+                    </div>
                 </x-slot>
             </x-table>
         </div>
