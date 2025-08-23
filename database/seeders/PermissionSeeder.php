@@ -12,7 +12,7 @@ final class PermissionSeeder extends Seeder
 {
     public function run(): void
     {
-        $permission = array_map(fn (\App\Enums\Models\Permission\Can $p): array => ['slug' => $p, 'tenant_id' => DatabaseSeeder::TenantId], Can::cases());
+        $permission = array_map(fn (Can $p): array => ['slug' => $p, 'tenant_id' => DatabaseSeeder::TenantId], Can::cases());
         Permission::upsert($permission, ['slug', 'tenant_id']);
     }
 }

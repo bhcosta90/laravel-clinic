@@ -11,10 +11,11 @@ use Illuminate\Queue\QueueManager;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Override;
 
 final class AppServiceProvider extends ServiceProvider
 {
-    #[\Override]
+    #[Override]
     public function register(): void
     {
         Carbon::macro('localFormat', fn ($format = 'd/m/Y H:i') => $this->timezone(config('app.client_timezone'))->format($format));

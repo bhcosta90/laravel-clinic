@@ -9,7 +9,7 @@ use App\Models\Room;
 
 final class RoomService extends Service
 {
-    protected function model(): \App\Models\Room
+    protected function model(): Room
     {
         return new Room();
     }

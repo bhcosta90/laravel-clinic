@@ -9,7 +9,7 @@ use App\Models\Transaction;
 
 final class TransactionService extends Service
 {
-    protected function model(): \App\Models\Transaction
+    protected function model(): Transaction
     {
         return new Transaction();
     }

@@ -9,7 +9,7 @@ use App\Models\AnamnesisItem;
 
 final class AnamnesisItemService extends Service
 {
-    protected function model(): \App\Models\AnamnesisItem
+    protected function model(): AnamnesisItem
     {
         return new AnamnesisItem();
     }
