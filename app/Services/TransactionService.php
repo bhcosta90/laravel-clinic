@@ -16,7 +16,7 @@ final class TransactionService extends Service
         return new Transaction();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         $includes = [
             'customer' => [],

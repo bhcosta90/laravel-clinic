@@ -16,7 +16,7 @@ final class CustomerService extends Service
         return new Customer();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new Customer(), [], [
             '(byFilter,name;document)' => $search,

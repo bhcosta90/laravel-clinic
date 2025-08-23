@@ -16,7 +16,7 @@ final class AppointmentService extends Service
         return new Appointment();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         // Includes common relations for listing appointments
         $includes = [

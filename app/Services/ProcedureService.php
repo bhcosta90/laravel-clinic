@@ -16,7 +16,7 @@ final class ProcedureService extends Service
         return new Procedure();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new Procedure(), [], [
             '(byFilter,name;code)' => $search,

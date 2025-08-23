@@ -16,7 +16,7 @@ final class AgreementService extends Service
         return new Agreement();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new Agreement(), [], [
             '(byFilter,name)' => $search,

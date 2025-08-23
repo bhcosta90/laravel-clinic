@@ -16,7 +16,7 @@ final class RoleService extends Service
         return new Role();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new Role(), ['permissions' => []], [
             '(byFilter,name;slug)' => $search,

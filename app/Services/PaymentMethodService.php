@@ -16,7 +16,7 @@ final class PaymentMethodService extends Service
         return new PaymentMethod();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new PaymentMethod(), [], [
             '(byFilter,name)' => $search,

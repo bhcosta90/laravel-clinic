@@ -16,7 +16,7 @@ final class AnamnesisItemService extends Service
         return new AnamnesisItem();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new AnamnesisItem(), ['anamnesisGroup' => []], [
             '(byFilter,name;description)' => $search,

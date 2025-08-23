@@ -16,7 +16,7 @@ final class RemedyService extends Service
         return new Remedy();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new Remedy(), [], [
             '(byFilter,name;description)' => $search,

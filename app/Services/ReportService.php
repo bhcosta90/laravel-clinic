@@ -16,7 +16,7 @@ final class ReportService extends Service
         return new ModelReport();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new ModelReport(), [], [
             '(byFilter,name;description)' => $search,

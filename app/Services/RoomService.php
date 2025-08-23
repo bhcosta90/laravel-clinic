@@ -16,7 +16,7 @@ final class RoomService extends Service
         return new Room();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new Room(), [], [
             '(byFilter,name)' => $search,

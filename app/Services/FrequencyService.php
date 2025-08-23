@@ -16,7 +16,7 @@ final class FrequencyService extends Service
         return new Frequency();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new Frequency(), [], [
             '(byFilter,name)' => $search,

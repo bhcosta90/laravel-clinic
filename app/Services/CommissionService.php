@@ -16,7 +16,7 @@ final class CommissionService extends Service
         return new Commission();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         // Commissions do not have a textual searchable field; rely mostly on filters
         return app(BuilderQuery::class)->execute(new Commission(), ['user' => []], $filters ?: []);

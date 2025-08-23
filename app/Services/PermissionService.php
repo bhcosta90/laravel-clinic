@@ -16,7 +16,7 @@ final class PermissionService extends Service
         return new Permission();
     }
 
-    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    protected function index(string $search, ?array $filters = [])
     {
         return app(BuilderQuery::class)->execute(new Permission(), [], [
             '(byFilter,name;slug)' => $search,
