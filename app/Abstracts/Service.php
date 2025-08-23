@@ -41,6 +41,7 @@ abstract class Service
         foreach ($filters as $key => $value) {
             if (is_string($key) && str_starts_with($key, '(') && str_ends_with($key, ')')) {
                 $newFilters[$key] = $value;
+
                 continue;
             }
 
