@@ -36,9 +36,9 @@ final class Update extends Component
 
         $this->dispatch('updated');
 
-        // Keep the form with current model values for UX; only close modal via external event if desired
         $this->form->setModel($model);
 
         $this->success();
+        $this->resetExcept('form');
     }
 }

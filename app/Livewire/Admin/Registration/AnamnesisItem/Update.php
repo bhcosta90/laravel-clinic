@@ -5,10 +5,8 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Registration\AnamnesisItem;
 
 use App\Livewire\Traits\Alert;
-use App\Models\AnamnesisGroup;
 use App\Models\AnamnesisItem;
 use Illuminate\Contracts\View\View;
-use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -41,5 +39,6 @@ final class Update extends Component
         $this->form->setModel($model);
 
         $this->success();
+        $this->resetExcept('form');
     }
 }

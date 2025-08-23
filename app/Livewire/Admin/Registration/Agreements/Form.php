@@ -6,7 +6,6 @@ namespace App\Livewire\Admin\Registration\Agreements;
 
 use App\Models\Agreement;
 use App\Services\AgreementService;
-use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
 {

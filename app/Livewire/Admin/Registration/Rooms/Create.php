@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Registration\Rooms;
 
 use App\Livewire\Traits\Alert;
-use App\Models\Room;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 

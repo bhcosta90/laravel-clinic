@@ -39,5 +39,7 @@ final class Update extends Component
         $this->form->setModel($model);
 
         $this->success();
+        $this->resetExcept('form');
+        $this->resetExcept('form');
     }
 }

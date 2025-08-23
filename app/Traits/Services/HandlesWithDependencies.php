@@ -11,7 +11,7 @@ use ReflectionNamedType;
 
 trait HandlesWithDependencies
 {
-    public function handle(string $method, ...$params)
+    public function handle(string $method, ...$params): mixed
     {
         $container = app(Container::class);
 

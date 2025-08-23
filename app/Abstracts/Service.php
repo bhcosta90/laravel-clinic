@@ -50,7 +50,7 @@ abstract class Service
         return app(RelationshipService::class)->execute($this->model(), $data);
     }
 
-    protected function update($model, array $data)
+    protected function update(\Illuminate\Database\Eloquent\Model $model, array $data)
     {
         return app(RelationshipService::class)->execute($model, $data);
     }

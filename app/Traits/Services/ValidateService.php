@@ -22,10 +22,6 @@ trait ValidateService
             abort(Response::HTTP_FORBIDDEN, 'Unauthorized action.');
         }
 
-        try {
-            return validator($request->all(), $request->rules())->validate();
-        } catch (Throwable $e) {
-            throw $e;
-        }
+        return validator($request->all(), $request->rules())->validate();
     }
 }
