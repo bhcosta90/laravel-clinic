@@ -6,8 +6,16 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Models\Agreement;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class AgreementService extends Service
 {
+    protected function model(): Agreement
+    {
+        return new Agreement();
+    }
+
+    protected function search(): array
+    {
+        return ['name'];
+    }
 }

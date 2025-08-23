@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\Admin\V1\Api;
 
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class UserController
 {
@@ -16,10 +16,11 @@ final class UserController
         $search = $request->get('search');
         $field  = $request->get('field', 'name');
 
-        return app(BuilderQuery::class)
-            ->execute(new User(), [], [
-                '(' . $field . ',like)' => $search,
-            ] + request()->all())
+        $filters                   = request()->all();
+        $filters[$field . ',like'] = $search;
+
+        return app(UserService::class)
+            ->handle('index', null, $filters)
             ->unless($search, fn (Builder $query) => $query->limit(10))
             ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
             ->orderBy('name')

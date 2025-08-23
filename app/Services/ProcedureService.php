@@ -6,8 +6,16 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Models\Procedure;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class ProcedureService extends Service
 {
+    protected function model(): Procedure
+    {
+        return new Procedure();
+    }
+
+    protected function search(): array
+    {
+        return ['name'];
+    }
 }

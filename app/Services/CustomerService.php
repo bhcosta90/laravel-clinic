@@ -6,8 +6,16 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Models\Customer;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class CustomerService extends Service
 {
+    protected function model(): Customer
+    {
+        return new Customer();
+    }
+
+    protected function search(): array
+    {
+        return ['name'];
+    }
 }

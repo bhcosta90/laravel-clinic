@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\Admin\V1\Api;
 
 use App\Models\Permission;
+use App\Services\PermissionService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class PermissionController
 {
@@ -17,9 +17,9 @@ final class PermissionController
         $id     = $request->get('id');
         $search = $request->get('search');
 
-        return app(BuilderQuery::class)
-            ->execute(new Permission(), [], [
-                '(full_name,like)' => $search,
+        return app(PermissionService::class)
+            ->handle('index', null, [
+                'full_name,like' => $search,
             ])
             ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
             ->when($type, function ($query) use ($type, $id): void {

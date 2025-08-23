@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\Admin\V1\Api;
 
 use App\Models\Customer;
+use App\Services\CustomerService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class CustomerController
 {
@@ -16,9 +16,9 @@ final class CustomerController
         $search = $request->get('search');
         $field  = $request->get('field', 'name');
 
-        return app(BuilderQuery::class)
-            ->execute(new Customer(), [], [
-                '(' . $field . ',like)' => $search,
+        return app(CustomerService::class)
+            ->handle('index', null, [
+                $field . ',like' => $search,
             ])
             ->unless($search, fn (Builder $query) => $query->limit(10))
             ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))

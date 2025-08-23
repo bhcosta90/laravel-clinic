@@ -12,38 +12,43 @@ abstract class Service
 {
     use HandlesWithDependencies;
 
-    //    abstract protected function model();
-    //
-    //    abstract protected function search();
-    //
-    //    protected function includes(): array
-    //    {
-    //        return [];
-    //    }
+    // Services should implement these two methods to enable index()
+    abstract protected function model();
 
-    //    protected function index(?string $search, ?array $filters = [])
-    //    {
-    //
-    //        if (null === $filters) {
-    //            $filters = [];
-    //        }
-    //
-    //        if ($search) {
-    //            $filters['byFilter,' . implode(';', $this->search())] = $search;
-    //        }
-    //
-    //        if (method_exists($this, 'filters') && $data = $this->handle('filters')) {
-    //            $filters = array_merge($filters, $data);
-    //        }
-    //
-    //        $newFilters = [];
-    //
-    //        foreach ($filters as $key => $value) {
-    //            $newFilters['(' . $key . ')'] = $value;
-    //        }
-    //
-    //        return app(BuilderQuery::class)->execute($this->model(), $this->includes(), $newFilters);
-    //    }
+    abstract protected function search();
+
+    protected function includes(): array
+    {
+        return [];
+    }
+
+    protected function index(?string $search, ?array $filters = [])
+    {
+        if (null === $filters) {
+            $filters = [];
+        }
+
+        if (null !== $search && '' !== $search && '0' !== $search) {
+            $filters['byFilter,' . implode(';', $this->search())] = $search;
+        }
+
+        if (method_exists($this, 'filters') && $data = $this->handle('filters')) {
+            $filters = array_merge($filters, $data);
+        }
+
+        $newFilters = [];
+
+        foreach ($filters as $key => $value) {
+            if (is_string($key) && str_starts_with($key, '(') && str_ends_with($key, ')')) {
+                $newFilters[$key] = $value;
+                continue;
+            }
+
+            $newFilters['(' . $key . ')'] = $value;
+        }
+
+        return app(BuilderQuery::class)->execute($this->model(), $this->includes(), $newFilters);
+    }
 
     protected function store(array $data)
     {

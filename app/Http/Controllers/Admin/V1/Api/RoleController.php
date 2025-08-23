@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\Admin\V1\Api;
 
 use App\Models\Role;
+use App\Services\RoleService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class RoleController
 {
@@ -16,9 +16,9 @@ final class RoleController
         $search = $request->get('search');
         $field  = $request->get('field', 'full_name');
 
-        return app(BuilderQuery::class)
-            ->execute(new Role(), [], [
-                '(' . $field . ',like)' => $search,
+        return app(RoleService::class)
+            ->handle('index', null, [
+                $field . ',like' => $search,
             ])
             ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
             ->unless($search, fn (Builder $query) => $query->limit(10))

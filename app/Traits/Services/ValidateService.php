@@ -6,7 +6,6 @@ namespace App\Traits\Services;
 
 use App\Models\User;
 use Illuminate\Http\Response;
-use Throwable;
 
 trait ValidateService
 {

@@ -6,8 +6,16 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Models\AnamnesisGroup;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class AnamnesisGroupService extends Service
 {
+    protected function model(): AnamnesisGroup
+    {
+        return new AnamnesisGroup();
+    }
+
+    protected function search(): array
+    {
+        return ['name'];
+    }
 }

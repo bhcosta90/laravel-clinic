@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\Admin\V1\Api;
 
 use App\Models\Agreement;
+use App\Services\AgreementService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class AgreementController
 {
@@ -16,9 +16,9 @@ final class AgreementController
         $search = $request->get('search');
         $field  = $request->get('field', 'name');
 
-        $results = app(BuilderQuery::class)
-            ->execute(new Agreement(), [], [
-                '(' . $field . ',like)' => $search,
+        $results = app(AgreementService::class)
+            ->handle('index', null, [
+                $field . ',like' => $search,
             ])
             ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
             ->unless($search, fn (Builder $query) => $query->limit(10))
