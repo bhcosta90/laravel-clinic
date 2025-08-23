@@ -16,7 +16,7 @@ final class UserService extends Service
 
     protected function search(): array
     {
-        return ['name'];
+        return ['name', 'email'];
     }
 
     protected function includes(): array
