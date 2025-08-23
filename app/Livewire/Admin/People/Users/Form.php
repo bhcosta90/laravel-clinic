@@ -50,7 +50,7 @@ final class Form extends \Livewire\Form
             return $this->model;
         }
 
-        return app(UserService::class)->handle('store', $data + ['password_confirmation' => $this->password_confirmation]);
+        return app(UserService::class)->handle('store', $data);
     }
 
     public function rules(): array
