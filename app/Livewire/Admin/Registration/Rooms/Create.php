@@ -13,37 +13,23 @@ final class Create extends Component
 {
     use Alert;
 
-    public Room $room;
+    public Form $form;
 
     public bool $modal = false;
-
-    public function mount(): void
-    {
-        $this->room = new Room();
-    }
 
     public function render(): View
     {
         return view('livewire.admin.registration.rooms.create');
     }
 
-    public function rules(): array
-    {
-        return [
-            'room.name' => ['required', 'string', 'max:255'],
-        ];
-    }
-
     public function save(): void
     {
-        $this->validate();
-
-        $this->room->save();
+        $this->form->save();
 
         $this->dispatch('created');
 
-        $this->reset();
-        $this->room = new Room();
+        $this->form->reset();
+        $this->resetExcept('form');
 
         $this->success();
     }

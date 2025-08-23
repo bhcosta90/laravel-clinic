@@ -14,7 +14,7 @@ final class Update extends Component
 {
     use Alert;
 
-    public ?AnamnesisGroup $anamnesisGroup = null;
+    public Form $form;
 
     public bool $modal = false;
 
@@ -26,28 +26,17 @@ final class Update extends Component
     #[On('load::agreement')]
     public function load(AnamnesisGroup $agreement): void
     {
-        $this->anamnesisGroup = $agreement;
-
+        $this->form->setModel($agreement);
         $this->modal = true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'anamnesisGroup.name'        => ['required', 'string', 'max:255'],
-            'anamnesisGroup.description' => ['required', 'string', 'max:255'],
-        ];
     }
 
     public function save(): void
     {
-        $this->validate();
-
-        $this->anamnesisGroup->save();
+        $model = $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->resetExcept('agreement');
+        $this->form->setModel($model);
 
         $this->success();
     }

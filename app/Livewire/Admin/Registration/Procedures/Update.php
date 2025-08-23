@@ -14,7 +14,7 @@ final class Update extends Component
 {
     use Alert;
 
-    public ?Procedure $procedure = null;
+    public Form $form;
 
     public bool $modal = false;
 
@@ -26,32 +26,17 @@ final class Update extends Component
     #[On('load::procedure')]
     public function load(Procedure $procedure): void
     {
-        $this->procedure = $procedure;
-
+        $this->form->setModel($procedure);
         $this->modal = true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'procedure.name'         => ['required', 'string', 'max:255'],
-            'procedure.price'        => ['required', 'numeric', 'min:0'],
-            'procedure.time'         => ['required', 'integer', 'min:1'],
-            'procedure.description'  => ['nullable', 'string', 'max:1000'],
-            'procedure.is_agreement' => ['nullable', 'boolean'],
-            'procedure.is_exam'      => ['nullable', 'boolean'],
-        ];
     }
 
     public function save(): void
     {
-        $this->validate();
-
-        $this->procedure->save();
+        $model = $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->resetExcept('procedure');
+        $this->form->setModel($model);
 
         $this->success();
     }

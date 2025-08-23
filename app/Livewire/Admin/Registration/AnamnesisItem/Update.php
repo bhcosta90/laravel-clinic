@@ -16,7 +16,7 @@ final class Update extends Component
 {
     use Alert;
 
-    public ?AnamnesisItem $anamnesisItem = null;
+    public Form $form;
 
     public bool $modal = false;
 
@@ -28,29 +28,17 @@ final class Update extends Component
     #[On('load::anamnesisItem')]
     public function load(AnamnesisItem $anamnesisItem): void
     {
-        $this->anamnesisItem = $anamnesisItem;
-
+        $this->form->setModel($anamnesisItem);
         $this->modal = true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'anamnesisItem.name'               => ['required', 'string', 'max:255'],
-            'anamnesisItem.anamnesis_group_id' => ['required', Rule::exists(AnamnesisGroup::class, 'id')],
-            'anamnesisItem.description'        => ['nullable', 'string', 'max:255'],
-        ];
     }
 
     public function save(): void
     {
-        $this->validate();
-
-        $this->anamnesisItem->save();
+        $model = $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->resetExcept('anamnesisItem');
+        $this->form->setModel($model);
 
         $this->success();
     }

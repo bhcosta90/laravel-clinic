@@ -14,7 +14,7 @@ final class Update extends Component
 {
     use Alert;
 
-    public ?Agreement $agreement = null;
+    public Form $form;
 
     public bool $modal = false;
 
@@ -26,29 +26,18 @@ final class Update extends Component
     #[On('load::agreement')]
     public function load(Agreement $agreement): void
     {
-        $this->agreement = $agreement;
-
+        $this->form->setModel($agreement);
         $this->modal = true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'agreement.name'       => ['required', 'string', 'max:255'],
-            'agreement.cellphone'  => ['required', 'string', 'max:150'],
-            'agreement.commission' => ['required', 'numeric:', 'min:0', 'max:100'],
-        ];
     }
 
     public function save(): void
     {
-        $this->validate();
-
-        $this->agreement->save();
+        $model = $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->resetExcept('agreement');
+        // Keep the form with current model values for UX; only close modal via external event if desired
+        $this->form->setModel($model);
 
         $this->success();
     }

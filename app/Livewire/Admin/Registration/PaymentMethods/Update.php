@@ -14,7 +14,7 @@ final class Update extends Component
 {
     use Alert;
 
-    public ?PaymentMethod $payment = null;
+    public Form $form;
 
     public bool $modal = false;
 
@@ -26,28 +26,17 @@ final class Update extends Component
     #[On('load::payment')]
     public function load(PaymentMethod $payment): void
     {
-        $this->payment = $payment;
-
+        $this->form->setModel($payment);
         $this->modal = true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'payment.name' => ['required', 'string', 'max:255'],
-            'payment.tax'  => ['required', 'numeric:', 'min:0', 'max:100'],
-        ];
     }
 
     public function save(): void
     {
-        $this->validate();
-
-        $this->payment->save();
+        $model = $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->resetExcept('payment');
+        $this->form->setModel($model);
 
         $this->success();
     }

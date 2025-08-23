@@ -13,39 +13,23 @@ final class Create extends Component
 {
     use Alert;
 
-    public Procedure $procedure;
+    public Form $form;
 
     public bool $modal = false;
-
-    public function mount(): void
-    {
-        $this->procedure = new Procedure();
-    }
 
     public function render(): View
     {
         return view('livewire.admin.registration.frequencies.create');
     }
 
-    public function rules(): array
-    {
-        return [
-            'frequency.name' => ['required', 'string', 'max:255'],
-            'frequency.days' => ['required', 'numeric', 'min:0'],
-
-        ];
-    }
-
     public function save(): void
     {
-        $this->validate();
-
-        $this->procedure->save();
+        $this->form->save();
 
         $this->dispatch('created');
 
-        $this->reset();
-        $this->procedure = new Procedure();
+        $this->form->reset();
+        $this->resetExcept('form');
 
         $this->success();
     }

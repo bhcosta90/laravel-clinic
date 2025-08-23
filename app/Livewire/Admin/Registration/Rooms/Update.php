@@ -14,7 +14,7 @@ final class Update extends Component
 {
     use Alert;
 
-    public ?Room $room = null;
+    public Form $form;
 
     public bool $modal = false;
 
@@ -26,27 +26,17 @@ final class Update extends Component
     #[On('load::room')]
     public function load(Room $room): void
     {
-        $this->room = $room;
-
+        $this->form->setModel($room);
         $this->modal = true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'room.name' => ['required', 'string', 'max:255'],
-        ];
     }
 
     public function save(): void
     {
-        $this->validate();
-
-        $this->room->save();
+        $model = $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->resetExcept('room');
+        $this->form->setModel($model);
 
         $this->success();
     }

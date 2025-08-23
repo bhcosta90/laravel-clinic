@@ -14,7 +14,7 @@ final class Update extends Component
 {
     use Alert;
 
-    public ?Remedy $remedy = null;
+    public Form $form;
 
     public bool $modal = false;
 
@@ -26,29 +26,17 @@ final class Update extends Component
     #[On('load::remedy')]
     public function load(Remedy $remedy): void
     {
-        $this->remedy = $remedy;
-
+        $this->form->setModel($remedy);
         $this->modal = true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'remedy.name'        => ['required', 'string', 'max:255'],
-            'remedy.quantity'    => ['nullable', 'string', 'max:255'],
-            'remedy.description' => ['nullable', 'string', 'max:255'],
-        ];
     }
 
     public function save(): void
     {
-        $this->validate();
-
-        $this->remedy->save();
+        $model = $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->resetExcept('remedy');
+        $this->form->setModel($model);
 
         $this->success();
     }

@@ -14,7 +14,7 @@ final class Update extends Component
 {
     use Alert;
 
-    public ?Frequency $frequency = null;
+    public Form $form;
 
     public bool $modal = false;
 
@@ -26,28 +26,17 @@ final class Update extends Component
     #[On('load::frequency')]
     public function load(Frequency $frequency): void
     {
-        $this->frequency = $frequency;
-
+        $this->form->setModel($frequency);
         $this->modal = true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'frequency.name' => ['required', 'string', 'max:255'],
-            'frequency.days' => ['required', 'numeric', 'min:0'],
-        ];
     }
 
     public function save(): void
     {
-        $this->validate();
-
-        $this->frequency->save();
+        $model = $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->resetExcept('frequency');
+        $this->form->setModel($model);
 
         $this->success();
     }

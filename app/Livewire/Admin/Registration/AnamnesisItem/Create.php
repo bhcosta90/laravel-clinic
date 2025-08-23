@@ -15,39 +15,23 @@ final class Create extends Component
 {
     use Alert;
 
-    public AnamnesisItem $anamnesisItem;
+    public Form $form;
 
     public bool $modal = false;
-
-    public function mount(): void
-    {
-        $this->anamnesisItem = new AnamnesisItem();
-    }
 
     public function render(): View
     {
         return view('livewire.admin.registration.anamnesis-item.create');
     }
 
-    public function rules(): array
-    {
-        return [
-            'anamnesisItem.name'               => ['required', 'string', 'max:255'],
-            'anamnesisItem.anamnesis_group_id' => ['required', Rule::exists(AnamnesisGroup::class, 'id')],
-            'anamnesisItem.description'        => ['nullable', 'string', 'max:255'],
-        ];
-    }
-
     public function save(): void
     {
-        $this->validate();
-
-        $this->anamnesisItem->save();
+        $this->form->save();
 
         $this->dispatch('created');
 
-        $this->reset();
-        $this->anamnesisItem = new AnamnesisItem();
+        $this->form->reset();
+        $this->resetExcept('form');
 
         $this->success();
     }
