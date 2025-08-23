@@ -16,6 +16,6 @@ final class TransactionService extends Service
 
     protected function search(): array
     {
-        return [];
+        return ['name', 'description'];
     }
 }
