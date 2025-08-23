@@ -19,7 +19,7 @@
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('permissions', $row)
-                        <x-button.circle icon="key" color='yellow' :href="route('admin.v1.registration.roles.permissions', $row)" />
+                        <x-button.circle icon="key" color='yellow' :href="route('admin.v1.registration.roles.permissions', $row->hash_code)" />
                     @endcan
                     @can('update', $row)
                         <x-button.circle icon="pencil" wire:click="$dispatch('load::role', { 'role' : '{{ $row->id }}'})" />

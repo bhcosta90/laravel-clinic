@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('agreements', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->string('name');
             $table->string('cellphone');
             $table->decimal('commission');

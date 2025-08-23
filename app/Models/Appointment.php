@@ -57,6 +57,31 @@ final class Appointment extends Model
         );
     }
 
+    public function agreementName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->agreement?->name ?: __('Particular'),
+        );
+    }
+
+    #[Scope]
+    public function byPayed(Builder $builder, Collection $values): void
+    {
+        $builder->when($values, function ($query) use ($values): void {
+            $query->where('is_paid', (bool) $values->first())
+                ->when(!$values->first(), fn ($query) => $query->orWhereNull('is_paid'));
+        });
+    }
+
+    #[Scope]
+    public function byAgreement(Builder $builder, Collection $values): void
+    {
+        $builder->when($values, function ($query) use ($values): void {
+            $query->when('particular' === $values->first(), fn ($query) => $query->whereNull('agreement_id'))
+                ->when('particular' !== $values->first(), fn ($query) => $query->where('agreement_id', $values->first()));
+        });
+    }
+
     protected function casts(): array
     {
         return [

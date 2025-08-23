@@ -4,33 +4,20 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Appointments\Appointments;
 
+use App\Abstracts\Livewire\Report\AbstractPdfReport;
 use App\Enums\Models\Appointment\Status;
-use App\Models\Agreement;
 use App\Models\Appointment;
-use App\Report\GenerateReportByPdf;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
-use Livewire\Component;
 
-final class ReportSchedule extends Component
+final class ReportSchedule extends AbstractPdfReport
 {
-    public ?\App\Models\Report $report = null;
-
-    public bool $modal        = false;
-    public string $date_start = '';
-    public string $date_end   = '';
-    public ?int $status       = null;
-    public ?int $is_payed     = null;
-    public ?int $agreement_id = null;
-    public ?int $procedure_id = null;
-    public ?int $employee_id  = null;
-
-    public function mount(): void
-    {
-        $this->date_start = now()->format('Y-m-d');
-        $this->date_end   = now()->format('Y-m-d');
-    }
+    public ?int $status                      = null;
+    public ?int $is_payed                    = null;
+    public string | int | null $agreement_id = null;
+    public ?int $procedure_id                = null;
+    public ?string $employee_id              = null;
 
     public function render(): View
     {
@@ -61,20 +48,41 @@ final class ReportSchedule extends Component
         ];
     }
 
-    public function save(GenerateReportByPdf $generateReportByPdf): void
+    protected function reportConfig(): array
+    {
+        return [
+            'name'           => 'Report schedule',
+            'view'           => 'pdf.report.schedule',
+            'model'          => Appointment::class,
+            'orderColumn'    => 'date',
+            'orderDirection' => 'desc',
+        ];
+    }
+
+    protected function customFilters(): array
     {
         $filters = [];
 
-        $this->report = $generateReportByPdf->execute(
-            user: auth()->user(),
-            name: 'report.schedule',
-            view: 'pdf.report.schedule',
-            model: Appointment::class,
-            filters: $filters,
-            orderColumn: 'date',
-            orderDirection: 'desc'
-        );
+        if (null !== $this->procedure_id && 0 !== $this->procedure_id) {
+            $filters['(procedure_id)'] = $this->procedure_id;
+        }
 
-        $this->dispatch('report::index');
+        if (null !== $this->employee_id && '' !== $this->employee_id && '0' !== $this->employee_id) {
+            $filters['(user_id)'] = $this->employee_id;
+        }
+
+        if (null !== $this->is_payed) {
+            $filters['(byPayed)'] = $this->is_payed;
+        }
+
+        if (null !== $this->status && 0 !== $this->status) {
+            $filters['(status)'] = $this->status;
+        }
+
+        if ('' !== $this->agreement_id && '0' !== $this->agreement_id && 0 !== $this->agreement_id) {
+            $filters['(byAgreement)'] = $this->agreement_id;
+        }
+
+        return $filters;
     }
 }

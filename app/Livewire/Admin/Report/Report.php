@@ -18,11 +18,11 @@ final class Report extends Component
     use WithoutUrlPagination;
     use WithPagination;
 
-    public ?string $name = null;
+    public ?string $view = null;
 
-    public function mount(?string $name): void
+    public function mount(?string $view): void
     {
-        $this->name = $name;
+        $this->view = $view;
     }
 
     public function render(): View
@@ -38,6 +38,7 @@ final class Report extends Component
             ['index' => 'name', 'label' => __('Name'), 'sortable' => false],
             ['index' => 'status', 'label' => __('Status'), 'sortable' => false],
             ['index' => 'created_at', 'label' => __('Created'), 'sortable' => false],
+            ['index' => 'can_shared', 'label' => __('Can shared') . '?', 'sortable' => false],
             ['index' => 'action', 'sortable' => false],
         ];
     }
@@ -49,9 +50,19 @@ final class Report extends Component
     {
         return app(BuilderQuery::class)->execute(new ModelReport(), [], [
             '(user_id)' => auth()->id(),
-            '(name)'    => $this->name,
+            '(view)'    => $this->view,
         ])
             ->orderBy('id', 'desc')
             ->simplePaginate(perPage: 3);
+    }
+
+    public function toggleCanShared(int | string $id): void
+    {
+        $report = ModelReport::query()->findOrFail($id);
+
+        $this->authorize('update', $report);
+
+        $report->can_shared = !$report->can_shared;
+        $report->save();
     }
 }

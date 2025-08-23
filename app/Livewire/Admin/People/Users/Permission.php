@@ -16,4 +16,10 @@ final class Permission extends Component
     {
         return view('livewire.admin.people.users.permission');
     }
+
+    public function mount(): void
+    {
+        $this->user = User::findOrFail(User::decodeHashCode(request()->route('user_hash')));
+        $this->authorize('permissions', $this->user);
+    }
 }

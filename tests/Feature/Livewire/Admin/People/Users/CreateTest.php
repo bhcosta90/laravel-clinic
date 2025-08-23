@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 use App\Livewire\Admin\People\Users\Create;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
 use function Pest\Laravel\assertDatabaseHas;
@@ -23,6 +24,8 @@ it('initializes with a new user', function (): void {
 });
 
 it('validates user creation with valid data', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
+
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -52,6 +55,7 @@ it('requires name', function (): void {
 });
 
 it('requires unique email', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     User::create([
         'name'     => 'Existing User',
         'email'    => 'existing@example.com',
@@ -88,6 +92,7 @@ it('requires password confirmation', function (): void {
 });
 
 it('sets email verified at when creating user', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -105,6 +110,7 @@ it('sets email verified at when creating user', function (): void {
 });
 
 it('resets form after successful creation', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -120,6 +126,7 @@ it('resets form after successful creation', function (): void {
 });
 
 it('dispatches created event', function (): void {
+    Auth::login(User::factory()->createTenant()->create());
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',

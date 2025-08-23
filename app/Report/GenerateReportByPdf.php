@@ -20,8 +20,11 @@ final class GenerateReportByPdf
         ?string $orderDirection = null,
     ): Report {
         $report = Report::create([
-            'user_id' => $user->id,
-            'name'    => $name,
+            'user_id'    => $user->id,
+            'name'       => $name,
+            'view'       => $view,
+            'filters'    => $filters,
+            'filesystem' => config('filesystems.default'),
         ]);
 
         dispatch(new GenerateReportByPdfJob(

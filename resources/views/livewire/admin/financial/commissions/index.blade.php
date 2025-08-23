@@ -1,4 +1,4 @@
-@php use App\Models\Commission; @endphp
+@php use App\Models\Model; @endphp
 <div>
     <x-card>
         <x-slot:header>
@@ -32,17 +32,20 @@
             @endinteract
 
             @interact('column_action', $row)
-                <div class="flex gap-1 justify-end">
-                    @can('update', $row)
-                        <x-button.circle icon="pencil" wire:click="$dispatch('load::commission', { 'commission' : '{{ $row->id }}'})" />
-                    @endcan
-                    @can('delete', $row)
-                        <livewire:admin.financial.commissions.delete :commission="$row" :key="uniqid('', true)" @deleted="$refresh" />
-                    @endcan
-                </div>
+            <div class="flex gap-1 justify-end">
+                @can('update', $row)
+                    <x-button.circle icon="pencil"
+                                     wire:click="$dispatch('load::commission', { 'commission' : '{{ $row->id }}'})"/>
+                @endcan
+                @can('delete', $row)
+                    <x-button.circle icon="trash" color="red"
+                                     @click="$dispatch('delete-confirm', { id: {{ $row->id }} })"/>
+                @endcan
+            </div>
             @endinteract
         </x-table>
     </x-card>
 
-    <livewire:admin.financial.commissions.update @updated="$refresh" />
+    <livewire:admin.financial.commissions.update @updated="$refresh"/>
+    <livewire:admin.financial.commissions.delete @deleted="$refresh"/>
 </div>

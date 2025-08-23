@@ -2,14 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Controllers\Admin\Api;
+namespace App\Http\Controllers\Admin\V1\Api;
 
-use App\Models\Procedure;
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
-final class ProcedureController
+final class CustomerController
 {
     public function search(Request $request)
     {
@@ -17,14 +17,14 @@ final class ProcedureController
         $field  = $request->get('field', 'name');
 
         return app(BuilderQuery::class)
-            ->execute(new Procedure(), [], [
+            ->execute(new Customer(), [], [
                 '(' . $field . ',like)' => $search,
             ])
             ->unless($search, fn (Builder $query) => $query->limit(10))
             ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
             ->orderBy('name')
             ->get()
-            ->map(fn (Procedure $user): array => [
+            ->map(fn (Customer $user): array => [
                 'label' => $user->{$field},
                 'value' => $user->id,
             ]);

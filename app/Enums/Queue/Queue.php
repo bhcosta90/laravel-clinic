@@ -10,4 +10,5 @@ enum Queue: string
     case Priority = 'priority';
     case Long     = 'long';
     case Medium   = 'medium';
+    case Report   = 'report';
 }

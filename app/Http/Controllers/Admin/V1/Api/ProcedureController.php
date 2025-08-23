@@ -2,14 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Controllers\Admin\Api;
+namespace App\Http\Controllers\Admin\V1\Api;
 
-use App\Models\PaymentMethod;
+use App\Models\Procedure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
-final class PaymentMethodController
+final class ProcedureController
 {
     public function search(Request $request)
     {
@@ -17,14 +17,14 @@ final class PaymentMethodController
         $field  = $request->get('field', 'name');
 
         return app(BuilderQuery::class)
-            ->execute(new PaymentMethod(), [], [
+            ->execute(new Procedure(), [], [
                 '(' . $field . ',like)' => $search,
             ])
-            ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
             ->unless($search, fn (Builder $query) => $query->limit(10))
+            ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
             ->orderBy('name')
             ->get()
-            ->map(fn (PaymentMethod $user): array => [
+            ->map(fn (Procedure $user): array => [
                 'label' => $user->{$field},
                 'value' => $user->id,
             ]);

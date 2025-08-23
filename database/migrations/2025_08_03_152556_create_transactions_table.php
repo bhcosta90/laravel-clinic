@@ -11,10 +11,11 @@ return new class() extends Migration {
     {
         Schema::create('transactions', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->string('name');
             $table->foreignId('agreement_id')->nullable()->constrained('agreements');
             $table->foreignId('customer_id')->nullable()->constrained('customers');
-            $table->foreignUlid('user_id')->nullable()->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('payment_method_id')->nullable()->constrained('payment_methods');
             $table->string('model_type')->nullable();
             $table->unsignedBigInteger('model_id')->nullable();

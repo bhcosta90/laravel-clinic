@@ -1,0 +1,41 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace App\Services;
+
+use App\Abstracts\Service;
+use App\Models\User;
+use App\Traits\Services\HandlesWithDependencies;
+use Illuminate\Container\Attributes\CurrentUser;
+use Illuminate\Support\Facades\Auth;
+use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
+
+final class UserService extends Service
+{
+    use HandlesWithDependencies;
+
+    protected function model(): User
+    {
+        return new User();
+    }
+
+    protected function index(#[CurrentUser] $user, ?string $search, ?array $filters = [])
+    {
+        return app(BuilderQuery::class)->execute(new User(), ['role' => []], [
+            '(byFilter,name;email)' => $search,
+            '(id,!=)'               => $user->id,
+        ] + ($filters ?: []));
+    }
+
+    protected function login(
+        string $username,
+        string $password,
+        ?bool $remember = false
+    ): bool {
+        return Auth::attempt([
+            'email'    => $username,
+            'password' => $password,
+        ], $remember);
+    }
+}

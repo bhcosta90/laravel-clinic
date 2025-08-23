@@ -11,15 +11,21 @@ return new class() extends Migration {
     {
         Schema::create('reports', function (Blueprint $table): void {
             $table->id();
-            $table->foreignUlid('user_id')->constrained('users');
+            $table->ulid('code')->unique();
+            $table->uuid('tenant_id')->index();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('name');
+            $table->string('view');
+            $table->string('filesystem');
+            $table->json('filters')->nullable();
             $table->unsignedBigInteger('status')->nullable();
             $table->string('file')->nullable();
             $table->string('type')->nullable();
+            $table->boolean('can_shared')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['user_id', 'name']);
+            $table->index(['user_id', 'view']);
         });
     }
 

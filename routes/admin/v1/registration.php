@@ -16,4 +16,4 @@ Route::get('/anamnesis-group', Registration\AnamnesisGroup\Index::class)->name('
 Route::get('/anamnesis-item', Registration\AnamnesisItem\Index::class)->name('anamnesis-item.index')->can('viewAny', Models\AnamnesisItem::class);
 
 Route::get('/roles', Registration\Roles\Index::class)->name('roles.index')->can('viewAny', Models\Role::class);
-Route::get('/roles/{role}/permissions', Registration\Roles\Permission::class)->name('roles.permissions')->can('permissions', 'role');
+Route::get('/roles/{role_hash}/permissions', Registration\Roles\Permission::class)->name('roles.permissions');

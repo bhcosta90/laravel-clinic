@@ -6,7 +6,7 @@ namespace App\Jobs;
 
 use App\Enums\Models\Report\Status;
 use App\Enums\Queue\Queue;
-use App\Events\ReportStatusEvent;
+use App\Events\ReportFinishEvent;
 use App\Models\Report;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
@@ -16,6 +16,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
+use Throwable;
 
 final class GenerateReportByPdfJob implements ShouldQueue
 {
@@ -33,7 +34,7 @@ final class GenerateReportByPdfJob implements ShouldQueue
         public ?string $orderColumn,
         public ?string $orderDirection,
     ) {
-        $this->onQueue(Queue::Low);
+        $this->onQueue(Queue::Report);
     }
 
     public function handle(): void
@@ -43,33 +44,42 @@ final class GenerateReportByPdfJob implements ShouldQueue
         $report->status = Status::Processing;
         $report->save();
 
-        broadcast(new ReportStatusEvent($this->reportId, (string) $report->user_id));
+        $event = new ReportFinishEvent($report->user_id, $this->reportId);
 
-        $nameFile = $this->generatePdf();
+        broadcast($event);
 
-        $report->status = Status::Completed;
-        $report->file   = $nameFile ?? 'nothing-' . sha1((string) $this->reportId);
-        $report->type   = 'pdf';
-        $report->save();
+        try {
+            $report->status = Status::Completed;
+            $report->file   = $this->generatePdf();
+            $report->type   = 'pdf';
+            $report->save();
 
-        broadcast(new ReportStatusEvent($this->reportId, (string) $report->user_id));
+            broadcast($event);
+        } catch (Throwable $e) {
+            $report->status = Status::Error;
+            $report->save();
+
+            broadcast($event);
+
+            throw $e;
+        }
 
     }
 
-    protected function generatePdf(): string
+    private function generatePdf(): string
     {
         $model = $this->model;
 
         $query = app(BuilderQuery::class)
             ->execute(new $model(), [], $this->filters);
 
-        if ($this->orderColumn) {
+        if (null !== $this->orderColumn && '' !== $this->orderColumn && '0' !== $this->orderColumn) {
             $query->orderBy($this->orderColumn, $this->orderDirection);
         }
 
         $result = $query->get();
 
-        $content = Pdf::loadView($this->view, compact('result'))
+        $content = Pdf::loadView($this->view, ['result' => $result])
             ->stream();
 
         $name = sha1($this->name);

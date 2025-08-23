@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('payment_methods', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->string('name');
             $table->decimal('tax');
             $table->timestamps();

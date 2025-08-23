@@ -92,9 +92,10 @@ it('dispatches success alert after saving', function (): void {
         ->call('save')
         ->assertDispatched('updated')
         ->assertDispatched('tallstackui:dialog', fn (string $event, array $params): bool => 'tallstackui:dialog' === $event
-            && 'success' === $params['type']
-            && 'Done!' === $params['title']
-            && 'Task completed successfully.' === $params['description']);
+             && 'success' === __($params['type'])
+             && __('Done!') === $params['title']
+             && __('Task completed successfully.') === $params['description']
+        );
 });
 
 it('resets password fields after saving', function (): void {

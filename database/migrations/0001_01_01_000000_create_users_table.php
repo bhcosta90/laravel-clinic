@@ -10,7 +10,8 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table): void {
-            $table->ulid('id')->primary();
+            $table->id();
+            $table->uuid('tenant_id')->index();
             $table->unsignedInteger('nested_parent')->nullable();
             $table->unsignedInteger('nested_left');
             $table->unsignedInteger('nested_right');
@@ -26,6 +27,7 @@ return new class() extends Migration {
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table): void {
@@ -36,7 +38,7 @@ return new class() extends Migration {
 
         Schema::create('sessions', function (Blueprint $table): void {
             $table->string('id')->primary();
-            $table->ulid('user_id')->nullable()->index();
+            $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Controllers\Admin\Api;
+namespace App\Http\Controllers\Admin\V1\Api;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;

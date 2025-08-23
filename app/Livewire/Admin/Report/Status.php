@@ -12,15 +12,17 @@ final class Status extends Component
 {
     public ?Report $report = null;
 
+    public bool $min = false;
+
     public function render(): View
     {
         return view('livewire.admin.report.status');
     }
 
     // Provide dynamic placeholder for private Echo channel
-    public function getUserIdProperty(): string
+    public function getUserIdProperty(): int
     {
-        return (string) auth()->id();
+        return (int) auth()->id();
     }
 
     // Provide dynamic placeholder for private Echo channel
@@ -36,7 +38,7 @@ final class Status extends Component
         }
 
         return [
-            'echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportStatusEvent' => 'handleJobFinished',
+            'echo-private:App.Models.ReportSchedule.{userId}.{reportId},ReportFinishEvent' => 'handleJobFinished',
         ];
     }
 

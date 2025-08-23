@@ -24,8 +24,9 @@
         "laravel/telescope": "^5.11",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.0.0",
+        "nunomaduro/essentials": "^0.1",
         "owen-it/laravel-auditing": "^14.0",
-        "quantumtecnology/controller-basics-extension": "dev-release/3.x",
+        "quantumtecnology/controller-basics-extension": "^3.0",
         "tallstackui/tallstackui": "^2.0.0",
         "vinkla/hashids": "^13.0"
     },
@@ -48,7 +49,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -76,7 +80,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#8b5cf6,#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan reverb:start --debug --port=8150\" \"php artisan serve --port=8100\" \"php artisan queue:listen --queue=low,priority,long,medium --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=reverb,server,queue,logs,vite"
+            "npx concurrently -c \"#8b5cf6,#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan reverb:start --debug --port=8150\" \"php artisan serve --port=8100\" \"php artisan queue:listen --queue=low,priority,long,medium,report --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=reverb,server,queue,logs,vite"
         ],
         "format": [
             "./vendor/bin/pint",

@@ -7,7 +7,7 @@ use App\Models\User;
 use Livewire\Livewire;
 
 beforeEach(function (): void {
-    $this->original = User::factory()->create([
+    $this->original = User::factory()->createTenant()->create([
         'name'  => 'Original Name',
         'email' => 'original@example.com',
     ]);

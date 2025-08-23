@@ -26,7 +26,7 @@
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('permissions', [$row, auth()->user()])
-                        <x-button.circle icon="key" color='neutral' :href="route('admin.v1.people.users.permissions', $row)" />
+                        <x-button.circle icon="key" color='neutral' :href="route('admin.v1.people.users.permissions', $row->hash_code)" />
                     @endcan
                     @can('impersonate', [$row, auth()->user()])
                         <livewire:admin.people.users.impersonate :user="$row" :key="uniqid('', true)" @deleted="$refresh" />

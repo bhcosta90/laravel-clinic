@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
+use App\Enums\Models\Appointment\Status;
 use App\Models\Agreement;
 use App\Models\Appointment;
 use App\Models\Customer;
@@ -21,6 +22,7 @@ final class AppointmentSeeder extends Seeder
         $agreementsId = Agreement::pluck('id')->toArray();
 
         Appointment::factory(100)->make()->each(function ($item) use ($usersId, $proceduresId, $customersId, $agreementsId): void {
+            $item->status       = Status::Scheduled;
             $item->user_id      = collect($usersId)->random();
             $item->procedure_id = collect($proceduresId)->random();
             $item->customer_id  = collect($customersId)->random();
@@ -29,6 +31,7 @@ final class AppointmentSeeder extends Seeder
         });
 
         Appointment::factory(5)->make()->each(function ($item) use ($usersId, $proceduresId, $customersId, $agreementsId): void {
+            $item->status       = Status::Scheduled;
             $item->date         = now();
             $item->user_id      = collect($usersId)->random();
             $item->procedure_id = collect($proceduresId)->random();

@@ -13,7 +13,7 @@ final class ReportFinishEvent implements ShouldBroadcastNow
 {
     use Dispatchable;
 
-    public function __construct(public int $reportId, public string $userId)
+    public function __construct(public int $userId, public int $reportId)
     {
     }
 

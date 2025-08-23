@@ -2,14 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Controllers\Admin\Api;
+namespace App\Http\Controllers\Admin\V1\Api;
 
-use App\Models\Customer;
+use App\Models\AnamnesisGroup;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
-final class CustomerController
+final class AnamnesisGroupController
 {
     public function search(Request $request)
     {
@@ -17,14 +17,14 @@ final class CustomerController
         $field  = $request->get('field', 'name');
 
         return app(BuilderQuery::class)
-            ->execute(new Customer(), [], [
+            ->execute(new AnamnesisGroup(), [], [
                 '(' . $field . ',like)' => $search,
             ])
-            ->unless($search, fn (Builder $query) => $query->limit(10))
             ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
+            ->unless($search, fn (Builder $query) => $query->limit(10))
             ->orderBy('name')
             ->get()
-            ->map(fn (Customer $user): array => [
+            ->map(fn (AnamnesisGroup $user): array => [
                 'label' => $user->{$field},
                 'value' => $user->id,
             ]);

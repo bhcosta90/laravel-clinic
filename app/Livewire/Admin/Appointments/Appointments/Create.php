@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Appointments\Appointments;
 
+use App\Enums\Models\Appointment\Status;
 use App\Models\Agreement;
 use App\Models\Appointment;
 use App\Models\Customer;
@@ -79,6 +80,7 @@ final class Create extends Component
 
         $this->appointment->date    = now()->parse($data['dataAppointment']['date'] . ' ' . $data['dataAppointment']['time']);
         $this->appointment->user_id = $data['dataAppointment']['user_id'];
+        $this->appointment->status  = Status::Scheduled;
         $this->appointment->save();
 
         $this->resetExcept('dataAppointment');

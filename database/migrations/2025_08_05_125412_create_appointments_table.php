@@ -11,15 +11,16 @@ return new class() extends Migration {
     {
         Schema::create('appointments', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->foreignId('customer_id')->constrained('customers');
-            $table->foreignUlid('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('procedure_id')->constrained('procedures');
             $table->foreignId('transaction_id')->nullable()->constrained('transactions');
             $table->foreignId('agreement_id')->nullable()->constrained('agreements');
             $table->dateTime('date');
             $table->boolean('is_return')->nullable();
             $table->boolean('is_paid')->nullable();
-            $table->unsignedTinyInteger('status')->nullable();
+            $table->unsignedTinyInteger('status');
             $table->string('exam_withdrawal_date')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

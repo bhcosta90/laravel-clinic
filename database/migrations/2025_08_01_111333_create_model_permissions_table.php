@@ -17,9 +17,6 @@ return new class() extends Migration {
             $table->foreignId('permission_id')->constrained('permissions');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->unique(['model_id', 'model_type', 'permission_id'], 'unique_1');
-            $table->unique(['model_id', 'model_type', 'integration_code', 'permission_id'], 'unique_2');
         });
     }
 
