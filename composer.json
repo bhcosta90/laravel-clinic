@@ -91,7 +91,7 @@
         "ci": [
             "Composer\\Config::disableProcessTimeout",
             "./vendor/bin/pint --test",
-            "./vendor/bin/phpstan analyse",
+            "./vendor/bin/phpstan analyse --memory-limit=2G",
             "./vendor/bin/pest --parallel"
         ]
     },
