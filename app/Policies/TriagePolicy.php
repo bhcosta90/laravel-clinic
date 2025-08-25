@@ -4,40 +4,20 @@ declare(strict_types = 1);
 
 namespace App\Policies;
 
-use App\Models\Triage;
-use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Enums\Models\Permission\Can;
+use App\Policies\Traits\CrudPolicyTrait;
 
 final class TriagePolicy
 {
-    use HandlesAuthorization;
+    use CrudPolicyTrait;
 
-    public function viewAny(User $user): bool
+    protected function getViewPermission(): Can
     {
-
+        return Can::RegistrationRoomView;
     }
 
-    public function view(User $user, Triage $triage): bool
+    protected function getEditPermission(): Can
     {
-    }
-
-    public function create(User $user): bool
-    {
-    }
-
-    public function update(User $user, Triage $triage): bool
-    {
-    }
-
-    public function delete(User $user, Triage $triage): bool
-    {
-    }
-
-    public function restore(User $user, Triage $triage): bool
-    {
-    }
-
-    public function forceDelete(User $user, Triage $triage): bool
-    {
+        return Can::RegistrationRoomEdit;
     }
 }
