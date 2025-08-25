@@ -10,6 +10,7 @@ use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\Procedure;
 use App\Models\User;
+use App\Services\AppointmentService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
@@ -81,7 +82,8 @@ final class Create extends Component
         $this->appointment->date    = now()->parse($data['dataAppointment']['date'] . ' ' . $data['dataAppointment']['time']);
         $this->appointment->user_id = $data['dataAppointment']['user_id'];
         $this->appointment->status  = Status::Scheduled;
-        $this->appointment->save();
+
+        app(AppointmentService::class)->handle('store', $this->appointment->toArray());
 
         $this->resetExcept('dataAppointment');
         $this->dataAppointment['time'] = null;
