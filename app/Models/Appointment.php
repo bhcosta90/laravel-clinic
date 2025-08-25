@@ -25,6 +25,7 @@ final class Appointment extends Model
         'exam_withdrawal_date',
         'description',
         'status',
+        'is_paid',
     ];
 
     public function user(): BelongsTo

@@ -6,7 +6,7 @@ namespace App\Jobs\Transaction;
 
 use App\Enums\Models\Transaction\Type;
 use App\Enums\Queue\Queue;
-use App\Models\Transaction;
+use App\Services\TransactionService;
 use DateTimeInterface;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -61,6 +61,6 @@ final class CreateTransactionJob implements ShouldQueue
             $data['model_id']   = $this->model->getKey();
         }
 
-        Transaction::create($data);
+        app(TransactionService::class)->handle('store', $data);
     }
 }
