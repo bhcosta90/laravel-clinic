@@ -16,23 +16,22 @@ final class TriageFactory extends Factory
     public function definition(): array
     {
         return [
-            'risk'               => $this->faker->randomNumber(),
-            'description'        => $this->faker->text(),
-            'mmhg'               => $this->faker->word(),
-            'bpm'                => $this->faker->word(),
-            'irpm'               => $this->faker->word(),
-            'temperature'        => $this->faker->randomNumber(),
-            'saturation'         => $this->faker->randomNumber(),
-            'allergies'          => $this->faker->word(),
-            'current_medication' => $this->faker->word(),
-            'history_diseases'   => $this->faker->word(),
-            'time_symptom_onset' => $this->faker->word(),
-            'general_condition'  => $this->faker->word(),
-            'eva'                => $this->faker->randomNumber(),
+            'customer_id'        => Customer::factory(),
+            'risk'               => $this->faker->randomNumber(1, 5),
+            'description'        => $this->faker->sentence(3),
+            'mmhg'               => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'bpm'                => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'irpm'               => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'temperature'        => $this->faker->numberBetween(20, 32),
+            'saturation'         => $this->faker->numberBetween(92, 98),
+            'allergies'          => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'current_medication' => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'history_diseases'   => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'time_symptom_onset' => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'general_condition'  => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'eva'                => $this->faker->randomNumber(1, 10),
             'created_at'         => Carbon::now(),
             'updated_at'         => Carbon::now(),
-
-            'customer_id' => Customer::factory(),
         ];
     }
 }
