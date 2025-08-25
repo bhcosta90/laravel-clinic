@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Abstracts;
 
 use App\Traits\Services\HandlesWithDependencies;
+use Illuminate\Database\Eloquent\Model;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 use QuantumTecnology\ControllerBasicsExtension\Services\RelationshipService;
 
@@ -56,7 +57,7 @@ abstract class Service
         return app(RelationshipService::class)->execute($this->model(), $data);
     }
 
-    protected function update(\Illuminate\Database\Eloquent\Model $model, array $data)
+    protected function update(Model $model, array $data)
     {
         return app(RelationshipService::class)->execute($model, $data);
     }
