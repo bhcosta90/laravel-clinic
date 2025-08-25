@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Override;
 
 final class UserService extends Service
@@ -24,5 +25,16 @@ final class UserService extends Service
     protected function includes(): array
     {
         return ['role' => []];
+    }
+
+    protected function login(
+        string $username,
+        string $password,
+        ?bool $remember = false
+    ): bool {
+        return Auth::attempt([
+            'email'    => $username,
+            'password' => $password,
+        ], $remember);
     }
 }
