@@ -28,6 +28,7 @@ final class TenantSeeder extends Seeder
                 TransactionSeeder::class,
                 CommissionSeeder::class,
                 AppointmentSeeder::class,
+                TriageSeeder::class,
             ]);
         });
     }
