@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Registration\Frequencies;
 
-use App\Models\Procedure;
+use App\Models\Frequency;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
@@ -47,7 +47,7 @@ final class Index extends Component
     #[Computed]
     public function rows(): Paginator
     {
-        return app(BuilderQuery::class)->execute(new Procedure(), [], [
+        return app(BuilderQuery::class)->execute(new Frequency(), [], [
             '(byFilter,name)' => $this->search,
         ])
             ->orderBy(...array_values($this->sort))

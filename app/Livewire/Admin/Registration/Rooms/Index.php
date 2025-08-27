@@ -4,14 +4,13 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Registration\Rooms;
 
-use App\Models\Room;
+use App\Services\RoomService;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class Index extends Component
 {
@@ -47,9 +46,7 @@ final class Index extends Component
     #[Computed]
     public function rows(): Paginator
     {
-        return app(BuilderQuery::class)->execute(new Room(), [], [
-            '(byFilter,name)' => $this->search,
-        ])
+        return app(RoomService::class)->handle('index', $this->search)
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();
