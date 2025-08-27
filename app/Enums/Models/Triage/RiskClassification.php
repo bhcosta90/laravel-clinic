@@ -9,7 +9,7 @@ enum RiskClassification: int
     case Blue   = 1;
     case Green  = 2;
     case Yellow = 3;
-    case Orage  = 4;
+    case Orange = 4;
     case Red    = 5;
 
     public static function options(): array
@@ -29,7 +29,7 @@ enum RiskClassification: int
             self::Blue   => __('Blue - Not urgent'),
             self::Green  => __('Green - Little urgency'),
             self::Yellow => __('Yellow - Urgency'),
-            self::Orage  => __('Orange - Much urgency'),
+            self::Orange => __('Orange - Much urgency'),
             self::Red    => __('Red - Emergency'),
         };
     }
@@ -40,7 +40,7 @@ enum RiskClassification: int
             self::Blue   => '🔵',
             self::Green  => '🟢',
             self::Yellow => '🟡',
-            self::Orage  => '🟠',
+            self::Orange => '🟠',
             self::Red    => '🔴',
         };
     }
