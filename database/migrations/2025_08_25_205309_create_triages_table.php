@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('triages', function (Blueprint $table) {
+        Schema::create('triages', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
             $table->unsignedTinyInteger('risk');
