@@ -14,7 +14,7 @@
     />
 
     <x-select.styled :label="__('Risk classification')"
-         :options="\App\Enums\Models\Triage\RiskClassification\RiskClassification::options()"
+         :options="\App\Enums\Models\Triage\RiskClassification::options()"
          select="label:name|value:id"
          :placeholders="[
             'empty'   => __('Select a Risk'),
