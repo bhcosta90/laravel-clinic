@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Registration\Triage;
 
 use App\Livewire\Traits\Alert;
-use App\Models\Frequency;
+use App\Models\Triage;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -23,10 +23,10 @@ final class Update extends Component
         return view('livewire.admin.registration.triage.update');
     }
 
-    #[On('load::frequency')]
-    public function load(Frequency $frequency): void
+    #[On('load::triage')]
+    public function load(Triage $triage): void
     {
-        $this->form->setModel($frequency);
+        $this->form->setModel($triage);
         $this->modal = true;
     }
 

@@ -13,13 +13,13 @@ return new class() extends Migration {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
             $table->unsignedTinyInteger('risk_classification');
-            $table->string('description')->nullable();
+            $table->string('description');
             $table->string('mmhg')->nullable();
             $table->string('bpm')->nullable();
             $table->string('irpm')->nullable();
             $table->unsignedTinyInteger('temperature')->nullable();
             $table->unsignedTinyInteger('saturation')->nullable();
-            $table->string('allergies')->nullable();
+            $table->string('allergy')->nullable();
             $table->string('current_medication')->nullable();
             $table->string('history_diseases')->nullable();
             $table->string('time_symptom_onset')->nullable();

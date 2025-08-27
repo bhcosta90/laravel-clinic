@@ -24,7 +24,7 @@ final class Triage extends Model
         'irpm',
         'temperature',
         'saturation',
-        'allergies',
+        'allergy',
         'current_medication',
         'history_diseases',
         'time_symptom_onset',

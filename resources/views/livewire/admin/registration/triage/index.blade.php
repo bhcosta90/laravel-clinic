@@ -19,10 +19,10 @@
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('update', $row)
-                        <x-button.circle icon="pencil" wire:click="$dispatch('load::frequency', { 'frequency' : '{{ $row->id }}'})" />
+                        <x-button.circle icon="pencil" wire:click="$dispatch('load::triage', { 'triage' : '{{ $row->id }}'})" />
                     @endcan
                     @can('delete', $row)
-                        <livewire:admin.registration.triage.delete :frequency="$row" :key="uniqid('', true)" @deleted="$refresh" />
+                        <livewire:admin.registration.triage.delete :triage="$row" :key="uniqid('', true)" @deleted="$refresh" />
                     @endcan
                 </div>
             @endinteract

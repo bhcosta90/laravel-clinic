@@ -4,41 +4,77 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Registration\Triage;
 
-use App\Models\Frequency;
-use App\Services\FrequencyService;
+use App\Enums\Models\Triage\RiskClassification;
+use App\Models\Customer;
+use App\Models\Triage;
+use App\Services\TriageService;
+use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
 {
-    public ?Frequency $model = null;
+    public ?Triage $model = null;
 
-    public $name;
-    public $days;
+    public $customer_id;
+    public $risk_classification;
+    public $description;
+    public $mmhg;
+    public $bpm;
+    public $irpm;
+    public $allergy;
+    public $current_medication;
+    public $history_diseases;
+    public $time_symptom_onset;
+    public $general_condition;
+    public $temperature;
+    public $saturation;
 
-    public function setModel(Frequency $model): void
+    public function setModel(Triage $model): void
     {
-        $this->model = $model;
-        $this->name  = $model->name;
-        $this->days  = $model->days;
+        $this->model               = $model;
+        $this->customer_id         = $model->customer_id;
+        $this->risk_classification = $model->risk_classification;
+        $this->description         = $model->description;
+        $this->mmhg                = $model->mmhg;
+        $this->bpm                 = $model->bpm;
+        $this->irpm                = $model->irpm;
+        $this->allergy             = $model->allergy;
+        $this->current_medication  = $model->current_medication;
+        $this->history_diseases    = $model->history_diseases;
+        $this->time_symptom_onset  = $model->time_symptom_onset;
+        $this->general_condition   = $model->general_condition;
+        $this->temperature         = $model->temperature;
+        $this->saturation          = $model->saturation;
     }
 
-    public function save(): Frequency
+    public function save(): Triage
     {
         $data = $this->validate();
 
         if ($this->model?->id) {
-            app(FrequencyService::class)->handle('update', $this->model, $data);
+            app(TriageService::class)->handle('update', $this->model, $data);
 
             return $this->model;
         }
 
-        return app(FrequencyService::class)->handle('store', $data);
+        return app(TriageService::class)->handle('store', $data);
     }
 
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'days' => ['required', 'numeric', 'min:0'],
+            'customer_id'         => ['nullable', Rule::exists(Customer::class, 'id')],
+            'risk_classification' => ['required', Rule::enum(RiskClassification::class)],
+            'description'         => ['required', 'string', 'max:255'],
+            'mmhg'                => ['nullable', 'string', 'max:255'],
+            'bpm'                 => ['nullable', 'string', 'max:255'],
+            'irpm'                => ['nullable', 'string', 'max:255'],
+            'allergy'             => ['nullable', 'string', 'max:255'],
+            'current_medication'  => ['nullable', 'string', 'max:255'],
+            'history_diseases'    => ['nullable', 'string', 'max:255'],
+            'time_symptom_onset'  => ['nullable', 'string', 'max:255'],
+            'general_condition'   => ['nullable', 'string', 'max:255'],
+            'temperature'         => ['nullable', 'integer', 'min:0'],
+            'saturation'          => ['nullable', 'integer', 'min:0', 'max:100'],
         ];
     }
 }

@@ -25,7 +25,7 @@ final class TriageFactory extends Factory
             'irpm'                => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
             'temperature'         => $this->faker->numberBetween(20, 32),
             'saturation'          => $this->faker->numberBetween(92, 98),
-            'allergies'           => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
+            'allergy'             => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
             'current_medication'  => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
             'history_diseases'    => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
             'time_symptom_onset'  => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
