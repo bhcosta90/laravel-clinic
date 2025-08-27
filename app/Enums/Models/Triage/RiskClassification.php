@@ -26,11 +26,22 @@ enum RiskClassification: int
     public function label(): string
     {
         return match ($this) {
-            self::Blue   => '🔵 ' . __('Blue - Not urgent'),
-            self::Green  => '🟢 ' . __('Green - Little urgency'),
-            self::Yellow => '🟡 ' . __('Yellow - Urgency'),
-            self::Orage  => '🟠 ' . __('Orange - Much urgency'),
-            self::Red    => '🔴 ' . __('Red - Emergency'),
+            self::Blue   => $this->color() . ' ' . __('Blue - Not urgent'),
+            self::Green  => $this->color() . ' ' . __('Green - Little urgency'),
+            self::Yellow => $this->color() . ' ' . __('Yellow - Urgency'),
+            self::Orage  => $this->color() . ' ' . __('Orange - Much urgency'),
+            self::Red    => $this->color() . ' ' . __('Red - Emergency'),
+        };
+    }
+
+    public function color(): string
+    {
+        return match ($this) {
+            self::Blue   => '🔵',
+            self::Green  => '🟢',
+            self::Yellow => '🟡',
+            self::Orage  => '🟠',
+            self::Red    => '🔴',
         };
     }
 }
