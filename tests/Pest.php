@@ -24,12 +24,12 @@ function makeUser(): User
     return $user;
 }
 
-function makeAppointment(User $user, string $dateTime): Appointment
+function makeAppointment(User $user, array $data = []): Appointment
 {
-    return Appointment::factory()->create([
+    return Appointment::factory()->create($data + [
         'user_id'      => $user->id,
         'agreement_id' => null,
-        'date'         => Carbon::parse($dateTime),
+        'date'         => when($data['date'], Carbon::parse($data['date'])),
         'is_return'    => false,
         'status'       => null,
         'is_paid'      => null,
