@@ -13,7 +13,7 @@ final class TriageSeeder extends Seeder
     public function run(): void
     {
         $customers = Customer::pluck('id')->toArray();
-        Triage::factory(25)->make()->each(function ($item) use ($customers) {
+        Triage::factory(25)->make()->each(function ($item) use ($customers): void {
             $item->customer_id = collect($customers)->random();
             $item->save();
         });
