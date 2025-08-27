@@ -60,9 +60,9 @@ final class Create extends Component
     #[Computed(persist: true)]
     public function times(): array
     {
-        $start    = config('date.hour_start', 8);
-        $end      = config('date.hour_end', 18);
-        $interval = config('date.interval_minutes', 15);
+        $start    = config('date.hour_start');
+        $end      = config('date.hour_end');
+        $interval = config('date.interval_minutes');
 
         $times = [];
 
