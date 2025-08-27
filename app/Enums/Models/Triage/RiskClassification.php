@@ -16,7 +16,7 @@ enum RiskClassification: int
     {
         return array_map(
             fn ($case) => [
-                'name' => $case->label(),
+                'name' => $case->color() . ' ' . $case->label(),
                 'id'   => $case->value,
             ],
             self::cases()
@@ -26,11 +26,11 @@ enum RiskClassification: int
     public function label(): string
     {
         return match ($this) {
-            self::Blue   => $this->color() . ' ' . __('Blue - Not urgent'),
-            self::Green  => $this->color() . ' ' . __('Green - Little urgency'),
-            self::Yellow => $this->color() . ' ' . __('Yellow - Urgency'),
-            self::Orage  => $this->color() . ' ' . __('Orange - Much urgency'),
-            self::Red    => $this->color() . ' ' . __('Red - Emergency'),
+            self::Blue   => __('Blue - Not urgent'),
+            self::Green  => __('Green - Little urgency'),
+            self::Yellow => __('Yellow - Urgency'),
+            self::Orage  => __('Orange - Much urgency'),
+            self::Red    => __('Red - Emergency'),
         };
     }
 
