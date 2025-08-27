@@ -12,7 +12,7 @@ return new class() extends Migration {
         Schema::create('triages', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
-            $table->unsignedTinyInteger('risk');
+            $table->unsignedTinyInteger('risk_classification');
             $table->string('description')->nullable();
             $table->string('mmhg')->nullable();
             $table->string('bpm')->nullable();
