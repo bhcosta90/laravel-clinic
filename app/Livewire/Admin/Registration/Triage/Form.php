@@ -27,6 +27,7 @@ final class Form extends \Livewire\Form
     public $general_condition;
     public $temperature;
     public $saturation;
+    public $eva;
 
     public function setModel(Triage $model): void
     {
@@ -44,6 +45,7 @@ final class Form extends \Livewire\Form
         $this->general_condition   = $model->general_condition;
         $this->temperature         = $model->temperature;
         $this->saturation          = $model->saturation;
+        $this->eva                 = $model->eva;
     }
 
     public function save(): Triage
@@ -75,6 +77,7 @@ final class Form extends \Livewire\Form
             'general_condition'   => ['nullable', 'string', 'max:255'],
             'temperature'         => ['nullable', 'integer', 'min:0'],
             'saturation'          => ['nullable', 'integer', 'min:0', 'max:100'],
+            'eva'                 => ['nullable', 'integer', 'min:0', 'max:10'],
         ];
     }
 }
