@@ -22,30 +22,30 @@
     />
     <x-input label="{{ __('Reason for search/main complaint') }} *" wire:model="form.description" required/>
 
-    <x-input label="{{ __('PA (mmHg)') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('PA (mmHg)') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('FC (bpm)') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('FC (bpm)') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('FR (irpm)') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('FR (irpm)') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('Temperature (°C)') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('Temperature (°C)') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('Saturation') . '(%)' }}" wire:model="form.description" required/>
+    <x-input label="{{ __('Saturation') . '(%)' }}" wire:model="form.description" />
 
-    <x-input label="{{ __('Allergies') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('Allergies') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('Use of current medicines') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('Use of current medicines') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('Disease History') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('Disease History') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('Starting time of symptoms') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('Starting time of symptoms') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('Patient\'s general condition') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('Patient\'s general condition') }}" wire:model="form.description" />
 
-    <x-input label="{{ __('Scale of pain') }}" wire:model="form.description" required/>
+    <x-input label="{{ __('Scale of pain') }}" wire:model="form.description" />
 
     <x-select.styled :label="__('Scale of pain')" :options="$collection" select="label:name|value:id"
-                     :placeholders="[
+         :placeholders="[
             'empty'   => __('Select') . '...',
          ]"
     />
