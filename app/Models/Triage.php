@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Enums\Models\Triage\RiskClassification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,7 +17,7 @@ final class Triage extends Model
 
     protected $fillable = [
         'customer_id',
-        'risk',
+        'risk_classification',
         'description',
         'mmhg',
         'bpm',
@@ -29,6 +30,10 @@ final class Triage extends Model
         'time_symptom_onset',
         'general_condition',
         'eva',
+    ];
+
+    protected $casts = [
+        'risk' => RiskClassification::class,
     ];
 
     public function customer(): BelongsTo
