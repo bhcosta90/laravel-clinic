@@ -11,6 +11,17 @@ use Override;
 
 final class UserService extends Service
 {
+    public function login(
+        string $username,
+        string $password,
+        ?bool $remember = false
+    ): bool {
+        return Auth::attempt([
+            'email'    => $username,
+            'password' => $password,
+        ], $remember);
+    }
+
     protected function model(): User
     {
         return new User();
@@ -25,16 +36,5 @@ final class UserService extends Service
     protected function includes(): array
     {
         return ['role' => []];
-    }
-
-    protected function login(
-        string $username,
-        string $password,
-        ?bool $remember = false
-    ): bool {
-        return Auth::attempt([
-            'email'    => $username,
-            'password' => $password,
-        ], $remember);
     }
 }

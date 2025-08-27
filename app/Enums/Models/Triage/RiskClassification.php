@@ -15,7 +15,7 @@ enum RiskClassification: int
     public static function options(): array
     {
         return array_map(
-            fn ($case) => [
+            fn (RiskClassification $case): array => [
                 'name' => $case->color() . ' ' . $case->label(),
                 'id'   => $case->value,
             ],
