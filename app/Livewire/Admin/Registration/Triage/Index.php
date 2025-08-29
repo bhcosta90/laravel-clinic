@@ -2,15 +2,16 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Registration\PaymentMethods;
+namespace App\Livewire\Admin\Registration\Triage;
 
-use App\Services\PaymentMethodService;
+use App\Models\Triage;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class Index extends Component
 {
@@ -32,7 +33,7 @@ final class Index extends Component
     public function headers(): array
     {
         return [
-            ['index' => 'name', 'label' => __('Name')],
+            ['index' => 'description', 'label' => __('Description')],
             ['index' => 'created_at', 'label' => __('Created')],
             ['index' => 'action', 'sortable' => false],
         ];
@@ -40,13 +41,15 @@ final class Index extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.registration.payment-methods.index');
+        return view('livewire.admin.registration.triage.index');
     }
 
     #[Computed]
     public function rows(): Paginator
     {
-        return app(PaymentMethodService::class)->handle('index', $this->search)
+        return app(BuilderQuery::class)->execute(new Triage(), [], [
+            '(byFilter,name)' => $this->search,
+        ])
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();

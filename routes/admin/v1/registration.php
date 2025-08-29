@@ -10,6 +10,7 @@ Route::get('/procedures', Registration\Procedures\Index::class)->name('procedure
 Route::get('/agreements', Registration\Agreements\Index::class)->name('agreements.index')->can('viewAny', Models\Agreement::class);
 Route::get('/payment-methods', Registration\PaymentMethods\Index::class)->name('payment-methods.index')->can('viewAny', Models\PaymentMethod::class);
 Route::get('/frequencies', Registration\Frequencies\Index::class)->name('frequencies.index')->can('viewAny', Models\Frequency::class);
+Route::get('/triage', Registration\Triage\Index::class)->name('triage.index')->can('viewAny', Models\Triage::class);
 Route::get('/remedies', Registration\Remedies\Index::class)->name('remedies.index')->can('viewAny', Models\Remedy::class);
 Route::get('/rooms', Registration\Rooms\Index::class)->name('rooms.index')->can('viewAny', Models\Room::class);
 Route::get('/anamnesis-group', Registration\AnamnesisGroup\Index::class)->name('anamnesis-group.index')->can('viewAny', Models\AnamnesisGroup::class);

@@ -18,10 +18,14 @@ final class Appointment extends Model
         'user_id',
         'procedure_id',
         'customer_id',
+        'agreement_id',
         'date',
         'is_return',
         'date_retired',
         'exam_withdrawal_date',
+        'description',
+        'status',
+        'is_paid',
     ];
 
     public function user(): BelongsTo

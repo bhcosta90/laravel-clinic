@@ -14,6 +14,7 @@ final class Tenant extends Model
     use HasUuids;
 
     protected $fillable = [
+        'id',
         'name',
     ];
 }

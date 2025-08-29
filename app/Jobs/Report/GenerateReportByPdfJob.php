@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Jobs;
+namespace App\Jobs\Report;
 
 use App\Enums\Models\Report\Status;
 use App\Enums\Queue\Queue;

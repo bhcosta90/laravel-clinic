@@ -41,7 +41,7 @@
 
         <div
             class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700">
-            <x-table :headers="$this->headers" :$sort :rows="$this->rows" paginate simple-pagination loading>
+            <x-table :headers="$this->headers" :$sort :rows="$this->rows" loading>
                 @interact('column_hour', $row)
                 <div class="w-0 font-medium text-blue-600 dark:text-blue-400">
                     <div class="flex items-center">
@@ -133,6 +133,12 @@
                     </div>
                 </div>
                 @endinteract
+
+                <x-slot name="footer">
+                    <div class="mr-4">
+                        {{ $this->rows->links('tallstack-ui::components.table.paginators', ['simplePagination' => true]) }}
+                    </div>
+                </x-slot>
             </x-table>
         </div>
     </x-card>

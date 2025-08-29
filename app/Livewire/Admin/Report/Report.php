@@ -31,7 +31,6 @@ final class Report extends Component
     }
 
     #[Computed(persist: true)]
-    #[On('report::index')]
     public function headers(): array
     {
         return [
