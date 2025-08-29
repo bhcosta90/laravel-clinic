@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Models\AnamnesisItem;
+use Override;
 
 final class AnamnesisItemService extends Service
 {
@@ -17,5 +18,13 @@ final class AnamnesisItemService extends Service
     protected function search(): array
     {
         return ['name'];
+    }
+
+    #[Override]
+    protected function includes(): array
+    {
+        return [
+            'anamnesisGroup' => ['id', 'name'],
+        ];
     }
 }

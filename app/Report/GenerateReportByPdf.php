@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Report;
 
-use App\Jobs\GenerateReportByPdfJob;
+use App\Jobs\Report\GenerateReportByPdfJob;
 use App\Models\Report;
 use App\Models\User;
 

@@ -30,6 +30,8 @@ enum Can: string
     case RegistrationRemedyEdit         = 'registration-remedy-edit';
     case RegistrationRoomView           = 'registration-room-view';
     case RegistrationRoomEdit           = 'registration-room-edit';
+    case RegistrationTriageView         = 'registration-triage-view';
+    case RegistrationTriageEdit         = 'registration-triage-edit';
     case RegistrationAnamnesisGroupView = 'registration-anamnesis_group-view';
     case RegistrationAnamnesisGroupEdit = 'registration-anamnesis_group-edit';
     case RegistrationAnamnesisTypeView  = 'registration-anamnesis_type-view';
@@ -55,7 +57,7 @@ enum Can: string
             __('frequency')       => __('Frequency records'),
             __('agreements')      => __('Agreements records'),
             __('anamnesis_group') => __('Anamnesis groups records'),
-            __('anamnesis_ype')   => __('Anamnesis types records'),
+            __('anamnesis_type')  => __('Anamnesis types records'),
             __('paymentsMethods') => __('Payment methods records'),
             __('room')            => __('Rooms records'),
             __('remedy')          => __('Remedies records'),
@@ -64,6 +66,8 @@ enum Can: string
             __('expense')         => __('Income records'),
             __('income')          => __('Expense records'),
             __('commission')      => __('Commission records'),
+            __('triage')          => __('Triage records'),
+            __('triage')          => __('Triage records'),
             default               => "operation {$label} do not configured",
         };
     }

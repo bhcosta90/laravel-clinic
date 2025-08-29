@@ -10,6 +10,7 @@ use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\Procedure;
 use App\Models\User;
+use App\Services\AppointmentService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
@@ -59,9 +60,9 @@ final class Create extends Component
     #[Computed(persist: true)]
     public function times(): array
     {
-        $start    = config('date.hour_start', 8);
-        $end      = config('date.hour_end', 18);
-        $interval = config('date.interval_minutes', 15);
+        $start    = config('date.hour_start');
+        $end      = config('date.hour_end');
+        $interval = config('date.interval_minutes');
 
         $times = [];
 
@@ -81,7 +82,8 @@ final class Create extends Component
         $this->appointment->date    = now()->parse($data['dataAppointment']['date'] . ' ' . $data['dataAppointment']['time']);
         $this->appointment->user_id = $data['dataAppointment']['user_id'];
         $this->appointment->status  = Status::Scheduled;
-        $this->appointment->save();
+
+        app(AppointmentService::class)->handle('store', $this->appointment->toArray());
 
         $this->resetExcept('dataAppointment');
         $this->dataAppointment['time'] = null;

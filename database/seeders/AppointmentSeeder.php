@@ -30,7 +30,7 @@ final class AppointmentSeeder extends Seeder
             $item->save();
         });
 
-        Appointment::factory(5)->make()->each(function ($item) use ($usersId, $proceduresId, $customersId, $agreementsId): void {
+        Appointment::factory(3)->make()->each(function ($item) use ($usersId, $proceduresId, $customersId, $agreementsId): void {
             $item->status       = Status::Scheduled;
             $item->date         = now();
             $item->user_id      = collect($usersId)->random();

@@ -9,6 +9,7 @@ use App\Jobs\Transaction\CreateTransactionJob;
 use App\Livewire\Traits\Alert;
 use App\Models\Appointment;
 use App\Models\User;
+use App\Services\AppointmentService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -49,8 +50,7 @@ final class ExecutePayment extends Component
     {
         $this->validate();
 
-        $this->appointment->is_paid = true;
-        $this->appointment->save();
+        app(AppointmentService::class)->handle('update', $this->appointment, ['is_paid' => true]);
 
         dispatch(new CreateTransactionJob(
             name: $this->appointment->procedure->name,
