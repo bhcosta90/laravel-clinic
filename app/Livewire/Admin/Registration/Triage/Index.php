@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Registration\Triage;
 
 use App\Models\Triage;
+use App\Services\RoomService;
+use App\Services\TriageService;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
@@ -47,9 +49,7 @@ final class Index extends Component
     #[Computed]
     public function rows(): Paginator
     {
-        return app(BuilderQuery::class)->execute(new Triage(), [], [
-            '(byFilter,name)' => $this->search,
-        ])
+        return app(TriageService::class)->handle('index', $this->search)
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();
