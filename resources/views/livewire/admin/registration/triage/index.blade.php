@@ -16,6 +16,10 @@
                 <x-ui.created_at :date="$row->created_at" />
             @endinteract
 
+            @interact('column_risk_classification', $row)
+                {{ $row->risk_classification->color() }} {{ $row->risk_classification->label() }}
+            @endinteract
+
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('update', $row)

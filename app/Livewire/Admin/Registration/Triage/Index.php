@@ -36,6 +36,7 @@ final class Index extends Component
     {
         return [
             ['index' => 'description', 'label' => __('Description')],
+            ['index' => 'risk_classification', 'label' => __('Risk classification')],
             ['index' => 'created_at', 'label' => __('Created')],
             ['index' => 'action', 'sortable' => false],
         ];
