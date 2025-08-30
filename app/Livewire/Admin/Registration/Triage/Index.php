@@ -27,8 +27,8 @@ final class Index extends Component
 
     #[Url]
     public array $sort = [
-        'column'    => 'name',
-        'direction' => 'asc',
+        'column'    => 'risk_classification',
+        'direction' => 'desc',
     ];
 
     #[Computed(persist: true)]
