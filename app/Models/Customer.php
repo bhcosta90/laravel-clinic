@@ -23,7 +23,7 @@ final class Customer extends Model
 
     public function birthdayDescription(): Attribute
     {
-        return Attribute::get(function () {
+        return Attribute::get(function (): string {
             $quantityYear  = abs((int) now()->diffInYears($this->birthday));
             $quantityMonth = abs((int) now()->diffInMonths($this->birthday));
             $quantityDays  = abs((int) now()->diffInDays($this->birthday));

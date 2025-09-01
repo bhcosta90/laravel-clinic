@@ -1,1 +1,0 @@
-resources/views/livewire/admin/registration/triage/index.blade.php nesse relatorio é triagem de clinica, pode colocar uma tela melhor pra mim

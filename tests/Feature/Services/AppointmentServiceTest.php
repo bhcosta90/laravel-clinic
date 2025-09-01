@@ -6,7 +6,7 @@ use App\Models\Appointment;
 use App\Services\AppointmentService;
 use Illuminate\Support\Carbon;
 
-it('returns 0 when there are no appointments', function () {
+it('returns 0 when there are no appointments', function (): void {
     $user = makeUser();
 
     $service = app(AppointmentService::class);
@@ -15,7 +15,7 @@ it('returns 0 when there are no appointments', function () {
     expect($service->verifyQuantityScheduleFromUser($user->id, $start))->toBe(0);
 });
 
-it('counts appointment in default slot when only start is given', function () {
+it('counts appointment in default slot when only start is given', function (): void {
     config()->set('date.interval_minutes', 15);
     $user = makeUser();
     // appointment at 10:00, slot = [10:00, 10:15)
@@ -27,7 +27,7 @@ it('counts appointment in default slot when only start is given', function () {
     expect($service->verifyQuantityScheduleFromUser($user->id, $start))->toBe(1);
 });
 
-it('does not count appointment that ends exactly at window start', function () {
+it('does not count appointment that ends exactly at window start', function (): void {
     config()->set('date.interval_minutes', 15);
     $user = makeUser();
     // appointment at 09:45 ends at 10:00
@@ -40,7 +40,7 @@ it('does not count appointment that ends exactly at window start', function () {
     expect($service->verifyQuantityScheduleFromUser($user->id, $start, $end))->toBe(0);
 });
 
-it('does not count appointment that starts exactly at window end', function () {
+it('does not count appointment that starts exactly at window end', function (): void {
     config()->set('date.interval_minutes', 15);
     $user = makeUser();
     // window [10:00, 10:30), appointment at 10:30 should not overlap
@@ -53,7 +53,7 @@ it('does not count appointment that starts exactly at window end', function () {
     expect($service->verifyQuantityScheduleFromUser($user->id, $start, $end))->toBe(0);
 });
 
-it('counts appointment that starts before and ends inside the window', function () {
+it('counts appointment that starts before and ends inside the window', function (): void {
     config()->set('date.interval_minutes', 30);
     $user = makeUser();
     // appointment 09:50-10:20 overlaps with [10:00, 10:30)
@@ -66,7 +66,7 @@ it('counts appointment that starts before and ends inside the window', function 
     expect($service->verifyQuantityScheduleFromUser($user->id, $start, $end))->toBe(1);
 });
 
-it('counts appointment that starts inside and ends after the window', function () {
+it('counts appointment that starts inside and ends after the window', function (): void {
     config()->set('date.interval_minutes', 45);
     $user = makeUser();
     // appointment 10:20-11:05 overlaps with [10:00, 10:30)
@@ -79,7 +79,7 @@ it('counts appointment that starts inside and ends after the window', function (
     expect($service->verifyQuantityScheduleFromUser($user->id, $start, $end))->toBe(1);
 });
 
-it('counts only overlapping appointments for the user within the time window', function () {
+it('counts only overlapping appointments for the user within the time window', function (): void {
     config()->set('date.interval_minutes', 15);
     $userA = makeUser();
     $userB = makeUser();
@@ -100,7 +100,7 @@ it('counts only overlapping appointments for the user within the time window', f
     expect($service->verifyQuantityScheduleFromUser($userA->id, $start))->toBe(2);
 });
 
-it('counts multiple overlapping appointments and ignores others users', function () {
+it('counts multiple overlapping appointments and ignores others users', function (): void {
     config()->set('date.interval_minutes', 15);
     $userA = makeUser();
     $userB = makeUser();
@@ -122,7 +122,7 @@ it('counts multiple overlapping appointments and ignores others users', function
     expect($service->verifyQuantityScheduleFromUser($userA->id, $start, $end))->toBe(2);
 });
 
-it('works when start is after end (swapped)', function () {
+it('works when start is after end (swapped)', function (): void {
     config()->set('date.interval_minutes', 15);
     $user = makeUser();
 
@@ -135,7 +135,7 @@ it('works when start is after end (swapped)', function () {
     expect($service->verifyQuantityScheduleFromUser($user->id, $start, $end))->toBe(1);
 });
 
-it('normalizes seconds to minute precision', function () {
+it('normalizes seconds to minute precision', function (): void {
     config()->set('date.interval_minutes', 15);
     $user = makeUser();
 

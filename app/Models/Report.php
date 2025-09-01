@@ -27,7 +27,7 @@ final class Report extends Model
     public function fileUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => when($this->file, fn () => route('report.view-file', $this->code)),
+            get: fn () => when($this->file, fn (): string => route('report.view-file', $this->code)),
         );
     }
 

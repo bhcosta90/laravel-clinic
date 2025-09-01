@@ -34,7 +34,7 @@ final class AppointmentService extends Service
 
         return Appointment::query()
             ->where('user_id', $userId)
-            ->where(function ($q) use ($start, $end, $slotMinutes) {
+            ->where(function ($q) use ($start, $end, $slotMinutes): void {
                 // Overlap condition (DB-agnostic):
                 // appointmentStart < end AND appointmentStart > (start - slotMinutes)
                 $q->where('date', '<', $end)

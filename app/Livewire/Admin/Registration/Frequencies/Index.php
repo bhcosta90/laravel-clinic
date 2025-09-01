@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Registration\Frequencies;
 
-use App\Models\Frequency;
 use App\Services\FrequencyService;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -12,7 +11,6 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class Index extends Component
 {
