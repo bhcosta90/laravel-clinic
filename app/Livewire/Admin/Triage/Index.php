@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Registration\Triage;
+namespace App\Livewire\Admin\Triage;
 
 use App\Services\TriageService;
 use Illuminate\Contracts\Pagination\Paginator;

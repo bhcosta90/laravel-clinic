@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Registration\Triage;
+namespace App\Livewire\Admin\Triage;
 
 use App\Livewire\Traits\Alert;
 use App\Models\Triage;
