@@ -23,7 +23,7 @@ Route::middleware(['auth'])->as('admin.')->prefix('admin')->group(function (): v
         Route::as('registration.')->prefix('registration')->group(base_path('routes/admin/v1/registration.php'));
         Route::as('transactions.')->prefix('transaction')->group(base_path('routes/admin/v1/transaction.php'));
         Route::as('appointments.')->prefix('appointment')->group(base_path('routes/admin/v1/appointment.php'));
-        Route::get('/triage', Registration\Triage\Index::class)->name('triage.index')->can('viewAny', Models\Triage::class);
+        Route::get('triage', Registration\Triage\Index::class)->name('triage.index')->can('viewAny', Models\Triage::class);
 
         Route::prefix('api')->as('api.')->group(base_path('routes/admin/api/v1/api.php'));
     });
