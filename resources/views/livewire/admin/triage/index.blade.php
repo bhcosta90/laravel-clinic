@@ -5,7 +5,7 @@
             <x-ui.header :title="__('Triage')">
                 <x-slot name="actions">
                     @can('create', Triage::class)
-                        <livewire:admin.registration.triage.create @created="$refresh" />
+                        <livewire:admin.triage.create @created="$refresh" />
                     @endcan
                 </x-slot>
             </x-ui.header>
@@ -46,7 +46,7 @@
                             <x-button.circle icon="pencil" wire:click="$dispatch('load::triage', { 'triage' : '{{ $row->id }}'})" />
                         @endcan
                         @can('delete', $row)
-                            <livewire:admin.registration.triage.delete :triage="$row" :key="uniqid('', true)" @deleted="$refresh" />
+                            <livewire:admin.triage.delete :triage="$row" :key="uniqid('', true)" @deleted="$refresh" />
                         @endcan
                     </div>
                 </div>
@@ -58,5 +58,5 @@
         </div>
     </x-card>
 
-    <livewire:admin.registration.triage.update @updated="$refresh" />
+    <livewire:admin.triage.update @updated="$refresh" />
 </div>

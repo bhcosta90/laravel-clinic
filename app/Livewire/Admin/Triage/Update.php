@@ -20,7 +20,7 @@ final class Update extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.registration.triage.update');
+        return view('livewire.admin.triage.update');
     }
 
     #[On('load::triage')]

@@ -3,7 +3,7 @@
 
     <x-modal size="3xl" :title="__('Create New Triage')" wire>
         <form id="triage-create" wire:submit="save" class="space-y-4">
-            <x-admin.registration.triage.form />
+            <x-admin.triage.form />
         </form>
         <x-slot:footer>
             <x-button type="submit" form="triage-create">

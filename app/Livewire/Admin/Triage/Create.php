@@ -18,7 +18,7 @@ final class Create extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.registration.triage.create');
+        return view('livewire.admin.triage.create');
     }
 
     public function save(): void

@@ -41,7 +41,7 @@ final class Index extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.registration.triage.index');
+        return view('livewire.admin.triage.index');
     }
 
     #[Computed]
