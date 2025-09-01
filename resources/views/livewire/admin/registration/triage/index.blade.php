@@ -25,21 +25,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($this->rows as $row)
                 @php
-                    $border = match($row->risk_classification) {
-                        \App\Enums\Models\Triage\RiskClassification::Red => 'border-red-300 dark:border-red-700',
-                        \App\Enums\Models\Triage\RiskClassification::Orange => 'border-orange-300 dark:border-orange-700',
-                        \App\Enums\Models\Triage\RiskClassification::Yellow => 'border-yellow-300 dark:border-yellow-700',
-                        \App\Enums\Models\Triage\RiskClassification::Green => 'border-green-300 dark:border-green-700',
-                        \App\Enums\Models\Triage\RiskClassification::Blue => 'border-blue-300 dark:border-blue-700',
-                    };
-
-                    $badge = match($row->risk_classification) {
-                        \App\Enums\Models\Triage\RiskClassification::Red => 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-                        \App\Enums\Models\Triage\RiskClassification::Orange => 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
-                        \App\Enums\Models\Triage\RiskClassification::Yellow => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-                        \App\Enums\Models\Triage\RiskClassification::Green => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-                        \App\Enums\Models\Triage\RiskClassification::Blue => 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-                    };
+                    $border = $row->risk_classification->borderClasses();
+                    $badge = $row->risk_classification->badgeClasses();
                 @endphp
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow border-2 {{ $border }} overflow-hidden">
                     <div class="p-4 flex items-start justify-between gap-3">
