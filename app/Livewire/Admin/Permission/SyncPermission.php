@@ -105,6 +105,7 @@ final class SyncPermission extends Component
             $parts = explode('-', $permission->value);
 
             if (count($parts) >= 3) {
+                // Three-level: parent-child-action (default)
                 $parent = __(array_shift($parts));
                 $child  = __(array_shift($parts));
                 $action = __(implode(' ', $parts));
@@ -118,6 +119,48 @@ final class SyncPermission extends Component
                 }
 
                 $permissions[$parent][$child]->push([
+                    'value' => $permission->value,
+                    'name'  => $action,
+                    'case'  => $permission,
+                ]);
+            } elseif (2 === count($parts)) {
+                // Two-level: parent-action (no child)
+                [$parent, $action] = $parts;
+                $parent            = __($parent);
+                $action            = __($action);
+
+                if (!$permissions->has($parent)) {
+                    $permissions[$parent] = collect();
+                }
+
+                // Use a synthetic single-level child key to render consistently
+                $singleKey = '__single__';
+
+                if (!$permissions[$parent]->has($singleKey)) {
+                    $permissions[$parent][$singleKey] = collect();
+                }
+
+                $permissions[$parent][$singleKey]->push([
+                    'value' => $permission->value,
+                    'name'  => $action,
+                    'case'  => $permission,
+                ]);
+            } else {
+                // Fallback for unexpected formats: put everything under Misc group
+                $parent = __('misc');
+                $action = __($permission->value);
+
+                if (!$permissions->has($parent)) {
+                    $permissions[$parent] = collect();
+                }
+
+                $singleKey = '__single__';
+
+                if (!$permissions[$parent]->has($singleKey)) {
+                    $permissions[$parent][$singleKey] = collect();
+                }
+
+                $permissions[$parent][$singleKey]->push([
                     'value' => $permission->value,
                     'name'  => $action,
                     'case'  => $permission,

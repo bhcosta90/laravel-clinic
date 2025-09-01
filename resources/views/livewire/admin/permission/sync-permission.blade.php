@@ -90,14 +90,18 @@
                             </x-button>
                         </div>
                         @foreach($children as $childName => $actions)
-                            <div class="border-b border-gray-200 dark:border-gray-600 pb-2 mb-4">
-                                <div class="flex items-center">
-                                    <div class="font-medium text-xl text-gray-700 dark:text-white">{{ mb_ucfirst($childName) }}</div>
-                                    <div class="ml-2 text-sm text-gray-500 dark:text-gray-400">
-                                        {{ Can::operation($childName) }}
+                            @php $isSingle = $childName === '__single__'; @endphp
+
+                            @unless($isSingle)
+                                <div class="border-b border-gray-200 dark:border-gray-600 pb-2 mb-4">
+                                    <div class="flex items-center">
+                                        <div class="font-medium text-xl text-gray-700 dark:text-white">{{ mb_ucfirst($childName) }}</div>
+                                        <div class="ml-2 text-sm text-gray-500 dark:text-gray-400">
+                                            {{ Can::operation($childName) }}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endunless
 
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 pl-4">
                                 @foreach($actions as $action)

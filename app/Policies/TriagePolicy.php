@@ -13,11 +13,11 @@ final class TriagePolicy
 
     protected function getViewPermission(): Can
     {
-        return Can::RegistrationRoomView;
+        return Can::TriageView;
     }
 
     protected function getEditPermission(): Can
     {
-        return Can::RegistrationRoomEdit;
+        return Can::TriageEdit;
     }
 }
