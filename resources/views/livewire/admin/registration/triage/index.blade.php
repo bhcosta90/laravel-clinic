@@ -24,11 +24,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($this->rows as $row)
-                @php
-                    $border = $row->risk_classification->borderClasses();
-                    $badge = $row->risk_classification->badgeClasses();
-                @endphp
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow border-2 {{ $border }} overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow border-2 {{ $row->risk_classification->borderClasses() }} overflow-hidden">
                     <div class="p-4 flex items-start justify-between gap-3">
                         <div>
                             <div class="text-xs text-gray-500 dark:text-gray-400">
@@ -39,7 +35,7 @@
                             </div>
                         </div>
                         <div>
-                            <span class="px-2 py-1 text-xs font-medium rounded-full flex items-center w-fit {{ $badge }}">
+                            <span class="px-2 py-1 text-xs font-medium rounded-full flex items-center w-fit {{ $row->risk_classification->badgeClasses() }}">
                                 <span class="mr-1">{{ $row->risk_classification->color() }}</span>
                                 {{ $row->risk_classification->label() }}
                             </span>
