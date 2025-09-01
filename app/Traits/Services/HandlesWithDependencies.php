@@ -27,7 +27,7 @@ trait HandlesWithDependencies
                 $resolved[$parameter->name] = $params[$index];
             }
 
-            return $reflection->invokeArgs($this, $resolved);
+            return app(static::class)->$method(...$resolved);
         }
 
         foreach ($parameters as $parameter) {
@@ -52,6 +52,6 @@ trait HandlesWithDependencies
             $resolved[$parameter->name] = array_shift($params);
         }
 
-        return $reflection->invokeArgs($this, $resolved);
+        return app(static::class)->$method(...$resolved);
     }
 }

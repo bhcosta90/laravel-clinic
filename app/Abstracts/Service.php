@@ -18,12 +18,7 @@ abstract class Service
 
     abstract protected function search();
 
-    protected function includes(): array
-    {
-        return [];
-    }
-
-    protected function index(?string $search, ?array $filters = [])
+    final public function index(?string $search, ?array $filters = [])
     {
         if (null === $filters) {
             $filters = [];
@@ -52,18 +47,23 @@ abstract class Service
         return app(BuilderQuery::class)->execute($this->model(), $this->includes(), $newFilters);
     }
 
-    protected function store(array $data)
+    final public function store(array $data)
     {
         return app(RelationshipService::class)->execute($this->model(), $data);
     }
 
-    protected function update(Model $model, array $data)
+    final public function update(Model $model, array $data)
     {
         return app(RelationshipService::class)->execute($model, $data);
     }
 
-    protected function delete($model): bool
+    final public function delete($model): bool
     {
         return $model->delete();
+    }
+
+    protected function includes(): array
+    {
+        return [];
     }
 }
