@@ -184,7 +184,7 @@
 
             @can('viewAny', Models\Triage::class)
                 <x-side-bar.item :text="__('Triage')"
-                                 :route="route('admin.v1.registration.triage.index')"
+                                 :route="route('admin.v1.triage.index')"
                                  :visible="auth()->user()->can('viewAny', Models\Triage::class)"/>
             @endcan
 
