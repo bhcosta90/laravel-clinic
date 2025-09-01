@@ -27,6 +27,7 @@
         "nunomaduro/essentials": "^0.1",
         "owen-it/laravel-auditing": "^14.0",
         "quantumtecnology/controller-basics-extension": "^3.0",
+        "tallstackui/envbar": "^1.2",
         "tallstackui/tallstackui": "^2.0.0",
         "vinkla/hashids": "^13.0"
     },
