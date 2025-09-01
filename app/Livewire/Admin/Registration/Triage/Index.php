@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Registration\Triage;
 
-use App\Models\Triage;
-use App\Services\RoomService;
 use App\Services\TriageService;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -13,14 +11,13 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class Index extends Component
 {
     use WithPagination;
 
     #[Url]
-    public ?int $quantity = 15;
+    public ?int $quantity = 9;
 
     #[Url]
     public ?string $search = null;
