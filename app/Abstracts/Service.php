@@ -13,7 +13,6 @@ abstract class Service
 {
     use HandlesWithDependencies;
 
-    // Services should implement these two methods to enable index()
     abstract protected function model();
 
     abstract protected function search();
