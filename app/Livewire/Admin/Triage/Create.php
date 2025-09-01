@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Registration\Triage;
+namespace App\Livewire\Admin\Triage;
 
 use App\Livewire\Traits\Alert;
 use Illuminate\Contracts\View\View;
@@ -18,7 +18,7 @@ final class Create extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.registration.triage.create');
+        return view('livewire.admin.triage.create');
     }
 
     public function save(): void

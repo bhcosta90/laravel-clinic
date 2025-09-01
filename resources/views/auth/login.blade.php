@@ -7,9 +7,9 @@
         @csrf
 
         <div class="space-y-4">
-            <x-input label="Email *" type="email" name="email" :value="old('email', 'bhcosta90@gmail.com')" required autofocus autocomplete="username" />
+            <x-input label="{{__('Email')}} *" type="email" name="email" :value="old('email', 'bhcosta90@gmail.com')" required autofocus autocomplete="username" />
 
-            <x-password label="Password *" type="password" name="password" required autocomplete="current-password" />
+            <x-password label="{{__('Password') }} *" type="password" name="password" required autocomplete="current-password" />
         </div>
 
         <div class="block mt-4">

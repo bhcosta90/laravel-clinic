@@ -33,7 +33,7 @@ final class Triage extends Model
     ];
 
     protected $casts = [
-        'risk' => RiskClassification::class,
+        'risk_classification' => RiskClassification::class,
     ];
 
     public function customer(): BelongsTo

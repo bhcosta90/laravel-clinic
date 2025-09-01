@@ -27,6 +27,7 @@
         "nunomaduro/essentials": "^0.1",
         "owen-it/laravel-auditing": "^14.0",
         "quantumtecnology/controller-basics-extension": "^3.0",
+        "tallstackui/envbar": "^1.2",
         "tallstackui/tallstackui": "^2.0.0",
         "vinkla/hashids": "^13.0"
     },
@@ -40,8 +41,8 @@
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-laravel": "^3.2",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
         "rector/rector": "^2.1"
     },
     "autoload": {

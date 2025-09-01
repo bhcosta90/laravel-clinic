@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Registration\Triage;
+namespace App\Livewire\Admin\Triage;
 
 use App\Livewire\Traits\Alert;
 use App\Models\Triage;
@@ -20,7 +20,7 @@ final class Update extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.registration.triage.update');
+        return view('livewire.admin.triage.update');
     }
 
     #[On('load::triage')]

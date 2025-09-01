@@ -14,7 +14,9 @@ final class ClearCacheObserver
 
     public function saved(Role | User $model): void
     {
-        $key = config('cache.times.permission_prefix') . $model->getTable() . ".{$this->id}.permissions";
+        $keyId = $model->getKeyName();
+
+        $key = config('cache.times.permission_prefix') . $model->getTable() . ".{$model->{$keyId}}.permissions";
         Cache::purge($key);
         Cache::forget($key);
     }

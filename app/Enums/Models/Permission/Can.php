@@ -30,8 +30,8 @@ enum Can: string
     case RegistrationRemedyEdit         = 'registration-remedy-edit';
     case RegistrationRoomView           = 'registration-room-view';
     case RegistrationRoomEdit           = 'registration-room-edit';
-    case RegistrationTriageView         = 'registration-triage-view';
-    case RegistrationTriageEdit         = 'registration-triage-edit';
+    case TriageView                     = 'triage-view';
+    case TriageEdit                     = 'triage-edit';
     case RegistrationAnamnesisGroupView = 'registration-anamnesis_group-view';
     case RegistrationAnamnesisGroupEdit = 'registration-anamnesis_group-edit';
     case RegistrationAnamnesisTypeView  = 'registration-anamnesis_type-view';

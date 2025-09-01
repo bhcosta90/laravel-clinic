@@ -182,9 +182,11 @@
 
             </x-side-bar.item>
 
-            <x-side-bar.item :text="__('Triage')"
-                             :route="route('admin.v1.registration.triage.index')"
-                             :visible="auth()->user()->can('viewAny', Models\Triage::class)"/>
+            @can('viewAny', Models\Triage::class)
+                <x-side-bar.item :text="__('Triage')"
+                                 :route="route('admin.v1.triage.index')"
+                                 :visible="auth()->user()->can('viewAny', Models\Triage::class)"/>
+            @endcan
 
             <x-side-bar.item :text="__('Welcome Page')" icon="arrow-uturn-left" :route="route('welcome')"/>
         </x-side-bar>

@@ -2,31 +2,30 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Registration\Triage;
+namespace App\Livewire\Admin\Triage;
 
-use App\Models\Triage;
+use App\Services\TriageService;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class Index extends Component
 {
     use WithPagination;
 
     #[Url]
-    public ?int $quantity = 5;
+    public ?int $quantity = 9;
 
     #[Url]
     public ?string $search = null;
 
     #[Url]
     public array $sort = [
-        'column'    => 'name',
-        'direction' => 'asc',
+        'column'    => 'risk_classification',
+        'direction' => 'desc',
     ];
 
     #[Computed(persist: true)]
@@ -34,6 +33,7 @@ final class Index extends Component
     {
         return [
             ['index' => 'description', 'label' => __('Description')],
+            ['index' => 'risk_classification', 'label' => __('Risk classification')],
             ['index' => 'created_at', 'label' => __('Created')],
             ['index' => 'action', 'sortable' => false],
         ];
@@ -41,15 +41,13 @@ final class Index extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.registration.triage.index');
+        return view('livewire.admin.triage.index');
     }
 
     #[Computed]
     public function rows(): Paginator
     {
-        return app(BuilderQuery::class)->execute(new Triage(), [], [
-            '(byFilter,name)' => $this->search,
-        ])
+        return app(TriageService::class)->handle('index', $this->search)
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();
