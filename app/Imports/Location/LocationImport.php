@@ -15,6 +15,7 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
 {
     public function __construct(public string $type, public string $id)
     {
+        //
     }
 
     public function collection(Collection $collection): void
