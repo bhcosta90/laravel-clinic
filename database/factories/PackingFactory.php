@@ -20,8 +20,8 @@ final class PackingFactory extends Factory
 
         return [
             'unit_of_measure' => $this->faker->randomElements(UnitOfMeasure::cases()),
-            'dun14'           => when($this->faker->boolean(), fn () => $this->faker->ean13()),
-            'sscc'            => when($this->faker->boolean(), fn () => $this->faker->ean8()),
+            'dun14'           => when($this->faker->boolean(), fn () => $this->faker->unique()->ean13()),
+            'sscc'            => when($this->faker->boolean(), fn () => $this->faker->unique()->ean8()),
             'gross_weight'    => when($volume, fn () => $this->faker->randomFloat()),
             'net_weight'      => when($volume, fn () => $this->faker->randomFloat()),
             'volume'          => when($volume, fn () => $this->faker->randomFloat()),

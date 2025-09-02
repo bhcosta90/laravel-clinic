@@ -8,7 +8,7 @@ use App\Enums\Models\Catalog\Hazardous;
 use App\Enums\Models\Catalog\Status;
 use App\Enums\Models\Catalog\TrackingMode;
 use App\Models\Catalog;
-use App\Models\Tenant;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -19,14 +19,13 @@ final class CatalogFactory extends Factory
     public function definition(): array
     {
         return [
+            'tenant_id'     => DatabaseSeeder::TenantId,
             'name'          => $this->faker->name(),
             'tracking_mode' => $this->faker->randomElements(TrackingMode::cases()),
             'hazardous'     => $this->faker->randomElements(Hazardous::cases()),
             'status'        => Status::Enabled,
             'created_at'    => Carbon::now(),
             'updated_at'    => Carbon::now(),
-
-            'tenant_id' => Tenant::factory(),
         ];
     }
 }
