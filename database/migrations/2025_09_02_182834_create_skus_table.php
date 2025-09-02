@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('skus', function (Blueprint $table) {
+        Schema::create('skus', function (Blueprint $table): void {
             $table->id();
             $table->foreignUuid('tenant_id')->constrained();
             $table->morphs('model');

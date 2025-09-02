@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('packings', function (Blueprint $table) {
+        Schema::create('packings', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('sku_id');
             $table->unsignedTinyInteger('unit_of_measure');
