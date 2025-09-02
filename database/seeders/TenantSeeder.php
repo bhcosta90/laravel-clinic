@@ -33,6 +33,8 @@ final class TenantSeeder extends Seeder
                 AppointmentSeeder::class,
                 TriageSeeder::class,
                 CatalogSeeder::class,
+                SkuSeeder::class,
+                PackingSeeder::class,
             ]);
         }
 

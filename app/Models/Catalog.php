@@ -36,6 +36,6 @@ final class Catalog extends Model
 
     public function skus(): MorphMany
     {
-        return $this->morphMany(Sku::class, 'modelable');
+        return $this->morphMany(Sku::class, 'model');
     }
 }

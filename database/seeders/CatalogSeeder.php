@@ -11,8 +11,6 @@ final class CatalogSeeder extends Seeder
 {
     public function run(): void
     {
-        Catalog::factory(25)->make()->each(function ($item): void {
-            $item->save();
-        });
+        Catalog::factory(25)->create();
     }
 }
