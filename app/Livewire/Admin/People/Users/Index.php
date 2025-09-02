@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\People\Users;
 
+use App\Models\Scopes\TenantScope;
 use App\Services\UserService;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
@@ -52,6 +53,7 @@ final class Index extends Component
             '(id,!=)' => auth()->id(),
         ])
             ->orderBy(...array_values($this->sort))
+            ->withGlobalScope('tenant', new TenantScope())
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();
     }
