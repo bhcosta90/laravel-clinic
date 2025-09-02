@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Stock\Location;
 
 use App\Livewire\Traits\Alert;
-use App\Models\Frequency;
+use App\Models\Location;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -24,7 +24,7 @@ final class Update extends Component
     }
 
     #[On('load::frequency')]
-    public function load(Frequency $frequency): void
+    public function load(Location $frequency): void
     {
         $this->form->setModel($frequency);
         $this->modal = true;

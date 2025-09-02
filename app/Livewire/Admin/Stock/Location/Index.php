@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Stock\Location;
 
-use App\Services\FrequencyService;
+use App\Services\LocationService;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
@@ -46,7 +46,7 @@ final class Index extends Component
     #[Computed]
     public function rows(): Paginator
     {
-        return app(FrequencyService::class)->handle('index', $this->search)
+        return app(LocationService::class)->handle('index', $this->search)
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();
