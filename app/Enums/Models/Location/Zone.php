@@ -4,8 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Enums\Models\Location;
 
+use App\Traits\Enums\EnumHelpers;
+
 enum Zone: int
 {
+    use EnumHelpers;
+
     case A   = 1;
     case B   = 2;
     case C   = 3;

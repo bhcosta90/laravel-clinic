@@ -4,8 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Enums\Models\Location;
 
+use App\Traits\Enums\EnumHelpers;
+
 enum Type: int
 {
+    use EnumHelpers;
+
     case Picking   = 1;
     case Buffer    = 2;
     case Receiving = 3;

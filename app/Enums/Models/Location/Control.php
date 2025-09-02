@@ -4,8 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Enums\Models\Location;
 
+use App\Traits\Enums\EnumHelpers;
+
 enum Control: int
 {
+    use EnumHelpers;
+
     case BatchValidity       = 1;
     case SerialNumber        = 2;
     case System              = 3;
