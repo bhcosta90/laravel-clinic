@@ -22,7 +22,6 @@ final class Location extends Model
         'level',
         'position',
         'zone',
-        'location_type',
         'max_capacity',
         'picking_sequence',
         'control',

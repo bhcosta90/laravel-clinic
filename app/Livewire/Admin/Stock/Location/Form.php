@@ -20,7 +20,6 @@ final class Form extends \Livewire\Form
     public ?string $level           = null;
     public ?string $position        = null;
     public ?string $zone            = null;
-    public ?string $location_type   = null;
     public ?float $max_capacity     = null;
     public ?float $picking_sequence = null;
     public ?string $control         = null;
@@ -37,7 +36,6 @@ final class Form extends \Livewire\Form
         $this->level            = $model->level;
         $this->position         = $model->position;
         $this->zone             = $model->zone;
-        $this->location_type    = $model->location_type;
         $this->max_capacity     = $model->max_capacity;
         $this->picking_sequence = $model->picking_sequence;
         $this->control          = $model->control;
@@ -73,7 +71,6 @@ final class Form extends \Livewire\Form
             'level'            => ['nullable', 'string', 'max:10'],
             'position'         => ['nullable', 'string', 'max:10'],
             'zone'             => ['required', Rule::enum(LocationEnum\Zone::class)],
-            'location_type'    => ['required', Rule::enum(LocationEnum\Zone::class)],
             'max_capacity'     => ['nullable', 'numeric', 'max:4000000000'],
             'picking_sequence' => ['nullable', 'numeric', 'max:4000000000'],
             'control'          => ['required', Rule::enum(LocationEnum\Control::class)],
