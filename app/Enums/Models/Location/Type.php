@@ -26,4 +26,15 @@ enum Type: int
             self::Damage    => __('Release, return or disposal'),
         };
     }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::Picking   => __('Picking'),
+            self::Buffer    => __('Buffer'),
+            self::Receiving => __('Receiving'),
+            self::Shipping  => __('Shipping'),
+            self::Damage    => __('Damage'),
+        };
+    }
 }

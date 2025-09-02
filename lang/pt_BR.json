@@ -1,5 +1,13 @@
 {
+    "Disabled": "Desabilitado",
+    "Blocked": "Bloqueado",
+    "Enabled": "Habilitado",
     "Locations": "Locais",
+    "Picking": "Separação",
+    "Buffer": "Buffer",
+    "Receiving": "Recebimento",
+    "Shipping": "Expedição",
+    "Damage": "Avarias",
     "Create New Location": "Criar Novo Local",
     "Update Location: #:id": "Atualizar Local: #:id",
     "(and :count more error)": "(e mais :count erro)",

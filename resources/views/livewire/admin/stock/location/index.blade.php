@@ -25,6 +25,16 @@
                 <x-ui.created_at :date="$row->created_at" />
             @endinteract
 
+            @interact('column_status', $row)
+                <span class="px-2 py-1 text-xs font-medium rounded-full flex items-center w-fit {{ $row->status->badgeClasses() }}">
+                    {{ $row->status->label() }}
+                </span>
+            @endinteract
+
+            @interact('column_type', $row)
+                {{ $row->type->label() }}
+            @endinteract
+
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('update', $row)

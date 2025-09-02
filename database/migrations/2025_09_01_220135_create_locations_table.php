@@ -24,7 +24,7 @@ return new class() extends Migration {
             $table->unsignedTinyInteger('zone')->nullable();
             $table->unsignedInteger('max_capacity')->nullable(); // max units
             $table->integer('sequence')->nullable(); // picking route order
-            $table->unsignedTinyInteger('control'); // controlled substances?
+            $table->unsignedTinyInteger('control')->nullable(); // controlled substances?
             $table->decimal('temperature', 5)->nullable(); // °C if refrigerated
             $table->unsignedTinyInteger('status');
 

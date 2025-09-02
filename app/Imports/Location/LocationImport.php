@@ -40,10 +40,10 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
                 $status,
             ] = $rs;
 
-            $type    = LocationEnum\Type::tryFromName($type) ?: $type;
-            $control = LocationEnum\Control::tryFromName($control) ?: $control;
-            $status  = LocationEnum\Status::tryFromName($status) ?: $status;
-            $zone    = LocationEnum\Status::tryFromName($zone) ?: $zone;
+            $type    = when(filled($type), fn () => LocationEnum\Type::tryFromName($type) ?: $type);
+            $control = when(filled($control), fn () => LocationEnum\Control::tryFromName($control) ?: $control);
+            $status  = when(filled($status), fn () => LocationEnum\Status::tryFromName($status) ?: $status);
+            $zone    = when(filled($zone), fn () => LocationEnum\Zone::tryFromName($zone) ?: $zone);
 
             app(LocationService::class)->handle('store', [
                 'code'         => $code,

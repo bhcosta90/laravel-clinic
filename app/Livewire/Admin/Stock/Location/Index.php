@@ -32,7 +32,10 @@ final class Index extends Component
     public function headers(): array
     {
         return [
-            ['index' => 'name', 'label' => __('Name')],
+            ['index' => 'code', 'label' => __('Location')],
+            ['index' => 'sequence', 'label' => __('Sequence')],
+            ['index' => 'status', 'label' => __('Status')],
+            ['index' => 'type', 'label' => __('Address Type')],
             ['index' => 'created_at', 'label' => __('Created')],
             ['index' => 'action', 'sortable' => false],
         ];

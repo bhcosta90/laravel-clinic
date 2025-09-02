@@ -25,13 +25,13 @@ final class LocationController
             __('Initial Status'),
         ]);
 
-        $data->push(['R01-C01-N01-P01', 1, 1, 1, 1, 'A', 'Picking', 50, 1, 'N', '25', 'Enabled']);
-        $data->push(['R05-C03-N04-P01', 5, 3, 4, 1, 'A', 'Buffer', 200, 100, 'N', '25', 'Enabled']);
-        $data->push(['REC-01', '', '', '', '', 'STG', 'Receiving', 1000, 9000, 'N', '25', 'Enabled']);
-        $data->push(['EXP-ROT-03', '', '', '', '', 'LO', 'Shipping', 500, 9500, 'N', '25', 'Enabled']);
-        $data->push(['AVA-01', '', '', '', '', 'DAM', 'Damage', 100, 9800, 'N', '25', 'Blocked']);
-        $data->push(['R02-C05-N01-P01', 2, 5, 1, 1, 'B', 'Picking', 30, 20, 'S', '18', 'Disabled']);
-        $data->push(['R02-C05-N01-P02', 2, 5, 1, 1, 'B', 'Picking', 30, 20, 'S', '18', 'Disabled']);
+        $data->push(['R01-C01-N01-P01', 1, 1, 1, 1, 'A', 'Picking', 50, 1, 'batch validity', '25', 'Enabled']);
+        $data->push(['R05-C03-N04-P01', 5, 3, 4, 1, 'A', 'Buffer', 200, 100, 'batch validity', '25', 'Enabled']);
+        $data->push(['REC-01', '', '', '', '', 'STG', 'Receiving', 1000, 9000, '', '25', 'Enabled']);
+        $data->push(['EXP-ROT-03', '', '', '', '', 'LO', 'Shipping', 500, 9500, '', '25', 'Enabled']);
+        $data->push(['AVA-01', '', '', '', '', 'DAM', 'Damage', 100, 9800, '', '25', 'Blocked']);
+        $data->push(['R02-C05-N01-P01', 2, 5, 1, 1, 'B', 'Picking', 30, 20, 'serial number', '18', 'Disabled']);
+        $data->push(['R02-C05-N01-P02', 2, 5, 1, 1, 'B', 'Picking', 30, 20, 'serial number', '18', 'Disabled']);
 
         return response()->streamDownload(function () use ($data): void {
             $data->each(function ($row): void {
