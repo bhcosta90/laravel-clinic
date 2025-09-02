@@ -6,16 +6,12 @@ namespace App\Models;
 
 use App\Abstracts\Model;
 use App\Enums\Models\Location as EnumLocation;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class Location extends Model
 {
-    use HasFactory;
-    use HasUuids;
-    use SoftDeletes;
+    use HasUlids;
 
     protected $fillable = [
         'code',

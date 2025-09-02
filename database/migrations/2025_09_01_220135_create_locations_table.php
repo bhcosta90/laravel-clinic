@@ -10,7 +10,7 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('locations', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->foreignUuid('tenant_id');
             $table->string('code');
             $table->unsignedTinyInteger('type');
