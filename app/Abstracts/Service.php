@@ -15,7 +15,7 @@ abstract class Service
 
     abstract protected function model();
 
-    abstract protected function search();
+    abstract protected function search(): array;
 
     final public function index(?string $search, ?array $filters = [])
     {
