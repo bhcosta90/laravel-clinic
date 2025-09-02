@@ -21,6 +21,8 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
 
     public function collection(Collection $collection): void
     {
+        $locationService = app(LocationService::class);
+
         foreach ($collection as $rs) {
             [
                 $code,
@@ -57,11 +59,9 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
                 'status'       => $status,
             ];
 
-            if ($location = app(LocationService::class)->handle('findByCode', $code)->first()) {
-                app(LocationService::class)->handle('update', $location, $data);
-            } else {
-                app(LocationService::class)->handle('store', $data);
-            }
+            ($location = $locationService->handle('findByCode', $code)->first())
+                ? $locationService->handle('update', $location, $data)
+                : $locationService->handle('store', $data);
         }
     }
 
