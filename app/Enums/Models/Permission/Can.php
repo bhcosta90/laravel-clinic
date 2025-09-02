@@ -46,8 +46,8 @@ enum Can: string
     case AppointmentAppointmentReport = 'appointment-appointment-report';
     case AppointmentAppointmentView   = 'appointment-appointment-view';
     case AppointmentAppointmentEdit   = 'appointment-appointment-edit';
-    case MaterialLocationView         = 'material-location-view';
-    case MaterialLocationEdit         = 'material-location-edit';
+    case StockLocationView            = 'stock-location-view';
+    case StockLocationEdit            = 'stock-location-edit';
 
     public static function operation(string $label): string
     {
@@ -69,7 +69,7 @@ enum Can: string
             __('income')          => __('Expense records'),
             __('commission')      => __('Commission records'),
             __('triage')          => __('Triage records'),
-            __('triage')          => __('Triage records'),
+            __('location')        => __('Location records'),
             default               => "operation {$label} do not configured",
         };
     }

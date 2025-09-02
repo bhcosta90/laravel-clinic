@@ -1,4 +1,9 @@
 {
+    "Location": "Localização",
+    "location": "localização",
+    "Location records": "Registros de localização",
+    "Stock" : "Estoque",
+    "stock" : "estoque",
     "Describe the patient's complaint":  "Descreva a queixa do paciente",
     "If you have any allergy":"Caso tenha alguma alergia",
     "If you are using any medicines": "Caso esteja usando algum medicamento",
