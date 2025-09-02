@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('tenant_id')->constrained();
             $table->string('name');
@@ -24,6 +24,6 @@ return new class() extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('catalogs');
     }
 };
