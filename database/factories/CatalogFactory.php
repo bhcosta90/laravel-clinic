@@ -19,13 +19,12 @@ final class CatalogFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'                   => $this->faker->name(),
-            'tracking_mode'          => $this->faker->randomElements(TrackingMode::cases()),
-            'hazardous'              => $this->faker->randomElements(Hazardous::cases()),
-            'temperature_controlled' => when($this->faker->boolean(), true),
-            'status'                 => $this->faker->randomElements(Status::cases()),
-            'created_at'             => Carbon::now(),
-            'updated_at'             => Carbon::now(),
+            'name'          => $this->faker->name(),
+            'tracking_mode' => $this->faker->randomElements(TrackingMode::cases()),
+            'hazardous'     => $this->faker->randomElements(Hazardous::cases()),
+            'status'        => Status::Enabled,
+            'created_at'    => Carbon::now(),
+            'updated_at'    => Carbon::now(),
 
             'tenant_id' => Tenant::factory(),
         ];

@@ -16,15 +16,10 @@ final class SkuFactory extends Factory
     public function definition(): array
     {
         return [
-            'sku_code'          => $this->faker->word(),
-            'barcode'           => $this->faker->word(),
-            'description'       => $this->faker->text(),
-            'unit_of_measure'   => $this->faker->randomNumber(),
-            'conversion_factor' => $this->faker->randomFloat(),
-            'weight'            => $this->faker->randomFloat(),
-            'volume'            => $this->faker->randomFloat(),
-            'created_at'        => Carbon::now(),
-            'updated_at'        => Carbon::now(),
+            'sku_code'   => $this->faker->ean8(),
+            'barcode'    => $this->faker->ean13(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
 
             'product_id' => Catalog::factory(),
         ];
