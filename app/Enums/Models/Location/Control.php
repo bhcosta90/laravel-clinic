@@ -15,22 +15,22 @@ enum Control: int
     public function getControlDescriptions(): string
     {
         return match ($this) {
-            self::BatchValidity       => 'Location can only store products with batch and expiry date registered.',
-            self::SerialNumber        => 'Location can only store products that require a serial number.',
-            self::System              => 'Movement to this location is only done via WMS task, not manually.',
-            self::Blocked             => 'Indicates the location is restricted (only authorized operators can move items).',
-            self::SpecialTraceability => 'Items stored here have extra traceability control (regulatory).',
+            self::BatchValidity       => __('Location can only store products with batch and expiry date registered.'),
+            self::SerialNumber        => __('Location can only store products that require a serial number.'),
+            self::System              => __('Movement to this location is only done via WMS task, not manually.'),
+            self::Blocked             => __('Indicates the location is restricted (only authorized operators can move items).'),
+            self::SpecialTraceability => __('Items stored here have extra traceability control (regulatory).'),
         };
     }
 
     public function getControlExamples(): string
     {
         return match ($this) {
-            self::BatchValidity       => 'Medicines with expiry date, cosmetics.',
-            self::SerialNumber        => 'Electronics, high-value equipment.',
-            self::System              => 'Automatic picking location, conveyor, stacker crane.',
-            self::Blocked             => 'Safe for controlled medicines (black stripe).',
-            self::SpecialTraceability => 'RDC 304/2019 for medicines controlled by ANVISA.',
+            self::BatchValidity       => __('Medicines with expiry date, cosmetics.'),
+            self::SerialNumber        => __('Electronics, high-value equipment.'),
+            self::System              => __('Automatic picking location, conveyor, stacker crane.'),
+            self::Blocked             => __('Safe for controlled medicines (black stripe).'),
+            self::SpecialTraceability => __('RDC 304/2019 for medicines controlled by ANVISA.'),
         };
     }
 }

@@ -15,11 +15,11 @@ enum Type: int
     public function movementTrigger(): string
     {
         return match ($this) {
-            self::Picking   => 'Replenishment when empty',
-            self::Buffer    => 'Replenish picking',
-            self::Receiving => 'Addressing to Picking/Buffer',
-            self::Shipping  => 'Loading onto transport',
-            self::Damage    => 'Release, return or disposal',
+            self::Picking   => __('Replenishment when empty'),
+            self::Buffer    => __('Replenish picking'),
+            self::Receiving => __('Addressing to Picking/Buffer'),
+            self::Shipping  => __('Loading onto transport'),
+            self::Damage    => __('Release, return or disposal'),
         };
     }
 }
