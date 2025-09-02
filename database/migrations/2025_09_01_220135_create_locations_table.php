@@ -11,7 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('locations', function (Blueprint $table): void {
             $table->ulid('id')->primary();
-            $table->foreignUuid('tenant_id');
+            $table->foreignUuid('tenant_id')->constrained();
             $table->string('code');
             $table->unsignedTinyInteger('type');
 
