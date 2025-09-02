@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
-final class LocalAddress extends Model implements Auditable
+final class LocationAddress extends Model implements Auditable
 {
     use CastsDatesToUserTimezone;
     use HasFactory;

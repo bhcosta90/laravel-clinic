@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('local_addresses', function (Blueprint $table) {
+        Schema::create('location_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('location_id');
             $table->string('code');
@@ -22,6 +22,6 @@ return new class() extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('local_addresses');
+        Schema::dropIfExists('location_addresses');
     }
 };

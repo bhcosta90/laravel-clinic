@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Models\LocalAddress;
 use App\Models\Location;
+use App\Models\LocationAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-final class LocalAddressFactory extends Factory
+final class LocationAddressFactory extends Factory
 {
-    protected $model = LocalAddress::class;
+    protected $model = LocationAddress::class;
 
     public function definition(): array
     {
