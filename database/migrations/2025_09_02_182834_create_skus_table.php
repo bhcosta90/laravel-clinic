@@ -19,7 +19,7 @@ return new class() extends Migration {
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['tenant_id', 'model_type', 'model_id']);
+            $table->unique(['tenant_id', 'model_type', 'model_id', 'sku_code']);
         });
     }
 
