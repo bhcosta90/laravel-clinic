@@ -3,6 +3,6 @@
         {{ __('Import from template') }}
     </x-button>
     <div style="display:none">
-        <x-input type="file" id="importFileInput" wire:model="file" />
+        <x-input type="file" id="importFileInput" wire:model.change="file" />
     </div>
 </div>
