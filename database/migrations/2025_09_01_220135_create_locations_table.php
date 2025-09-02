@@ -23,7 +23,7 @@ return new class() extends Migration {
             // Zone (picking zone, receiving, shipping, quarantine, etc.)
             $table->unsignedTinyInteger('zone')->nullable();
             $table->unsignedInteger('max_capacity')->nullable(); // max units
-            $table->integer('picking_sequence')->nullable(); // picking route order
+            $table->integer('sequence')->nullable(); // picking route order
             $table->unsignedTinyInteger('control'); // controlled substances?
             $table->decimal('temperature', 5)->nullable(); // °C if refrigerated
             $table->unsignedTinyInteger('status');

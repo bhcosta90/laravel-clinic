@@ -23,7 +23,7 @@ final class Location extends Model
         'position',
         'zone',
         'max_capacity',
-        'picking_sequence',
+        'sequence',
         'control',
         'temperature',
         'status',
