@@ -12,7 +12,7 @@ final class PackingSeeder extends Seeder
 {
     public function run(): void
     {
-        Sku::query()->each(function (Sku $item) {
+        Sku::query()->each(function (Sku $item): void {
             $packing = Packing::factory()->make();
             $item->packings()->create($packing->toArray());
         });

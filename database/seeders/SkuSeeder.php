@@ -12,7 +12,7 @@ final class SkuSeeder extends Seeder
 {
     public function run(): void
     {
-        Catalog::query()->each(function ($item) {
+        Catalog::query()->each(function ($item): void {
             $sku = Sku::factory()->make();
             $item->skus()->create($sku->toArray());
         });
