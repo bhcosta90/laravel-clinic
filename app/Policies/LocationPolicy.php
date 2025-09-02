@@ -4,40 +4,20 @@ declare(strict_types = 1);
 
 namespace App\Policies;
 
-use App\Models\Location;
-use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Enums\Models\Permission\Can;
+use App\Policies\Traits\CrudPolicyTrait;
 
 final class LocationPolicy
 {
-    use HandlesAuthorization;
+    use CrudPolicyTrait;
 
-    public function viewAny(User $user): bool
+    protected function getViewPermission(): Can
     {
-
+        return Can::MaterialLocationView;
     }
 
-    public function view(User $user, Location $location): bool
+    protected function getEditPermission(): Can
     {
-    }
-
-    public function create(User $user): bool
-    {
-    }
-
-    public function update(User $user, Location $location): bool
-    {
-    }
-
-    public function delete(User $user, Location $location): bool
-    {
-    }
-
-    public function restore(User $user, Location $location): bool
-    {
-    }
-
-    public function forceDelete(User $user, Location $location): bool
-    {
+        return Can::MaterialLocationEdit;
     }
 }
