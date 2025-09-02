@@ -62,6 +62,11 @@ final class User extends Authenticatable implements Auditable
         return $this->belongsTo(Role::class);
     }
 
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
     public function permissions(): MorphToMany
     {
         return $this->morphToMany(Permission::class, 'model', $table = 'model_permissions')
