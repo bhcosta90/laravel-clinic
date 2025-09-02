@@ -5,8 +5,7 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Abstracts\Model;
-use App\Enums\Models\Location\Control;
-use App\Enums\Models\Location\Type;
+use App\Enums\Models\Location as EnumLocation;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,8 +22,9 @@ final class Location extends Model
     ];
 
     protected $casts = [
-        'type'    => Type::class,
-        'control' => Control::class,
+        'type'    => EnumLocation\Type::class,
+        'control' => EnumLocation\Control::class,
+        'zone'    => EnumLocation\Zone::class,
     ];
 
     public function tenant(): BelongsTo

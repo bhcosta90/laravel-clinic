@@ -22,13 +22,13 @@ return new class() extends Migration {
             $table->string('position')->nullable(); // depth/slot
 
             // Zone (picking zone, receiving, shipping, quarantine, etc.)
-            $table->string('zone')->nullable();
+            $table->unsignedTinyInteger('zone')->nullable();
             $table->unsignedTinyInteger('location_type');
 
             $table->integer('max_capacity')->nullable(); // max units
             $table->integer('picking_sequence')->nullable(); // picking route order
-            $table->boolean('is_controlled')->default(false); // controlled substances?
-            $table->decimal('temperature', 5, 2)->nullable(); // °C if refrigerated
+            $table->unsignedTinyInteger('control'); // controlled substances?
+            $table->decimal('temperature', 5)->nullable(); // °C if refrigerated
             $table->unsignedTinyInteger('status');
 
             $table->timestamps();
