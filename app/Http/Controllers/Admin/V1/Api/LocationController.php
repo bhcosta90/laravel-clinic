@@ -8,6 +8,36 @@ final class LocationController
 {
     public function store()
     {
+    }
 
+    public function download()
+    {
+        $data = collect();
+
+        $data->push([
+            __('Address Code'),
+            __('Street'),
+            __('Column'),
+            __('Level'),
+            __('Position'),
+            __('Zone'),
+            __('Address Type'),
+            __('Max Capacity'),
+            __('Sequence'),
+            __('Controlled'),
+            __('Temperature'),
+            __('Initial Status'),
+        ]);
+
+        $data->push(['R01-C01-N01-P01', 1, 1, 1, 1, 'A', 'Picking', 50, 1, 'N', '25', 'Liberado']);
+        $data->push(['R05-C03-N04-P01', 5, 3, 4, 1, 'A', 'Buffer', 200, 100, 'N', '25', 'Liberado']);
+        $data->push(['REC-01', '', '', '', '', 'STG', 'Receiving', 1000, 9000, 'N', '25', 'Liberado']);
+        $data->push(['EXP-ROT-03', '', '', '', '', 'LO', 'Shipping', 500, 9500, 'N', '25', 'Liberado']);
+        $data->push(['AVA-01', '', '', '', '', 'DAM', 'Damage', 100, 9800, 'N', '25', 'Bloqueado']);
+        $data->push(['R02-C05-N01-P01', 2, 5, 1, 1, 'B', 'Picking', 30, 20, 'S', '18', 'Liberado']);
+
+        return response()->streamDownload(function () use ($data) {
+            echo $data->implode("\n");
+        }, 'locations.csv');
     }
 }
