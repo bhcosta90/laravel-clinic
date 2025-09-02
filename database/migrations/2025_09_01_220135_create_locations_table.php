@@ -15,7 +15,6 @@ return new class() extends Migration {
             $table->string('code');
             $table->unsignedTinyInteger('type');
 
-            $table->string('warehouse')->nullable(); // e.g. CD01
             $table->string('aisle')->nullable(); // row/corridor
             $table->string('column')->nullable(); // rack/module
             $table->string('level')->nullable(); // level/shelf
@@ -23,9 +22,7 @@ return new class() extends Migration {
 
             // Zone (picking zone, receiving, shipping, quarantine, etc.)
             $table->unsignedTinyInteger('zone')->nullable();
-            $table->unsignedTinyInteger('location_type');
-
-            $table->integer('max_capacity')->nullable(); // max units
+            $table->unsignedInteger('max_capacity')->nullable(); // max units
             $table->integer('picking_sequence')->nullable(); // picking route order
             $table->unsignedTinyInteger('control'); // controlled substances?
             $table->decimal('temperature', 5)->nullable(); // °C if refrigerated
