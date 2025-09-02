@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Abstracts\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 final class Sku extends Model
 {
@@ -19,8 +19,8 @@ final class Sku extends Model
         'volume',
     ];
 
-    public function product(): BelongsTo
+    public function modelable(): MorphTo
     {
-        return $this->belongsTo(Catalog::class);
+        return $this->morphTo();
     }
 }

@@ -4,6 +4,9 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
+use App\Enums\Models\Catalog\Hazardous;
+use App\Enums\Models\Catalog\Status;
+use App\Enums\Models\Catalog\TrackingMode;
 use App\Models\Catalog;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -17,10 +20,10 @@ final class CatalogFactory extends Factory
     {
         return [
             'name'                   => $this->faker->name(),
-            'tracking_mode'          => $this->faker->randomNumber(),
-            'hazardous'              => $this->faker->randomNumber(),
-            'temperature_controlled' => $this->faker->randomNumber(),
-            'status'                 => $this->faker->randomNumber(),
+            'tracking_mode'          => $this->faker->randomElements(TrackingMode::cases()),
+            'hazardous'              => $this->faker->randomElements(Hazardous::cases()),
+            'temperature_controlled' => when($this->faker->boolean(), true),
+            'status'                 => $this->faker->randomElements(Status::cases()),
             'created_at'             => Carbon::now(),
             'updated_at'             => Carbon::now(),
 
