@@ -2,21 +2,21 @@
 
 declare(strict_types = 1);
 
-namespace App\Enums\Models\Sku;
+namespace App\Enums\Models\Packing;
 
-enum UnitOfMeasure
+enum UnitOfMeasure: int
 {
-    case UN;
-    case CX;
-    case FD;
-    case KG;
-    case G;
-    case L;
-    case ML;
-    case PALLET;
-    case M2;
-    case M3;
-    case KIT;
+    case UN     = 1;
+    case CX     = 2;
+    case FD     = 3;
+    case KG     = 4;
+    case G      = 5;
+    case L      = 6;
+    case ML     = 7;
+    case Pallet = 8;
+    case M2     = 9;
+    case M3     = 10;
+    case Kit    = 11;
 
     public function name(): string
     {
@@ -28,10 +28,10 @@ enum UnitOfMeasure
             self::G      => __('Gram'),
             self::L      => __('Liter'),
             self::ML     => __('Milliliter'),
-            self::PALLET => __('Pallet'),
+            self::Pallet => __('Pallet'),
             self::M2     => __('Square meter'),
             self::M3     => __('Cubic meter'),
-            self::KIT    => __('Kit / Set'),
+            self::Kit    => __('Kit / Set'),
         };
     }
 
@@ -45,10 +45,10 @@ enum UnitOfMeasure
             self::G      => __('Same logic, but for smaller units'),
             self::L      => __('Liquid products accounted by volume'),
             self::ML     => __('Used for small bottles or cosmetics'),
-            self::PALLET => __('Stock in closed pallet units (with several SKUs or same SKU)'),
+            self::Pallet => __('Stock in closed pallet units (with several SKUs or same SKU)'),
             self::M2     => __('Materials sold by area (floor, fabric)'),
             self::M3     => __('Volumetric products (sand, gravel, bulk liquids)'),
-            self::KIT    => __('When the SKU is composed of multiple items (e.g.: promotional kit)'),
+            self::Kit    => __('When the SKU is composed of multiple items (e.g.: promotional kit)'),
         };
     }
 }

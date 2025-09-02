@@ -13,13 +13,9 @@ return new class() extends Migration {
             $table->id();
             $table->foreignUuid('tenant_id')->constrained();
             $table->morphs('model');
-            $table->string('sku_code');
-            $table->string('barcode');
-            $table->string('description');
-            $table->unsignedTinyInteger('unit_of_measure');
-            $table->decimal('conversion_factor');
-            $table->decimal('weight');
-            $table->decimal('volume');
+            $table->string('sku_code');  // Internal code
+            $table->string('gtin')->nullable();    // Bar code of the sale of sale
+            $table->json('attributes')->nullable(); // JSON com atributos (ex.: {"color": "red", "size": "500ml"})
             $table->timestamps();
             $table->softDeletes();
 
