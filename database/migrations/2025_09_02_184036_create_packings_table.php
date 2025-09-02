@@ -18,6 +18,7 @@ return new class() extends Migration {
             $table->decimal('gross_weight')->nullable();
             $table->decimal('net_weight')->nullable();
             $table->decimal('volume')->nullable();
+            $table->boolean('is_promotional')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
