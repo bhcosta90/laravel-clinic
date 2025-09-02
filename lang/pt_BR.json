@@ -8,6 +8,7 @@
     "Receiving": "Recebimento",
     "Shipping": "Expedição",
     "Damage": "Avarias",
+    "Export the template" : "Exportar o modelo",
     "Create New Location": "Criar Novo Local",
     "Update Location: #:id": "Atualizar Local: #:id",
     "(and :count more error)": "(e mais :count erro)",

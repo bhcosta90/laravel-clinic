@@ -10,7 +10,7 @@
                         @endcan
 
                         @can('export', Location::class)
-                            <x-button :text="__('Import from template')" href="{{ route('admin.v1.api.location.download') }}" color="secondary" outline />
+                            <x-button :text="__('Export the template')" href="{{ route('admin.v1.api.location.download') }}" color="secondary" outline />
                         @endcan
                         @can('import', Location::class)
                             <livewire:admin.stock.location.import />
