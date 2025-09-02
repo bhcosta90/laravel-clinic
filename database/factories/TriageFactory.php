@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Database\Factories;
 
 use App\Enums\Models\Triage\RiskClassification;
-use App\Models\Customer;
 use App\Models\Triage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -17,7 +16,6 @@ final class TriageFactory extends Factory
     public function definition(): array
     {
         return [
-            'customer_id'         => Customer::factory(),
             'risk_classification' => $this->faker->randomElement(RiskClassification::cases()),
             'description'         => $this->faker->sentence(3),
             'mmhg'                => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),
