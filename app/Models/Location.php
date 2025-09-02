@@ -25,6 +25,7 @@ final class Location extends Model
         'type'    => EnumLocation\Type::class,
         'control' => EnumLocation\Control::class,
         'zone'    => EnumLocation\Zone::class,
+        'status'  => EnumLocation\Status::class,
     ];
 
     public function tenant(): BelongsTo
