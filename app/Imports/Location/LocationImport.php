@@ -8,7 +8,6 @@ use App\Enums\Models\Location as LocationEnum;
 use App\Services\LocationService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithStartRow;
@@ -22,8 +21,6 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
 
     public function collection(Collection $collection): void
     {
-        Log::info($this->id);
-
         foreach ($collection as $rs) {
             [
                 $code,
@@ -45,7 +42,7 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
             $status  = when(filled($status), fn () => LocationEnum\Status::tryFromName($status) ?: $status);
             $zone    = when(filled($zone), fn () => LocationEnum\Zone::tryFromName($zone) ?: $zone);
 
-            app(LocationService::class)->handle('store', [
+            $data = [
                 'code'         => $code,
                 'type'         => $type,
                 'aisle'        => $street,
@@ -58,7 +55,13 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
                 'control'      => $control,
                 'temperature'  => $temperature,
                 'status'       => $status,
-            ]);
+            ];
+
+            if ($location = app(LocationService::class)->handle('findByCode', $code)->first()) {
+                app(LocationService::class)->handle('update', $location, $data);
+            } else {
+                app(LocationService::class)->handle('store', $data);
+            }
         }
     }
 
