@@ -38,9 +38,9 @@ final class LocationController
         $data->push(['R02-C05-N01-P02', 2, 5, 1, 1, 'B', 'Picking', 30, 20, 'S', '18', 'Disabled']);
 
         return response()->streamDownload(function () use ($data) {
-            foreach ($data as $row) {
+            $data->each(function ($row) {
                 echo implode(',', $row) . "\n";
-            }
+            });
         }, 'locations.csv');
     }
 }
