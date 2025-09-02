@@ -14,24 +14,26 @@ final class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => [
+            'data' => ['required', 'array', 'min:1'],
+
+            'data.*.code' => [
                 'required',
                 'string',
                 'max:255',
                 Rule::exists(Location::class)->where('tenant_id', auth()->user()->tenant_id),
             ],
-            'type'             => ['required', Rule::enum(LocationEnum\Type::class)],
-            'aisle'            => ['nullable', 'string', 'max:10'],
-            'column'           => ['nullable', 'string', 'max:10'],
-            'level'            => ['nullable', 'string', 'max:10'],
-            'position'         => ['nullable', 'string', 'max:10'],
-            'zone'             => ['required', Rule::enum(LocationEnum\Zone::class)],
-            'location_type'    => ['required', Rule::enum(LocationEnum\Zone::class)],
-            'max_capacity'     => ['nullable', 'numeric', 'max:4000000000'],
-            'picking_sequence' => ['nullable', 'numeric', 'max:4000000000'],
-            'control'          => ['required', Rule::enum(LocationEnum\Control::class)],
-            'temperature'      => ['nullable', 'numeric'],
-            'status'           => ['required', Rule::enum(LocationEnum\Status::class)],
+            'data.*.type'             => ['required', Rule::enum(LocationEnum\Type::class)],
+            'data.*.aisle'            => ['nullable', 'string', 'max:10'],
+            'data.*.column'           => ['nullable', 'string', 'max:10'],
+            'data.*.level'            => ['nullable', 'string', 'max:10'],
+            'data.*.position'         => ['nullable', 'string', 'max:10'],
+            'data.*.zone'             => ['required', Rule::enum(LocationEnum\Zone::class)],
+            'data.*.location_type'    => ['required', Rule::enum(LocationEnum\Zone::class)],
+            'data.*.max_capacity'     => ['nullable', 'numeric', 'max:4000000000'],
+            'data.*.picking_sequence' => ['nullable', 'numeric', 'max:4000000000'],
+            'data.*.control'          => ['required', Rule::enum(LocationEnum\Control::class)],
+            'data.*.temperature'      => ['nullable', 'numeric'],
+            'data.*.status'           => ['required', Rule::enum(LocationEnum\Status::class)],
         ];
     }
 
