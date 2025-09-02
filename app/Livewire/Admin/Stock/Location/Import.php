@@ -32,7 +32,9 @@ final class Import extends Component
                 'file' => 'file|mimes:csv,txt|max:12288',
             ]);
 
-            Excel::import(new LocationImport(), $this->file->getRealPath())
+            $import = new LocationImport('location', str()->uuid()->toString());
+
+            Excel::import($import, $this->file->getRealPath())
                 ->onQueue(Queue::Low);
 
         } catch (ValidationException $th) {

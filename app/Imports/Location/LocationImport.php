@@ -13,8 +13,13 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 
 final class LocationImport implements ShouldQueue, ToCollection, WithChunkReading, WithStartRow
 {
+    public function __construct(public string $type, public string $id)
+    {
+    }
+
     public function collection(Collection $collection): void
     {
+        Log::info($this->id);
         Log::info($collection);
     }
 
