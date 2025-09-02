@@ -37,7 +37,7 @@ final class Import extends Component
 
         } catch (ValidationException $th) {
             $this->dialog()->error($th->getMessage())->send();
-            $this->file = null;
+            $this->reset('file');
         }
     }
 }
