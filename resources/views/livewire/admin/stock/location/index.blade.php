@@ -2,10 +2,17 @@
 <div>
     <x-card>
         <x-slot:header>
-            <x-ui.header :title="__('Frequencies')">
+            <x-ui.header :title="__('Locations')">
                 <x-slot name="actions">
                     @can('create', Location::class)
                         <livewire:admin.stock.location.create @created="$refresh" />
+                    @endcan
+
+                    @can('export', Location::class)
+                        <x-button :text="__('Download from template')" href="{{ route('admin.v1.api.location.download') }}" outline />
+                    @endcan
+                    @can('import', Location::class)
+                        <x-button :text="__('Import from template')" outline />
                     @endcan
                 </x-slot>
             </x-ui.header>

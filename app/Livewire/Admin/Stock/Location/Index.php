@@ -24,7 +24,7 @@ final class Index extends Component
 
     #[Url]
     public array $sort = [
-        'column'    => 'name',
+        'column'    => 'picking_sequence',
         'direction' => 'asc',
     ];
 
