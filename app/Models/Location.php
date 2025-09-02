@@ -18,7 +18,20 @@ final class Location extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'tenant_id',
+        'code',
+        'type',
+        'warehouse',
+        'aisle',
+        'column',
+        'level',
+        'position',
+        'zone',
+        'location_type',
+        'max_capacity',
+        'picking_sequence',
+        'control',
+        'temperature',
+        'status',
     ];
 
     protected $casts = [
