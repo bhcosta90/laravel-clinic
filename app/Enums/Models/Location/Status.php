@@ -6,7 +6,7 @@ namespace App\Enums\Models\Location;
 
 enum Status: int
 {
-    case Active   = 1;
-    case Inactive = 2;
+    case Enabled  = 1;
+    case Disabled = 2;
     case Blocked  = 3;
 }
