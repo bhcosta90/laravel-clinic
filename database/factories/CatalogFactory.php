@@ -21,8 +21,8 @@ final class CatalogFactory extends Factory
         return [
             'tenant_id'     => DatabaseSeeder::TenantId,
             'name'          => $this->faker->name(),
-            'tracking_mode' => $this->faker->randomElements(TrackingMode::cases()),
-            'hazardous'     => $this->faker->randomElements(Hazardous::cases()),
+            'tracking_mode' => $this->faker->randomElement(TrackingMode::cases()),
+            'hazardous'     => $this->faker->randomElement(Hazardous::cases()),
             'status'        => Status::Enabled,
             'created_at'    => Carbon::now(),
             'updated_at'    => Carbon::now(),

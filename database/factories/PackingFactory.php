@@ -19,7 +19,7 @@ final class PackingFactory extends Factory
         $volume = $this->faker->boolean();
 
         return [
-            'unit_of_measure' => $this->faker->randomElements(UnitOfMeasure::cases()),
+            'unit_of_measure' => $this->faker->randomElement(UnitOfMeasure::cases()),
             'dun14'           => when($this->faker->boolean(), fn () => $this->faker->unique()->ean13()),
             'sscc'            => when($this->faker->boolean(), fn () => $this->faker->unique()->ean8()),
             'gross_weight'    => when($volume, fn () => $this->faker->randomFloat()),

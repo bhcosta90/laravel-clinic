@@ -15,7 +15,7 @@ return new class() extends Migration {
             $table->string('name');
             $table->unsignedTinyInteger('tracking_mode');
             $table->unsignedTinyInteger('hazardous');
-            $table->boolean('temperature_controlled');
+            $table->boolean('temperature_controlled')->nullable();
             $table->unsignedTinyInteger('status');
             $table->timestamps();
             $table->softDeletes();
