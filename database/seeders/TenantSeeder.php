@@ -36,8 +36,6 @@ final class TenantSeeder extends Seeder
             ]);
         }
 
-        DB::transaction(function () use ($default) {
-            $this->call($default);
-        });
+        DB::transaction(fn () => $this->call($default));
     }
 }
