@@ -6,17 +6,18 @@ namespace App\Enums\Models\Packing;
 
 enum UnitOfMeasure: int
 {
-    case UN     = 1;
-    case CX     = 2;
-    case FD     = 3;
-    case KG     = 4;
-    case G      = 5;
-    case L      = 6;
-    case ML     = 7;
-    case Pallet = 8;
-    case M2     = 9;
-    case M3     = 10;
-    case Kit    = 11;
+    case UN      = 1;
+    case CX      = 2;
+    case FD      = 3;
+    case KG      = 4;
+    case G       = 5;
+    case L       = 6;
+    case ML      = 7;
+    case Pallet  = 8;
+    case M2      = 9;
+    case M3      = 10;
+    case Kit     = 11;
+    case Display = 12;
 
     public function name(): string
     {
