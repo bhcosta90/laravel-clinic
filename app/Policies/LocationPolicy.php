@@ -13,11 +13,11 @@ final class LocationPolicy
 
     protected function getViewPermission(): Can
     {
-        return Can::MaterialLocationView;
+        return Can::StockLocationView;
     }
 
     protected function getEditPermission(): Can
     {
-        return Can::MaterialLocationEdit;
+        return Can::StockLocationEdit;
     }
 }
