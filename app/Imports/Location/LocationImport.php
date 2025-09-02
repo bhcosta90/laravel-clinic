@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace App\Imports\Location;
 
+use App\Enums\Models\Location as LocationEnum;
+use App\Services\LocationService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +15,7 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 
 final class LocationImport implements ShouldQueue, ToCollection, WithChunkReading, WithStartRow
 {
-    public function __construct(public string $type, public string $id)
+    public function __construct(public string $id)
     {
         //
     }
@@ -21,7 +23,43 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
     public function collection(Collection $collection): void
     {
         Log::info($this->id);
-        Log::info($collection);
+
+        foreach ($collection as $rs) {
+            [
+                $code,
+                $street,
+                $column,
+                $level,
+                $position,
+                $zone,
+                $type,
+                $capacity,
+                $sequence,
+                $control,
+                $temperature,
+                $status,
+            ] = $rs;
+
+            $type    = LocationEnum\Type::tryFromName($type) ?: $type;
+            $control = LocationEnum\Control::tryFromName($control) ?: $control;
+            $status  = LocationEnum\Status::tryFromName($status) ?: $status;
+            $zone    = LocationEnum\Status::tryFromName($zone) ?: $zone;
+
+            app(LocationService::class)->handle('store', [
+                'code'         => $code,
+                'type'         => $type,
+                'aisle'        => $street,
+                'column'       => $column,
+                'level'        => $level,
+                'position'     => $position,
+                'zone'         => $zone,
+                'max_capacity' => $capacity,
+                'sequence'     => $sequence,
+                'control'      => $control,
+                'temperature'  => $temperature,
+                'status'       => $status,
+            ]);
+        }
     }
 
     public function batchSize(): int

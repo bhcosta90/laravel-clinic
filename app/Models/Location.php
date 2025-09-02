@@ -16,7 +16,6 @@ final class Location extends Model
     protected $fillable = [
         'code',
         'type',
-        'warehouse',
         'aisle',
         'column',
         'level',
