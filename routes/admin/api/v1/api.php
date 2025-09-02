@@ -14,7 +14,7 @@ Route::get('procedures/search', [Api\ProcedureController::class, 'search'])->nam
 Route::get('payment-methods/search', [Api\PaymentMethodController::class, 'search'])->name('payment-method.search');
 Route::get('users/search', [Api\UserController::class, 'search'])->name('user.search');
 
-Route::controller(Api\LocationController::class)->prefix('location')->as('location.')->group(function () {
+Route::controller(Api\LocationController::class)->prefix('location')->as('location.')->group(function (): void {
     Route::get('download', 'download')->name('download');
     Route::post('/', 'store')->name('store');
 });

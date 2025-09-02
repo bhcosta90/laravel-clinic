@@ -6,10 +6,6 @@ namespace App\Http\Controllers\Admin\V1\Api;
 
 final class LocationController
 {
-    public function store()
-    {
-    }
-
     public function download()
     {
         $data = collect();
@@ -37,8 +33,8 @@ final class LocationController
         $data->push(['R02-C05-N01-P01', 2, 5, 1, 1, 'B', 'Picking', 30, 20, 'S', '18', 'Disabled']);
         $data->push(['R02-C05-N01-P02', 2, 5, 1, 1, 'B', 'Picking', 30, 20, 'S', '18', 'Disabled']);
 
-        return response()->streamDownload(function () use ($data) {
-            $data->each(function ($row) {
+        return response()->streamDownload(function () use ($data): void {
+            $data->each(function ($row): void {
                 echo implode(',', $row) . "\n";
             });
         }, 'locations.csv');
