@@ -6,6 +6,8 @@ namespace App\Abstracts;
 
 use App\Traits\Services\HandlesWithDependencies;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 use QuantumTecnology\ControllerBasicsExtension\Services\RelationshipService;
 
@@ -48,6 +50,8 @@ abstract class Service
 
     final public function store(array $data)
     {
+        $this->validateMethod('storeValidate', $data);
+
         return app(RelationshipService::class)->execute($this->model(), $data);
     }
 
@@ -64,5 +68,17 @@ abstract class Service
     protected function includes(): array
     {
         return [];
+    }
+
+    private function validateMethod(string $method, array $data): void
+    {
+        if (method_exists($this, $method)) {
+            $rules     = $this->handle($method);
+            $validator = Validator::make($data, $rules)->validate();
+
+            if ($validator->fails()) {
+                throw ValidationException::withMessages($validator->errors()->toArray());
+            }
+        }
     }
 }

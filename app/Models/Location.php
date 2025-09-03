@@ -6,12 +6,12 @@ namespace App\Models;
 
 use App\Abstracts\Model;
 use App\Enums\Models\Location as EnumLocation;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use App\Traits\Models\UserTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Location extends Model
 {
-    use HasUlids;
+    use UserTrait;
 
     protected $fillable = [
         'code',

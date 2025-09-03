@@ -14,7 +14,7 @@ return new class() extends Migration {
             $table->foreignUuid('tenant_id')->constrained('tenants');
             $table->foreignId('user_id')->constrained('users');
             $table->unsignedTinyInteger('type');
-            $table->string('message')->nullable();
+            $table->text('message')->nullable();
             $table->json('data')->nullable();
             $table->timestamps();
             $table->softDeletes();
