@@ -5,17 +5,12 @@
             <x-ui.header :title="__('Locations')" :subtitle="__('Manage stock locations and their availability status.')">
                 <x-slot name="actions">
                     <div class="flex flex-wrap justify-between gap-2 items-center">
-                        @can('create', Location::class)
-                            <livewire:admin.stock.location.create @created="$refresh" />
+                        @can('export', Location::class)
+                            <x-button :text="__('Export the template')" href="{{ route('admin.v1.api.location.download') }}" color="secondary" outline />
                         @endcan
-
-                        <x-dropdown>
-                            <x-slot:action>
-                                <x-button.circle type="button" icon="bars-3" color="secondary" x-on:click="show = !show" aria-controls="dropdown-menu" aria-haspopup="true" :title="__('More actions')" />
-                            </x-slot:action>
-                            <x-dropdown.items :text="__('Export the template')" href="{{ route('admin.v1.api.location.download') }}" />
+                        @can('import', Location::class)
                             <livewire:admin.stock.location.import />
-                        </x-dropdown>
+                        @endcan
                     </div>
                 </x-slot>
             </x-ui.header>

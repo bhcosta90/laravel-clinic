@@ -193,7 +193,7 @@
                     auth()->user()->can('viewAny', Models\Location::class)
                 "
             >
-                <x-side-bar.item :text="__('Location')"
+                <x-side-bar.item :text="__('Import Location')"
                                  :route="route('admin.v1.stocks.locations.index')"
                                  :visible="auth()->user()->can('viewAny', Models\Location::class)"/>
             </x-side-bar.item>
