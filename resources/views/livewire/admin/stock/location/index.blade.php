@@ -9,7 +9,10 @@
                             <livewire:admin.stock.location.create @created="$refresh" />
                         @endcan
 
-                        <x-dropdown icon="bars-3">
+                        <x-dropdown>
+                            <x-slot:action>
+                                <x-button.circle type="button" icon="bars-3" color="secondary" x-on:click="show = !show" aria-controls="dropdown-menu" />
+                            </x-slot:action>
                             <x-dropdown.items :text="__('Export the template')" href="{{ route('admin.v1.api.location.download') }}" />
                             <livewire:admin.stock.location.import />
                         </x-dropdown>

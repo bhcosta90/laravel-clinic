@@ -11,6 +11,7 @@
     "Export the template" : "Exportar o modelo",
     "Create New Location": "Criar Novo Local",
     "Update Location: #:id": "Atualizar Local: #:id",
+    "Import started successfully. Wait a few moments to see all locations registered in the system": "Importação iniciada com sucesso. Aguarde alguns instantes para ver todos os locais registrados no sistema",
     "(and :count more error)": "(e mais :count erro)",
     "(and :count more errors)": "(e mais :count erros)",
     "1 bottle, 10 tablets, etc.": "1 frasco, 10 comprimidos, etc.",

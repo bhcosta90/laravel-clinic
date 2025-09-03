@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Services;
 
 use App\Abstracts\Service;
+use App\Enums\Models\Error\Type;
 use App\Models\Error;
 use Closure;
 use Exception;
@@ -12,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 
 final class ErrorService extends Service
 {
-    public function registerError(string $type, Closure $callback): mixed
+    public function registerError(Type $type, Closure $callback): mixed
     {
         $data = [];
 

@@ -37,6 +37,8 @@ final class Import extends Component
             Excel::import($import, $this->file->getRealPath())
                 ->onQueue(Queue::Low);
 
+            $this->dialog()->success(__('Import started successfully. Wait a few moments to see all locations registered in the system'))->send();
+
         } catch (ValidationException $th) {
             $this->dialog()->error($th->getMessage())->send();
             $this->reset('file');
