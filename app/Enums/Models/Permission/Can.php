@@ -46,8 +46,11 @@ enum Can: string
     case AppointmentAppointmentReport = 'appointment-appointment-report';
     case AppointmentAppointmentView   = 'appointment-appointment-view';
     case AppointmentAppointmentEdit   = 'appointment-appointment-edit';
-    case StockLocationView            = 'stock-location-view';
-    case StockLocationEdit            = 'stock-location-edit';
+    case StockLocationImportView      = 'stock-location_import-view';
+    case StockLocationImportEdit      = 'stock-location_import-edit';
+
+    case StockLocationModuleView = 'stock-location_module-view';
+    case StockLocationModuleEdit = 'stock-location_module-edit';
 
     public static function operation(string $label): string
     {

@@ -24,11 +24,11 @@ final class LocationPolicy
 
     protected function getViewPermission(): Can
     {
-        return Can::StockLocationView;
+        return Can::StockLocationImportView;
     }
 
     protected function getEditPermission(): Can
     {
-        return Can::StockLocationEdit;
+        return Can::StockLocationImportEdit;
     }
 }
