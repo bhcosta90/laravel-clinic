@@ -3,6 +3,8 @@
 declare(strict_types = 1);
 
 use App\Models\Appointment;
+use App\Models\Customer;
+use App\Models\Procedure;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +26,10 @@ function makeUser(): User
 function makeAppointment(User $user, array $data = []): Appointment
 {
     return Appointment::factory()->create($data + [
+        'tenant_id'    => tenant()->id,
         'user_id'      => $user->id,
+        'customer_id'  => $data['customer_id'] ?? Customer::factory()->create()->id,
+        'procedure_id' => $data['procedure_id'] ?? Procedure::factory()->create()->id,
         'agreement_id' => null,
         'date'         => when($data['date'], Carbon::parse($data['date'])),
         'is_return'    => false,
