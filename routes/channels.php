@@ -9,3 +9,5 @@ Broadcast::channel('App.Models.User.{id}', fn ($user, $id): bool => (int) $user-
 
 Broadcast::channel('App.Models.ReportSchedule.{userId}.{reportId}', fn ($user, $userId, $reportId): bool => (int) $user->id === (int) $userId
     && Report::whereUserId($userId)->where('id', $reportId)->exists());
+
+Broadcast::channel('App.Models.LocationError.{userId}.{type}', fn ($user, $userId, $reportId): bool => (int) $user->id === (int) $userId);

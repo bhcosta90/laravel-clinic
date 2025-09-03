@@ -1,4 +1,4 @@
-@php use App\Models\Location; @endphp
+@php use App\Models\Location; use App\Enums\Models\Error\Type; @endphp
 <div>
     <x-card>
         <x-slot:header>
@@ -20,6 +20,8 @@
                 </x-slot>
             </x-ui.header>
         </x-slot:header>
+
+        <livewire:error.index :type="Type::Location" />
 
         <x-table :headers="$this->headers" :$sort :rows="$this->rows" paginate simple-pagination filter loading :quantity="[2, 5, 15, 25]">
             @interact('column_created_at', $row)

@@ -19,13 +19,11 @@ final class Status extends Component
         return view('livewire.admin.report.status');
     }
 
-    // Provide dynamic placeholder for private Echo channel
     public function getUserIdProperty(): int
     {
         return (int) auth()->id();
     }
 
-    // Provide dynamic placeholder for private Echo channel
     public function getReportIdProperty(): string
     {
         return (string) $this->report?->id;
