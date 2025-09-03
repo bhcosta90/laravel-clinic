@@ -13,7 +13,7 @@ return new class() extends Migration {
             $table->id();
             $table->foreignUuid('tenant_id')->constrained('tenants');
             $table->foreignId('user_id')->constrained('users');
-            $table->string('type');
+            $table->unsignedTinyInteger('type');
             $table->string('message')->nullable();
             $table->json('data')->nullable();
             $table->timestamps();

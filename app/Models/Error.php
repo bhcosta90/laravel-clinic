@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Abstracts\Model;
+use App\Enums\Models\Error\Type;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Error extends Model
@@ -31,6 +32,7 @@ final class Error extends Model
     {
         return [
             'data' => 'array',
+            'type' => Type::class,
         ];
     }
 }
