@@ -49,7 +49,9 @@ final class Index extends Component
     #[Computed]
     public function rows(): Paginator
     {
-        return app(LocationService::class)->handle('index', $this->search)
+        return app(LocationService::class)->handle('index', $this->search, [
+            '(is_imported)' => true,
+        ])
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();

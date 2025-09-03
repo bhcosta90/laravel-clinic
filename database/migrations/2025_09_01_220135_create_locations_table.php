@@ -27,6 +27,7 @@ return new class() extends Migration {
             $table->unsignedTinyInteger('control')->nullable(); // controlled substances?
             $table->decimal('temperature', 5)->nullable(); // °C if refrigerated
             $table->unsignedTinyInteger('status');
+            $table->boolean('is_imported')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

@@ -55,6 +55,7 @@ final class LocationImport implements ShouldQueue, ToCollection, WithBatchInsert
                 'control'      => $control,
                 'temperature'  => $temperature,
                 'status'       => $status,
+                'is_imported'  => true,
             ];
 
             app(ErrorService::class)->handle('registerError', Type::ImportLocation, $code, fn () => ($location = $locationService->handle('findByCode', $code)->first())

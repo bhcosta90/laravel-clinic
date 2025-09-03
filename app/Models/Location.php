@@ -26,13 +26,15 @@ final class Location extends Model
         'control',
         'temperature',
         'status',
+        'is_imported',
     ];
 
     protected $casts = [
-        'type'    => EnumLocation\Type::class,
-        'control' => EnumLocation\Control::class,
-        'zone'    => EnumLocation\Zone::class,
-        'status'  => EnumLocation\Status::class,
+        'is_imported' => 'boolean',
+        'type'        => EnumLocation\Type::class,
+        'control'     => EnumLocation\Control::class,
+        'zone'        => EnumLocation\Zone::class,
+        'status'      => EnumLocation\Status::class,
     ];
 
     public function tenant(): BelongsTo
