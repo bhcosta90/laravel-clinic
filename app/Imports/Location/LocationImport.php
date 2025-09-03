@@ -11,10 +11,11 @@ use App\Services\LocationService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
-final class LocationImport implements ShouldQueue, ToCollection, WithChunkReading, WithStartRow
+final class LocationImport implements ShouldQueue, ToCollection, WithBatchInserts, WithChunkReading, WithStartRow
 {
     public function collection(Collection $collection): void
     {
