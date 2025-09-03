@@ -13,11 +13,13 @@ final class Form extends \Livewire\Form
     public ?LocationModule $model = null;
 
     public $acronym;
+    public $sequence;
 
     public function setModel(LocationModule $model): void
     {
-        $this->model   = $model;
-        $this->acronym = $model->name;
+        $this->model    = $model;
+        $this->acronym  = $model->acronym;
+        $this->sequence = $model->sequence;
     }
 
     public function save(): LocationModule
@@ -42,6 +44,7 @@ final class Form extends \Livewire\Form
                 'max:255',
                 Rule::exists(LocationModule::class)->where('tenant_id', tenant()->id),
             ],
+            'sequence' => ['nullable', 'numeric', 'max:4000000000'],
         ];
     }
 }

@@ -17,14 +17,14 @@ final class Index extends Component
     use WithPagination;
 
     #[Url]
-    public ?int $quantity = 5;
+    public ?int $quantity = 15;
 
     #[Url]
     public ?string $search = null;
 
     #[Url]
     public array $sort = [
-        'column'    => 'acronym',
+        'column'    => 'sequence',
         'direction' => 'asc',
     ];
 
@@ -33,6 +33,7 @@ final class Index extends Component
     {
         return [
             ['index' => 'acronym', 'label' => __('Acronym')],
+            ['index' => 'sequence', 'label' => __('Sequence')],
             ['index' => 'created_at', 'label' => __('Created')],
             ['index' => 'action', 'sortable' => false],
         ];

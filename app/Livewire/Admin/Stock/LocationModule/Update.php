@@ -23,10 +23,10 @@ final class Update extends Component
         return view('livewire.admin.stock.location-module.update');
     }
 
-    #[On('load::frequency')]
-    public function load(LocationModule $frequency): void
+    #[On('load::module')]
+    public function load(LocationModule $module): void
     {
-        $this->form->setModel($frequency);
+        $this->form->setModel($module);
         $this->modal = true;
     }
 
