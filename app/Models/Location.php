@@ -41,4 +41,9 @@ final class Location extends Model
     {
         return $this->belongsTo(Tenant::class);
     }
+
+    public function sector(): BelongsTo
+    {
+        return $this->belongsTo(Sector::class);
+    }
 }

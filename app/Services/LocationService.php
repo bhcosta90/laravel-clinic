@@ -50,6 +50,13 @@ final class LocationService extends Service
         ];
     }
 
+    protected function includes(): array
+    {
+        return [
+            'sector' => ['id'],
+        ];
+    }
+
     protected function model(): Location
     {
         return new Location();
