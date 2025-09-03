@@ -5,7 +5,7 @@
             <x-ui.header :title="__('Modules')">
                 <x-slot name="actions">
                     @can('create', LocationModule::class)
-                        <livewire:admin.registration.frequencies.create @created="$refresh" />
+                        <livewire:admin.stock.location-module.create @created="$refresh" />
                     @endcan
                 </x-slot>
             </x-ui.header>
@@ -22,12 +22,12 @@
                         <x-button.circle icon="pencil" wire:click="$dispatch('load::module', { 'module' : '{{ $row->id }}'})" />
                     @endcan
                     @can('delete', $row)
-                        <livewire:admin.registration.frequencies.delete :module="$row" :key="uniqid('', true)" @deleted="$refresh" />
+                        <livewire:admin.stock.location-module.delete :module="$row" :key="uniqid('', true)" @deleted="$refresh" />
                     @endcan
                 </div>
             @endinteract
         </x-table>
     </x-card>
 
-    <livewire:admin.registration.frequencies.update @updated="$refresh" />
+    <livewire:admin.stock.location-module.update @updated="$refresh" />
 </div>

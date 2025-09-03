@@ -1,10 +1,13 @@
 {
+    "Create New Module": "Criar Novo Módulo",
+    "Update Module: #:id" : "Atualizar Módulo: #:id",
     "By Import": "Por Importação",
     "There were some problems with your input with code :code.": "Houve alguns problemas com sua entrada com o código :code.",
     "Import Location": "Importar Local",
     "By Module": "Por Módulo",
     "Acronym": "Sigla",
     "Details": "Detalhes",
+    "Modules": "Módulos",
     "(and :count more error)": "(e mais :count erro)",
     "(and :count more errors)": "(e mais :count erros)",
     "1 bottle, 10 tablets, etc.": "1 frasco, 10 comprimidos, etc.",

@@ -6,19 +6,18 @@ namespace App\Livewire\Admin\Stock\LocationModule;
 
 use App\Models\LocationModule;
 use App\Services\LocationModuleService;
+use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
 {
     public ?LocationModule $model = null;
 
-    public $name;
-    public $days;
+    public $acronym;
 
     public function setModel(LocationModule $model): void
     {
-        $this->model = $model;
-        $this->name  = $model->name;
-        $this->days  = $model->days;
+        $this->model   = $model;
+        $this->acronym = $model->name;
     }
 
     public function save(): LocationModule
@@ -37,8 +36,12 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'days' => ['required', 'numeric', 'min:0'],
+            'acronym' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::exists(LocationModule::class)->where('tenant_id', tenant()->id),
+            ],
         ];
     }
 }
