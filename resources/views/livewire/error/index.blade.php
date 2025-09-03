@@ -85,9 +85,5 @@
                 </div>
             @endforeach
         </div>
-    @else
-        <div class="rounded-md border border-dashed border-gray-200 p-6 text-center text-sm text-gray-500 dark:border-gray-800 dark:text-gray-400">
-            {{ __('No errors to display.') }}
-        </div>
     @endif
 </div>
