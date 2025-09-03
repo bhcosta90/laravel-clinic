@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('triages', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->foreignId('customer_id')->constrained('customers');
             $table->unsignedTinyInteger('risk_classification');
             $table->string('description');

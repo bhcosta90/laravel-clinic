@@ -16,7 +16,7 @@ final class SkuFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'  => DatabaseSeeder::TenantId,
+            'tenant_id'  => tenant()?->id ?: DatabaseSeeder::TenantId,
             'sku_code'   => $this->faker->unique()->ean8(),
             'gtin'       => $this->faker->unique()->ean13(),
             'created_at' => Carbon::now(),

@@ -19,7 +19,7 @@ final class LocationService extends Service
         ]);
     }
 
-    protected function dataValidate(array $data): array
+    public function dataValidate(array $data): array
     {
         return [
             'code' => [

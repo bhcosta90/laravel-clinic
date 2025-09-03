@@ -19,7 +19,7 @@ final class CatalogFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'     => DatabaseSeeder::TenantId,
+            'tenant_id'     => tenant()?->id ?: DatabaseSeeder::TenantId,
             'name'          => $this->faker->name(),
             'tracking_mode' => $this->faker->randomElement(TrackingMode::cases()),
             'hazardous'     => $this->faker->randomElement(Hazardous::cases()),
