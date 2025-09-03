@@ -27,13 +27,13 @@ final class ErrorService extends Service
             return $callback();
         } catch (ValidationException $e) {
             $data = array_merge($data, [
-                'exception' => get_class($e),
+                'exception' => $e::class,
                 'message'   => $e->getMessage(),
                 'data'      => $e->errors(),
             ]);
         } catch (Exception $e) {
             $data = array_merge($data, [
-                'exception' => get_class($e),
+                'exception' => $e::class,
                 'message'   => $e->getMessage(),
                 'data'      => [
                     'file'     => $e->getFile(),

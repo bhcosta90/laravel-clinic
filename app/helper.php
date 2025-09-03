@@ -17,7 +17,7 @@ if (!function_exists('tenant')) {
         static $currentTenant = null;
 
         if (null === $currentTenant) {
-            $currentTenant = $tenant ?: auth()->user()->tenant;
+            $currentTenant = $tenant instanceof Tenant ? $tenant : auth()->user()->tenant;
         }
 
         return $currentTenant;
