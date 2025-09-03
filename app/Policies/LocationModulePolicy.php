@@ -22,6 +22,11 @@ final class LocationModulePolicy
         return $user->hasPermissionTo($this->getEditPermission());
     }
 
+    public function location(User $user): bool
+    {
+        return $user->hasPermissionTo($this->getEditPermission());
+    }
+
     protected function getViewPermission(): Can
     {
         return Can::StockLocationModuleView;

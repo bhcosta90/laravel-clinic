@@ -18,6 +18,10 @@
 
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
+                    @can('location', $row)
+                        <x-button.circle color="secondary" icon="map-pin" wire:click="$dispatch('load::module', { 'module' : '{{ $row->id }}'})" />
+                    @endcan
+
                     @can('update', $row)
                         <x-button.circle icon="pencil" wire:click="$dispatch('load::module', { 'module' : '{{ $row->id }}'})" />
                     @endcan
