@@ -4,17 +4,15 @@
         <x-slot:header>
             <x-ui.header :title="__('Locations')">
                 <x-slot name="actions">
-                    <div class="flex justify-between gap-x-3">
+                    <div class="flex justify-between gap-x-3 items-center">
                         @can('create', Location::class)
                             <livewire:admin.stock.location.create @created="$refresh" />
                         @endcan
 
-                        @can('export', Location::class)
-                            <x-button :text="__('Export the template')" href="{{ route('admin.v1.api.location.download') }}" color="secondary" outline />
-                        @endcan
-                        @can('import', Location::class)
+                        <x-dropdown icon="bars-3">
+                            <x-dropdown.items :text="__('Export the template')" href="{{ route('admin.v1.api.location.download') }}" />
                             <livewire:admin.stock.location.import />
-                        @endcan
+                        </x-dropdown>
                     </div>
                 </x-slot>
             </x-ui.header>
