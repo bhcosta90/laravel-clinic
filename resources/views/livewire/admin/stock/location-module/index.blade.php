@@ -22,7 +22,7 @@
                         <x-button.circle icon="pencil" wire:click="$dispatch('load::module', { 'module' : '{{ $row->id }}'})" />
                     @endcan
                     @can('delete', $row)
-                        <livewire:admin.stock.location-module.delete :module="$row" :key="uniqid('', true)" @deleted="$refresh" />
+                        <livewire:admin.stock.location-module.delete :location-module="$row" :key="uniqid('', true)" @deleted="$refresh" />
                     @endcan
                 </div>
             @endinteract

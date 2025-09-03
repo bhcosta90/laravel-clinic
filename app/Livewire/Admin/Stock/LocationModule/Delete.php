@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Stock\LocationModule;
 
 use App\Livewire\Traits\Alert;
-use App\Models\Procedure;
+use App\Models\LocationModule;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
@@ -13,7 +13,7 @@ final class Delete extends Component
 {
     use Alert;
 
-    public Procedure $procedure;
+    public LocationModule $locationModule;
 
     public function render(): string
     {
@@ -35,7 +35,7 @@ final class Delete extends Component
 
     public function delete(): void
     {
-        $this->procedure->delete();
+        $this->locationModule->delete();
 
         $this->dispatch('deleted');
 
