@@ -6,15 +6,12 @@ use App\Livewire\Admin\People\Users\Index;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
 beforeEach(function (): void {
-    $this->auth = User::factory()->create();
+    $this->auth = makeUser();
 
-    Auth::login($this->auth);
-
-    User::factory()->count(15)->create();
+    User::factory()->count(15)->create(['tenant_id' => tenant()->id]);
 });
 
 it('renders the users index component', function (): void {
@@ -58,9 +55,8 @@ it('fetches paginated users excluding authenticated user', function (): void {
 });
 
 it('filters users by search term', function (): void {
-    Auth::login(User::factory()->createTenant()->create());
     $user = User::factory()->create([
-        'tenant_id' => auth()->user()->tenant_id,
+        'tenant_id' => tenant()->id,
         'name'      => 'John Unique Searchable',
         'email'     => 'john.unique@example.com',
     ]);
@@ -77,10 +73,10 @@ it('filters users by search term', function (): void {
 });
 
 it('supports searching by email', function (): void {
-    Auth::login(User::factory()->createTenant()->create());
     $user = User::factory()->create([
-        'name'  => 'Unique Search User',
-        'email' => 'unique.searchable@example.com',
+        'tenant_id' => tenant()->id,
+        'name'      => 'Unique Search User',
+        'email'     => 'unique.searchable@example.com',
     ]);
 
     $component = Livewire::test(Index::class)->set('search', 'unique.searchable');
