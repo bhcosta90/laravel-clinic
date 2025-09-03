@@ -64,6 +64,8 @@ abstract class Service
         $this->validateMethod('storeValidate', $data);
         $this->validateMethod('dataValidate', $data);
 
+        unset($data[$keyName]);
+
         return app(RelationshipService::class)->execute($model, $data);
     }
 

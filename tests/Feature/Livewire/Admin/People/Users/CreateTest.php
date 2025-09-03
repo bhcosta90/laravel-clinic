@@ -24,7 +24,7 @@ it('initializes with a new user', function (): void {
 });
 
 it('validates user creation with valid data', function (): void {
-    Auth::login(User::factory()->createTenant()->create());
+    makeUser();
 
     $data = [
         'form.name'                  => 'John Doe',

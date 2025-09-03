@@ -94,6 +94,15 @@ final class User extends Authenticatable implements Auditable
         return $response;
     }
 
+    protected static function booted(): void
+    {
+        self::creating(function ($model): void {
+            if (blank($model->tenant_id) && auth()->check()) {
+                $model->tenant_id = tenant()->id;
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [
