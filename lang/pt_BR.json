@@ -9,6 +9,8 @@
     "A new verification link has been sent to your email address.": "Um novo link de verificação foi enviado para seu endereço de e-mail.",
     "API Token Permissions": "Permissões do Token de API",
     "API Token": "Token de API",
+    "An unexpected error occurred with code :code.": "Ocorreu um erro inesperado com o código :code.",
+    "At": "Em",
     "API Tokens": "Tokens de API",
     "API tokens allow third-party services to authenticate with our application on your behalf.": "Tokens de API permitem que serviços de terceiros autentiquem-se sem precisar utilizar o login e senha do usuário. Pode-se criar um ou mais tokens de API e revogá-los a qualquer momento.",
     "Accept Invitation": "Aceitar Convite",

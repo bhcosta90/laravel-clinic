@@ -35,7 +35,7 @@
                                     <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">{{ $messageError->message }}</p>
                                 @endif
                                 @if($createdAt)
-                                    <p class="mt-1 text-xs text-gray-400">{{ __('At') }}: {{ \Illuminate\Support\Carbon::parse($createdAt)->format('d/m/Y H:i') }}</p>
+                                    <p class="mt-1 text-xs text-gray-400">{{ __('At') }}: {{ now()->localFormat() }}</p>
                                 @endif
                             </div>
                         </div>
