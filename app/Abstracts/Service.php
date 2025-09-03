@@ -51,12 +51,20 @@ abstract class Service
     final public function store(array $data)
     {
         $this->validateMethod('storeValidate', $data);
+        $this->validateMethod('dataValidate', $data);
 
         return app(RelationshipService::class)->execute($this->model(), $data);
     }
 
     final public function update(Model $model, array $data)
     {
+        $keyName  = $model->getKeyName();
+        $keyValue = $model->{$keyName};
+
+        $data[$keyName] = $keyValue;
+        $this->validateMethod('storeValidate', $data);
+        $this->validateMethod('dataValidate', $data);
+
         return app(RelationshipService::class)->execute($model, $data);
     }
 

@@ -19,7 +19,7 @@ final class LocationService extends Service
         ]);
     }
 
-    protected function storeValidate(): array
+    protected function dataValidate(): array
     {
         return [
             'type'             => ['required', Rule::enum(LocationEnum\Type::class)],
