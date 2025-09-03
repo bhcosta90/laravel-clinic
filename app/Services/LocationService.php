@@ -5,7 +5,9 @@ declare(strict_types = 1);
 namespace App\Services;
 
 use App\Abstracts\Service;
+use App\Enums\Models\Location as LocationEnum;
 use App\Models\Location;
+use Illuminate\Validation\Rule;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class LocationService extends Service
@@ -15,6 +17,31 @@ final class LocationService extends Service
         return app(BuilderQuery::class)->execute($this->model(), filters: [
             '(code)' => $code,
         ]);
+    }
+
+    protected function dataValidate(array $data): array
+    {
+        return [
+            'code' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique(Location::class)
+                    ->where('tenant_id', tenant()->id)
+                    ->ignore($data['id'] ?? null),
+            ],
+            'type'             => ['required', Rule::enum(LocationEnum\Type::class)],
+            'aisle'            => ['nullable', 'numeric', 'max:4000000000'],
+            'column'           => ['nullable', 'numeric', 'max:4000000000'],
+            'level'            => ['nullable', 'numeric', 'max:4000000000'],
+            'position'         => ['nullable', 'numeric', 'max:4000000000'],
+            'zone'             => ['required', Rule::enum(LocationEnum\Zone::class)],
+            'max_capacity'     => ['nullable', 'numeric', 'max:4000000000'],
+            'picking_sequence' => ['nullable', 'numeric', 'max:4000000000'],
+            'control'          => ['nullable', Rule::enum(LocationEnum\Control::class)],
+            'temperature'      => ['nullable', 'numeric'],
+            'status'           => ['required', Rule::enum(LocationEnum\Status::class)],
+        ];
     }
 
     protected function model(): Location
