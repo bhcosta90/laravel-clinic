@@ -21,7 +21,7 @@
             </x-ui.header>
         </x-slot:header>
 
-        <livewire:error.index :type="Type::Location" />
+        <livewire:error.index :type="Type::ImportLocation->value" />
 
         <x-table :headers="$this->headers" :$sort :rows="$this->rows" paginate simple-pagination filter loading :quantity="[2, 5, 15, 25]">
             @interact('column_created_at', $row)

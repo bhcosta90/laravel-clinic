@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Error;
 
-use App\Enums\Models\Error\Type;
 use App\Services\ErrorService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,7 +11,7 @@ use Livewire\Component;
 
 final class Index extends Component
 {
-    public Type $type;
+    public int $type;
     public ?Collection $messageErrors = null;
 
     public function mount(): void
@@ -39,7 +38,7 @@ final class Index extends Component
 
     public function getTypeProperty(): int
     {
-        return (int) $this->type->value;
+        return (int) $this->type;
     }
 
     public function getListeners(): array
