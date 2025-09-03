@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Stock\Location;
+namespace App\Livewire\Admin\Stock\Location\Location;
 
 use App\Enums\Queue\Queue;
 use App\Imports\Location\LocationImport;

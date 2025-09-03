@@ -32,19 +32,6 @@
             @interact('column_type', $row)
                 {{ $row->type->label() }}
             @endinteract
-
-            @interact('column_action', $row)
-                <div class="flex gap-1 justify-end">
-                    @can('update', $row)
-                        <x-button.circle icon="pencil" :title="__('Edit location')" wire:click="$dispatch('load::location', { 'location' : '{{ $row->id }}'})" />
-                    @endcan
-                    @can('delete', $row)
-                        <livewire:admin.stock.location.delete :location="$row" :key="uniqid('', true)" @deleted="$refresh" />
-                    @endcan
-                </div>
-            @endinteract
         </x-table>
     </x-card>
-
-    <livewire:admin.stock.location.update @updated="$refresh" />
 </div>
