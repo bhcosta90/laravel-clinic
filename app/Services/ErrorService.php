@@ -15,7 +15,7 @@ final class ErrorService extends Service
 {
     public function registerError(Type $type, Closure $callback): mixed
     {
-        $data = [];
+        $data = compact('type');
 
         try {
             return $callback();

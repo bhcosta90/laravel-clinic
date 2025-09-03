@@ -6,10 +6,13 @@ namespace App\Models;
 
 use App\Abstracts\Model;
 use App\Enums\Models\Error\Type;
+use App\Traits\Models\UserTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Error extends Model
 {
+    use UserTrait;
+
     protected $fillable = [
         'type',
         'message',
