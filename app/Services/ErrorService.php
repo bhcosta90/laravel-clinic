@@ -14,7 +14,7 @@ use Illuminate\Validation\ValidationException;
 
 final class ErrorService extends Service
 {
-    public function removeErrorFromUser(#[CurrentUser] $user)
+    public function removeErrorFromUser(#[CurrentUser] $user): bool
     {
         return $this->model()->where('user_id', $user?->id)->forceDelete();
     }
