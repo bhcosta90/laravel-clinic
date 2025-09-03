@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
 use App\Abstracts\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Error extends Model
+final class Error extends Model
 {
-
     protected $fillable = [
         'type',
         'message',

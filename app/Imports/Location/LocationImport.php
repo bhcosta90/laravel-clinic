@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Imports\Location;
 
 use App\Enums\Models\Location as LocationEnum;
+use App\Services\ErrorService;
 use App\Services\LocationService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
@@ -59,9 +60,9 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
                 'status'       => $status,
             ];
 
-            ($location = $locationService->handle('findByCode', $code)->first())
+            app(ErrorService::class)->handle('registerError', fn () => ($location = $locationService->handle('findByCode', $code)->first())
                 ? $locationService->handle('update', $location, $data)
-                : $locationService->handle('store', $data);
+                : $locationService->handle('store', $data));
         }
     }
 
