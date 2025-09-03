@@ -10,6 +10,7 @@
     "Damage": "Avarias",
     "Export the template" : "Exportar o modelo",
     "Create New Location": "Criar Novo Local",
+    "Manage stock locations and their availability status.": "Gerenciar locais de estoque e seu status de disponibilidade.",
     "Update Location: #:id": "Atualizar Local: #:id",
     "Import started successfully. Wait a few moments to see all locations registered in the system": "Importação iniciada com sucesso. Aguarde alguns instantes para ver todos os locais registrados no sistema",
     "(and :count more error)": "(e mais :count erro)",

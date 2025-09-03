@@ -30,17 +30,17 @@ final class LocationService extends Service
                     ->where('tenant_id', tenant()->id)
                     ->ignore($data['id'] ?? null),
             ],
-            'type'             => ['required', Rule::enum(LocationEnum\Type::class)],
-            'aisle'            => ['nullable', 'numeric', 'max:4000000000'],
-            'column'           => ['nullable', 'numeric', 'max:4000000000'],
-            'level'            => ['nullable', 'numeric', 'max:4000000000'],
-            'position'         => ['nullable', 'numeric', 'max:4000000000'],
-            'zone'             => ['required', Rule::enum(LocationEnum\Zone::class)],
-            'max_capacity'     => ['nullable', 'numeric', 'max:4000000000'],
-            'picking_sequence' => ['nullable', 'numeric', 'max:4000000000'],
-            'control'          => ['nullable', Rule::enum(LocationEnum\Control::class)],
-            'temperature'      => ['nullable', 'numeric'],
-            'status'           => ['required', Rule::enum(LocationEnum\Status::class)],
+            'type'         => ['required', Rule::enum(LocationEnum\Type::class)],
+            'aisle'        => ['nullable', 'numeric', 'max:4000000000'],
+            'column'       => ['nullable', 'numeric', 'max:4000000000'],
+            'level'        => ['nullable', 'numeric', 'max:4000000000'],
+            'position'     => ['nullable', 'numeric', 'max:4000000000'],
+            'zone'         => ['required', Rule::enum(LocationEnum\Zone::class)],
+            'max_capacity' => ['nullable', 'numeric', 'max:4000000000'],
+            'sequence'     => ['nullable', 'numeric', 'max:4000000000'],
+            'control'      => ['nullable', Rule::enum(LocationEnum\Control::class)],
+            'temperature'  => ['nullable', 'numeric'],
+            'status'       => ['required', Rule::enum(LocationEnum\Status::class)],
         ];
     }
 
