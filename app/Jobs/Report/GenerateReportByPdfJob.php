@@ -14,7 +14,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 use Throwable;
@@ -61,8 +60,6 @@ final class GenerateReportByPdfJob implements ShouldQueue
             $report->save();
 
             broadcast($event);
-
-            Log::debug($e);
 
             throw $e;
         }
