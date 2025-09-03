@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Stock\Location\Location;
+namespace App\Livewire\Admin\Stock\Location;
 
 use App\Services\LocationService;
 use Illuminate\Contracts\Pagination\Paginator;

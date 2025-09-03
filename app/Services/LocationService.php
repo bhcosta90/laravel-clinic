@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Abstracts\Service;
 use App\Enums\Models\Location as LocationEnum;
 use App\Models\Location;
+use App\Models\Sector;
 use Illuminate\Validation\Rule;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
@@ -22,6 +23,11 @@ final class LocationService extends Service
     public function dataValidate(array $data): array
     {
         return [
+            'sector_id' => [
+                'required',
+                Rule::exists(Sector::class, 'id')
+                    ->where('tenant_id', tenant()->id),
+            ],
             'code' => [
                 'required',
                 'string',

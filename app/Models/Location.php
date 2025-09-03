@@ -15,6 +15,7 @@ final class Location extends Model
 
     protected $fillable = [
         'location_module_id',
+        'sector_id',
         'code',
         'type',
         'aisle',
