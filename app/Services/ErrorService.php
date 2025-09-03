@@ -16,7 +16,7 @@ final class ErrorService extends Service
 {
     public function removeErrorFromUser(#[CurrentUser] $user): bool
     {
-        return $this->model()->where('user_id', $user?->id)->forceDelete();
+        return (bool) $this->model()->where('user_id', $user?->id)->forceDelete();
     }
 
     public function registerError(Type $type, Closure $callback): mixed
