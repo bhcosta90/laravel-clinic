@@ -188,6 +188,16 @@
                                  :visible="auth()->user()->can('viewAny', Models\Triage::class)"/>
             @endcan
 
+            <x-side-bar.item :text="__('Stock')"
+                             :visible="
+                    auth()->user()->can('viewAny', Models\Location::class)
+                "
+            >
+                <x-side-bar.item :text="__('Location')"
+                                 :route="route('admin.v1.stocks.locations.index')"
+                                 :visible="auth()->user()->can('viewAny', Models\Location::class)"/>
+            </x-side-bar.item>
+
             <x-side-bar.item :text="__('Welcome Page')" icon="arrow-uturn-left" :route="route('welcome')"/>
         </x-side-bar>
     </x-slot:menu>

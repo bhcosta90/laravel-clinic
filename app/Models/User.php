@@ -10,7 +10,6 @@ use App\Observers\ClearCacheObserver;
 use App\Traits\Models\CastsDatesToUserTimezone;
 use App\Traits\Models\HashCode;
 use App\Traits\Models\NodeTrait;
-use App\Traits\Models\TenantTrait;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,7 +30,6 @@ final class User extends Authenticatable implements Auditable
     use Notifiable;
     use \OwenIt\Auditing\Auditable;
     use SoftDeletes;
-    use TenantTrait;
 
     protected $fillable = [
         'tenant_id',
@@ -60,6 +58,11 @@ final class User extends Authenticatable implements Auditable
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
     }
 
     public function permissions(): MorphToMany

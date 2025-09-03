@@ -18,7 +18,7 @@ final class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     #[Override]
     public function register(): void
     {
-        // Telescope::night();
+        Telescope::night();
 
         $this->hideSensitiveRequestDetails();
 

@@ -11,10 +11,13 @@ final class TenantSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::transaction(function (): void {
-            $this->call([
-                PermissionSeeder::class,
-                RoleSeeder::class,
+        $default = [
+            PermissionSeeder::class,
+            RoleSeeder::class,
+        ];
+
+        if (app()->isLocal()) {
+            $default = array_merge($default, [
                 UserSeeder::class,
                 CustomerSeeder::class,
                 ProcedureSeeder::class,
@@ -29,7 +32,12 @@ final class TenantSeeder extends Seeder
                 CommissionSeeder::class,
                 AppointmentSeeder::class,
                 TriageSeeder::class,
+                CatalogSeeder::class,
+                SkuSeeder::class,
+                PackingSeeder::class,
             ]);
-        });
+        }
+
+        DB::transaction(fn () => $this->call($default));
     }
 }

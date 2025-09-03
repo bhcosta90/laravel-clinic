@@ -6,6 +6,7 @@ namespace App\Abstracts;
 
 use App\Traits\Services\HandlesWithDependencies;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 use QuantumTecnology\ControllerBasicsExtension\Services\RelationshipService;
 
@@ -15,7 +16,7 @@ abstract class Service
 
     abstract protected function model();
 
-    abstract protected function search();
+    abstract protected function search(): array;
 
     final public function index(?string $search, ?array $filters = [])
     {
@@ -48,11 +49,21 @@ abstract class Service
 
     final public function store(array $data)
     {
+        $this->validateMethod('storeValidate', $data);
+        $this->validateMethod('dataValidate', $data);
+
         return app(RelationshipService::class)->execute($this->model(), $data);
     }
 
     final public function update(Model $model, array $data)
     {
+        $keyName  = $model->getKeyName();
+        $keyValue = $model->{$keyName};
+
+        $data[$keyName] = $keyValue;
+        $this->validateMethod('storeValidate', $data);
+        $this->validateMethod('dataValidate', $data);
+
         return app(RelationshipService::class)->execute($model, $data);
     }
 
@@ -64,5 +75,13 @@ abstract class Service
     protected function includes(): array
     {
         return [];
+    }
+
+    private function validateMethod(string $method, array &$data): void
+    {
+        if (method_exists($this, $method)) {
+            $rules = $this->handle($method, $data);
+            $data  = Validator::make($data, $rules)->validate();
+        }
     }
 }
