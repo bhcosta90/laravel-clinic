@@ -9,32 +9,33 @@ use App\Enums\Models\Error\Type;
 use App\Models\Error;
 use Closure;
 use Exception;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Validation\ValidationException;
 
 final class ErrorService extends Service
 {
+    public function removeErrorFromUser(#[CurrentUser] $user)
+    {
+        return $this->model()->where('user_id', $user?->id)->forceDelete();
+    }
+
     public function registerError(Type $type, Closure $callback): mixed
     {
-        $data = compact('type');
+        $data = ['type' => $type];
 
         try {
             return $callback();
         } catch (ValidationException $e) {
             $data = array_merge($data, [
-                'message' => $e->getMessage(),
-                'data'    => [
-                    'file'     => $e->getFile(),
-                    'line'     => $e->getLine(),
-                    'trace'    => $e->getTrace(),
-                    'code'     => $e->getCode(),
-                    'previous' => $e->getPrevious()?->getMessage(),
-                    'errors'   => $e->errors(),
-                ],
+                'exception' => get_class($e),
+                'message'   => $e->getMessage(),
+                'data'      => $e->errors(),
             ]);
         } catch (Exception $e) {
             $data = array_merge($data, [
-                'message' => $e->getMessage(),
-                'data'    => [
+                'exception' => get_class($e),
+                'message'   => $e->getMessage(),
+                'data'      => [
                     'file'     => $e->getFile(),
                     'line'     => $e->getLine(),
                     'trace'    => $e->getTrace(),

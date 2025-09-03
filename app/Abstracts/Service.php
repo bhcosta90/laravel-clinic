@@ -7,7 +7,6 @@ namespace App\Abstracts;
 use App\Traits\Services\HandlesWithDependencies;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 use QuantumTecnology\ControllerBasicsExtension\Services\RelationshipService;
 
@@ -78,15 +77,11 @@ abstract class Service
         return [];
     }
 
-    private function validateMethod(string $method, array $data): void
+    private function validateMethod(string $method, array &$data): void
     {
         if (method_exists($this, $method)) {
-            $rules     = $this->handle($method);
-            $validator = Validator::make($data, $rules)->validate();
-
-            if ($validator->fails()) {
-                throw ValidationException::withMessages($validator->errors()->toArray());
-            }
+            $rules = $this->handle($method, $data);
+            $data  = Validator::make($data, $rules)->validate();
         }
     }
 }

@@ -63,7 +63,7 @@ final class Form extends \Livewire\Form
                 'required',
                 'string',
                 'max:255',
-                Rule::exists(Location::class)->where('tenant_id', auth()->user()->tenant_id),
+                Rule::exists(Location::class)->where('tenant_id', tenant()->id),
             ],
             'type'             => ['required', Rule::enum(LocationEnum\Type::class)],
             'aisle'            => ['nullable', 'string', 'max:10'],

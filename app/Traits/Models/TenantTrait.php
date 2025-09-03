@@ -12,14 +12,14 @@ trait TenantTrait
     {
         static::creating(function ($model): void {
             if (blank($model->tenant_id) && auth()->check()) {
-                $model->tenant_id = auth()->user()->tenant_id;
+                $model->tenant_id = tenant()->id;
             }
         });
 
         static::addGlobalScope('byTenant', function (Builder $builder): void {
             $table = $builder->getModel()->getTable();
 
-            if (auth()->check() && $tenantId = auth()->user()->tenant_id) {
+            if (auth()->check() && $tenantId = tenant()->id) {
                 $builder->where($table . '.tenant_id', $tenantId);
             }
         });

@@ -7,10 +7,12 @@ namespace App\Models;
 use App\Abstracts\Model;
 use App\Enums\Models\Error\Type;
 use App\Traits\Models\UserTrait;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Error extends Model
 {
+    use HasUlids;
     use UserTrait;
 
     protected $fillable = [
@@ -19,6 +21,7 @@ final class Error extends Model
         'data',
         'tenant_id',
         'user_id',
+        'exception',
     ];
 
     public function tenant(): BelongsTo

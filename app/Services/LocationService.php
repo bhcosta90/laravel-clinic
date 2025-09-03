@@ -19,19 +19,26 @@ final class LocationService extends Service
         ]);
     }
 
-    protected function dataValidate(): array
+    protected function dataValidate(array $data): array
     {
         return [
+            'code' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique(Location::class)
+                    ->where('tenant_id', tenant()->id)
+                    ->ignore($data['id'] ?? null),
+            ],
             'type'             => ['required', Rule::enum(LocationEnum\Type::class)],
-            'aisle'            => ['nullable', 'string', 'max:10'],
-            'column'           => ['nullable', 'string', 'max:10'],
-            'level'            => ['nullable', 'string', 'max:10'],
-            'position'         => ['nullable', 'string', 'max:10'],
+            'aisle'            => ['nullable', 'numeric', 'max:4000000000'],
+            'column'           => ['nullable', 'numeric', 'max:4000000000'],
+            'level'            => ['nullable', 'numeric', 'max:4000000000'],
+            'position'         => ['nullable', 'numeric', 'max:4000000000'],
             'zone'             => ['required', Rule::enum(LocationEnum\Zone::class)],
-            'location_type'    => ['required', Rule::enum(LocationEnum\Zone::class)],
             'max_capacity'     => ['nullable', 'numeric', 'max:4000000000'],
             'picking_sequence' => ['nullable', 'numeric', 'max:4000000000'],
-            'control'          => ['required', Rule::enum(LocationEnum\Control::class)],
+            'control'          => ['nullable', Rule::enum(LocationEnum\Control::class)],
             'temperature'      => ['nullable', 'numeric'],
             'status'           => ['required', Rule::enum(LocationEnum\Status::class)],
         ];

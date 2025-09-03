@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Stock\Location;
 
 use App\Enums\Queue\Queue;
 use App\Imports\Location\LocationImport;
+use App\Services\ErrorService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
@@ -34,6 +35,7 @@ final class Import extends Component
 
             $import = new LocationImport();
 
+            app(ErrorService::class)->handle('removeErrorFromUser');
             Excel::import($import, $this->file->getRealPath())
                 ->allOnQueue(Queue::Low);
 

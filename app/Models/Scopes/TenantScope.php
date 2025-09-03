@@ -14,7 +14,7 @@ final class TenantScope implements Scope
     {
         $table = $model->getTable();
 
-        if (auth()->check() && $tenantId = auth()->user()->tenant_id) {
+        if (auth()->check() && $tenantId = tenant()->id) {
             $builder->where($table . '.tenant_id', $tenantId);
         }
     }
