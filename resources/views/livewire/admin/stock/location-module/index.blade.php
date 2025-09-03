@@ -19,7 +19,7 @@
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('location', $row)
-                        <x-button.circle color="secondary" icon="map-pin" wire:click="$dispatch('load::module', { 'module' : '{{ $row->id }}'})" />
+                        <x-button.circle :href="route('admin.v1.stocks.location-modules.id.location', $row->hash_code)" color="secondary" icon="map-pin" wire:click="$dispatch('load::module', { 'module' : '{{ $row->id }}'})" />
                     @endcan
 
                     @can('update', $row)
