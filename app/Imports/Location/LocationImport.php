@@ -60,7 +60,7 @@ final class LocationImport implements ShouldQueue, ToCollection, WithChunkReadin
                 'status'       => $status,
             ];
 
-            app(ErrorService::class)->handle('registerError', fn () => ($location = $locationService->handle('findByCode', $code)->first())
+            app(ErrorService::class)->handle('registerError', self::class, fn () => ($location = $locationService->handle('findByCode', $code)->first())
                 ? $locationService->handle('update', $location, $data)
                 : $locationService->handle('store', $data));
         }
