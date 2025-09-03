@@ -16,11 +16,6 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 
 final class LocationImport implements ShouldQueue, ToCollection, WithChunkReading, WithStartRow
 {
-    public function __construct(public string $id)
-    {
-        //
-    }
-
     public function collection(Collection $collection): void
     {
         $locationService = app(LocationService::class);
