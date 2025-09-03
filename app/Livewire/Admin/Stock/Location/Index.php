@@ -11,6 +11,7 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use QuantumTecnology\ControllerBasicsExtension\Enum\QueryBuilderType;
 
 final class Index extends Component
 {
@@ -50,7 +51,7 @@ final class Index extends Component
     public function rows(): Paginator
     {
         return app(LocationService::class)->handle('index', $this->search, [
-            '(is_imported)' => true,
+            '(location_module_id)' => QueryBuilderType::Null,
         ])
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)

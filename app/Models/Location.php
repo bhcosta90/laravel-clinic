@@ -14,6 +14,7 @@ final class Location extends Model
     use HasUlids;
 
     protected $fillable = [
+        'location_module_id',
         'code',
         'type',
         'aisle',
@@ -26,15 +27,13 @@ final class Location extends Model
         'control',
         'temperature',
         'status',
-        'is_imported',
     ];
 
     protected $casts = [
-        'is_imported' => 'boolean',
-        'type'        => EnumLocation\Type::class,
-        'control'     => EnumLocation\Control::class,
-        'zone'        => EnumLocation\Zone::class,
-        'status'      => EnumLocation\Status::class,
+        'type'    => EnumLocation\Type::class,
+        'control' => EnumLocation\Control::class,
+        'zone'    => EnumLocation\Zone::class,
+        'status'  => EnumLocation\Status::class,
     ];
 
     public function tenant(): BelongsTo

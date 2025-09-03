@@ -41,7 +41,6 @@ final class LocationService extends Service
             'control'      => ['nullable', Rule::enum(LocationEnum\Control::class)],
             'temperature'  => ['nullable', 'numeric'],
             'status'       => ['required', Rule::enum(LocationEnum\Status::class)],
-            'is_imported'  => ['nullable', 'boolean'],
         ];
     }
 
