@@ -94,6 +94,7 @@ final class User extends Authenticatable implements Auditable
         return $response;
     }
 
+    #[\Override]
     protected static function booted(): void
     {
         self::creating(function ($model): void {
