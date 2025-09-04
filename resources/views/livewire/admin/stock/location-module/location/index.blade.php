@@ -4,9 +4,20 @@
         <x-slot:header>
             <x-ui.header :title="__('Locations')" :subtitle="__('Manage stock locations and their availability status.')">
                 <x-slot name="actions">
-                    @can('create', LocationModule::class)
-                        <livewire:admin.stock.location-module.location.create :location-module="$locationModule" />
-                    @endcan
+                    <div class="flex items-center gap-x-3">
+                        @can('create', LocationModule::class)
+                            <livewire:admin.stock.location-module.location.create :location-module="$locationModule" />
+                        @endcan
+
+                        <x-dropdown>
+                            <x-slot:action>
+                                <x-button :text="__('Sort column')" x-on:click="show = !show" icon="bars-3" outline color="secondary" />
+                            </x-slot:action>
+                            <x-dropdown.items :text="__('Column by odd and even')" />
+                            <x-dropdown.items :text="__('Column by even and odd')" />
+                            <x-dropdown.items  :text="__('Column sequence')" />
+                        </x-dropdown>
+                    </div>
                 </x-slot>
             </x-ui.header>
         </x-slot:header>
