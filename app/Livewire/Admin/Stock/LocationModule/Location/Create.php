@@ -40,6 +40,21 @@ final class Create extends Component
 
     public function render(): View
     {
+        if (app()->isLocal()) {
+            $this->sector_id        = 1;
+            $this->temperature      = '1';
+            $this->column_initial   = 1;
+            $this->column_final     = 5;
+            $this->level_initial    = 1;
+            $this->level_final      = 5;
+            $this->position_initial = 1;
+            $this->position_final   = 5;
+            $this->type             = 1;
+            $this->control          = 1;
+            $this->zone             = 1;
+            $this->status           = 1;
+        }
+
         return view('livewire.admin.stock.location-module.location.create');
     }
 
