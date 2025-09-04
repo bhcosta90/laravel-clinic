@@ -6,8 +6,9 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Enums\Models\Location as LocationEnum;
-use App\Jobs\Location\CreateNewLocationJob;
+use App\Jobs\Location\CreateBatchLocationJob;
 use App\Models\Location;
+use App\Models\LocationModule;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Override;
@@ -22,22 +23,23 @@ final class LocationService extends Service
         ]);
     }
 
-    public function dataValidate(array $data): array
+    public function dataValidate(): array
     {
         return [
-            'sector_id'    => ['required', 'numeric'],
-            'code'         => ['required', 'string', 'max:255', 'string'],
-            'type'         => ['required', Rule::enum(LocationEnum\Type::class)],
-            'aisle'        => ['nullable', 'string', 'max:4000000000'],
-            'column'       => ['nullable', 'numeric', 'max:4000000000'],
-            'level'        => ['nullable', 'numeric', 'max:4000000000'],
-            'position'     => ['nullable', 'numeric', 'max:4000000000'],
-            'zone'         => ['required', Rule::enum(LocationEnum\Zone::class)],
-            'max_capacity' => ['nullable', 'numeric', 'max:4000000000'],
-            'sequence'     => ['nullable', 'numeric', 'max:4000000000'],
-            'control'      => ['nullable', Rule::enum(LocationEnum\Control::class)],
-            'temperature'  => ['nullable', 'numeric'],
-            'status'       => ['required', Rule::enum(LocationEnum\Status::class)],
+            'location_module_id' => ['required', 'numeric'],
+            'sector_id'          => ['required', 'numeric'],
+            'code'               => ['required', 'string', 'max:255', 'string'],
+            'type'               => ['required', Rule::enum(LocationEnum\Type::class)],
+            'aisle'              => ['nullable', 'string', 'max:4000000000'],
+            'column'             => ['nullable', 'numeric', 'max:4000000000'],
+            'level'              => ['nullable', 'numeric', 'max:4000000000'],
+            'position'           => ['nullable', 'numeric', 'max:4000000000'],
+            'zone'               => ['required', Rule::enum(LocationEnum\Zone::class)],
+            'max_capacity'       => ['nullable', 'numeric', 'max:4000000000'],
+            'sequence'           => ['nullable', 'numeric', 'max:4000000000'],
+            'control'            => ['nullable', Rule::enum(LocationEnum\Control::class)],
+            'temperature'        => ['nullable', 'numeric'],
+            'status'             => ['required', Rule::enum(LocationEnum\Status::class)],
         ];
     }
 
@@ -66,7 +68,7 @@ final class LocationService extends Service
             'level_final'        => ['required', 'numeric', 'min:' . $data['level_initial'], 'max:' . $data['level_max']],
             'position_initial'   => ['required', 'numeric', 'min:0'],
             'position_final'     => ['required', 'numeric', 'min:' . $data['position_initial'], 'max:' . $data['position_max']],
-        ] + Arr::except($this->dataValidate($data), [
+        ] + Arr::except($this->dataValidate(), [
             'code',
             'aisle',
             'column',
@@ -74,30 +76,62 @@ final class LocationService extends Service
             'position',
         ]));
 
-        $total = $this->getLastSequence($data['location_module_id'])->sequence ?? 0;
+        $total = optional($this->getLastSequence($data['location_module_id']))->sequence ?? 0;
 
-        for ($i = $data['column_initial']; $i <= $data['column_final']; ++$i) {
-            for ($j = $data['level_initial']; $j <= $data['level_final']; ++$j) {
-                for ($k = $data['position_initial']; $k <= $data['position_final']; ++$k) {
-                    dispatch(new CreateNewLocationJob(
-                        $data['location_module_id'],
-                        $data['sector_id'],
-                        $data['type'],
-                        $i,
-                        $j,
-                        $k,
-                        $data['zone'],
-                        $data['max_capacity'] ?? null,
-                        $total,
-                        $data['control'] ?? null,
-                        $data['temperature'] ?? null,
-                        $data['status'],
-                    ));
-
-                    $total += $i + $j + $k;
-                }
-            }
+        if ($total > 0) {
+            $total += 10;
         }
+
+        dispatch(new CreateBatchLocationJob($total, $data));
+    }
+
+    public function orderColumn(LocationModule $locationModule, string $type): void
+    {
+        // Build base query for the given module
+        $query = app(BuilderQuery::class)->execute($this->model(), [
+            '(location_module_id)' => $locationModule->id,
+        ]);
+
+        // Normalize type
+        $type = mb_strtolower($type);
+
+        // Define ordering according to requested mode
+        // Also consider level and position as tie-breakers
+        match ($type) {
+            // Evens first (ASC), then odds (DESC within their group)
+            // Use CASE expressions to apply different directions per parity
+            'even_odd' => $query->orderByRaw('(`column` % 2) ASC')
+                ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END ASC')
+                ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END DESC')
+                ->orderBy('level', 'ASC')
+                ->orderBy('position', 'ASC')
+                ->orderBy('id', 'ASC'),
+            // Odds first (ASC), then evens (DESC within their group)
+            'odd_even' => $query->orderByRaw('(`column` % 2) DESC')
+                ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END ASC')
+                ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END DESC')
+                ->orderBy('level', 'ASC')
+                ->orderBy('position', 'ASC')
+                ->orderBy('id', 'ASC'),
+            // Natural ascending sequence by column, then level and position
+            default => $query->orderBy('column', 'ASC')
+                ->orderBy('level', 'ASC')
+                ->orderBy('position', 'ASC')
+                ->orderBy('id', 'ASC'),
+        };
+
+        // Apply the computed order into sequence field so that the picking route is persisted
+        $sequence = 0;
+        $query->chunkById(500, function ($locations) use (&$sequence): void {
+            foreach ($locations as $loc) {
+                // Update only if different to minimize writes
+                if ($loc->sequence !== $sequence) {
+                    $loc->sequence = $sequence;
+                    $loc->save();
+                }
+                ++$sequence;
+            }
+        }, 'id');
     }
 
     #[Override]

@@ -36,4 +36,20 @@ enum Zone: int
             self::LO  => __('Cross-docking or direct shipping zone'),
         };
     }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::A   => __('A'),
+            self::B   => __('B'),
+            self::C   => __('C'),
+            self::FR  => __('FR'),
+            self::CL  => __('CL'),
+            self::QA  => __('QA'),
+            self::RET => __('RET'),
+            self::DAM => __('DAM'),
+            self::STG => __('STG'),
+            self::LO  => __('LO'),
+        };
+    }
 }

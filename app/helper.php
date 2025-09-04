@@ -16,7 +16,7 @@ if (!function_exists('tenant')) {
     {
         static $currentTenant = null;
 
-        if (null === $currentTenant) {
+        if (null === $currentTenant || app()->environment('testing')) {
             $currentTenant = $tenant instanceof Tenant ? $tenant : auth()->user()?->tenant;
         }
 

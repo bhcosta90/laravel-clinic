@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Database\Factories;
 
 use App\Models\Frequency;
-use Database\Seeders\DatabaseSeeder;
+use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -16,7 +16,7 @@ final class FrequencyFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'  => tenant()?->id ?: DatabaseSeeder::TenantId,
+            'tenant_id'  => tenant()?->id ?: Tenant::factory(),
             'name'       => $this->faker->name(),
             'days'       => $this->faker->randomElement([30, 60, 90, 120]),
             'created_at' => Carbon::now(),
