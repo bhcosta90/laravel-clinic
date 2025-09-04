@@ -106,23 +106,18 @@ final class LocationService extends Service
             // Use CASE expressions to apply different directions per parity
             'even_odd' => $query->orderByRaw('(`column` % 2) ASC')
                 ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END ASC')
-                ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END DESC')
-                ->orderBy('level', 'ASC')
-                ->orderBy('position', 'ASC')
-                ->orderBy('id', 'ASC'),
+                ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END DESC'),
             // Odds first (ASC), then evens (DESC within their group)
             'odd_even' => $query->orderByRaw('(`column` % 2) DESC')
                 ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END ASC')
-                ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END DESC')
-                ->orderBy('level', 'ASC')
-                ->orderBy('position', 'ASC')
-                ->orderBy('id', 'ASC'),
+                ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END DESC'),
             // Natural ascending sequence by column, then level and position
-            default => $query->orderBy('column', 'ASC')
-                ->orderBy('level', 'ASC')
-                ->orderBy('position', 'ASC')
-                ->orderBy('id', 'ASC'),
+            default => $query->orderBy('column', 'ASC'),
         };
+
+        $query->orderBy('level', 'ASC')
+            ->orderBy('position', 'ASC')
+            ->orderBy('id', 'ASC');
 
         // Apply the computed order into sequence field so that the picking route is persisted
         $sequence = 0;
