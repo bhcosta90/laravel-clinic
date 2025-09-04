@@ -7,9 +7,9 @@ namespace App\Services;
 use App\Abstracts\Service;
 use App\Enums\Models\Location as LocationEnum;
 use App\Jobs\Location\CreateBatchLocationJob;
+use App\Jobs\LocationModule\OrderColumnJob;
 use App\Models\Location;
 use App\Models\LocationModule;
-use DB;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Override;
@@ -92,49 +92,7 @@ final class LocationService extends Service
             'type' => ['required', 'in:even_odd,odd_even,sequence'],
         ]);
 
-        $query = app(BuilderQuery::class)->execute($this->model(), [
-            '(location_module_id)' => $locationModule->id,
-        ]);
-
-        // Normalize type
-        $type = mb_strtolower($type);
-
-        // Define ordering according to requested mode
-        // Also consider level and position as tie-breakers
-        match ($type) {
-            // Evens first (ASC), then odds (DESC within their group)
-            // Use CASE expressions to apply different directions per parity
-            'even_odd' => $query->orderByRaw('(`column` % 2) ASC')
-                ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END ASC')
-                ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END DESC'),
-            // Odds first (ASC), then evens (DESC within their group)
-            'odd_even' => $query->orderByRaw('(`column` % 2) DESC')
-                ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END ASC')
-                ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END DESC'),
-            // Natural ascending sequence by column, then level and position
-            default => $query->orderBy('column', 'ASC'),
-        };
-
-        $query->orderBy('level', 'ASC')
-            ->orderBy('position', 'ASC')
-            ->orderBy('id', 'ASC');
-
-        // Apply the computed order into sequence field so that the picking route is persisted
-        $sequence = 0;
-        $query->chunkById(500, function ($locations) use (&$sequence): void {
-            foreach ($locations as $loc) {
-                // Update only if different to minimize writes
-                if ($loc->sequence !== $sequence) {
-                    $loc->sequence = $sequence;
-                    $loc->save();
-                }
-                ++$sequence;
-            }
-        }, 'id');
-
-        $query->update([
-            'sequence' => DB::raw('`sequence` * 10'),
-        ]);
+        dispatch(new OrderColumnJob($locationModule->id, $type));
     }
 
     #[Override]

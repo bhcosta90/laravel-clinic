@@ -82,7 +82,7 @@ test('it orders locations by sequence and validates their attributes', function 
 
     assertDatabaseCount(Location::class, 64);
 
-    OrderColumnJob::dispatch($this->locationModule->id, 'sequence');
+    $this->service->handle('orderColumn', $this->locationModule, 'sequence');
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
@@ -130,7 +130,7 @@ test('it orders locations by even and odd, and validates their attributes', func
 
     assertDatabaseCount(Location::class, 96);
 
-    OrderColumnJob::dispatch($this->locationModule->id, 'even_odd');
+    $this->service->handle('orderColumn', $this->locationModule, 'even_odd');
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
