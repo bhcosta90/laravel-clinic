@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Traits\Services;
 
 use Closure;
+use Exception;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use ReflectionMethod;
@@ -25,41 +26,47 @@ trait HandlesWithDependencies
 
         if (count($params) === count($parameters)) {
             foreach ($parameters as $index => $parameter) {
-                $resolved[$parameter->name] = $params[$index];
+                $resolved[$index] = $params[$index];
             }
 
             return app(static::class)->$method(...$resolved);
         }
 
-        foreach ($parameters as $parameter) {
-            foreach ($parameter->getAttributes() as $attribute) {
-                $instance = $attribute->newInstance();
+        try {
+            foreach ($parameters as $key => $parameter) {
+                foreach ($parameter->getAttributes() as $attribute) {
+                    $instance = $attribute->newInstance();
 
-                if (method_exists($instance, 'resolve')) {
-                    $resolved[$parameter->name] = $instance->resolve($instance, $container);
+                    if (method_exists($instance, 'resolve')) {
+                        $resolved[$key] = $instance->resolve($instance, $container);
 
-                    continue 2;
+                        continue 2;
+                    }
                 }
+
+                $type = $parameter->getType();
+
+                if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
+                    $resolved[$key] = $application->make($type->getName());
+
+                    continue;
+                }
+
+                $resolved[$key] = array_shift($params);
             }
-
-            $type = $parameter->getType();
-
-            if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
-                $resolved[$parameter->name] = $application->make($type->getName());
-
-                continue;
-            }
-
-            $resolved[$parameter->name] = array_shift($params);
+        } catch (Exception) {
+            //
         }
+
+        $this->debug('registerError' === $method, fn () => dd($resolved));
 
         return app(static::class)->$method(...$resolved);
     }
 
-    protected function debug(string $method, Closure $params): void
+    protected function debug(bool $method, Closure $closure): void
     {
         if ($method) {
-            $params();
+            $closure();
         }
     }
 }

@@ -19,7 +19,7 @@ final class ErrorService extends Service
         return (bool) $this->model()->where('user_id', $user?->id)->forceDelete();
     }
 
-    public function registerError(Type $type, string | int $code, Closure $callback): mixed
+    public function registerError(#[CurrentUser] $user, Type $type, string | int $code, Closure $callback): mixed
     {
         //        $event = new LocationErrorEvent($user->id, $type);
 
