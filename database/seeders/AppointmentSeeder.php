@@ -22,6 +22,7 @@ final class AppointmentSeeder extends Seeder
         $agreementsId = Agreement::pluck('id')->toArray();
 
         Appointment::factory(100)->make()->each(function ($item) use ($usersId, $proceduresId, $customersId, $agreementsId): void {
+            $item->tenant_id    = DatabaseSeeder::TenantId;
             $item->status       = Status::Scheduled;
             $item->user_id      = collect($usersId)->random();
             $item->procedure_id = collect($proceduresId)->random();

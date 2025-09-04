@@ -22,6 +22,7 @@ final class TransactionSeeder extends Seeder
         $agreements     = Agreement::pluck('id')->toArray();
 
         Transaction::factory(25)->make()->each(function ($item) use ($paymentMethods, $customers, $agreements): void {
+            $item->tenant_id         = DatabaseSeeder::TenantId;
             $item->type              = Type::Incomes;
             $item->payment_method_id = collect($paymentMethods)->random();
             $item->customer_id       = collect($customers)->random();
@@ -30,6 +31,7 @@ final class TransactionSeeder extends Seeder
         });
 
         Transaction::factory(25)->make()->each(function ($item) use ($paymentMethods, $users): void {
+            $item->tenant_id         = DatabaseSeeder::TenantId;
             $item->type              = Type::Expenses;
             $item->payment_method_id = collect($paymentMethods)->random();
             $item->user_id           = collect($users)->random();

@@ -11,6 +11,6 @@ final class LocationModuleSeeder extends Seeder
 {
     public function run(): void
     {
-        LocationModule::factory(25)->create();
+        LocationModule::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
     }
 }

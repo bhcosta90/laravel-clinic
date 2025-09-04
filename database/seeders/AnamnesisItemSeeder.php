@@ -15,6 +15,7 @@ final class AnamnesisItemSeeder extends Seeder
         $groupIds = AnamnesisGroup::pluck('id')->toArray();
 
         AnamnesisItem::factory(25)->make()->each(function ($item) use ($groupIds): void {
+            $item->tenant_id          = DatabaseSeeder::TenantId;
             $item->anamnesis_group_id = collect($groupIds)->random();
             $item->save();
         });

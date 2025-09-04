@@ -11,6 +11,6 @@ final class PaymentMethodSeeder extends Seeder
 {
     public function run(): void
     {
-        PaymentMethod::factory(5)->create();
+        PaymentMethod::factory(5)->create(['tenant_id' => DatabaseSeeder::TenantId]);
     }
 }

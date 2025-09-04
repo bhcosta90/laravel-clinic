@@ -14,6 +14,7 @@ final class TriageSeeder extends Seeder
     {
         $customers = Customer::pluck('id')->toArray();
         Triage::factory(25)->make()->each(function ($item) use ($customers): void {
+            $item->tenant_id   = DatabaseSeeder::TenantId;
             $item->customer_id = collect($customers)->random();
             $item->save();
         });

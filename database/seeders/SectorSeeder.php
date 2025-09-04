@@ -11,6 +11,6 @@ final class SectorSeeder extends Seeder
 {
     public function run(): void
     {
-        Sector::factory(25)->create();
+        Sector::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
     }
 }

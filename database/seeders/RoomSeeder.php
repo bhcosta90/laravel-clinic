@@ -11,6 +11,6 @@ final class RoomSeeder extends Seeder
 {
     public function run(): void
     {
-        Room::factory(25)->create();
+        Room::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
     }
 }
