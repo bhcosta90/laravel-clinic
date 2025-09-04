@@ -6,7 +6,7 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Enums\Models\Location as LocationEnum;
-use App\Jobs\Location\CreateNewLocationJob;
+use App\Jobs\Location\CreateBatchLocationJob;
 use App\Models\Location;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
@@ -77,28 +77,7 @@ final class LocationService extends Service
 
         $total = ($this->getLastSequence($data['location_module_id'])->sequence ?? 0) + 1;
 
-        for ($i = $data['column_initial']; $i <= $data['column_final']; ++$i) {
-            for ($j = $data['level_initial']; $j <= $data['level_final']; ++$j) {
-                for ($k = $data['position_initial']; $k <= $data['position_final']; ++$k) {
-                    dispatch(new CreateNewLocationJob(
-                        $data['sector_id'],
-                        $data['location_module_id'],
-                        $data['type'],
-                        (int) $i,
-                        (int) $j,
-                        (int) $k,
-                        $data['zone'],
-                        $data['max_capacity'] ?? null,
-                        $total,
-                        $data['control'] ?? null,
-                        $data['temperature'] ?? null,
-                        $data['status'],
-                    ));
-
-                    $total += $i + $j + $k;
-                }
-            }
-        }
+        dispatch(new CreateBatchLocationJob($total, $data));
     }
 
     #[Override]
