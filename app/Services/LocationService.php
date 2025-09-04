@@ -8,6 +8,7 @@ use App\Abstracts\Service;
 use App\Enums\Models\Location as LocationEnum;
 use App\Jobs\Location\CreateBatchLocationJob;
 use App\Models\Location;
+use App\Models\LocationModule;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Override;
@@ -82,6 +83,13 @@ final class LocationService extends Service
         }
 
         dispatch(new CreateBatchLocationJob($total, $data));
+    }
+
+    public function orderColumn(LocationModule $locationModule, string $type): void
+    {
+        app(BuilderQuery::class)->execute($this->model(), [
+            '(location_module_id)' => $locationModule->id,
+        ])->orderBy('column');
     }
 
     #[Override]
