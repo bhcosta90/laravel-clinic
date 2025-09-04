@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Enums\Models\Error\Type;
+use App\Events\Location\LocationErrorEvent;
 use App\Models\Error;
 use Closure;
 use Exception;
@@ -21,7 +22,7 @@ final class ErrorService extends Service
 
     public function registerError(#[CurrentUser] $user, Type $type, string | int $code, Closure $callback): mixed
     {
-        //        $event = new LocationErrorEvent($user->id, $type);
+        $event = new LocationErrorEvent($user->id, $type);
 
         $data = ['type' => $type, 'code' => $code];
 
@@ -33,7 +34,7 @@ final class ErrorService extends Service
                 'message'   => $e->getMessage(),
                 'data'      => $e->errors(),
             ]);
-            //            broadcast($event);
+            broadcast($event);
         } catch (Exception $e) {
             $data = array_merge($data, [
                 'exception' => $e::class,
@@ -46,7 +47,7 @@ final class ErrorService extends Service
                     'previous' => $e->getPrevious()?->getMessage(),
                 ],
             ]);
-            //            broadcast($event);
+            broadcast($event);
         }
 
         if (filled($data)) {
