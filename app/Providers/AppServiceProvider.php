@@ -8,6 +8,7 @@ use App\Http\Middleware\ImpersonateMiddleware;
 use Carbon\Carbon;
 use Illuminate\Queue\Queue;
 use Illuminate\Queue\QueueManager;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -35,16 +36,18 @@ final class AppServiceProvider extends ServiceProvider
     private function configureJob(): void
     {
         Queue::createPayloadUsing(function (): array {
-            $customer = auth()->user()->id;
+            $userId = ($user = auth()->user())->id;
 
             return [
-                'user_id' => $customer,
+                'tenant_id' => $user->tenant_id,
+                'user_id'   => $userId,
             ];
         });
 
         app(QueueManager::class)->before(function ($event): void {
-            $payload = $event->job?->payload();
-            $userId  = $payload['user_id'] ?? null;
+            $payload  = $event->job?->payload();
+            $userId   = $payload['user_id'] ?? null;
+            $tenantId = $payload['tenant_id'] ?? null;
 
             if (isset($payload['data']['command']) && blank($userId)) {
                 $command = unserialize($payload['data']['command']);
@@ -52,9 +55,15 @@ final class AppServiceProvider extends ServiceProvider
                 if (isset($command->user_id)) {
                     $userId = $command->user_id;
                 }
+
+                if (isset($command->tenant_id)) {
+                    $tenantId = $command->tenant_id;
+                }
             }
 
             auth()->onceUsingId($userId);
+            Log::debug('User ID: ' . $userId);
+            Log::debug('Job Tenant ID: ' . $tenantId);
         });
     }
 }
