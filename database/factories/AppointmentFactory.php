@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Database\Factories;
 
 use App\Models\Appointment;
-use Database\Seeders\DatabaseSeeder;
+use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -16,7 +16,7 @@ final class AppointmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'            => tenant()?->id ?: DatabaseSeeder::TenantId,
+            'tenant_id'            => tenant()?->id ?: Tenant::factory(),
             'date'                 => $this->faker->dateTimeBetween(now()->firstOfMonth(), now()->endOfMonth()),
             'is_return'            => $this->faker->boolean(),
             'exam_withdrawal_date' => $this->faker->sentence(2),

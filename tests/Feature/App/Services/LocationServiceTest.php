@@ -66,7 +66,7 @@ test('it stores locations with buck and validates database state', function (): 
     ]);
 })->skip();
 
-test('it orders locations by sequence and validates their attributes', function () {
+test('it orders locations by sequence and validates their attributes', function (): void {
     $data = [
         'column_initial'   => 0,
         'column_final'     => 3,
@@ -111,7 +111,7 @@ test('it orders locations by sequence and validates their attributes', function 
         ->and($model->position)->toBe(1);
 })->skip();
 
-test('it orders locations by even and odd, and validates their attributes', function () {
+test('it orders locations by even and odd, and validates their attributes', function (): void {
     $data = [
         'column_initial'   => 0,
         'column_final'     => 5,
@@ -181,7 +181,7 @@ test('it orders locations by even and odd, and validates their attributes', func
         ->and($model->position)->toBe(3);
 })->skip();
 
-test('it orders locations by odd and even, and validates their attributes', function () {
+test('it orders locations by odd and even, and validates their attributes', function (): void {
     $data = [
         'column_initial'   => 0,
         'column_final'     => 5,
