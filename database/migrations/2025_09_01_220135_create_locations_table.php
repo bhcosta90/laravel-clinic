@@ -18,9 +18,9 @@ return new class() extends Migration {
             $table->unsignedTinyInteger('type');
 
             $table->string('aisle')->nullable(); // row/corridor
-            $table->string('column')->nullable(); // rack/module
-            $table->string('level')->nullable(); // level/shelf
-            $table->string('position')->nullable(); // depth/slot
+            $table->unsignedBigInteger('column')->nullable(); // rack/module
+            $table->unsignedBigInteger('level')->nullable(); // level/shelf
+            $table->unsignedBigInteger('position')->nullable(); // depth/slot
 
             // Zone (picking zone, receiving, shipping, quarantine, etc.)
             $table->unsignedTinyInteger('zone')->nullable();
