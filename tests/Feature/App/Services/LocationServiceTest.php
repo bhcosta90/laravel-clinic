@@ -5,7 +5,6 @@ declare(strict_types = 1);
 use App\Enums\Models\Location\Status;
 use App\Enums\Models\Location\Type;
 use App\Enums\Models\Location\Zone;
-use App\Jobs\LocationModule\OrderColumnJob;
 use App\Livewire\Admin\Stock\LocationModule\Location\Create;
 use App\Models\Location;
 use App\Models\LocationModule;
@@ -200,7 +199,7 @@ test('it orders locations by odd and even, and validates their attributes', func
 
     assertDatabaseCount(Location::class, 96);
 
-    OrderColumnJob::dispatch($this->locationModule->id, 'odd_even');
+    $this->service->handle('orderColumn', $this->locationModule, 'odd_even');
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
