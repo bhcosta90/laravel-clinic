@@ -5,9 +5,7 @@ declare(strict_types = 1);
 use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\Procedure;
-use App\Models\Tenant;
 use App\Models\User;
-use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,10 +17,7 @@ pest()->extend(Tests\TestCase::class)
 
 function makeUser(): User
 {
-    $tenant = Tenant::factory()->create([
-        'id' => DatabaseSeeder::TenantId,
-    ]);
-    $user = User::factory()->create(['is_employee' => true, 'tenant_id' => $tenant->id]);
+    $user = User::factory()->createTenant()->create(['is_employee' => true]);
     Auth::login($user);
 
     return $user;
