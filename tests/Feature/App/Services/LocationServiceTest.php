@@ -2,6 +2,7 @@
 
 declare(strict_types = 1);
 
+use App\Enums\Models\Location\Status;
 use App\Enums\Models\Location\Type;
 use App\Enums\Models\Location\Zone;
 use App\Models\Location;
@@ -18,14 +19,15 @@ beforeEach(function () {
     $this->data    = [
         'location_module_id' => ($this->locationModule = LocationModule::factory()->create())->id,
         'sector_id'          => Sector::factory()->create()->id,
-        'type'               => Type::Picking,
-        'zone'               => Zone::A,
+        'type'               => Type::Picking->value,
+        'zone'               => Zone::A->value,
         'column_initial'     => 0,
         'column_final'       => 1,
         'level_initial'      => 0,
         'level_final'        => 1,
         'position_initial'   => 0,
         'position_final'     => 1,
+        'status'             => Status::Enabled->value,
     ];
 });
 

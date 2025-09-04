@@ -84,7 +84,6 @@ final class LocationService extends Service
             'position_initial' => ['required', 'numeric', 'min:0'],
             'position_final'   => ['required', 'numeric', 'min:' . $data['position_initial'], 'max:' . $data['position_max']],
         ] + Arr::except($this->dataValidate($data), [
-            'status',
             'code',
             'aisle',
             'column',
@@ -100,16 +99,16 @@ final class LocationService extends Service
                     dispatch(new CreateNewLocationJob(
                         $data['location_module_id'],
                         $data['sector_id'],
-                        $data['type']->value,
+                        $data['type'],
                         $i,
                         $j,
                         $k,
-                        $data['zone']->value,
+                        $data['zone'],
                         $data['max_capacity'] ?? null,
                         $total,
                         $data['control'] ?? null,
                         $data['temperature'] ?? null,
-                        LocationEnum\Status::Enabled->value,
+                        $data['status'],
                     ));
 
                     $total += $i + $j + $k;
