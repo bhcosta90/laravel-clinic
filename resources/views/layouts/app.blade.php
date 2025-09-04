@@ -204,7 +204,7 @@
                                      :visible="auth()->user()->can('viewAny', Models\Location::class)"/>
 
                     <x-side-bar.item :text="__('By Module')"
-                                     :route="route('admin.v1.stocks.location-modules.index')"
+                                     :route="route('admin.v1.stocks.locations.modules.index')"
                                      :visible="auth()->user()->can('viewAny', Models\LocationModule::class)"/>
                 </x-side-bar.item>
             </x-side-bar.item>
