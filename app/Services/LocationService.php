@@ -87,7 +87,10 @@ final class LocationService extends Service
 
     public function orderColumn(LocationModule $locationModule, string $type): void
     {
-        // Build base query for the given module
+        $this->executeValidate(['type' => $type], [
+            'type' => ['required', 'in:even_odd,odd_even,sequence'],
+        ]);
+
         $query = app(BuilderQuery::class)->execute($this->model(), [
             '(location_module_id)' => $locationModule->id,
         ]);
