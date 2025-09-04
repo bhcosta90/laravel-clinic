@@ -53,7 +53,7 @@ trait HandlesWithDependencies
                 // tenta ver se o chamador passou manualmente uma instância desse tipo
                 $matchIndex = array_search(
                     true,
-                    array_map(fn ($p) => is_object($p) && $p instanceof $className, $paramsQueue),
+                    array_map(fn ($p): bool => $p instanceof $className, $paramsQueue),
                     true
                 );
 

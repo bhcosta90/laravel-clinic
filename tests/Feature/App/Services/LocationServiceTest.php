@@ -12,7 +12,7 @@ use App\Models\Sector;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 
-beforeEach(function () {
+beforeEach(function (): void {
     makeUser();
 
     $this->service = app(App\Services\LocationService::class);
@@ -31,7 +31,7 @@ beforeEach(function () {
     ];
 });
 
-test('it stores locations with buck and validates database state', function () {
+test('it stores locations with buck and validates database state', function (): void {
     $this->service->handle('storeWithBuck', $this->data);
     assertDatabaseCount(Location::class, 8);
 

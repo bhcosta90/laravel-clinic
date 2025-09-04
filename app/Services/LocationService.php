@@ -43,9 +43,9 @@ final class LocationService extends Service
 
     public function storeWithBuck(array $data): void
     {
-        $data['column_initial']   = $data['column_initial'] ?? 1;
-        $data['level_initial']    = $data['level_initial'] ?? 1;
-        $data['position_initial'] = $data['position_initial'] ?? 1;
+        $data['column_initial'] ??= 1;
+        $data['level_initial'] ??= 1;
+        $data['position_initial'] ??= 1;
 
         $limits = [
             'column'   => $data['column_initial'],
@@ -100,13 +100,6 @@ final class LocationService extends Service
         }
     }
 
-    protected function getLastSequence(int $locationModuleId): ?Location
-    {
-        return app(BuilderQuery::class)->execute($this->model(), [
-            '(location_module_id)' => $locationModuleId,
-        ])->orderBy('sequence', 'desc')->first();
-    }
-
     #[Override]
     protected function includes(): array
     {
@@ -123,5 +116,12 @@ final class LocationService extends Service
     protected function search(): array
     {
         return ['name'];
+    }
+
+    private function getLastSequence(int $locationModuleId): ?Location
+    {
+        return app(BuilderQuery::class)->execute($this->model(), [
+            '(location_module_id)' => $locationModuleId,
+        ])->orderBy('sequence', 'desc')->first();
     }
 }
