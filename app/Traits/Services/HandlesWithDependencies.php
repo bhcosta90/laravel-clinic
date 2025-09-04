@@ -85,7 +85,7 @@ trait HandlesWithDependencies
             }
 
             // 5) If you arrived here, we have no value to pass - error
-            throw new InvalidArgumentException("Não foi possível resolver o parâmetro \${$name} no método {$method} de " . static::class);
+            throw new InvalidArgumentException("It was not possible to resolve the parameter \${$name} no method {$method} of " . static::class);
         }
 
         return $bindClass->$method(...$resolved);
