@@ -101,9 +101,9 @@ final class LocationService extends Service
             case 'even_odd':
                 // Evens first (ASC), then odds (DESC within their group)
                 // Use CASE expressions to apply different directions per parity
-                $query->orderByRaw('(column % 2) ASC')
-                    ->orderByRaw('CASE WHEN (column % 2) = 0 THEN column END ASC')
-                    ->orderByRaw('CASE WHEN (column % 2) = 1 THEN column END DESC')
+                $query->orderByRaw('(`column` % 2) ASC')
+                    ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END ASC')
+                    ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END DESC')
                     ->orderBy('level', 'ASC')
                     ->orderBy('position', 'ASC')
                     ->orderBy('id', 'ASC');
@@ -112,9 +112,9 @@ final class LocationService extends Service
 
             case 'odd_even':
                 // Odds first (ASC), then evens (DESC within their group)
-                $query->orderByRaw('(column % 2) DESC')
-                    ->orderByRaw('CASE WHEN (column % 2) = 1 THEN column END ASC')
-                    ->orderByRaw('CASE WHEN (column % 2) = 0 THEN column END DESC')
+                $query->orderByRaw('(`column` % 2) DESC')
+                    ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END ASC')
+                    ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END DESC')
                     ->orderBy('level', 'ASC')
                     ->orderBy('position', 'ASC')
                     ->orderBy('id', 'ASC');

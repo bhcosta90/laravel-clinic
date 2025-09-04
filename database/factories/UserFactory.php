@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Models\Tenant;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -31,13 +30,6 @@ final class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
-        ]);
-    }
-
-    public function createTenant(): self
-    {
-        return $this->state(fn (array $attributes): array => [
-            'tenant_id' => Tenant::factory()->create()->id,
         ]);
     }
 }
