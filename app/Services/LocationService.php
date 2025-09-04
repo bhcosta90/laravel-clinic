@@ -9,6 +9,7 @@ use App\Enums\Models\Location as LocationEnum;
 use App\Jobs\Location\CreateBatchLocationJob;
 use App\Models\Location;
 use App\Models\LocationModule;
+use DB;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Override;
@@ -135,6 +136,10 @@ final class LocationService extends Service
                 ++$sequence;
             }
         }, 'id');
+
+        $query->update([
+            'sequence' => DB::raw('`sequence` * 10'),
+        ]);
     }
 
     #[Override]
