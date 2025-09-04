@@ -23,6 +23,8 @@ final class Create extends Component
     {
         $this->dispatch('created');
 
+        $this->resetExcept();
+
         $this->success();
     }
 }
