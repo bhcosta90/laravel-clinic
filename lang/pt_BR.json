@@ -92,6 +92,7 @@
     "Batch validity and serial number": "Validade do lote e número de série",
     "Medicines with expiry date, cosmetics, electronics, high-value equipment.": "Medicamentos com data de validade, cosméticos, eletrônicos, equipamentos de alto valor.",
     "Location can only store products with batch and expiry date registered, and also require a serial number.": "Localização só pode armazenar produtos com lote e data de validade registrados, e também exigir número de série.",
+    "Register the address blocks": "Registrar os blocos de endereço",
     "Control Type": "Tipo de controle",
     "Batch validity": "Validade do lote",
     "Serial number": "Número de série",

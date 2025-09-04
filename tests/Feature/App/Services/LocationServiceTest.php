@@ -46,10 +46,11 @@ test('it stores locations with buck and validates database state', function (): 
 
     assertDatabaseCount(Location::class, 9);
     assertDatabaseHas(Location::class, [
-        'aisle'    => $this->locationModule->acronym,
-        'column'   => 2,
-        'level'    => 0,
-        'position' => 0,
-        'sequence' => 900,
+        'location_module_id' => $this->locationModule->id,
+        'aisle'              => $this->locationModule->acronym,
+        'column'             => 2,
+        'level'              => 0,
+        'position'           => 0,
+        'sequence'           => 900,
     ]);
 });

@@ -5,7 +5,7 @@
             <x-ui.header :title="__('Locations')" :subtitle="__('Manage stock locations and their availability status.')">
                 <x-slot name="actions">
                     @can('create', LocationModule::class)
-                        <livewire:admin.stock.location-module.location.create />
+                        <livewire:admin.stock.location-module.location.create :location-module="$locationModule" />
                     @endcan
                 </x-slot>
             </x-ui.header>

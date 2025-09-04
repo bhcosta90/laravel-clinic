@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace App\Jobs\Location;
 
 use App\Enums\Models\Location\Control;
-use App\Enums\Models\Location\Status;
 use App\Enums\Models\Location\Type;
 use App\Enums\Models\Location\Zone;
 use App\Models\LocationModule;
@@ -16,6 +15,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Arr;
 
 final class CreateNewLocationJob implements ShouldQueue
 {
@@ -35,7 +35,7 @@ final class CreateNewLocationJob implements ShouldQueue
         public ?int $max_capacity,
         public int $sequence,
         public ?int $control,
-        public ?int $temperature,
+        public ?string $temperature,
         public int $status,
     ) {
     }
@@ -53,20 +53,40 @@ final class CreateNewLocationJob implements ShouldQueue
             str(__('Position'))->substr(0, 1)->upper() . str($this->position)->padLeft(3, '0'),
         );
 
-        app(LocationService::class)->handle('store', [
-            'sector_id'    => $sector->id,
-            'code'         => $code,
-            'type'         => Type::from($this->type),
-            'aisle'        => $locationModule->acronym,
-            'column'       => $this->column,
-            'level'        => $this->level,
-            'position'     => $this->position,
-            'zone'         => Zone::from($this->zone),
-            'max_capacity' => $this->max_capacity,
-            'sequence'     => $this->sequence * 10,
-            'control'      => when($this->control, fn () => Control::from($this->control)),
-            'temperature'  => null,
-            'status'       => Status::Enabled,
+        $dataStore = [
+            'location_module_id' => $locationModule->id,
+            'sector_id'          => $sector->id,
+            'code'               => $code,
+            'type'               => Type::from($this->type),
+            'aisle'              => $locationModule->acronym,
+            'column'             => $this->column,
+            'level'              => $this->level,
+            'position'           => $this->position,
+            'zone'               => Zone::from($this->zone),
+            'max_capacity'       => $this->max_capacity,
+            'sequence'           => $this->sequence + 10,
+            'control'            => when($this->control, fn () => Control::from($this->control)),
+            'temperature'        => $this->temperature,
+            'status'             => $this->status,
+        ];
+
+        $location = app(LocationService::class)->handle('findByCode', $code)->first();
+
+        $dataUpdated = Arr::only($dataStore, [
+            'sector_id',
+            'code',
+            'location_module_id',
+            'type',
+            'zone',
+            'max_capacity',
+            'sequence',
+            'control',
+            'temperature',
+            'status',
         ]);
+
+        $location
+            ? app(LocationService::class)->handle('update', $location, $dataUpdated)
+            : app(LocationService::class)->handle('store', $dataStore);
     }
 }

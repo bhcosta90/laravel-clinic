@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers\Admin\V1\Api;
 
-use App\Models\Customer;
-use App\Services\CustomerService;
+use App\Models\Sector;
+use App\Services\SectorService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ final class SectorController
         $search = $request->get('search');
         $field  = $request->get('field', 'name');
 
-        return app(CustomerService::class)
+        return app(SectorService::class)
             ->handle('index', null, [
                 $field . ',like' => $search,
             ])
@@ -24,7 +24,7 @@ final class SectorController
             ->when($request->get('selected'), fn (Builder $query) => $query->whereIn('id', json_decode((string) $request->get('selected'))))
             ->orderBy('name')
             ->get()
-            ->map(fn (Customer $user): array => [
+            ->map(fn (Sector $user): array => [
                 'label' => $user->{$field},
                 'value' => $user->id,
             ]);

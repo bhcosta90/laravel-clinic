@@ -22,22 +22,23 @@ final class LocationService extends Service
         ]);
     }
 
-    public function dataValidate(array $data): array
+    public function dataValidate(): array
     {
         return [
-            'sector_id'    => ['required', 'numeric'],
-            'code'         => ['required', 'string', 'max:255', 'string'],
-            'type'         => ['required', Rule::enum(LocationEnum\Type::class)],
-            'aisle'        => ['nullable', 'string', 'max:4000000000'],
-            'column'       => ['nullable', 'numeric', 'max:4000000000'],
-            'level'        => ['nullable', 'numeric', 'max:4000000000'],
-            'position'     => ['nullable', 'numeric', 'max:4000000000'],
-            'zone'         => ['required', Rule::enum(LocationEnum\Zone::class)],
-            'max_capacity' => ['nullable', 'numeric', 'max:4000000000'],
-            'sequence'     => ['nullable', 'numeric', 'max:4000000000'],
-            'control'      => ['nullable', Rule::enum(LocationEnum\Control::class)],
-            'temperature'  => ['nullable', 'numeric'],
-            'status'       => ['required', Rule::enum(LocationEnum\Status::class)],
+            'location_module_id' => ['required', 'numeric'],
+            'sector_id'          => ['required', 'numeric'],
+            'code'               => ['required', 'string', 'max:255', 'string'],
+            'type'               => ['required', Rule::enum(LocationEnum\Type::class)],
+            'aisle'              => ['nullable', 'string', 'max:4000000000'],
+            'column'             => ['nullable', 'numeric', 'max:4000000000'],
+            'level'              => ['nullable', 'numeric', 'max:4000000000'],
+            'position'           => ['nullable', 'numeric', 'max:4000000000'],
+            'zone'               => ['required', Rule::enum(LocationEnum\Zone::class)],
+            'max_capacity'       => ['nullable', 'numeric', 'max:4000000000'],
+            'sequence'           => ['nullable', 'numeric', 'max:4000000000'],
+            'control'            => ['nullable', Rule::enum(LocationEnum\Control::class)],
+            'temperature'        => ['nullable', 'numeric'],
+            'status'             => ['required', Rule::enum(LocationEnum\Status::class)],
         ];
     }
 
@@ -66,7 +67,7 @@ final class LocationService extends Service
             'level_final'        => ['required', 'numeric', 'min:' . $data['level_initial'], 'max:' . $data['level_max']],
             'position_initial'   => ['required', 'numeric', 'min:0'],
             'position_final'     => ['required', 'numeric', 'min:' . $data['position_initial'], 'max:' . $data['position_max']],
-        ] + Arr::except($this->dataValidate($data), [
+        ] + Arr::except($this->dataValidate(), [
             'code',
             'aisle',
             'column',
@@ -74,18 +75,18 @@ final class LocationService extends Service
             'position',
         ]));
 
-        $total = $this->getLastSequence($data['location_module_id'])->sequence ?? 0;
+        $total = ($this->getLastSequence($data['location_module_id'])->sequence ?? 0) + 1;
 
         for ($i = $data['column_initial']; $i <= $data['column_final']; ++$i) {
             for ($j = $data['level_initial']; $j <= $data['level_final']; ++$j) {
                 for ($k = $data['position_initial']; $k <= $data['position_final']; ++$k) {
                     dispatch(new CreateNewLocationJob(
-                        $data['location_module_id'],
                         $data['sector_id'],
+                        $data['location_module_id'],
                         $data['type'],
-                        $i,
-                        $j,
-                        $k,
+                        (int) $i,
+                        (int) $j,
+                        (int) $k,
                         $data['zone'],
                         $data['max_capacity'] ?? null,
                         $total,
