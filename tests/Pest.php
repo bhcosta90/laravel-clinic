@@ -37,3 +37,29 @@ function makeAppointment(User $user, array $data = []): Appointment
         'is_paid'      => null,
     ]);
 }
+
+function dumpTable(string $table, array $fields = ['*']): void
+{
+    dump([
+        $table,
+        Illuminate\Support\Facades\DB::table($table)->get($fields)->toArray(),
+    ]);
+}
+
+function ddTable(string $table, array $fields = ['*']): void
+{
+    dd([
+        $table,
+        Illuminate\Support\Facades\DB::table($table)->get($fields)->toArray(),
+    ]);
+}
+
+function enableQuery(): void
+{
+    DB::listen(function ($query): void {
+        dump([
+            $query->sql,
+            $query->bindings,
+        ]);
+    });
+}

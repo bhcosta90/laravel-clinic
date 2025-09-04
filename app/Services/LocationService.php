@@ -6,8 +6,11 @@ namespace App\Services;
 
 use App\Abstracts\Service;
 use App\Enums\Models\Location as LocationEnum;
+use App\Jobs\Location\CreateNewLocationJob;
 use App\Models\Location;
+use App\Models\LocationModule;
 use App\Models\Sector;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Override;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
@@ -38,7 +41,7 @@ final class LocationService extends Service
                     ->ignore($data['id'] ?? null),
             ],
             'type'         => ['required', Rule::enum(LocationEnum\Type::class)],
-            'aisle'        => ['nullable', 'numeric', 'max:4000000000'],
+            'aisle'        => ['nullable', 'string', 'max:4000000000'],
             'column'       => ['nullable', 'numeric', 'max:4000000000'],
             'level'        => ['nullable', 'numeric', 'max:4000000000'],
             'position'     => ['nullable', 'numeric', 'max:4000000000'],
@@ -49,6 +52,77 @@ final class LocationService extends Service
             'temperature'  => ['nullable', 'numeric'],
             'status'       => ['required', Rule::enum(LocationEnum\Status::class)],
         ];
+    }
+
+    public function storeWithBuck(array $data): void
+    {
+        $data['column_initial']   = $data['column_initial'] ?? 1;
+        $data['level_initial']    = $data['level_initial'] ?? 1;
+        $data['position_initial'] = $data['position_initial'] ?? 1;
+
+        $limits = [
+            'column'   => $data['column_initial'],
+            'level'    => $data['level_initial'],
+            'position' => $data['position_initial'],
+        ];
+
+        foreach ($limits as $key => $initial) {
+            $maxKey        = $key . '_max';
+            $data[$maxKey] = min($initial + 25, 4000000000);
+        }
+
+        $this->executeValidate($data, [
+            'location_module_id' => [
+                'required',
+                Rule::exists(LocationModule::class, 'id')
+                    ->where('tenant_id', tenant()->id),
+            ],
+            'column_initial'   => ['required', 'numeric', 'min:0'],
+            'column_final'     => ['required', 'numeric', 'min:' . $data['column_initial'], 'max:' . $data['column_max']],
+            'level_initial'    => ['required', 'numeric', 'min:0'],
+            'level_final'      => ['required', 'numeric', 'min:' . $data['level_initial'], 'max:' . $data['level_max']],
+            'position_initial' => ['required', 'numeric', 'min:0'],
+            'position_final'   => ['required', 'numeric', 'min:' . $data['position_initial'], 'max:' . $data['position_max']],
+        ] + Arr::except($this->dataValidate($data), [
+            'status',
+            'code',
+            'aisle',
+            'column',
+            'level',
+            'position',
+        ]));
+
+        $total = $this->getLastSequence($data['location_module_id'])->sequence ?? 0;
+
+        for ($i = $data['column_initial']; $i <= $data['column_final']; ++$i) {
+            for ($j = $data['level_initial']; $j <= $data['level_final']; ++$j) {
+                for ($k = $data['position_initial']; $k <= $data['position_final']; ++$k) {
+                    dispatch(new CreateNewLocationJob(
+                        $data['location_module_id'],
+                        $data['sector_id'],
+                        $data['type']->value,
+                        $i,
+                        $j,
+                        $k,
+                        $data['zone']->value,
+                        $data['max_capacity'] ?? null,
+                        $total,
+                        $data['control'] ?? null,
+                        $data['temperature'] ?? null,
+                        LocationEnum\Status::Enabled->value,
+                    ));
+
+                    $total += $i + $j + $k;
+                }
+            }
+        }
+    }
+
+    protected function getLastSequence(int $locationModuleId): ?Location
+    {
+        return app(BuilderQuery::class)->execute($this->model(), [
+            '(location_module_id)' => $locationModuleId,
+        ])->orderBy('sequence', 'desc')->first();
     }
 
     #[Override]

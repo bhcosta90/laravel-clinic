@@ -79,6 +79,11 @@ abstract class Service
         return [];
     }
 
+    protected function executeValidate(array &$data, array $rules): void
+    {
+        $data = Validator::make($data, $rules)->validate();
+    }
+
     private function validateMethod(string $method, array &$data): void
     {
         if (method_exists($this, $method)) {
