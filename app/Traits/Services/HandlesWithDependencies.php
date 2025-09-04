@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Traits\Services;
 
+use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use ReflectionMethod;
@@ -53,5 +54,12 @@ trait HandlesWithDependencies
         }
 
         return app(static::class)->$method(...$resolved);
+    }
+
+    protected function debug(string $method, Closure $params): mixed
+    {
+        if ($method) {
+            $params();
+        }
     }
 }
