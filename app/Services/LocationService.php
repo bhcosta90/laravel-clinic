@@ -99,10 +99,11 @@ final class LocationService extends Service
         // Also consider level and position as tie-breakers
         switch ($type) {
             case 'even_odd':
-                // Evens first (ASC), then odds (DESC)
-                // MySQL/MariaDB/PostgreSQL support modulo operator
+                // Evens first (ASC), then odds (DESC within their group)
+                // Use CASE expressions to apply different directions per parity
                 $query->orderByRaw('(column % 2) ASC')
-                    ->orderBy('column', 'ASC')
+                    ->orderByRaw('CASE WHEN (column % 2) = 0 THEN column END ASC')
+                    ->orderByRaw('CASE WHEN (column % 2) = 1 THEN column END DESC')
                     ->orderBy('level', 'ASC')
                     ->orderBy('position', 'ASC')
                     ->orderBy('id', 'ASC');
@@ -110,9 +111,10 @@ final class LocationService extends Service
                 break;
 
             case 'odd_even':
-                // Odds first (ASC), then evens (DESC)
+                // Odds first (ASC), then evens (DESC within their group)
                 $query->orderByRaw('(column % 2) DESC')
-                    ->orderBy('column', 'ASC')
+                    ->orderByRaw('CASE WHEN (column % 2) = 1 THEN column END ASC')
+                    ->orderByRaw('CASE WHEN (column % 2) = 0 THEN column END DESC')
                     ->orderBy('level', 'ASC')
                     ->orderBy('position', 'ASC')
                     ->orderBy('id', 'ASC');

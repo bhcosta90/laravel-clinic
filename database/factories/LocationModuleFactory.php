@@ -16,12 +16,11 @@ final class LocationModuleFactory extends Factory
     public function definition(): array
     {
         return [
+            'tenant_id'  => tenant()?->id ?: DatabaseSeeder::TenantId,
             'acronym'    => str($this->faker->unique()->colorName())->upper(),
             'sequence'   => $this->faker->randomNumber(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-
-            'tenant_id' => tenant()?->id ?: DatabaseSeeder::TenantId,
         ];
     }
 }

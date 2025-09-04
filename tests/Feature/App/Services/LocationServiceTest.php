@@ -86,32 +86,27 @@ test('it orders locations by sequence and validates their attributes', function 
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
-    expect($model->sequence)->toBe(0)
-        ->and($model->column)->toBe(0)
+    expect($model->column)->toBe(0)
         ->and($model->level)->toBe(0)
         ->and($model->position)->toBe(0);
 
     $model = $location->get(1);
-    expect($model->sequence)->toBe(1)
-        ->and($model->column)->toBe(0)
+    expect($model->column)->toBe(0)
         ->and($model->level)->toBe(0)
         ->and($model->position)->toBe(1);
 
     $model = $location->get(15);
-    expect($model->sequence)->toBe(15)
-        ->and($model->column)->toBe(0)
+    expect($model->column)->toBe(0)
         ->and($model->level)->toBe(3)
         ->and($model->position)->toBe(3);
 
     $model = $location->get(16);
-    expect($model->sequence)->toBe(16)
-        ->and($model->column)->toBe(1)
+    expect($model->column)->toBe(1)
         ->and($model->level)->toBe(0)
         ->and($model->position)->toBe(0);
 
     $model = $location->get(17);
-    expect($model->sequence)->toBe(17)
-        ->and($model->column)->toBe(1)
+    expect($model->column)->toBe(1)
         ->and($model->level)->toBe(0)
         ->and($model->position)->toBe(1);
 });
@@ -136,35 +131,122 @@ test('it orders locations by even and odd, and validates their attributes', func
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
-    expect($model->sequence)->toBe(0)
-        ->and($model->column)->toBe(0)
+    expect($model->column)->toBe(0)
         ->and($model->level)->toBe(0)
         ->and($model->position)->toBe(0);
 
     $model = $location->get(1);
-    expect($model->sequence)->toBe(1)
-        ->and($model->column)->toBe(0)
+    expect($model->column)->toBe(0)
         ->and($model->level)->toBe(0)
         ->and($model->position)->toBe(1);
 
     $model = $location->get(15);
-    expect($model->sequence)->toBe(15)
-        ->and($model->column)->toBe(0)
+    expect($model->column)->toBe(0)
         ->and($model->level)->toBe(3)
         ->and($model->position)->toBe(3);
 
     $model = $location->get(16);
-    expect($model->sequence)->toBe(16)
-        ->and($model->column)->toBe(2)
+    expect($model->column)->toBe(2)
         ->and($model->level)->toBe(0)
         ->and($model->position)->toBe(0);
 
     $model = $location->get(17);
-    expect($model->sequence)->toBe(17)
-        ->and($model->column)->toBe(2)
+    expect($model->column)->toBe(2)
         ->and($model->level)->toBe(0)
         ->and($model->position)->toBe(1);
 
     $model = $location->get(47);
-    dd($model->column, $model->level, $model->position);
+    expect($model->column)->toBe(4)
+        ->and($model->level)->toBe(3)
+        ->and($model->position)->toBe(3);
+
+    $model = $location->get(48);
+    expect($model->column)->toBe(5)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(49);
+    expect($model->column)->toBe(5)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(1);
+
+    $model = $location->get(64);
+    expect($model->column)->toBe(3)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(95);
+    expect($model->column)->toBe(1)
+        ->and($model->level)->toBe(3)
+        ->and($model->position)->toBe(3);
+});
+
+test('it orders locations by odd and even, and validates their attributes', function () {
+    $data = [
+        'column_initial'   => 0,
+        'column_final'     => 5,
+        'level_initial'    => 0,
+        'level_final'      => 3,
+        'position_initial' => 0,
+        'position_final'   => 3,
+    ];
+    Livewire::test(Create::class, ['locationModule' => $this->locationModule])
+        ->set($data += Illuminate\Support\Arr::except($this->data, 'location_module_id'))
+        ->call('save')
+        ->assertHasNoErrors();
+
+    assertDatabaseCount(Location::class, 96);
+
+    OrderColumnJob::dispatch($this->locationModule->id, 'odd_even');
+    $location = Location::orderBy('sequence')->get();
+
+    $model = $location->get(0);
+    expect($model->column)->toBe(1)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(1);
+    expect($model->column)->toBe(1)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(1);
+
+    $model = $location->get(15);
+    expect($model->column)->toBe(1)
+        ->and($model->level)->toBe(3)
+        ->and($model->position)->toBe(3);
+
+    $model = $location->get(16);
+    expect($model->column)->toBe(3)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(17);
+    expect($model->column)->toBe(3)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(1);
+
+    $model = $location->get(47);
+    expect($model->column)->toBe(5)
+        ->and($model->level)->toBe(3)
+        ->and($model->position)->toBe(3);
+
+    $model = $location->get(48);
+    expect($model->column)->toBe(4)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(49);
+    expect($model->column)->toBe(4)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(1);
+
+    $model = $location->get(64);
+    expect($model->column)->toBe(2)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(95);
+    expect($model->column)->toBe(0)
+        ->and($model->level)->toBe(3)
+        ->and($model->position)->toBe(3);
 });

@@ -16,6 +16,8 @@ final class OrderColumn extends Component
 
     public LocationModule $locationModule;
 
+    public string $type;
+
     public function render(): View
     {
         return view('livewire.admin.stock.location-module.location.order-column');
@@ -23,11 +25,19 @@ final class OrderColumn extends Component
 
     public function confirm(string $type): void
     {
+        $this->type = $type;
+
         $this->question(description: __('Are you sure you want to order this block module again?'))
             ->confirm(method: 'order')
             ->cancel()
             ->send();
+    }
 
-        dispatch(new OrderColumnJob($this->locationModule->id, $type));
+    public function order(): void
+    {
+
+        dispatch(new OrderColumnJob($this->locationModule->id, $this->type));
+
+        $this->dialog()->success(__('The module is being ordered again, please wait a few moments to see the result.'))->send();
     }
 }
