@@ -16,7 +16,7 @@ final class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'         => tenant()?->id ?: Tenant::factor(),
+            'tenant_id'         => tenant()?->id ?: Tenant::factory(),
             'name'              => fake()->name(),
             'email'             => fake()->unique()->freeEmail(),
             'is_employee'       => fake()->boolean(),
