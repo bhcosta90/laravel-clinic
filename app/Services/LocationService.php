@@ -9,6 +9,7 @@ use App\Enums\Models\Location as LocationEnum;
 use App\Models\Location;
 use App\Models\Sector;
 use Illuminate\Validation\Rule;
+use Override;
 use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class LocationService extends Service
@@ -50,6 +51,7 @@ final class LocationService extends Service
         ];
     }
 
+    #[Override]
     protected function includes(): array
     {
         return [

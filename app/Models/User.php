@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
+use Override;
 use OwenIt\Auditing\Contracts\Auditable;
 
 #[ObservedBy([ClearCacheObserver::class])]
@@ -94,7 +95,7 @@ final class User extends Authenticatable implements Auditable
         return $response;
     }
 
-    #[\Override]
+    #[Override]
     protected static function booted(): void
     {
         self::creating(function ($model): void {

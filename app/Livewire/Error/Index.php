@@ -38,7 +38,7 @@ final class Index extends Component
 
     public function getTypeProperty(): int
     {
-        return (int) $this->type;
+        return $this->type;
     }
 
     public function getListeners(): array
