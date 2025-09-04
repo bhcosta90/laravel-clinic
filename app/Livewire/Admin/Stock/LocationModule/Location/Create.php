@@ -73,7 +73,7 @@ final class Create extends Component
         $this->dialog()->success(__('Address registration sent to the system, wait a few moments to be able to see it complete here'))->send();
     }
 
-    protected function rules(): array
+    private function rules(): array
     {
         return [
             'sector_id'        => ['required', 'numeric', Rule::exists(Sector::class, 'id')->where('tenant_id', tenant()->id)],
