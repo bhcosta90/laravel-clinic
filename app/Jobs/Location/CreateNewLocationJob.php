@@ -63,7 +63,7 @@ final class CreateNewLocationJob implements ShouldQueue
             'position'     => $this->position,
             'zone'         => Zone::from($this->zone),
             'max_capacity' => $this->max_capacity,
-            'sequence'     => $this->sequence * 100,
+            'sequence'     => $this->sequence * 10,
             'control'      => when($this->control, fn () => Control::from($this->control)),
             'temperature'  => null,
             'status'       => Status::Enabled,

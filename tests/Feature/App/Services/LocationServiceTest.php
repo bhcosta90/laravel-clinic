@@ -50,6 +50,6 @@ test('it stores locations with buck and validates database state', function () {
         'column'   => 2,
         'level'    => 0,
         'position' => 0,
-        'sequence' => 90000,
+        'sequence' => 900,
     ]);
 });

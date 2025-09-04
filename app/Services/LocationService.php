@@ -8,8 +8,6 @@ use App\Abstracts\Service;
 use App\Enums\Models\Location as LocationEnum;
 use App\Jobs\Location\CreateNewLocationJob;
 use App\Models\Location;
-use App\Models\LocationModule;
-use App\Models\Sector;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Override;
@@ -29,8 +27,7 @@ final class LocationService extends Service
         return [
             'sector_id' => [
                 'required',
-                Rule::exists(Sector::class, 'id')
-                    ->where('tenant_id', tenant()->id),
+                'numeric',
             ],
             'code' => [
                 'required',
@@ -74,8 +71,7 @@ final class LocationService extends Service
         $this->executeValidate($data, [
             'location_module_id' => [
                 'required',
-                Rule::exists(LocationModule::class, 'id')
-                    ->where('tenant_id', tenant()->id),
+                'numeric',
             ],
             'column_initial'   => ['required', 'numeric', 'min:0'],
             'column_final'     => ['required', 'numeric', 'min:' . $data['column_initial'], 'max:' . $data['column_max']],
