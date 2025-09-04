@@ -27,7 +27,7 @@ trait HandlesWithDependencies
         foreach ($parameters as $parameter) {
             $name = $parameter->getName();
 
-            // 1) Primeiro tenta resolver por atributo (ex: #[CurrentUser])
+            // 1) First tries to solve by attribute (ex: #[CurrentUser])
             foreach ($parameter->getAttributes() as $attribute) {
                 $instance = $attribute->newInstance();
 
@@ -40,7 +40,7 @@ trait HandlesWithDependencies
 
             $type = $parameter->getType();
 
-            // 2) Se for uma classe (ReflectionNamedType não-builtin), tenta pegar da fila ou container
+            // 2) If it's a class (ReflectionNamedType no-builtin), Try to get the line or container
             if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
                 $className = $type->getName();
 
@@ -58,31 +58,30 @@ trait HandlesWithDependencies
                     continue;
                 }
 
-                // senão, resolve via container
+                // else, resolve via container
                 $resolved[$name] = $application->make($className);
 
                 continue;
             }
 
-            // 3) Se ainda sobrou algo na fila de params, consome na ordem
+            // 3) If something is still left in the line of Params, consumes in order
             if (count($paramsQueue) > 0) {
                 $resolved[$name] = array_shift($paramsQueue);
 
                 continue;
             }
 
-            // 4) Se o parâmetro tem valor default, usa
+            // 4) If the parameter has value default, uses
             if ($parameter->isDefaultValueAvailable()) {
                 $resolved[$name] = $parameter->getDefaultValue();
 
                 continue;
             }
 
-            // 5) Se chegou aqui, não temos valor para passar — erro
+            // 5) If you arrived here, we have no value to pass - error
             throw new InvalidArgumentException("Não foi possível resolver o parâmetro \${$name} no método {$method} de " . static::class);
         }
 
-        // Chama o método original com todos os parâmetros resolvidos
         return app(static::class)->$method(...$resolved);
     }
 
