@@ -48,9 +48,9 @@ final class CreateNewLocationJob implements ShouldQueue
         $code   = sprintf(
             '%s.%s.%s.%s',
             $locationModule->acronym,
-            $this->column,
-            $this->level,
-            $this->position,
+            str(__('Column'))->substr(0, 1)->upper() . str($this->column)->padLeft(3, '0'),
+            str(__('Level'))->substr(0, 1)->upper() . str($this->level)->padLeft(3, '0'),
+            str(__('Position'))->substr(0, 1)->upper() . str($this->position)->padLeft(3, '0'),
         );
 
         app(LocationService::class)->handle('store', [
@@ -63,7 +63,7 @@ final class CreateNewLocationJob implements ShouldQueue
             'position'     => $this->position,
             'zone'         => Zone::from($this->zone),
             'max_capacity' => $this->max_capacity,
-            'sequence'     => $this->sequence,
+            'sequence'     => $this->sequence * 100,
             'control'      => when($this->control, fn () => Control::from($this->control)),
             'temperature'  => null,
             'status'       => Status::Enabled,
