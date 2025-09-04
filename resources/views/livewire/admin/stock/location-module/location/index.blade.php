@@ -1,18 +1,11 @@
-@php use App\Models\Location; use App\Enums\Models\Error\Type; @endphp
+@php use App\Models\LocationModule; use App\Enums\Models\Error\Type; @endphp
 <div>
     <x-card>
         <x-slot:header>
             <x-ui.header :title="__('Locations')" :subtitle="__('Manage stock locations and their availability status.')">
-                <x-slot name="actions">
-                    <div class="flex flex-wrap justify-between gap-2 items-center">
-                        @can('export', Location::class)
-                            <x-button :text="__('Export the template')" href="{{ route('admin.v1.api.location.download') }}" color="secondary" outline />
-                        @endcan
-                        @can('import', Location::class)
-                            <livewire:admin.stock.location.import />
-                        @endcan
-                    </div>
-                </x-slot>
+                @can('create', LocationModule::class)
+                    <livewire:admin.stock.location-module.location.create />
+                @endcan
             </x-ui.header>
         </x-slot:header>
 
