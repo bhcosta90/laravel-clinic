@@ -38,8 +38,8 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <x-ui.select.enum :label="__('Address Type') . ' *'" required :enum="Location\Type::class" />
                     <x-ui.select.enum :label="__('Control Type')" :enum="Location\Control::class" />
-                    <x-ui.select.enum :label="__('Status') . ' *'" required :enum="Location\Status::class" />
                     <x-ui.select.enum :label="__('Zone') . ' *'" required :enum="Location\Zone::class" />
+                    <x-ui.select.enum :label="__('Status') . ' *'" required :enum="Location\Status::class" />
                 </div>
             </div>
         </form>

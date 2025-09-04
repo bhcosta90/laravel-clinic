@@ -26,9 +26,9 @@ enum Status: int
     public function label(): string
     {
         return match ($this) {
-            self::Disabled => __('Disabled'),
-            self::Blocked  => __('Blocked'),
-            self::Enabled  => __('Enabled'),
+            self::Disabled => '🔴 ' . __('Disabled'),
+            self::Blocked  => '🟡 ' . __('Blocked'),
+            self::Enabled  => '🟢 ' . __('Enabled'),
         };
     }
 }
