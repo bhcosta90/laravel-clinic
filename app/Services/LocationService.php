@@ -25,18 +25,8 @@ final class LocationService extends Service
     public function dataValidate(array $data): array
     {
         return [
-            'sector_id' => [
-                'required',
-                'numeric',
-            ],
-            'code' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique(Location::class)
-                    ->where('tenant_id', tenant()->id)
-                    ->ignore($data['id'] ?? null),
-            ],
+            'sector_id'    => ['required', 'numeric'],
+            'code'         => ['required', 'string', 'max:255', 'string'],
             'type'         => ['required', Rule::enum(LocationEnum\Type::class)],
             'aisle'        => ['nullable', 'string', 'max:4000000000'],
             'column'       => ['nullable', 'numeric', 'max:4000000000'],
@@ -69,16 +59,13 @@ final class LocationService extends Service
         }
 
         $this->executeValidate($data, [
-            'location_module_id' => [
-                'required',
-                'numeric',
-            ],
-            'column_initial'   => ['required', 'numeric', 'min:0'],
-            'column_final'     => ['required', 'numeric', 'min:' . $data['column_initial'], 'max:' . $data['column_max']],
-            'level_initial'    => ['required', 'numeric', 'min:0'],
-            'level_final'      => ['required', 'numeric', 'min:' . $data['level_initial'], 'max:' . $data['level_max']],
-            'position_initial' => ['required', 'numeric', 'min:0'],
-            'position_final'   => ['required', 'numeric', 'min:' . $data['position_initial'], 'max:' . $data['position_max']],
+            'location_module_id' => ['required', 'numeric'],
+            'column_initial'     => ['required', 'numeric', 'min:0'],
+            'column_final'       => ['required', 'numeric', 'min:' . $data['column_initial'], 'max:' . $data['column_max']],
+            'level_initial'      => ['required', 'numeric', 'min:0'],
+            'level_final'        => ['required', 'numeric', 'min:' . $data['level_initial'], 'max:' . $data['level_max']],
+            'position_initial'   => ['required', 'numeric', 'min:0'],
+            'position_final'     => ['required', 'numeric', 'min:' . $data['position_initial'], 'max:' . $data['position_max']],
         ] + Arr::except($this->dataValidate($data), [
             'code',
             'aisle',
