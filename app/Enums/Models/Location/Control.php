@@ -37,4 +37,15 @@ enum Control: int
             self::SpecialTraceability => __('RDC 304/2019 for medicines controlled by ANVISA.'),
         };
     }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::BatchValidity       => __('Batch validity'),
+            self::SerialNumber        => __('Serial number'),
+            self::System              => __('System'),
+            self::Blocked             => __('Blocked'),
+            self::SpecialTraceability => __('Special traceability'),
+        };
+    }
 }

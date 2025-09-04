@@ -3,9 +3,11 @@
     <x-card>
         <x-slot:header>
             <x-ui.header :title="__('Locations')" :subtitle="__('Manage stock locations and their availability status.')">
-                @can('create', LocationModule::class)
-                    <livewire:admin.stock.location-module.location.create />
-                @endcan
+                <x-slot name="actions">
+                    @can('create', LocationModule::class)
+                        <livewire:admin.stock.location-module.location.create />
+                    @endcan
+                </x-slot>
             </x-ui.header>
         </x-slot:header>
 
