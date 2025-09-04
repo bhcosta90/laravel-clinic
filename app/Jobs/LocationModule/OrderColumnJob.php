@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Jobs\LocationModule;
 
+use App\Enums\Models\Location\OrderColumn;
 use App\Enums\Queue\Queue;
 use App\Models\Location;
 use DB;
@@ -21,7 +22,7 @@ final class OrderColumnJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public function __construct(public int $locationModuleId, public string $type)
+    public function __construct(public int $locationModuleId, public OrderColumn $type)
     {
         $this->onQueue(Queue::Low);
     }
@@ -33,18 +34,17 @@ final class OrderColumnJob implements ShouldQueue
         ]);
 
         // Normalize type
-        $type = mb_strtolower($this->type);
 
         // Define ordering according to requested mode
         // Also consider level and position as tie-breakers
-        match ($type) {
+        match (true) {
             // Evens first (ASC), then odds (DESC within their group)
             // Use CASE expressions to apply different directions per parity
-            'even_odd' => $query->orderByRaw('(`column` % 2) ASC')
+            OrderColumn::EvenOdd === $this->type => $query->orderByRaw('(`column` % 2) ASC')
                 ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END ASC')
                 ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END DESC'),
             // Odds first (ASC), then evens (DESC within their group)
-            'odd_even' => $query->orderByRaw('(`column` % 2) DESC')
+            OrderColumn::OddEven === $this->type => $query->orderByRaw('(`column` % 2) DESC')
                 ->orderByRaw('CASE WHEN (`column` % 2) = 1 THEN `column` END ASC')
                 ->orderByRaw('CASE WHEN (`column` % 2) = 0 THEN `column` END DESC'),
             // Natural ascending sequence by column, then level and position

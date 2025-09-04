@@ -86,10 +86,10 @@ final class LocationService extends Service
         dispatch(new CreateBatchLocationJob($total, $data));
     }
 
-    public function orderColumn(LocationModule $locationModule, string $type): void
+    public function orderColumn(LocationModule $locationModule, LocationEnum\OrderColumn $type): void
     {
         $this->executeValidate(['type' => $type], [
-            'type' => ['required', 'in:even_odd,odd_even,sequence'],
+            'type' => ['required', Rule::enum(LocationEnum\OrderColumn::class)],
         ]);
 
         dispatch(new OrderColumnJob($locationModule->id, $type));

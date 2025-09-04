@@ -2,6 +2,7 @@
 
 declare(strict_types = 1);
 
+use App\Enums\Models\Location\OrderColumn;
 use App\Enums\Models\Location\Status;
 use App\Enums\Models\Location\Type;
 use App\Enums\Models\Location\Zone;
@@ -81,7 +82,7 @@ test('it orders locations by sequence and validates their attributes', function 
 
     assertDatabaseCount(Location::class, 64);
 
-    $this->service->handle('orderColumn', $this->locationModule, 'sequence');
+    $this->service->handle('orderColumn', $this->locationModule, OrderColumn::Sequence);
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
@@ -129,7 +130,7 @@ test('it orders locations by even and odd, and validates their attributes', func
 
     assertDatabaseCount(Location::class, 96);
 
-    $this->service->handle('orderColumn', $this->locationModule, 'even_odd');
+    $this->service->handle('orderColumn', $this->locationModule, OrderColumn::EvenOdd);
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
@@ -199,7 +200,7 @@ test('it orders locations by odd and even, and validates their attributes', func
 
     assertDatabaseCount(Location::class, 96);
 
-    $this->service->handle('orderColumn', $this->locationModule, 'odd_even');
+    $this->service->handle('orderColumn', $this->locationModule, OrderColumn::OddEven);
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
