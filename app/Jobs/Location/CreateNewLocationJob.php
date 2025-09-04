@@ -83,7 +83,6 @@ final class CreateNewLocationJob implements ShouldQueue
             'type',
             'zone',
             'max_capacity',
-            'sequence',
             'control',
             'temperature',
             'status',
