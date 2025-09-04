@@ -62,6 +62,7 @@ final class AppServiceProvider extends ServiceProvider
             }
 
             auth()->onceUsingId($userId);
+
             Log::debug('User ID: ' . $userId);
             Log::debug('Job Tenant ID: ' . $tenantId);
         });
