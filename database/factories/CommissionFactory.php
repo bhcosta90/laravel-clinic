@@ -16,7 +16,7 @@ final class CommissionFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'  => DatabaseSeeder::TenantId,
+            'tenant_id'  => tenant()?->id ?: DatabaseSeeder::TenantId,
             'value'      => $this->faker->numberBetween(1000, 10000) / 100,
             'due_date'   => $this->faker->dateTimeBetween(now()->addDays(2), now()->addDays(30)),
             'created_at' => Carbon::now(),

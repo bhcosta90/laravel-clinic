@@ -13,6 +13,7 @@ return new class() extends Migration {
             $table->ulid('id')->primary();
             $table->foreignUuid('tenant_id')->constrained('tenants');
             $table->foreignId('user_id')->constrained('users');
+            $table->string('code');
             $table->unsignedTinyInteger('type');
             $table->string('exception')->nullable();
             $table->text('message')->nullable();

@@ -14,6 +14,8 @@ final class Location extends Model
     use HasUlids;
 
     protected $fillable = [
+        'location_module_id',
+        'sector_id',
         'code',
         'type',
         'aisle',
@@ -38,5 +40,10 @@ final class Location extends Model
     public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    public function sector(): BelongsTo
+    {
+        return $this->belongsTo(Sector::class);
     }
 }

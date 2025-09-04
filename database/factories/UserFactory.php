@@ -17,7 +17,7 @@ final class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'         => DatabaseSeeder::TenantId,
+            'tenant_id'         => tenant()?->id ?: DatabaseSeeder::TenantId,
             'name'              => fake()->name(),
             'email'             => fake()->unique()->freeEmail(),
             'is_employee'       => fake()->boolean(),

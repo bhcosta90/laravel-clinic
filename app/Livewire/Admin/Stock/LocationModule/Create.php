@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Stock\Location;
+namespace App\Livewire\Admin\Stock\LocationModule;
 
 use App\Livewire\Traits\Alert;
 use Illuminate\Contracts\View\View;
@@ -18,7 +18,7 @@ final class Create extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.stock.location.create');
+        return view('livewire.admin.stock.location-module.create');
     }
 
     public function save(): void

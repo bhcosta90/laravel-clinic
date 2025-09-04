@@ -22,6 +22,7 @@ final class Error extends Model
         'tenant_id',
         'user_id',
         'exception',
+        'code',
     ];
 
     public function tenant(): BelongsTo

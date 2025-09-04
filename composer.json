@@ -82,7 +82,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#8b5cf6,#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan reverb:start --debug --port=8150\" \"php artisan serve --port=8100\" \"php artisan queue:listen --queue=low,priority,long,medium,report --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=reverb,server,queue,logs,vite"
+            "npx concurrently -c \"#8b5cf6,#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan reverb:start --debug --port=8150\" \"php artisan serve --port=8500\" \"php artisan queue:listen --queue=low,priority,long,medium,report --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=reverb,server,queue,logs,vite"
         ],
         "format": [
             "./vendor/bin/pint",

@@ -11,13 +11,14 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use QuantumTecnology\ControllerBasicsExtension\Enum\QueryBuilderType;
 
 final class Index extends Component
 {
     use WithPagination;
 
     #[Url]
-    public ?int $quantity = 5;
+    public ?int $quantity = 15;
 
     #[Url]
     public ?string $search = null;
@@ -32,6 +33,7 @@ final class Index extends Component
     public function headers(): array
     {
         return [
+            ['index' => 'sector.name', 'label' => __('Sector')],
             ['index' => 'code', 'label' => __('Location')],
             ['index' => 'sequence', 'label' => __('Sequence')],
             ['index' => 'status', 'label' => __('Status')],
@@ -49,7 +51,9 @@ final class Index extends Component
     #[Computed]
     public function rows(): Paginator
     {
-        return app(LocationService::class)->handle('index', $this->search)
+        return app(LocationService::class)->handle('index', $this->search, [
+            '(location_module_id)' => QueryBuilderType::Null,
+        ])
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();

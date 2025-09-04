@@ -16,12 +16,12 @@ final class ErrorService extends Service
 {
     public function removeErrorFromUser(#[CurrentUser] $user): bool
     {
-        return $this->model()->where('user_id', $user?->id)->forceDelete();
+        return (bool) $this->model()->where('user_id', $user?->id)->forceDelete();
     }
 
-    public function registerError(Type $type, Closure $callback): mixed
+    public function registerError(Type $type, string | int $code, Closure $callback): mixed
     {
-        $data = ['type' => $type];
+        $data = ['type' => $type, 'code' => $code];
 
         try {
             return $callback();

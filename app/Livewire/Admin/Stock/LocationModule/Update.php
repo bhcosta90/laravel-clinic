@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Stock\Location;
+namespace App\Livewire\Admin\Stock\LocationModule;
 
 use App\Livewire\Traits\Alert;
-use App\Models\Location;
+use App\Models\LocationModule;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -20,13 +20,13 @@ final class Update extends Component
 
     public function render(): View
     {
-        return view('livewire.admin.stock.location.update');
+        return view('livewire.admin.stock.location-module.update');
     }
 
-    #[On('load::frequency')]
-    public function load(Location $frequency): void
+    #[On('load::module')]
+    public function load(LocationModule $module): void
     {
-        $this->form->setModel($frequency);
+        $this->form->setModel($module);
         $this->modal = true;
     }
 

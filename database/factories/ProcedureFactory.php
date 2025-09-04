@@ -16,7 +16,7 @@ final class ProcedureFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'    => DatabaseSeeder::TenantId,
+            'tenant_id'    => tenant()?->id ?: DatabaseSeeder::TenantId,
             'name'         => $this->faker->sentence(2),
             'price'        => $this->faker->numberBetween(10000, 100000) / 100,
             'time'         => $this->faker->randomNumber(),

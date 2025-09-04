@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Registration\Frequencies;
 
 use App\Livewire\Traits\Alert;
-use App\Models\Procedure;
+use App\Models\Frequency;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
@@ -13,7 +13,7 @@ final class Delete extends Component
 {
     use Alert;
 
-    public Procedure $procedure;
+    public Frequency $frequency;
 
     public function render(): string
     {
@@ -35,7 +35,7 @@ final class Delete extends Component
 
     public function delete(): void
     {
-        $this->procedure->delete();
+        $this->frequency->delete();
 
         $this->dispatch('deleted');
 

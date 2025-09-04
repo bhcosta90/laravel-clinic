@@ -16,7 +16,7 @@ final class RoomFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'  => DatabaseSeeder::TenantId,
+            'tenant_id'  => tenant()?->id ?: DatabaseSeeder::TenantId,
             'name'       => $this->faker->sentence(3),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

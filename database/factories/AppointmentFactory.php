@@ -16,7 +16,7 @@ final class AppointmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'            => DatabaseSeeder::TenantId,
+            'tenant_id'            => tenant()?->id ?: DatabaseSeeder::TenantId,
             'date'                 => $this->faker->dateTimeBetween(now()->firstOfMonth(), now()->endOfMonth()),
             'is_return'            => $this->faker->boolean(),
             'exam_withdrawal_date' => $this->faker->sentence(2),

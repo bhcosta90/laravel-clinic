@@ -16,7 +16,7 @@ final class AnamnesisGroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'   => DatabaseSeeder::TenantId,
+            'tenant_id'   => tenant()?->id ?: DatabaseSeeder::TenantId,
             'name'        => $this->faker->sentence(2),
             'description' => $this->faker->sentence(3),
             'created_at'  => Carbon::now(),

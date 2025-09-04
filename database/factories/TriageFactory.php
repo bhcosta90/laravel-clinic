@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Enums\Models\Triage\RiskClassification;
 use App\Models\Triage;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -16,6 +17,7 @@ final class TriageFactory extends Factory
     public function definition(): array
     {
         return [
+            'tenant_id'           => tenant()?->id ?: DatabaseSeeder::TenantId,
             'risk_classification' => $this->faker->randomElement(RiskClassification::cases()),
             'description'         => $this->faker->sentence(3),
             'mmhg'                => when($this->faker->boolean(), fn () => $this->faker->sentence(2)),

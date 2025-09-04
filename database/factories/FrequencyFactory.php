@@ -16,7 +16,7 @@ final class FrequencyFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'  => DatabaseSeeder::TenantId,
+            'tenant_id'  => tenant()?->id ?: DatabaseSeeder::TenantId,
             'name'       => $this->faker->name(),
             'days'       => $this->faker->randomElement([30, 60, 90, 120]),
             'created_at' => Carbon::now(),

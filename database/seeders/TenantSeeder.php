@@ -35,6 +35,7 @@ final class TenantSeeder extends Seeder
                 CatalogSeeder::class,
                 SkuSeeder::class,
                 PackingSeeder::class,
+                LocationModuleSeeder::class,
             ]);
         }
 
