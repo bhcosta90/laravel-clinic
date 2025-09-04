@@ -21,6 +21,12 @@ trait HandlesWithDependencies
         $reflection = new ReflectionMethod(static::class, $method);
         $parameters = $reflection->getParameters();
 
+        $bindClass = app(static::class);
+
+        if (count($parameters) === count($params)) {
+            return $bindClass->$method(...$params);
+        }
+
         $resolved    = [];
         $paramsQueue = $params; // fila de parâmetros manuais que vamos consumindo
 
@@ -82,7 +88,7 @@ trait HandlesWithDependencies
             throw new InvalidArgumentException("Não foi possível resolver o parâmetro \${$name} no método {$method} de " . static::class);
         }
 
-        return app(static::class)->$method(...$resolved);
+        return $bindClass->$method(...$resolved);
     }
 
     protected function debug(bool $method, Closure $closure): void
