@@ -54,6 +54,8 @@ final class Create extends Component
         $this->resetExcept('locationModule');
 
         $this->success();
+
+        $this->dialog()->success(__('Address registration sent to the system, wait a few moments to be able to see it complete here'))->send();
     }
 
     protected function rules(): array

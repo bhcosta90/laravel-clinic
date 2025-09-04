@@ -7,6 +7,7 @@ namespace App\Jobs\Location;
 use App\Enums\Models\Location\Control;
 use App\Enums\Models\Location\Type;
 use App\Enums\Models\Location\Zone;
+use App\Enums\Queue\Queue;
 use App\Models\LocationModule;
 use App\Models\Sector;
 use App\Services\LocationService;
@@ -38,6 +39,7 @@ final class CreateNewLocationJob implements ShouldQueue
         public ?string $temperature,
         public int $status,
     ) {
+        $this->onQueue(Queue::Low);
     }
 
     public function handle(): void
