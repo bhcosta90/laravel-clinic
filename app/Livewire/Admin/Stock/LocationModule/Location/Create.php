@@ -44,11 +44,11 @@ final class Create extends Component
             $this->sector_id        = 1;
             $this->temperature      = '1';
             $this->column_initial   = 1;
-            $this->column_final     = 5;
+            $this->column_final     = 3;
             $this->level_initial    = 1;
-            $this->level_final      = 5;
+            $this->level_final      = 3;
             $this->position_initial = 1;
-            $this->position_final   = 5;
+            $this->position_final   = 3;
             $this->type             = 1;
             $this->control          = 1;
             $this->zone             = 1;

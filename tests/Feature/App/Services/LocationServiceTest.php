@@ -35,6 +35,15 @@ test('it stores locations with buck and validates database state', function (): 
     $this->service->handle('storeWithBuck', $this->data);
     assertDatabaseCount(Location::class, 8);
 
+    assertDatabaseHas(Location::class, [
+        'location_module_id' => $this->locationModule->id,
+        'aisle'              => $this->locationModule->acronym,
+        'column'             => 1,
+        'level'              => 1,
+        'position'           => 1,
+        'sequence'           => 70,
+    ]);
+
     $this->service->handle('storeWithBuck', [
         'column_initial'   => 2,
         'column_final'     => 2,
@@ -51,6 +60,6 @@ test('it stores locations with buck and validates database state', function (): 
         'column'             => 2,
         'level'              => 0,
         'position'           => 0,
-        'sequence'           => 900,
+        'sequence'           => 80,
     ]);
 });

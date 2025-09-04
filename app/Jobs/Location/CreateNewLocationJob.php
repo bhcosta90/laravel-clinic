@@ -55,6 +55,8 @@ final class CreateNewLocationJob implements ShouldQueue
             str(__('Position'))->substr(0, 1)->upper() . str($this->position)->padLeft(3, '0'),
         );
 
+        $sequence = max(0, $this->sequence + 1);
+
         $dataStore = [
             'location_module_id' => $locationModule->id,
             'sector_id'          => $sector->id,
@@ -66,7 +68,7 @@ final class CreateNewLocationJob implements ShouldQueue
             'position'           => $this->position,
             'zone'               => Zone::from($this->zone),
             'max_capacity'       => $this->max_capacity,
-            'sequence'           => $this->sequence + 10,
+            'sequence'           => $sequence,
             'control'            => when($this->control, fn () => Control::from($this->control)),
             'temperature'        => $this->temperature,
             'status'             => $this->status,

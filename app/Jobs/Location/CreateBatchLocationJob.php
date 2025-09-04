@@ -28,12 +28,13 @@ final class CreateBatchLocationJob implements ShouldQueue
     public function handle(): void
     {
         $data  = $this->data;
-        $total = $this->last;
+        $total = $this->last - 1;
+        $job   = collect();
 
         for ($i = $data['column_initial']; $i <= $data['column_final']; ++$i) {
             for ($j = $data['level_initial']; $j <= $data['level_final']; ++$j) {
                 for ($k = $data['position_initial']; $k <= $data['position_final']; ++$k) {
-                    dispatch(new CreateNewLocationJob(
+                    $job->push(new CreateNewLocationJob(
                         $data['sector_id'],
                         $data['location_module_id'],
                         $data['type'],
@@ -48,10 +49,13 @@ final class CreateBatchLocationJob implements ShouldQueue
                         $data['status'],
                     ));
 
-                    $total += $i + $j + $k;
+                    $total += 10;
                 }
             }
         }
 
+        dispatch($job->pop());
+
+        $job->map(fn ($job) => dispatch($job)->delay(now()->between(now()->addSeconds(0), now()->addSeconds(60))));
     }
 }

@@ -75,7 +75,11 @@ final class LocationService extends Service
             'position',
         ]));
 
-        $total = ($this->getLastSequence($data['location_module_id'])->sequence ?? 0) + 1;
+        $total = optional($this->getLastSequence($data['location_module_id']))->sequence ?? 0;
+
+        if ($total > 0) {
+            $total += 10;
+        }
 
         dispatch(new CreateBatchLocationJob($total, $data));
     }
