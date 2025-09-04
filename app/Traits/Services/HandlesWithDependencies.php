@@ -56,7 +56,7 @@ trait HandlesWithDependencies
         return app(static::class)->$method(...$resolved);
     }
 
-    protected function debug(string $method, Closure $params): mixed
+    protected function debug(string $method, Closure $params): void
     {
         if ($method) {
             $params();
