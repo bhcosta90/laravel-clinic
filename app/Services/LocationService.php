@@ -87,9 +87,61 @@ final class LocationService extends Service
 
     public function orderColumn(LocationModule $locationModule, string $type): void
     {
-        app(BuilderQuery::class)->execute($this->model(), [
+        // Build base query for the given module
+        $query = app(BuilderQuery::class)->execute($this->model(), [
             '(location_module_id)' => $locationModule->id,
-        ])->orderBy('column');
+        ]);
+
+        // Normalize type
+        $type = mb_strtolower($type);
+
+        // Define ordering according to requested mode
+        // Also consider level and position as tie-breakers
+        switch ($type) {
+            case 'even_odd':
+                // Evens first (ASC), then odds (DESC)
+                // MySQL/MariaDB/PostgreSQL support modulo operator
+                $query->orderByRaw('(column % 2) ASC')
+                    ->orderBy('column', 'ASC')
+                    ->orderBy('level', 'ASC')
+                    ->orderBy('position', 'ASC')
+                    ->orderBy('id', 'ASC');
+
+                break;
+
+            case 'odd_even':
+                // Odds first (ASC), then evens (DESC)
+                $query->orderByRaw('(column % 2) DESC')
+                    ->orderBy('column', 'ASC')
+                    ->orderBy('level', 'ASC')
+                    ->orderBy('position', 'ASC')
+                    ->orderBy('id', 'ASC');
+
+                break;
+
+            case 'sequence':
+            default:
+                // Natural ascending sequence by column, then level and position
+                $query->orderBy('column', 'ASC')
+                    ->orderBy('level', 'ASC')
+                    ->orderBy('position', 'ASC')
+                    ->orderBy('id', 'ASC');
+
+                break;
+        }
+
+        // Apply the computed order into sequence field so that the picking route is persisted
+        $sequence = 0;
+        $query->chunkById(500, function ($locations) use (&$sequence): void {
+            foreach ($locations as $loc) {
+                // Update only if different to minimize writes
+                if ($loc->sequence !== $sequence) {
+                    $loc->sequence = $sequence;
+                    $loc->save();
+                }
+                ++$sequence;
+            }
+        }, 'id');
     }
 
     #[Override]

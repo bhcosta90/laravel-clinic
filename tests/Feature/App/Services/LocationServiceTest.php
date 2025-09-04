@@ -5,6 +5,8 @@ declare(strict_types = 1);
 use App\Enums\Models\Location\Status;
 use App\Enums\Models\Location\Type;
 use App\Enums\Models\Location\Zone;
+use App\Jobs\LocationModule\OrderColumnJob;
+use App\Livewire\Admin\Stock\LocationModule\Location\Create;
 use App\Models\Location;
 use App\Models\LocationModule;
 use App\Models\Sector;
@@ -62,4 +64,107 @@ test('it stores locations with buck and validates database state', function (): 
         'position'           => 0,
         'sequence'           => 80,
     ]);
+});
+
+test('it orders locations by sequence and validates their attributes', function () {
+    $data = [
+        'column_initial'   => 0,
+        'column_final'     => 3,
+        'level_initial'    => 0,
+        'level_final'      => 3,
+        'position_initial' => 0,
+        'position_final'   => 3,
+    ];
+    Livewire::test(Create::class, ['locationModule' => $this->locationModule])
+        ->set($data += Illuminate\Support\Arr::except($this->data, 'location_module_id'))
+        ->call('save')
+        ->assertHasNoErrors();
+
+    assertDatabaseCount(Location::class, 64);
+
+    OrderColumnJob::dispatch($this->locationModule->id, 'sequence');
+    $location = Location::orderBy('sequence')->get();
+
+    $model = $location->get(0);
+    expect($model->sequence)->toBe(0)
+        ->and($model->column)->toBe(0)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(1);
+    expect($model->sequence)->toBe(1)
+        ->and($model->column)->toBe(0)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(1);
+
+    $model = $location->get(15);
+    expect($model->sequence)->toBe(15)
+        ->and($model->column)->toBe(0)
+        ->and($model->level)->toBe(3)
+        ->and($model->position)->toBe(3);
+
+    $model = $location->get(16);
+    expect($model->sequence)->toBe(16)
+        ->and($model->column)->toBe(1)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(17);
+    expect($model->sequence)->toBe(17)
+        ->and($model->column)->toBe(1)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(1);
+});
+
+test('it orders locations by even and odd, and validates their attributes', function () {
+    $data = [
+        'column_initial'   => 0,
+        'column_final'     => 5,
+        'level_initial'    => 0,
+        'level_final'      => 3,
+        'position_initial' => 0,
+        'position_final'   => 3,
+    ];
+    Livewire::test(Create::class, ['locationModule' => $this->locationModule])
+        ->set($data += Illuminate\Support\Arr::except($this->data, 'location_module_id'))
+        ->call('save')
+        ->assertHasNoErrors();
+
+    assertDatabaseCount(Location::class, 96);
+
+    OrderColumnJob::dispatch($this->locationModule->id, 'even_odd');
+    $location = Location::orderBy('sequence')->get();
+
+    $model = $location->get(0);
+    expect($model->sequence)->toBe(0)
+        ->and($model->column)->toBe(0)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(1);
+    expect($model->sequence)->toBe(1)
+        ->and($model->column)->toBe(0)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(1);
+
+    $model = $location->get(15);
+    expect($model->sequence)->toBe(15)
+        ->and($model->column)->toBe(0)
+        ->and($model->level)->toBe(3)
+        ->and($model->position)->toBe(3);
+
+    $model = $location->get(16);
+    expect($model->sequence)->toBe(16)
+        ->and($model->column)->toBe(2)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(0);
+
+    $model = $location->get(17);
+    expect($model->sequence)->toBe(17)
+        ->and($model->column)->toBe(2)
+        ->and($model->level)->toBe(0)
+        ->and($model->position)->toBe(1);
+
+    $model = $location->get(47);
+    dd($model->column, $model->level, $model->position);
 });
