@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Abstracts\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Packing extends Model
 {
