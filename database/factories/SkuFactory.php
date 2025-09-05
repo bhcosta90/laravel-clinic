@@ -18,7 +18,7 @@ final class SkuFactory extends Factory
         return [
             'tenant_id'  => tenant()?->id ?: Tenant::factory(),
             'sku_code'   => $this->faker->unique()->ean8(),
-            'gtin'       => $this->faker->unique()->ean13(),
+            'barcode'    => $this->faker->unique()->ean13(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
