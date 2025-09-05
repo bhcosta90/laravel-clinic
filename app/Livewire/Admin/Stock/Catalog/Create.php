@@ -27,8 +27,7 @@ final class Create extends Component
 
         $this->dispatch('created');
 
-        $this->form->reset();
-        $this->resetExcept('form');
+        $this->modal = false;
 
         $this->success();
     }
