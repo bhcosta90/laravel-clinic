@@ -11,6 +11,6 @@ final class CatalogSeeder extends Seeder
 {
     public function run(): void
     {
-        Catalog::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
+        Catalog::factory(25)->create();
     }
 }

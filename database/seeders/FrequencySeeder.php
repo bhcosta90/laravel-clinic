@@ -11,6 +11,6 @@ final class FrequencySeeder extends Seeder
 {
     public function run(): void
     {
-        Frequency::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
+        Frequency::factory(25)->create();
     }
 }

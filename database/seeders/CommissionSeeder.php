@@ -15,8 +15,7 @@ final class CommissionSeeder extends Seeder
         $groupIds = User::query()->whereIsEmployee(true)->pluck('id')->toArray();
 
         Commission::factory(25)->make()->each(function ($item) use ($groupIds): void {
-            $item->tenant_id = DatabaseSeeder::TenantId;
-            $item->user_id   = collect($groupIds)->random();
+            $item->user_id = collect($groupIds)->random();
             $item->save();
         });
     }

@@ -11,6 +11,6 @@ final class AnamnesisGroupSeeder extends Seeder
 {
     public function run(): void
     {
-        AnamnesisGroup::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
+        AnamnesisGroup::factory(25)->create();
     }
 }

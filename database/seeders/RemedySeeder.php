@@ -11,6 +11,6 @@ final class RemedySeeder extends Seeder
 {
     public function run(): void
     {
-        Remedy::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
+        Remedy::factory(25)->create();
     }
 }

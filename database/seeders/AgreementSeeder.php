@@ -11,6 +11,6 @@ final class AgreementSeeder extends Seeder
 {
     public function run(): void
     {
-        Agreement::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
+        Agreement::factory(25)->create();
     }
 }

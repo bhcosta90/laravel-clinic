@@ -11,6 +11,6 @@ final class ProcedureSeeder extends Seeder
 {
     public function run(): void
     {
-        Procedure::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
+        Procedure::factory(25)->create();
     }
 }

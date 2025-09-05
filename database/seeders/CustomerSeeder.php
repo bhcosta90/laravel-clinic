@@ -11,7 +11,7 @@ final class CustomerSeeder extends Seeder
 {
     public function run(): void
     {
-        Customer::factory(25)->create(['tenant_id' => DatabaseSeeder::TenantId]);
+        Customer::factory(25)->create();
 
         $date = fake()->dateTimeBetween(now()->subYears(18), now()->subYears(10));
 
