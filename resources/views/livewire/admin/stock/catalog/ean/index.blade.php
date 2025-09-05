@@ -1,5 +1,5 @@
 @php use App\Models\Ean; @endphp
-<x-ui.action>
+<x-ui.action size="3xl">
     @if($catalog)
         <div class="space-y-3">
             @can('create', Ean::class)
