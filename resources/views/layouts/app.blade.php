@@ -165,7 +165,7 @@
                 "
             >
                 <x-side-bar.item :text="__('Appointments')"
-                                 :route="route('admin.v1.appointments.appointments.index')"
+                                 :route="route('admin.v1.appointment.appointment.index')"
                                  :visible="auth()->user()->can('viewAny', Models\Appointment::class)"/>
 
                 @can('viewAny', Models\Appointment::class)
@@ -197,11 +197,11 @@
                 "
             >
                 <x-side-bar.item :text="__('Sector')"
-                                 :route="route('admin.v1.stocks.sector.index')"
+                                 :route="route('admin.v1.stock.sector.index')"
                                  :visible="auth()->user()->can('viewAny', Models\Sector::class)"/>
 
                 <x-side-bar.item :text="__('Catalog')"
-                                 :route="route('admin.v1.stocks.catalog.index')"
+                                 :route="route('admin.v1.stock.catalog.index')"
                                  :visible="auth()->user()->can('viewAny', Models\Catalog::class)"/>
 
                 <x-side-bar.item :text="__('Location')"
@@ -210,12 +210,12 @@
                 "
                 >
                     <x-side-bar.item :text="__('By Import')"
-                                     :route="route('admin.v1.stocks.locations.index')"
+                                     :route="route('admin.v1.stock.location.index')"
                                      :visible="auth()->user()->can('viewAny', Models\Location::class)"/>
 
                     <x-side-bar.item :text="__('By Module')"
-                                     :current="request()->routeIs('admin.v1.stocks.locations.modules.*')"
-                                     :route="route('admin.v1.stocks.locations.modules.index')"
+                                     :current="request()->routeIs('admin.v1.stock.location.modules.*')"
+                                     :route="route('admin.v1.stock.location.modules.index')"
                                      :visible="auth()->user()->can('viewAny', Models\LocationModule::class)"/>
                 </x-side-bar.item>
             </x-side-bar.item>

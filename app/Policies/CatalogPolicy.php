@@ -12,9 +12,9 @@ final class CatalogPolicy
 {
     use CrudPolicyTrait;
 
-    public function generateReport(User $user): bool
+    public function barcode(User $user): bool
     {
-        return $user->hasPermissionTo(Can::RegistrationProcedureReport);
+        return $user->hasPermissionTo(Can::StockCatalogView);
     }
 
     protected function getViewPermission(): Can
