@@ -1,14 +1,14 @@
 <div>
     @if($this->showButton)
-        <x-button :text="__('Create New Patient')" wire:click="$toggle('modal')" outline />
+        <x-button :text="__('Create New Sector')" wire:click="$toggle('modal')" outline />
     @endif
 
     <x-modal size="3xl" :title="__('Create New Customer')" wire>
-        <form id="customer-create-{{ $id = str()->uuid() }}" wire:submit="save" class="space-y-4">
+        <form id="sector-create-{{ $id = str()->uuid() }}" wire:submit="save" class="space-y-4">
             <x-admin.stock.sector.form />
         </form>
         <x-slot:footer>
-            <x-button type="submit" form="customer-create-{{ $id }}">
+            <x-button type="submit" form="sector-create-{{ $id }}">
                 @lang('Save')
             </x-button>
         </x-slot:footer>
