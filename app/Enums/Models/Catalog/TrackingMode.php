@@ -22,4 +22,15 @@ enum TrackingMode: int
             self::LotAndExpiry => __('Tracked by lot and expiry date'),
         };
     }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::None         => __('None'),
+            self::Lot          => __('Lot'),
+            self::Serial       => __('Serial'),
+            self::ExpiryDate   => __('Expiry Date'),
+            self::LotAndExpiry => __('Lot and Expiry Date'),
+        };
+    }
 }

@@ -16,7 +16,7 @@ final class Update extends Component
 
     public Form $form;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     public function render(): View
     {
@@ -27,7 +27,7 @@ final class Update extends Component
     public function load(AnamnesisGroup $agreement): void
     {
         $this->form->setModel($agreement);
-        $this->modal = true;
+        $this->slide = true;
     }
 
     public function save(): void

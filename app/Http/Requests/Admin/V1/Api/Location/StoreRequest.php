@@ -6,6 +6,7 @@ namespace App\Http\Requests\Admin\V1\Api\Location;
 
 use App\Enums\Models\Location as LocationEnum;
 use App\Models\Location;
+use App\Rules\TenantUnique;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -20,8 +21,7 @@ final class StoreRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique(Location::class)
-                    ->where('tenant_id', tenant()->id),
+                new TenantUnique(Location::class, 'code'),
             ],
             'data.*.type'             => ['required', Rule::enum(LocationEnum\Type::class)],
             'data.*.aisle'            => ['nullable', 'string', 'max:10'],

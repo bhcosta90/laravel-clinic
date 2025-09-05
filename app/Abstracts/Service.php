@@ -18,7 +18,7 @@ abstract class Service
 
     abstract protected function search(): array;
 
-    final public function index(?string $search, ?array $filters = [])
+    final public function index(?string $search = null, ?array $filters = [])
     {
         if (null === $filters) {
             $filters = [];

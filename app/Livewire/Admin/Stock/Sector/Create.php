@@ -15,7 +15,7 @@ final class Create extends Component
 
     public Form $form;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     public bool $showButton = true;
 
@@ -40,6 +40,6 @@ final class Create extends Component
     #[On('sector::open')]
     public function open(): void
     {
-        $this->modal = true;
+        $this->slide = true;
     }
 }

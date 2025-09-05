@@ -52,6 +52,8 @@ enum Can: string
     case StockLocationModuleEdit      = 'stock-location_module-edit';
     case StockSectorView              = 'stock-sector-view';
     case StockSectorEdit              = 'stock-sector-edit';
+    case StockCatalogView             = 'stock-catalog-view';
+    case StockCatalogEdit             = 'stock-catalog-edit';
 
     public static function operation(string $label): string
     {
@@ -74,6 +76,9 @@ enum Can: string
             __('commission')      => __('Commission records'),
             __('triage')          => __('Triage records'),
             __('location')        => __('Location records'),
+            __('catalog')         => __('Catalog records'),
+            __('location_module') => __('Module records'),
+            __('location_import') => __('Import locations records'),
             default               => "operation {$label} do not configured",
         };
     }

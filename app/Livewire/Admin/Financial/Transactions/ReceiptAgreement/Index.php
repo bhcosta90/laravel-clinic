@@ -15,7 +15,7 @@ final class Index extends Component
 
     public Form $form;
 
-    public $modal = false;
+    public $slide = false;
 
     public function render(): View
     {
@@ -25,7 +25,7 @@ final class Index extends Component
     #[On('load::receipt-agreements')]
     public function load(): void
     {
-        $this->modal = true;
+        $this->slide = true;
     }
 
     public function save(): void
@@ -36,7 +36,7 @@ final class Index extends Component
         $this->dispatch('load::transactions');
 
         $this->form->reset();
-        $this->reset('modal');
+        $this->reset('slide');
 
         $this->success();
     }

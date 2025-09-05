@@ -32,7 +32,7 @@ final class ExecutePayment extends Component
 
     public ?string $description = null;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     public function mount(): void
     {

@@ -16,7 +16,7 @@ final class Update extends Component
 
     public Form $form;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     public function render(): View
     {
@@ -27,7 +27,7 @@ final class Update extends Component
     public function load(PaymentMethod $payment): void
     {
         $this->form->setModel($payment);
-        $this->modal = true;
+        $this->slide = true;
     }
 
     public function save(): void

@@ -22,7 +22,7 @@ final class ReportProcedure extends AbstractPdfReport
     #[On('appointment::appointment::report-procedure')]
     public function load(): void
     {
-        $this->modal = true;
+        $this->slide = true;
     }
 
     protected function reportConfig(): array

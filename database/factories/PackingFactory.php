@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Enums\Models\Packing\UnitOfMeasure;
 use App\Models\Packing;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,15 +18,13 @@ final class PackingFactory extends Factory
         $volume = $this->faker->boolean();
 
         return [
-            'tenant_id'       => tenant()?->id ?: Tenant::factory(),
-            'unit_of_measure' => $this->faker->randomElement(UnitOfMeasure::cases()),
-            'dun14'           => when($this->faker->boolean(), fn () => $this->faker->unique()->ean13()),
-            'sscc'            => when($this->faker->boolean(), fn () => $this->faker->unique()->ean8()),
-            'gross_weight'    => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
-            'net_weight'      => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
-            'volume'          => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
-            'created_at'      => Carbon::now(),
-            'updated_at'      => Carbon::now(),
+            'tenant_id'    => tenant()?->id ?: Tenant::factory(),
+            'sscc'         => when($this->faker->boolean(), fn () => $this->faker->unique()->ean8()),
+            'gross_weight' => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
+            'net_weight'   => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
+            'volume'       => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
+            'created_at'   => Carbon::now(),
+            'updated_at'   => Carbon::now(),
         ];
     }
 }

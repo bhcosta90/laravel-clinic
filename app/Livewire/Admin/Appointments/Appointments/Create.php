@@ -19,7 +19,7 @@ use Livewire\Component;
 
 final class Create extends Component
 {
-    public bool $modal;
+    public bool $slide;
 
     public array $dataAppointment = [];
 

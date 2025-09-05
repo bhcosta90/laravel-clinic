@@ -1,7 +1,7 @@
 <div>
-    <x-button :text="__('Create New Procedure')" wire:click="$toggle('modal')" outline />
+    <x-button :text="__('Create New Procedure')" wire:click="$toggle('slide')" outline />
 
-    <x-modal size="3xl" :title="__('Create New Procedure')" wire>
+    <x-ui.action size="3xl" :title="__('Create New Procedure')">
         <form id="procedure-create" wire:submit="save" class="space-y-4">
             <x-admin.registration.procedures.form />
         </form>
@@ -10,5 +10,5 @@
                 @lang('Save')
             </x-button>
         </x-slot:footer>
-    </x-modal>
+    </x-ui.action>
 </div>

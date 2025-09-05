@@ -5,19 +5,26 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Abstracts\Model;
+use App\Enums\Models\Ean\UnitOfMeasure;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-final class Sku extends Model
+final class Ean extends Model
 {
+    protected $table = 'ean';
+
     protected $fillable = [
-        'sku_code',
-        'barcode',
-        'description',
+        'ean',
+        'gross_weight',
+        'net_weight',
         'unit_of_measure',
-        'conversion_factor',
-        'weight',
         'volume',
+        'model_id',
+        'model_type',
+    ];
+
+    protected $casts = [
+        'unit_of_measure' => UnitOfMeasure::class,
     ];
 
     public function model(): MorphTo

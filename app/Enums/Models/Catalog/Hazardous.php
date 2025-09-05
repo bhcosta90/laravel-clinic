@@ -24,4 +24,16 @@ enum Hazardous: int
             self::ControlledMedications => __('Depending on regulations, may be treated as hazardous'),
         };
     }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::Flammable             => __('Flammable'),
+            self::Corrosive             => __('Corrosive'),
+            self::Explosive             => __('Explosive'),
+            self::CompressedGases       => __('Compressed Gases'),
+            self::RadioactiveMaterials  => __('Radioactive Materials'),
+            self::ControlledMedications => __('Controlled Medications'),
+        };
+    }
 }

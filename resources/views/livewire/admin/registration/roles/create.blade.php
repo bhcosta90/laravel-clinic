@@ -1,7 +1,7 @@
 <div>
-    <x-button :text="__('Create New Role')" wire:click="$toggle('modal')" outline />
+    <x-button :text="__('Create New Role')" wire:click="$toggle('slide')" outline />
 
-    <x-modal :title="__('Create New Role')" wire>
+    <x-ui.action :title="__('Create New Role')">
         <form id="role-create" wire:submit="save" class="space-y-4">
             <x-select.styled :label="__('Role')" wire:model="role.nested_parent" :request="route('admin.v1.api.roles.search')" unfiltered />
 
@@ -14,5 +14,5 @@
                 @lang('Save')
             </x-button>
         </x-slot:footer>
-    </x-modal>
+    </x-ui.action>
 </div>
