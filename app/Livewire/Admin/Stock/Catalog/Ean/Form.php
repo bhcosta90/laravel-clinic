@@ -49,7 +49,7 @@ final class Form extends \Livewire\Form
 
         return app(EanService::class)->handle('store', $data + [
             'model_id'   => $this->modelRelation->id,
-            'model_type' => get_class($this->modelRelation),
+            'model_type' => $this->modelRelation instanceof Model ? $this->modelRelation::class : self::class,
         ]);
     }
 
