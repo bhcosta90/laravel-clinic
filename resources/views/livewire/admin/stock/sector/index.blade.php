@@ -2,7 +2,7 @@
 <div>
     <x-card>
         <x-slot:header>
-            <x-ui.header :title="__('Patients')">
+            <x-ui.header :title="__('Sectors')">
                 <x-slot name="actions">
                     @can('create', Customer::class)
                         <livewire:admin.stock.sector.create @created="$refresh" />
@@ -19,10 +19,10 @@
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('update', $row)
-                        <x-button.circle icon="pencil" wire:click="$dispatch('load::customer', { 'customer' : '{{ $row->id }}'})" />
+                        <x-button.circle icon="pencil" wire:click="$dispatch('load::sector', { 'sector' : '{{ $row->id }}'})" />
                     @endcan
                     @can('delete', $row)
-                        <livewire:admin.stock.sector.delete :customer="$row" :key="uniqid('', true)" @deleted="$refresh" />
+                        <livewire:admin.stock.sector.delete :sector="$row" :key="uniqid('', true)" @deleted="$refresh" />
                     @endcan
                 </div>
             @endinteract
