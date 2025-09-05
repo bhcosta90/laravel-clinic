@@ -201,6 +201,7 @@
                                  :visible="auth()->user()->can('viewAny', Models\Sector::class)"/>
 
                 <x-side-bar.item :text="__('Catalog')"
+                                 :current="request()->routeIs('admin.v1.stock.catalog.*')"
                                  :route="route('admin.v1.stock.catalog.index')"
                                  :visible="auth()->user()->can('viewAny', Models\Catalog::class)"/>
 
@@ -214,8 +215,8 @@
                                      :visible="auth()->user()->can('viewAny', Models\Location::class)"/>
 
                     <x-side-bar.item :text="__('By Module')"
-                                     :current="request()->routeIs('admin.v1.stock.location.modules.*')"
-                                     :route="route('admin.v1.stock.location.modules.index')"
+                                     :current="request()->routeIs('admin.v1.stock.location.module.*')"
+                                     :route="route('admin.v1.stock.location.module.index')"
                                      :visible="auth()->user()->can('viewAny', Models\LocationModule::class)"/>
                 </x-side-bar.item>
             </x-side-bar.item>
