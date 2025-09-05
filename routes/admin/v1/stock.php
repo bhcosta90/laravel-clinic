@@ -7,6 +7,7 @@ use App\Models;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sectors', Stock\Sector\Index::class)->name('sector.index')->can('viewAny', Models\Sector::class);
+Route::get('/catalogs', Stock\Catalog\Index::class)->name('catalog.index')->can('viewAny', Models\Catalog::class);
 Route::prefix('location')->as('locations.')->group(function (): void {
     Route::prefix('/modules')->name('modules.')->group(function (): void {
         Route::get('/', Stock\LocationModule\Index::class)->name('index')->can('viewAny', Models\LocationModule::class);

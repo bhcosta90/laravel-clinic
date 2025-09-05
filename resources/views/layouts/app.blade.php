@@ -193,11 +193,16 @@
                     ($location = auth()->user()->can('viewAny', Models\Location::class)
                     || auth()->user()->can('viewAny', Models\LocationModule::class))
                     || auth()->user()->can('viewAny', Models\Sector::class)
+                    || auth()->user()->can('viewAny', Models\Catalog::class)
                 "
             >
                 <x-side-bar.item :text="__('Sector')"
                                  :route="route('admin.v1.stocks.sector.index')"
                                  :visible="auth()->user()->can('viewAny', Models\Sector::class)"/>
+
+                <x-side-bar.item :text="__('Catalog')"
+                                 :route="route('admin.v1.stocks.catalog.index')"
+                                 :visible="auth()->user()->can('viewAny', Models\Catalog::class)"/>
 
                 <x-side-bar.item :text="__('Location')"
                                  :visible="

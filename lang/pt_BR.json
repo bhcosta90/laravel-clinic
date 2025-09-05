@@ -1,4 +1,11 @@
 {
+    "Catalog records": "Registros de catálogo",
+    "Catalog": "Catálogo",
+    "catalog": "catálogo",
+    "location_import": "importação de local",
+    "Import locations records": "Importar locais",
+    "location_module": "módulo",
+    "Module records": "Registros de módulo",
     "Create New Module": "Criar Novo Módulo",
     "Update Module: #:id" : "Atualizar Módulo: #:id",
     "By Import": "Por Importação",
