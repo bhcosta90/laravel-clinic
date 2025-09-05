@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('warehouses', function (Blueprint $table) {
+        Schema::create('warehouses', function (Blueprint $table): void {
             $table->id();
             $table->foreignUuid('tenant_id')->constrained('tenants');
             $table->string('name');

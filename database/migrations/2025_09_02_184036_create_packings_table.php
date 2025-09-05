@@ -11,6 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('packings', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('tenant_id')->index();
             $table->foreignId('sku_id');
             $table->unsignedTinyInteger('unit_of_measure');
             $table->string('dun14')->nullable();
