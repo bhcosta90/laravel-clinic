@@ -5,10 +5,9 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Stock\Catalog\Ean;
 
 use App\Abstracts\Model;
-use App\Enums\Models\Catalog\Hazardous;
-use App\Enums\Models\Catalog\Status;
-use App\Enums\Models\Catalog\TrackingMode;
+use App\Enums\Models\Ean\UnitOfMeasure;
 use App\Models\Ean;
+use App\Rules\TenantUnique;
 use App\Services\EanService;
 use Illuminate\Validation\Rule;
 
@@ -21,6 +20,7 @@ final class Form extends \Livewire\Form
     public $ean;
     public $gross_weight;
     public $net_weight;
+    public $volume;
 
     public function setModelRelation(Model $modelRelation): void
     {
@@ -34,6 +34,7 @@ final class Form extends \Livewire\Form
         $this->gross_weight    = $model->gross_weight;
         $this->net_weight      = $model->net_weight;
         $this->unit_of_measure = $model->unit_of_measure;
+        $this->volume          = $model->volume;
     }
 
     public function save(): Ean
@@ -52,10 +53,11 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'name'          => ['required', 'string', 'max:255'],
-            'status'        => ['required', Rule::enum(Status::class)],
-            'hazardous'     => ['required', Rule::enum(Hazardous::class)],
-            'tracking_mode' => ['required', Rule::enum(TrackingMode::class)],
+            'ean'             => ['required', 'string', 'max:255', new TenantUnique(Ean::class, 'ean', $this->model?->id)],
+            'gross_weight'    => ['nullable', 'numeric', 'min:0'],
+            'net_weight'      => ['nullable', 'numeric', 'min:0'],
+            'unit_of_measure' => ['nullable', 'integer', Rule::enum(UnitOfMeasure::class)],
+            'volume'          => ['nullable', 'numeric', 'min:0'],
         ];
     }
 }

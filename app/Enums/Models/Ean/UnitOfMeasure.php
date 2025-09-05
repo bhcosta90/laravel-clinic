@@ -19,7 +19,7 @@ enum UnitOfMeasure: int
     case Kit     = 11;
     case Display = 12;
 
-    public function name(): string
+    public function label(): string
     {
         return match ($this) {
             self::UN      => __('Unit'),
