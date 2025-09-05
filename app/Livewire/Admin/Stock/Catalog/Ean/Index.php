@@ -50,11 +50,14 @@ final class Index extends Component
     #[Computed]
     public function rows(): Collection
     {
-        if ($this->catalog) {
+        if (!$this->catalog) {
             return collect([]);
         }
 
-        return app(EanService::class)->handle('index')
+        return app(EanService::class)->handle('index', null, [
+            '(model_type)' => Catalog::class,
+            '(model_id)'   => $this->catalog->id,
+        ])
             ->orderBy(...array_values($this->sort))
             ->get();
     }
