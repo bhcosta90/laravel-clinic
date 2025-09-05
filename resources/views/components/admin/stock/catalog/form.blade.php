@@ -8,7 +8,7 @@
 
     <div class="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4 sm:p-5">
         <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-200">{{ __('Attributes') }}</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <x-ui.select.enum :label="__('Hazardous') . ' *'" wire:model="form.hazardous" required :enum="Catalog\Hazardous::class" />
             <x-ui.select.enum :label="__('Tracking mode') . ' *'" wire:model="form.tracking_mode" required :enum="Catalog\TrackingMode::class" />
             <x-ui.select.enum class="sm:col-span-2" :label="__('Status') . ' *'" wire:model="form.status" required :enum="Catalog\Status::class" />
