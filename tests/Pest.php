@@ -5,7 +5,9 @@ declare(strict_types = 1);
 use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\Procedure;
+use App\Models\Tenant;
 use App\Models\User;
+use App\Models\Warehouse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +19,11 @@ pest()->extend(Tests\TestCase::class)
 
 function makeUser(): User
 {
-    $user = User::factory()->createTenant()->create(['is_employee' => true]);
+    $tenant    = Tenant::factory()->create();
+    $warehouse = Warehouse::factory()->for($tenant)->create();
+
+    $user = User::factory()->for($tenant)->for($warehouse)->create(['is_employee' => true]);
+
     Auth::login($user);
 
     return $user;

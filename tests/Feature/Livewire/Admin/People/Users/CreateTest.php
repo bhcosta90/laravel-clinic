@@ -3,7 +3,9 @@
 declare(strict_types = 1);
 
 use App\Livewire\Admin\People\Users\Create;
+use App\Models\Tenant;
 use App\Models\User;
+use App\Models\Warehouse;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
@@ -55,7 +57,9 @@ it('requires name', function (): void {
 });
 
 it('requires unique email', function (): void {
-    Auth::login(User::factory()->createTenant()->create());
+    $tenant    = Tenant::factory()->create();
+    $warehouse = Warehouse::factory()->for($tenant)->create();
+    Auth::login(User::factory()->for($tenant)->for($warehouse)->create());
     User::create([
         'name'     => 'Existing User',
         'email'    => 'existing@example.com',
@@ -92,7 +96,10 @@ it('requires password confirmation', function (): void {
 });
 
 it('sets email verified at when creating user', function (): void {
-    Auth::login(User::factory()->createTenant()->create());
+    $tenant    = Tenant::factory()->create();
+    $warehouse = Warehouse::factory()->for($tenant)->create();
+    Auth::login(User::factory()->for($tenant)->for($warehouse)->create());
+
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -110,7 +117,9 @@ it('sets email verified at when creating user', function (): void {
 });
 
 it('resets form after successful creation', function (): void {
-    Auth::login(User::factory()->createTenant()->create());
+    $tenant    = Tenant::factory()->create();
+    $warehouse = Warehouse::factory()->for($tenant)->create();
+    Auth::login(User::factory()->for($tenant)->for($warehouse)->create());
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
@@ -126,7 +135,9 @@ it('resets form after successful creation', function (): void {
 });
 
 it('dispatches created event', function (): void {
-    Auth::login(User::factory()->createTenant()->create());
+    $tenant    = Tenant::factory()->create();
+    $warehouse = Warehouse::factory()->for($tenant)->create();
+    Auth::login(User::factory()->for($tenant)->for($warehouse)->create());
     $data = [
         'form.name'                  => 'John Doe',
         'form.email'                 => 'john@example.com',
