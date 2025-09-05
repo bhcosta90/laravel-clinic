@@ -51,7 +51,7 @@ final class Index extends Component
     #[Computed]
     public function rows(): Collection
     {
-        if (!$this->catalog) {
+        if (!$this->catalog instanceof Catalog) {
             return collect([]);
         }
 
