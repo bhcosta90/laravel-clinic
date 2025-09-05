@@ -192,8 +192,13 @@
                              :visible="
                     ($location = auth()->user()->can('viewAny', Models\Location::class)
                     || auth()->user()->can('viewAny', Models\LocationModule::class))
+                    || auth()->user()->can('viewAny', Models\Sector::class)
                 "
             >
+                <x-side-bar.item :text="__('Sector')"
+                                 :route="route('admin.v1.stocks.sector.index')"
+                                 :visible="auth()->user()->can('viewAny', Models\Sector::class)"/>
+
                 <x-side-bar.item :text="__('Location')"
                                  :visible="
                     $location
@@ -204,6 +209,7 @@
                                      :visible="auth()->user()->can('viewAny', Models\Location::class)"/>
 
                     <x-side-bar.item :text="__('By Module')"
+                                     :current="request()->routeIs('admin.v1.stocks.locations.modules.*')"
                                      :route="route('admin.v1.stocks.locations.modules.index')"
                                      :visible="auth()->user()->can('viewAny', Models\LocationModule::class)"/>
                 </x-side-bar.item>

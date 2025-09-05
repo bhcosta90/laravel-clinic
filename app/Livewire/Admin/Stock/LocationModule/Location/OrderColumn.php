@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Stock\LocationModule\Location;
 
+use App\Enums\Models\Location\OrderColumn as OrderColumnEnum;
 use App\Livewire\Traits\Alert;
 use App\Models\LocationModule;
 use App\Services\LocationService;
@@ -36,7 +37,11 @@ final class OrderColumn extends Component
     public function order(): void
     {
 
-        app(LocationService::class)->handle('orderColumn', $this->locationModule, $this->type);
+        app(LocationService::class)->handle('orderColumn', $this->locationModule, match ($this->type) {
+            'odd_even' => OrderColumnEnum::OddEven,
+            'even_odd' => OrderColumnEnum::EvenOdd,
+            'sequence' => OrderColumnEnum::Sequence,
+        });
 
         $this->dialog()->success(__('The module is being ordered again, please wait a few moments to see the result.'))->send();
     }

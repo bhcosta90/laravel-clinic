@@ -18,7 +18,7 @@ final class Index extends Component
     use WithPagination;
 
     #[Url]
-    public ?int $quantity = 5;
+    public ?int $quantity = 15;
 
     #[Url]
     public ?string $date = null;
