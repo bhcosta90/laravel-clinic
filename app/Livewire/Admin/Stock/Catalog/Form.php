@@ -19,6 +19,7 @@ final class Form extends \Livewire\Form
     public $hazardous;
     public $status;
     public $tracking_mode;
+    public $barcode;
 
     public function setModel(Catalog $model): void
     {
@@ -27,6 +28,7 @@ final class Form extends \Livewire\Form
         $this->hazardous     = $model->hazardous;
         $this->status        = $model->status;
         $this->tracking_mode = $model->tracking_mode;
+        $this->barcode       = $model->skus()->oldest()->first()?->barcode;
     }
 
     public function save(): Catalog
