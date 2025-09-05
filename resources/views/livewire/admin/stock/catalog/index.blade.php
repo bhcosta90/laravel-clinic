@@ -33,4 +33,5 @@
     </x-card>
 
     <livewire:admin.stock.catalog.update @updated="$refresh" />
+    <livewire:admin.stock.catalog.ean.index />
 </div>
