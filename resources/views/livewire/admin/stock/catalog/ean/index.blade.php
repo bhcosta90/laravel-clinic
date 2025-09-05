@@ -13,6 +13,10 @@
                 <x-ui.created_at :date="$row->created_at" />
                 @endinteract
 
+                @interact('column_unit_of_measure', $row)
+                {{ $row->unit_of_measure->label() }}
+                @endinteract
+
                 @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('barcode', $row)

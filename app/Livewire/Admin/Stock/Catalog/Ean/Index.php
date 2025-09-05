@@ -30,6 +30,7 @@ final class Index extends Component
     {
         return [
             ['index' => 'ean', 'label' => __('Ean')],
+            ['index' => 'unit_of_measure', 'label' => __('Unit of measure')],
             ['index' => 'created_at', 'label' => __('Created')],
             ['index' => 'action', 'sortable' => false],
         ];
