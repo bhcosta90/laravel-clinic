@@ -17,11 +17,12 @@ final class EanFactory extends Factory
     public function definition(): array
     {
         return [
-            'tenant_id'       => tenant()?->id ?: Tenant::factory(),
-            'unit_of_measure' => $this->faker->randomElement(UnitOfMeasure::cases()),
-            'ean'             => $this->faker->unique()->ean13(),
-            'created_at'      => Carbon::now(),
-            'updated_at'      => Carbon::now(),
+            'tenant_id'         => tenant()?->id ?: Tenant::factory(),
+            'unit_of_measure'   => $this->faker->randomElement(UnitOfMeasure::cases()),
+            'conversion_factor' => $this->faker->randomFloat(2, 1, 100),
+            'ean'               => $this->faker->unique()->ean13(),
+            'created_at'        => Carbon::now(),
+            'updated_at'        => Carbon::now(),
         ];
     }
 }

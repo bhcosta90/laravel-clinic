@@ -18,6 +18,7 @@ return new class() extends Migration {
             $table->decimal('gross_weight', 30, 4)->nullable();
             $table->decimal('net_weight', 30, 4)->nullable();
             $table->decimal('volume', 30, 4)->nullable();
+            $table->decimal('conversion_factor', 30, 8)->nullable();
             $table->timestamps();
             $table->softDeletes();
 
