@@ -1,3 +1,3 @@
-<x-modal>
-
-</x-modal>
+<x-slide {{$attributes}} wire="modal">
+    {{ $slot }}
+</x-slide>

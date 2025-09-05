@@ -1,6 +1,6 @@
 <div>
     @if($modal)
-        <x-modal :title="__('Update Role: #:id', ['id' => $form->model?->id])" wire>
+        <x-ui.action :title="__('Update Role: #:id', ['id' => $form->model?->id])">
             <form id="role-update-{{ $form->model?->id }}" wire:submit="save" class="space-y-4">
                 <div>
                     <x-input label="{{ __('Name') }} *" wire:model="role.name" required />
@@ -11,6 +11,6 @@
                     @lang('Save')
                 </x-button>
             </x-slot:footer>
-        </x-modal>
+        </x-ui.action>
     @endif
 </div>

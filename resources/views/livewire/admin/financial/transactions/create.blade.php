@@ -1,7 +1,7 @@
 <div>
     <x-button :text="__('Create New ' . mb_ucfirst($this->type->label()))" wire:click="$toggle('modal')" outline />
 
-    <x-modal size="4xl" :title="__('Create New ' . mb_ucfirst($this->type->label()))" wire>
+    <x-ui.action :title="__('Create New ' . mb_ucfirst($this->type->label()))">
         <form id="transaction-create" wire:submit="save" class="space-y-4">
             <x-admin.financial.transactions.form />
         </form>
@@ -10,5 +10,5 @@
                 @lang('Save')
             </x-button>
         </x-slot:footer>
-    </x-modal>
+    </x-ui.action>
 </div>

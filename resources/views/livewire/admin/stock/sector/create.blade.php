@@ -3,7 +3,7 @@
         <x-button :text="__('Create New Sector')" wire:click="$toggle('modal')" outline />
     @endif
 
-    <x-modal size="3xl" :title="__('Create New Customer')" wire>
+    <x-ui.action size="3xl" :title="__('Create New Customer')">
         <form id="sector-create-{{ $id = str()->uuid() }}" wire:submit="save" class="space-y-4">
             <x-admin.stock.sector.form />
         </form>
@@ -12,5 +12,5 @@
                 @lang('Save')
             </x-button>
         </x-slot:footer>
-    </x-modal>
+    </x-ui.action>
 </div>

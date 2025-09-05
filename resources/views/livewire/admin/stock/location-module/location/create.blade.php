@@ -2,7 +2,7 @@
 <div>
     <x-button :text="__('Create New Location')" wire:click="$toggle('modal')" outline/>
 
-    <x-modal size="3xl" :title="__('Create New Location')" wire>
+    <x-ui.action size="3xl" :title="__('Create New Location')">
         <form id="module-create" wire:submit="save" class="space-y-3">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <x-select.sector
@@ -47,5 +47,5 @@
                 @lang('Register the address blocks')
             </x-button>
         </x-slot:footer>
-    </x-modal>
+    </x-ui.action>
 </div>

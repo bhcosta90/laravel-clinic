@@ -3,7 +3,7 @@
         <x-button.circle icon="credit-card" color="yellow" wire:click="$toggle('modal')" title="{{ __('Execute Payment') }}" wire:loading.attr="disabled" />
     @endcan
 
-    <x-modal size="3xl" :title="__('Execute Payment')" wire>
+    <x-ui.action size="3xl" :title="__('Execute Payment')">
         <form id="appointment-create-{{ $idForm = (string) str()->uuid() }}" wire:submit="save" class="space-y-6">
             <!-- Payment Details -->
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 border border-gray-200 dark:border-gray-700">
@@ -103,5 +103,5 @@
                 @lang('Save')
             </x-button>
         </x-slot:footer>
-    </x-modal>
+    </x-ui.action>
 </div>

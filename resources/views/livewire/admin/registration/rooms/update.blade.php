@@ -1,6 +1,6 @@
 <div>
     @if($modal)
-        <x-modal size="3xl" :title="__('Update Room: #:id', ['id' => $form->model?->id])" wire>
+        <x-ui.action size="3xl" :title="__('Update Room: #:id', ['id' => $form->model?->id])">
             <form id="room-update-{{ $form->model?->id }}" wire:submit="save" class="space-y-4">
                 <x-admin.registration.rooms.form />
             </form>
@@ -9,6 +9,6 @@
                     @lang('Save')
                 </x-button>
             </x-slot:footer>
-        </x-modal>
+        </x-ui.action>
     @endif
 </div>

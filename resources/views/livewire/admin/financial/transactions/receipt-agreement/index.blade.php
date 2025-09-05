@@ -1,5 +1,5 @@
 @php use App\Models\Transaction; @endphp
-<x-modal size="4xl" :title="__('Send Receipt')" wire>
+<x-ui.action :title="__('Send Receipt')">
     <form id="customer-create" wire:submit="save" class="space-y-6">
         <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
             <h3 class="text-lg font-medium text-gray-800 mb-3">{{ __('Date Information') }}</h3>
@@ -69,4 +69,4 @@
             </x-button>
         </div>
     </x-slot:footer>
-</x-modal>
+</x-ui.action>

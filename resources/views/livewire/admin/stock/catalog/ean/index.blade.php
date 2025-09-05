@@ -1,5 +1,5 @@
 @php use App\Models\Ean; @endphp
-<x-modal size="4xl" wire>
+<x-ui.action>
     @if($catalog)
         <div class="space-y-3">
             @can('create', Ean::class)
@@ -34,4 +34,4 @@
         </div>
         <livewire:admin.stock.catalog.ean.update @updated="$refresh" />
     @endif
-</x-modal>
+</x-ui.action>

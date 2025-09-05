@@ -1,6 +1,6 @@
 <div>
     @if($modal)
-        <x-modal size="4xl" :title="__('Update '.mb_ucfirst($this->form->type->label()).': #:id', ['id' => $this->form->model->id])" wire>
+        <x-ui.action :title="__('Update '.mb_ucfirst($this->form->type->label()).': #:id', ['id' => $this->form->model->id])">
             <form id="transaction-update-{{ $this->form->model->id }}" wire:submit="save" class="space-y-4">
                 <x-admin.financial.transactions.form />
             </form>
@@ -9,6 +9,6 @@
                     @lang('Save')
                 </x-button>
             </x-slot:footer>
-        </x-modal>
+        </x-ui.action>
     @endif
 </div>
