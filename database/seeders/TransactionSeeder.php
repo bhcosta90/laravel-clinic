@@ -21,16 +21,18 @@ final class TransactionSeeder extends Seeder
         $users          = User::whereIsEmployee(true)->pluck('id')->toArray();
         $agreements     = Agreement::pluck('id')->toArray();
 
-        Transaction::factory(25)->make()->each(function ($item) use ($paymentMethods, $customers, $agreements): void {
-            $item->type              = Type::Incomes;
+        Transaction::factory(25)->make([
+            'type' => Type::Incomes,
+        ])->each(function ($item) use ($paymentMethods, $customers, $agreements): void {
             $item->payment_method_id = collect($paymentMethods)->random();
             $item->customer_id       = collect($customers)->random();
             $item->agreement_id      = collect($agreements)->random();
             $item->save();
         });
 
-        Transaction::factory(25)->make()->each(function ($item) use ($paymentMethods, $users): void {
-            $item->type              = Type::Expenses;
+        Transaction::factory(25)->make([
+            'type' => Type::Incomes,
+        ])->each(function ($item) use ($paymentMethods, $users): void {
             $item->payment_method_id = collect($paymentMethods)->random();
             $item->user_id           = collect($users)->random();
             $item->save();

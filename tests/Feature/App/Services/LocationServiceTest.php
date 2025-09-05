@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
+use App\Enums\Models\Location\OrderColumn;
 use App\Enums\Models\Location\Status;
 use App\Enums\Models\Location\Type;
 use App\Enums\Models\Location\Zone;
-use App\Jobs\LocationModule\OrderColumnJob;
 use App\Livewire\Admin\Stock\LocationModule\Location\Create;
 use App\Models\Location;
 use App\Models\LocationModule;
@@ -82,13 +82,14 @@ test('it orders locations by sequence and validates their attributes', function 
 
     assertDatabaseCount(Location::class, 64);
 
-    OrderColumnJob::dispatch($this->locationModule->id, 'sequence');
+    $this->service->handle('orderColumn', $this->locationModule, OrderColumn::Sequence);
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
     expect($model->column)->toBe(0)
         ->and($model->level)->toBe(0)
-        ->and($model->position)->toBe(0);
+        ->and($model->position)->toBe(0)
+        ->and($model->sequence)->toBe(0);
 
     $model = $location->get(1);
     expect($model->column)->toBe(0)
@@ -103,12 +104,14 @@ test('it orders locations by sequence and validates their attributes', function 
     $model = $location->get(16);
     expect($model->column)->toBe(1)
         ->and($model->level)->toBe(0)
-        ->and($model->position)->toBe(0);
+        ->and($model->position)->toBe(0)
+        ->and($model->sequence)->toBe(160);
 
     $model = $location->get(17);
     expect($model->column)->toBe(1)
         ->and($model->level)->toBe(0)
-        ->and($model->position)->toBe(1);
+        ->and($model->position)->toBe(1)
+        ->and($model->sequence)->toBe(170);
 });
 
 test('it orders locations by even and odd, and validates their attributes', function (): void {
@@ -127,7 +130,7 @@ test('it orders locations by even and odd, and validates their attributes', func
 
     assertDatabaseCount(Location::class, 96);
 
-    OrderColumnJob::dispatch($this->locationModule->id, 'even_odd');
+    $this->service->handle('orderColumn', $this->locationModule, OrderColumn::EvenOdd);
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);
@@ -197,7 +200,7 @@ test('it orders locations by odd and even, and validates their attributes', func
 
     assertDatabaseCount(Location::class, 96);
 
-    OrderColumnJob::dispatch($this->locationModule->id, 'odd_even');
+    $this->service->handle('orderColumn', $this->locationModule, OrderColumn::OddEven);
     $location = Location::orderBy('sequence')->get();
 
     $model = $location->get(0);

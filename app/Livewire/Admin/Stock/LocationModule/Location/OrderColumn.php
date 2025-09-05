@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Stock\LocationModule\Location;
 
-use App\Jobs\LocationModule\OrderColumnJob;
 use App\Livewire\Traits\Alert;
 use App\Models\LocationModule;
+use App\Services\LocationService;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -36,7 +36,7 @@ final class OrderColumn extends Component
     public function order(): void
     {
 
-        dispatch(new OrderColumnJob($this->locationModule->id, $this->type));
+        app(LocationService::class)->handle('orderColumn', $this->locationModule, $this->type);
 
         $this->dialog()->success(__('The module is being ordered again, please wait a few moments to see the result.'))->send();
     }

@@ -15,8 +15,8 @@ final class RoleSeeder extends Seeder
     {
         DB::transaction(function (): void {
             $role = Role::create([
-                'name'      => 'Administrador',
                 'tenant_id' => DatabaseSeeder::TenantId,
+                'name'      => 'Administrador',
                 'children'  => [
                     ['name' => 'Testing', 'tenant_id' => DatabaseSeeder::TenantId],
                     ['name' => 'Clínico Geral', 'tenant_id' => DatabaseSeeder::TenantId],
