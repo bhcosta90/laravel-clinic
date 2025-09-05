@@ -4,7 +4,7 @@
     'report'
 ])
 <x-modal size="4xl" :title="__($title)" wire>
-    @if($this->modal)
+    @if($this->slide)
         <div class="space-y-4">
             <form id="report-{{ $id = str()->uuid() }}" wire:submit="save" class="space-y-6">
                 <div class="space-y-3">

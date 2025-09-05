@@ -8,7 +8,7 @@
         <div class="sm:col-span-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Provide the product barcode (EAN) and select the unit of measure used for this package.') }}</div>
     </div>
 
-    <input type="number" wire:model="form.conversion_factor" :label="__('Conversion factor') . ' *'" />
+    <x-input type="number" wire:model="form.conversion_factor" :label="__('Conversion factor') . ' *'" />
 
     <div class="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4 sm:p-5">
         <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-200">{{ __('Physical attributes') }}</h3>

@@ -21,6 +21,7 @@ final class Form extends \Livewire\Form
     public $gross_weight;
     public $net_weight;
     public $volume;
+    public $conversion_factor;
 
     public function setModelRelation(Model $modelRelation): void
     {
@@ -29,12 +30,13 @@ final class Form extends \Livewire\Form
 
     public function setModel(Ean $model): void
     {
-        $this->model           = $model;
-        $this->ean             = $model->ean;
-        $this->gross_weight    = $model->gross_weight;
-        $this->net_weight      = $model->net_weight;
-        $this->unit_of_measure = $model->unit_of_measure;
-        $this->volume          = $model->volume;
+        $this->model             = $model;
+        $this->ean               = $model->ean;
+        $this->gross_weight      = $model->gross_weight;
+        $this->net_weight        = $model->net_weight;
+        $this->unit_of_measure   = $model->unit_of_measure;
+        $this->volume            = $model->volume;
+        $this->conversion_factor = $model->conversion_factor;
     }
 
     public function save(): Ean
@@ -56,11 +58,12 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'ean'             => ['required', 'string', 'max:255', new TenantUnique(Ean::class, 'ean', $this->model?->id)],
-            'gross_weight'    => ['nullable', 'numeric', 'min:0'],
-            'net_weight'      => ['nullable', 'numeric', 'min:0'],
-            'unit_of_measure' => ['required', 'integer', Rule::enum(UnitOfMeasure::class)],
-            'volume'          => ['nullable', 'numeric', 'min:0'],
+            'ean'               => ['required', 'string', 'max:255', new TenantUnique(Ean::class, 'ean', $this->model?->id)],
+            'gross_weight'      => ['nullable', 'numeric', 'min:0'],
+            'net_weight'        => ['nullable', 'numeric', 'min:0'],
+            'unit_of_measure'   => ['required', 'integer', Rule::enum(UnitOfMeasure::class)],
+            'volume'            => ['nullable', 'numeric', 'min:0'],
+            'conversion_factor' => ['nullable', 'numeric', 'min:0'],
         ];
     }
 }

@@ -21,6 +21,7 @@ final class Ean extends Model
         'volume',
         'model_id',
         'model_type',
+        'conversion_factor',
     ];
 
     protected $casts = [
