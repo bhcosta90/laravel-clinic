@@ -1,5 +1,5 @@
 <div>
-    <x-button :text="__('Create New Role')" wire:click="$toggle('modal')" outline />
+    <x-button :text="__('Create New Role')" wire:click="$toggle('slide')" outline />
 
     <x-ui.action :title="__('Create New Role')">
         <form id="role-create" wire:submit="save" class="space-y-4">

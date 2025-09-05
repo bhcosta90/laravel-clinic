@@ -1,5 +1,5 @@
 <div>
-    @if($modal)
+    @if($slide)
         <x-ui.action size="3xl" :title="__('Update Procedure: #:id', ['id' => $form->model?->id])">
             <form id="procedure-update" wire:submit="save" class="space-y-4">
                 <x-admin.registration.procedures.form />

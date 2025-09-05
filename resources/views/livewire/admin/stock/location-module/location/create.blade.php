@@ -1,6 +1,6 @@
 @php use App\Enums\Models\Location; @endphp
 <div>
-    <x-button :text="__('Create New Location')" wire:click="$toggle('modal')" outline/>
+    <x-button :text="__('Create New Location')" wire:click="$toggle('slide')" outline/>
 
     <x-ui.action size="3xl" :title="__('Create New Location')">
         <form id="module-create" wire:submit="save" class="space-y-3">

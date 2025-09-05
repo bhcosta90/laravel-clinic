@@ -9,7 +9,7 @@ use Livewire\Component;
 
 final class Update extends Component
 {
-    public bool $modal = false;
+    public bool $slide = false;
 
     public function render(): View
     {

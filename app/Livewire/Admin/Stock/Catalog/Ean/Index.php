@@ -17,7 +17,7 @@ final class Index extends Component
 {
     public ?Catalog $catalog = null;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     #[Url]
     public array $sort = [
@@ -40,7 +40,7 @@ final class Index extends Component
     public function load(Catalog $catalog): void
     {
         $this->catalog = $catalog;
-        $this->modal   = true;
+        $this->slide   = true;
     }
 
     public function render(): View

@@ -1,5 +1,5 @@
 <div>
-    @if($modal)
+    @if($slide)
         <x-ui.action size="3xl" :title="__('Update Catalog: #:id', ['id' => $form->model?->id])">
             <form id="catalog-update" wire:submit="save" class="space-y-4">
                 <x-admin.stock.catalog.form />

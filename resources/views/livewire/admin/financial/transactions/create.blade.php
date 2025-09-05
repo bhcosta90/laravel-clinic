@@ -1,5 +1,5 @@
 <div>
-    <x-button :text="__('Create New ' . mb_ucfirst($this->type->label()))" wire:click="$toggle('modal')" outline />
+    <x-button :text="__('Create New ' . mb_ucfirst($this->type->label()))" wire:click="$toggle('slide')" outline />
 
     <x-ui.action :title="__('Create New ' . mb_ucfirst($this->type->label()))">
         <form id="transaction-create" wire:submit="save" class="space-y-4">

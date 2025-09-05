@@ -16,7 +16,7 @@ final class Update extends Component
 
     public ?Role $role = null;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     public function render(): View
     {
@@ -28,7 +28,7 @@ final class Update extends Component
     {
         $this->role = $role;
 
-        $this->modal = true;
+        $this->slide = true;
     }
 
     public function rules(): array

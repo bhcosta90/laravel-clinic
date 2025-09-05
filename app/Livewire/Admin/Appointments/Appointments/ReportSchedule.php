@@ -27,7 +27,7 @@ final class ReportSchedule extends AbstractPdfReport
     #[On('appointment::appointment::report-schedule')]
     public function load(): void
     {
-        $this->modal = true;
+        $this->slide = true;
     }
 
     #[Computed(persist: true)]

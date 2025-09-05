@@ -1,5 +1,5 @@
 <div>
-    <x-button :text="__('Create New Commission')" wire:click="$toggle('modal')" outline />
+    <x-button :text="__('Create New Commission')" wire:click="$toggle('slide')" outline />
 
     <x-ui.action size="3xl" :title="__('Create New Commission')">
         <form id="commission-create" wire:submit="save" class="space-y-4">

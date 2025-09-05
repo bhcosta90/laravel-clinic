@@ -23,7 +23,7 @@ final class Create extends Component
 
     public LocationModule $locationModule;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     public $sector_id;
     public $temperatura;

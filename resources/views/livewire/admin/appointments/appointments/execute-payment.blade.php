@@ -1,6 +1,6 @@
 <div>
     @can('executePayment', $appointment)
-        <x-button.circle icon="credit-card" color="yellow" wire:click="$toggle('modal')" title="{{ __('Execute Payment') }}" wire:loading.attr="disabled" />
+        <x-button.circle icon="credit-card" color="yellow" wire:click="$toggle('slide')" title="{{ __('Execute Payment') }}" wire:loading.attr="disabled" />
     @endcan
 
     <x-ui.action size="3xl" :title="__('Execute Payment')">

@@ -1,6 +1,6 @@
 <div>
     @if($this->showButton)
-        <x-button :text="__('Create New Sector')" wire:click="$toggle('modal')" outline />
+        <x-button :text="__('Create New Sector')" wire:click="$toggle('slide')" outline />
     @endif
 
     <x-ui.action size="3xl" :title="__('Create New Customer')">

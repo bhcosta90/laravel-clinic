@@ -1,5 +1,5 @@
 <div>
-    @if($modal)
+    @if($slide)
         <x-ui.action :title="__('Update Role: #:id', ['id' => $role?->id])">
             <form id="role-update-{{ $role?->id }}" wire:submit="save" class="space-y-4">
                 <div>

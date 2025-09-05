@@ -14,7 +14,7 @@ final class Create extends Component
 
     public Form $form;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     public function render(): View
     {
@@ -27,7 +27,7 @@ final class Create extends Component
 
         $this->dispatch('created');
 
-        $this->modal = false;
+        $this->slide = false;
 
         $this->success();
     }

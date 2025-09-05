@@ -19,7 +19,7 @@ final class Update extends Component
 
     public Type $type;
 
-    public bool $modal = false;
+    public bool $slide = false;
 
     public function render(): View
     {
@@ -31,7 +31,7 @@ final class Update extends Component
     {
         $this->form->setModel($transaction);
 
-        $this->modal = true;
+        $this->slide = true;
     }
 
     public function save(): void
@@ -43,7 +43,7 @@ final class Update extends Component
         $this->dispatch('updated');
 
         $this->form->reset();
-        $this->reset('modal');
+        $this->reset('slide');
 
         $this->success();
     }

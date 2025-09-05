@@ -1,5 +1,5 @@
 <div>
-    <x-button :text="__('Create New Catalog')" wire:click="$toggle('modal')" outline />
+    <x-button :text="__('Create New Catalog')" wire:click="$toggle('slide')" outline />
 
     <x-ui.action size="3xl" :title="__('Create New Catalog')">
         <form id="catalog-create" wire:submit="save" class="space-y-4">

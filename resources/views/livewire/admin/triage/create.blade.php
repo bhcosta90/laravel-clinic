@@ -1,5 +1,5 @@
 <div>
-    <x-button :text="__('Create New Triage')" wire:click="$toggle('modal')" outline />
+    <x-button :text="__('Create New Triage')" wire:click="$toggle('slide')" outline />
 
     <x-ui.action size="3xl" :title="__('Create New Triage')">
         <form id="triage-create" wire:submit="save" class="space-y-4">

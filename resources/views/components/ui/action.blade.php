@@ -1,4 +1,4 @@
-<x-slide {{$attributes}} wire="modal">
+<x-slide {{$attributes}} wire="slide">
     {{ $slot }}
 
     <x-slot:footer>
