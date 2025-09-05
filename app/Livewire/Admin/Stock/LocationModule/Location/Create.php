@@ -11,6 +11,7 @@ use App\Enums\Models\Location\Zone;
 use App\Livewire\Traits\Alert;
 use App\Models\LocationModule;
 use App\Models\Sector;
+use App\Rules\TenantExists;
 use App\Services\LocationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
@@ -76,7 +77,7 @@ final class Create extends Component
     public function rules(): array
     {
         return [
-            'sector_id'        => ['required', 'numeric', Rule::exists(Sector::class, 'id')->where('tenant_id', tenant()->id)],
+            'sector_id'        => ['required', 'numeric', new TenantExists(Sector::class, 'id')],
             'column_initial'   => ['required', 'numeric', 'min:0'],
             'column_final'     => ['required', 'numeric', 'min:0'],
             'level_initial'    => ['required', 'numeric', 'min:0'],

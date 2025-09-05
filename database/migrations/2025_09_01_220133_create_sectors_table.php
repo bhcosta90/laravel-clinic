@@ -15,8 +15,6 @@ return new class() extends Migration {
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->unique(['tenant_id', 'name']);
         });
     }
 

@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Stock\LocationModule;
 
 use App\Models\LocationModule;
+use App\Rules\TenantUnique;
 use App\Services\LocationModuleService;
-use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
 {
@@ -42,7 +42,7 @@ final class Form extends \Livewire\Form
                 'required',
                 'string',
                 'max:255',
-                Rule::exists(LocationModule::class)->where('tenant_id', tenant()->id),
+                new TenantUnique(LocationModule::class, 'acronym', $this->model?->id),
             ],
             'sequence' => ['nullable', 'numeric', 'max:4000000000'],
         ];

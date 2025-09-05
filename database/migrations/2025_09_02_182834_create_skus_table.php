@@ -18,8 +18,6 @@ return new class() extends Migration {
             $table->json('attributes')->nullable(); // JSON com atributos (ex.: {"color": "red", "size": "500ml"})
             $table->timestamps();
             $table->softDeletes();
-
-            $table->unique(['tenant_id', 'model_type', 'model_id', 'sku_code']);
         });
     }
 
