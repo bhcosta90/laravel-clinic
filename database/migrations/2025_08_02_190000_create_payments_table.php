@@ -13,7 +13,7 @@ return new class() extends Migration {
             $table->id();
             $table->uuid('tenant_id')->index();
             $table->string('name');
-            $table->decimal('tax');
+            $table->decimal('tax', 5, 2);
             $table->timestamps();
             $table->softDeletes();
         });

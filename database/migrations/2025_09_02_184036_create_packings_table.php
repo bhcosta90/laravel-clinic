@@ -15,9 +15,9 @@ return new class() extends Migration {
             $table->unsignedTinyInteger('unit_of_measure');
             $table->string('dun14')->nullable();
             $table->string('sscc')->nullable();
-            $table->decimal('gross_weight')->nullable();
-            $table->decimal('net_weight')->nullable();
-            $table->decimal('volume')->nullable();
+            $table->decimal('gross_weight', 30, 4)->nullable();
+            $table->decimal('net_weight', 30, 4)->nullable();
+            $table->decimal('volume', 30, 4)->nullable();
             $table->boolean('is_promotional')->nullable();
             $table->timestamps();
             $table->softDeletes();

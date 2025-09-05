@@ -14,7 +14,7 @@ return new class() extends Migration {
             $table->uuid('tenant_id')->index();
             $table->string('name');
             $table->string('cellphone');
-            $table->decimal('commission');
+            $table->decimal('commission', 5, 2);
             $table->timestamps();
             $table->softDeletes();
         });

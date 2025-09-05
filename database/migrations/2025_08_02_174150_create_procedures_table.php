@@ -13,7 +13,7 @@ return new class() extends Migration {
             $table->id();
             $table->uuid('tenant_id')->index();
             $table->string('name');
-            $table->decimal('price');
+            $table->decimal('price', 30, 4);
             $table->unsignedInteger('time');
             $table->string('description')->nullable();
             $table->boolean('is_agreement')->nullable();
