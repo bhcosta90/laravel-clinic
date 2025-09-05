@@ -20,7 +20,7 @@ abstract class AbstractPdfReport extends Component
 {
     public ?Report $report = null;
 
-    public bool $modal         = false;
+    public bool $slide         = false;
     public ?string $date_start = null;
     public ?string $date_end   = null;
 
