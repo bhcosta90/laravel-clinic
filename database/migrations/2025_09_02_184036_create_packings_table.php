@@ -12,7 +12,6 @@ return new class() extends Migration {
         Schema::create('packings', function (Blueprint $table): void {
             $table->id();
             $table->uuid('tenant_id')->index();
-            $table->foreignId('barcode_id');
             $table->string('sscc')->nullable();
             $table->decimal('gross_weight', 30, 4)->nullable();
             $table->decimal('net_weight', 30, 4)->nullable();
