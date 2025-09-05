@@ -4,21 +4,20 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Models\Sku;
 use App\Models\Tenant;
+use App\Models\Warehouse;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-final class SkuFactory extends Factory
+final class WarehouseFactory extends Factory
 {
-    protected $model = Sku::class;
+    protected $model = Warehouse::class;
 
     public function definition(): array
     {
         return [
             'tenant_id'  => tenant()?->id ?: Tenant::factory(),
-            'sku_code'   => $this->faker->unique()->ean8(),
-            'barcode'    => $this->faker->unique()->ean13(),
+            'name'       => $this->faker->name(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

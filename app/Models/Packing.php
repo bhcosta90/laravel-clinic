@@ -4,16 +4,10 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Abstracts\Model;
 
 final class Packing extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
-
     protected $fillable = [
         'sku_id',
         'unit_of_measure',

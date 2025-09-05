@@ -11,10 +11,10 @@ return new class() extends Migration {
     {
         Schema::create('skus', function (Blueprint $table): void {
             $table->id();
-            $table->foreignUuid('tenant_id')->constrained();
+            $table->uuid('tenant_id')->index();
             $table->morphs('model');
             $table->string('sku_code');  // Internal code
-            $table->string('gtin')->nullable();    // Bar code of the sale of sale
+            $table->string('barcode')->nullable();    // Bar code of the sale of sale
             $table->json('attributes')->nullable(); // JSON com atributos (ex.: {"color": "red", "size": "500ml"})
             $table->timestamps();
             $table->softDeletes();

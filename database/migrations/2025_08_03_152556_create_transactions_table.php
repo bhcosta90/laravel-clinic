@@ -20,7 +20,7 @@ return new class() extends Migration {
             $table->string('model_type')->nullable();
             $table->unsignedBigInteger('model_id')->nullable();
             $table->string('type')->index();
-            $table->decimal('value');
+            $table->decimal('value', 30, 4);
             $table->date('due_date');
             $table->date('payment_date')->nullable();
             $table->string('frequency')->nullable();

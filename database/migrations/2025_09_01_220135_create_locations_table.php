@@ -11,7 +11,8 @@ return new class() extends Migration {
     {
         Schema::create('locations', function (Blueprint $table): void {
             $table->ulid('id')->primary();
-            $table->foreignUuid('tenant_id')->constrained();
+            $table->uuid('tenant_id')->index();
+            $table->foreignId('warehouse_id')->index();
             $table->foreignId('sector_id')->constrained();
             $table->foreignId('location_module_id')->nullable()->constrained();
             $table->string('code');

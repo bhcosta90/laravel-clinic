@@ -13,7 +13,7 @@ return new class() extends Migration {
             $table->id();
             $table->uuid('tenant_id')->index();
             $table->foreignId('user_id')->constrained('users');
-            $table->decimal('value');
+            $table->decimal('value', 30, 4);
             $table->date('due_date');
             $table->date('payment_date')->nullable();
             $table->timestamps();

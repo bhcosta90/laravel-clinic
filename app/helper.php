@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 
 use App\Models\Tenant;
+use App\Models\Warehouse;
 
 if (!function_exists('numberFormat')) {
     function numberFormat(float | int $number): string
@@ -21,5 +22,18 @@ if (!function_exists('tenant')) {
         }
 
         return $currentTenant;
+    }
+}
+
+if (!function_exists('warehouse')) {
+    function warehouse(?Warehouse $warehouse = null): ?Warehouse
+    {
+        static $currentWarehouse = null;
+
+        if (null === $currentWarehouse || app()->environment('testing')) {
+            $currentWarehouse = $warehouse instanceof Warehouse ? $warehouse : auth()->user()?->warehouse;
+        }
+
+        return $currentWarehouse;
     }
 }

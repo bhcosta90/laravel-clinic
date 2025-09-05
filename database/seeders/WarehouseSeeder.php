@@ -4,13 +4,15 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
-use App\Models\LocationModule;
+use App\Models\Warehouse;
 use Illuminate\Database\Seeder;
 
-final class LocationModuleSeeder extends Seeder
+use function warehouse;
+
+final class WarehouseSeeder extends Seeder
 {
     public function run(): void
     {
-        LocationModule::factory()->create();
+        warehouse(Warehouse::factory()->create());
     }
 }

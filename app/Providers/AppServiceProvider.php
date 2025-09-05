@@ -39,15 +39,17 @@ final class AppServiceProvider extends ServiceProvider
             $userId = ($user = auth()->user())->id;
 
             return [
-                'tenant_id' => $user->tenant_id,
-                'user_id'   => $userId,
+                'tenant_id'    => $user->tenant_id,
+                'warehouse_id' => $user->warehouse_id,
+                'user_id'      => $userId,
             ];
         });
 
         app(QueueManager::class)->before(function ($event): void {
-            $payload  = $event->job?->payload();
-            $userId   = $payload['user_id'] ?? null;
-            $tenantId = $payload['tenant_id'] ?? null;
+            $payload     = $event->job?->payload();
+            $userId      = $payload['user_id'] ?? null;
+            $tenantId    = $payload['tenant_id'] ?? null;
+            $warehouseId = $payload['warehouse_id'] ?? null;
 
             if (isset($payload['data']['command']) && blank($userId)) {
                 $command = unserialize($payload['data']['command']);
@@ -59,12 +61,17 @@ final class AppServiceProvider extends ServiceProvider
                 if (isset($command->tenant_id)) {
                     $tenantId = $command->tenant_id;
                 }
+
+                if (isset($command->warehouse_id)) {
+                    $warehouseId = $command->warehouse_id;
+                }
             }
 
             auth()->onceUsingId($userId);
 
             Log::debug('User ID: ' . $userId);
             Log::debug('Tenant ID: ' . $tenantId);
+            Log::debug('Warehouse ID: ' . $warehouseId);
         });
     }
 }

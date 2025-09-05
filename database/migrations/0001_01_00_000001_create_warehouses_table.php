@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('payment_methods', function (Blueprint $table): void {
+        Schema::create('warehouses', function (Blueprint $table): void {
             $table->id();
-            $table->uuid('tenant_id')->index();
+            $table->foreignUuid('tenant_id')->constrained('tenants');
             $table->string('name');
-            $table->decimal('tax', 5, 2);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -21,6 +20,6 @@ return new class() extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('warehouses');
     }
 };

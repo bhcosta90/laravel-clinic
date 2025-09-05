@@ -14,6 +14,7 @@ final class TenantSeeder extends Seeder
         $default = [
             PermissionSeeder::class,
             RoleSeeder::class,
+            WarehouseSeeder::class,
         ];
 
         if (app()->isLocal()) {

@@ -11,7 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('catalogs', function (Blueprint $table): void {
             $table->id();
-            $table->foreignUuid('tenant_id')->constrained();
+            $table->uuid('tenant_id')->index();
             $table->string('name');
             $table->unsignedTinyInteger('tracking_mode');
             $table->unsignedTinyInteger('hazardous');

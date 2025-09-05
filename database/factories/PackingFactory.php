@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Enums\Models\Packing\UnitOfMeasure;
 use App\Models\Packing;
+use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -18,6 +19,7 @@ final class PackingFactory extends Factory
         $volume = $this->faker->boolean();
 
         return [
+            'tenant_id'       => tenant()?->id ?: Tenant::factory(),
             'unit_of_measure' => $this->faker->randomElement(UnitOfMeasure::cases()),
             'dun14'           => when($this->faker->boolean(), fn () => $this->faker->unique()->ean13()),
             'sscc'            => when($this->faker->boolean(), fn () => $this->faker->unique()->ean8()),
