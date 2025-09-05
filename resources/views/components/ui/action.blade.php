@@ -2,6 +2,6 @@
     {{ $slot }}
 
     <x-slot:footer>
-        {{ $footer }}
+        {{ $footer ?? null }}
     </x-slot:footer>
 </x-slide>

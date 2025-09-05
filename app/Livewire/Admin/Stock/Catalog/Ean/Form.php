@@ -47,7 +47,10 @@ final class Form extends \Livewire\Form
             return $this->model;
         }
 
-        return app(EanService::class)->handle('store', $data);
+        return app(EanService::class)->handle('store', $data + [
+            'model_id'   => $this->modelRelation->id,
+            'model_type' => get_class($this->modelRelation),
+        ]);
     }
 
     public function rules(): array
@@ -56,7 +59,7 @@ final class Form extends \Livewire\Form
             'ean'             => ['required', 'string', 'max:255', new TenantUnique(Ean::class, 'ean', $this->model?->id)],
             'gross_weight'    => ['nullable', 'numeric', 'min:0'],
             'net_weight'      => ['nullable', 'numeric', 'min:0'],
-            'unit_of_measure' => ['nullable', 'integer', Rule::enum(UnitOfMeasure::class)],
+            'unit_of_measure' => ['required', 'integer', Rule::enum(UnitOfMeasure::class)],
             'volume'          => ['nullable', 'numeric', 'min:0'],
         ];
     }

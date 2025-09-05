@@ -32,7 +32,5 @@ final class Create extends Component
         $this->dispatch('created');
 
         $this->slide = false;
-
-        $this->success();
     }
 }

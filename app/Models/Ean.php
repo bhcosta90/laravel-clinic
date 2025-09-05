@@ -19,6 +19,8 @@ final class Ean extends Model
         'net_weight',
         'unit_of_measure',
         'volume',
+        'model_id',
+        'model_type',
     ];
 
     protected $casts = [
