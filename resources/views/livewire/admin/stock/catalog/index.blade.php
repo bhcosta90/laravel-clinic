@@ -19,7 +19,7 @@
             @interact('column_action', $row)
                 <div class="flex gap-1 justify-end">
                     @can('barcode', $row)
-                        <x-button.circle color="secondary" icon="bars-3" href="{{ route('admin.v1.stock.catalog.id.barcodes', $row->hash_code) }}" />
+                        <x-button.circle color="secondary" icon="bars-3" href="{{ route('admin.v1.stock.catalog.id.ean', $row->hash_code) }}" />
                     @endcan
                     @can('update', $row)
                         <x-button.circle icon="pencil" wire:click="$dispatch('load::catalog', { 'catalog' : '{{ $row->id }}'})" />

@@ -12,9 +12,7 @@ return new class() extends Migration {
         Schema::create('packings', function (Blueprint $table): void {
             $table->id();
             $table->uuid('tenant_id')->index();
-            $table->foreignId('sku_id');
-            $table->unsignedTinyInteger('unit_of_measure');
-            $table->string('dun14')->nullable();
+            $table->foreignId('barcode_id');
             $table->string('sscc')->nullable();
             $table->decimal('gross_weight', 30, 4)->nullable();
             $table->decimal('net_weight', 30, 4)->nullable();

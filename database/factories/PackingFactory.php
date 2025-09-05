@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Enums\Models\Packing\UnitOfMeasure;
+use App\Enums\Models\Barcode\UnitOfMeasure;
 use App\Models\Packing;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;

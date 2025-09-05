@@ -34,8 +34,8 @@ final class Catalog extends Model
         return $this->belongsTo(Tenant::class);
     }
 
-    public function skus(): MorphMany
+    public function ean(): MorphMany
     {
-        return $this->morphMany(Sku::class, 'model');
+        return $this->morphMany(Ean::class, 'model');
     }
 }

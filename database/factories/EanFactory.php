@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Models\Sku;
+use App\Models\Ean;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-final class SkuFactory extends Factory
+final class EanFactory extends Factory
 {
-    protected $model = Sku::class;
+    protected $model = Ean::class;
 
     public function definition(): array
     {

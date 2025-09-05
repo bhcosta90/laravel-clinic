@@ -8,16 +8,11 @@ use App\Abstracts\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-final class Sku extends Model
+final class Ean extends Model
 {
+    protected $table = 'ean';
+
     protected $fillable = [
-        'sku_code',
-        'barcode',
-        'description',
-        'unit_of_measure',
-        'conversion_factor',
-        'weight',
-        'volume',
     ];
 
     public function model(): MorphTo

@@ -9,20 +9,24 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('skus', function (Blueprint $table): void {
+        Schema::create('ean', function (Blueprint $table): void {
             $table->id();
             $table->uuid('tenant_id')->index();
             $table->morphs('model');
-            $table->string('sku_code');  // Internal code
-            $table->string('barcode')->nullable();    // Bar code of the sale of sale
-            $table->json('attributes')->nullable(); // JSON com atributos (ex.: {"color": "red", "size": "500ml"})
+            $table->unsignedTinyInteger('unit_of_measure');
+            $table->string('ean')->nullable();
+            $table->decimal('gross_weight', 30, 4)->nullable();
+            $table->decimal('net_weight', 30, 4)->nullable();
+            $table->decimal('volume', 30, 4)->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['tenant_id', 'ean']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('skus');
+        Schema::dropIfExists('ean');
     }
 };

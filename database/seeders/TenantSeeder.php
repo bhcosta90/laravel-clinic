@@ -34,7 +34,7 @@ final class TenantSeeder extends Seeder
                 AppointmentSeeder::class,
                 TriageSeeder::class,
                 CatalogSeeder::class,
-                SkuSeeder::class,
+                EanSeeder::class,
                 PackingSeeder::class,
                 LocationModuleSeeder::class,
                 SectorSeeder::class,
