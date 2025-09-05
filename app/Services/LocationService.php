@@ -27,11 +27,11 @@ final class LocationService extends Service
     public function dataValidate(): array
     {
         return [
-            'location_module_id' => ['required', 'numeric'],
+            'location_module_id' => ['nullable', 'numeric'],
             'sector_id'          => ['required', 'numeric'],
             'code'               => ['required', 'string', 'max:255', 'string'],
             'type'               => ['required', Rule::enum(LocationEnum\Type::class)],
-            'aisle'              => ['nullable', 'string', 'max:4000000000'],
+            'aisle'              => ['nullable', 'max:4000000000'],
             'column'             => ['nullable', 'numeric', 'max:4000000000'],
             'level'              => ['nullable', 'numeric', 'max:4000000000'],
             'position'           => ['nullable', 'numeric', 'max:4000000000'],

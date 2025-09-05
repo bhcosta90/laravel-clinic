@@ -9,19 +9,17 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('sectors', function (Blueprint $table): void {
+        Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
-            $table->uuid('tenant_id')->index();
+            $table->foreignUuid('tenant_id')->constrained('tenants');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->unique(['tenant_id', 'name']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('sectors');
+        Schema::dropIfExists('warehouses');
     }
 };

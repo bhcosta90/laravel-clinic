@@ -66,6 +66,11 @@ final class User extends Authenticatable implements Auditable
         return $this->belongsTo(Tenant::class);
     }
 
+    public function warehouse(): BelongsTo
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
+
     public function permissions(): MorphToMany
     {
         return $this->morphToMany(Permission::class, 'model', $table = 'model_permissions')
@@ -101,6 +106,10 @@ final class User extends Authenticatable implements Auditable
         self::creating(function ($model): void {
             if (blank($model->tenant_id) && auth()->check()) {
                 $model->tenant_id = tenant()->id;
+            }
+
+            if (blank($model->warehouse_id) && auth()->check()) {
+                $model->warehouse_id = warehouse()->id;
             }
         });
     }
