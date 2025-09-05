@@ -50,6 +50,8 @@ enum Can: string
     case StockLocationImportEdit      = 'stock-location_import-edit';
     case StockLocationModuleView      = 'stock-location_module-view';
     case StockLocationModuleEdit      = 'stock-location_module-edit';
+    case StockSectorView              = 'stock-sector-view';
+    case StockSectorEdit              = 'stock-sector-edit';
 
     public static function operation(string $label): string
     {

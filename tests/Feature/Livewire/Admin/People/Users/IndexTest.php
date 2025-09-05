@@ -22,7 +22,7 @@ it('renders the users index component', function (): void {
 
 it('initializes with default settings', function (): void {
     Livewire::test(Index::class)
-        ->assertSet('quantity', 5)
+        ->assertSet('quantity', 15)
         ->assertSet('search', null)
         ->assertSet('sort', [
             'column'    => 'name',
@@ -49,7 +49,7 @@ it('fetches paginated users excluding authenticated user', function (): void {
     expect($rows)
         ->toBeInstanceOf(Paginator::class)
         ->and(count($rows))
-        ->toBe(5)
+        ->toBe(15)
         ->and($rows->pluck('id'))->not()->toContain($this->auth->id);
 
 });

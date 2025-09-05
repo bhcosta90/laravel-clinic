@@ -23,7 +23,7 @@ final class Index extends Component
     public Type $type;
 
     #[Url]
-    public ?int $quantity = 5;
+    public ?int $quantity = 15;
 
     #[Url]
     public ?string $search = null;

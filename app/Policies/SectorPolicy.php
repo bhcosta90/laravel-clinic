@@ -4,9 +4,20 @@ declare(strict_types = 1);
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Enums\Models\Permission\Can;
+use App\Policies\Traits\CrudPolicyTrait;
 
 final class SectorPolicy
 {
-    use HandlesAuthorization;
+    use CrudPolicyTrait;
+
+    protected function getViewPermission(): Can
+    {
+        return Can::StockSectorView;
+    }
+
+    protected function getEditPermission(): Can
+    {
+        return Can::StockSectorEdit;
+    }
 }
