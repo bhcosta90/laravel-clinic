@@ -43,12 +43,12 @@ final class Create extends Component
         if (app()->isLocal()) {
             $this->sector_id        = 1;
             $this->temperature      = '1';
-            $this->column_initial   = 1;
-            $this->column_final     = 3;
-            $this->level_initial    = 1;
-            $this->level_final      = 3;
-            $this->position_initial = 1;
-            $this->position_final   = 3;
+            $this->column_initial   = 0;
+            $this->column_final     = 6;
+            $this->level_initial    = 0;
+            $this->level_final      = 6;
+            $this->position_initial = 0;
+            $this->position_final   = 6;
             $this->type             = 1;
             $this->control          = 1;
             $this->zone             = 1;
