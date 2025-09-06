@@ -17,12 +17,6 @@
             </x-ui.header>
         </x-slot:header>
 
-        <div class="mb-3 flex items-center justify-between gap-2">
-            <div class="text-xs text-gray-500 dark:text-gray-400">
-                {{ __('Showing') }} {{ $this->rows->count() }} {{ __('of') }} {{ method_exists($this->rows, 'total') ? $this->rows->total() : $this->rows->count() }}
-            </div>
-        </div>
-
         <x-table :headers="$this->headers" :$sort :rows="$this->rows" paginate simple-pagination filter loading :quantity="[5, 15, 25, 50]">
             @interact('column_name', $row)
                 <div class="font-medium text-gray-900 dark:text-gray-100">{{ $row->name }}</div>
