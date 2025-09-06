@@ -24,7 +24,7 @@
             @endinteract
 
             @interact('column_action', $row)
-                <div class="flex gap-1 justify-end">
+                <div class="flex gap-2 justify-end">
                     @can('updateEmployee', [$row, auth()->user()])
                         <x-button.circle icon="pencil" wire:click="$dispatch('load::employee', { 'employee' : '{{ $row->id }}'})" />
                     @endcan

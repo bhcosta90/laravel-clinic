@@ -21,7 +21,10 @@
             @endinteract
 
             @interact('column_action', $row)
-                <div class="flex gap-1 justify-end">
+                <div class="flex gap-2 justify-end">
+                    @can('barcode', $row)
+                        <x-button.circle outline color="secondary" icon="qr-code" wire:click="$dispatch('load::packing::barcode', { 'packing' : '{{ $row->id }}'})" />
+                    @endcan
                     @can('update', $row)
                         <x-button.circle icon="pencil" wire:click="$dispatch('load::packing', { 'packing' : '{{ $row->id }}'})" />
                     @endcan

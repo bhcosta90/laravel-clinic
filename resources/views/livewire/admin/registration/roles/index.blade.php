@@ -17,7 +17,7 @@
             @endinteract
 
             @interact('column_action', $row)
-                <div class="flex gap-1 justify-end">
+                <div class="flex gap-2 justify-end">
                     @can('permissions', $row)
                         <x-button.circle icon="key" color='yellow' :href="route('admin.v1.registration.roles.permissions', $row->hash_code)" />
                     @endcan

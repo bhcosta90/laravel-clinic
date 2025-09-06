@@ -17,7 +17,7 @@
             @endinteract
 
             @interact('column_action', $row)
-                <div class="flex gap-1 justify-end">
+                <div class="flex gap-2 justify-end">
                     @can('update' . mb_ucfirst($this->type->value), $row)
                         <x-button.circle icon="pencil" wire:click="$dispatch('load::transaction', { 'transaction' : '{{ $row->id }}'})" />
                     @endcan
