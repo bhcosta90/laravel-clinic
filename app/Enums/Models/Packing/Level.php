@@ -35,6 +35,7 @@ enum Level: int
             self::M3      => __('Cubic meter'),
             self::Kit     => __('Kit / Set'),
             self::Display => __('Display'),
+            self::Packing => __('Packing'),
         };
     }
 

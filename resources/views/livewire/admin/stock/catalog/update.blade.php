@@ -1,4 +1,4 @@
-<div>
+<div class="space-y-3">
     <x-card>
         <x-slot:header>
             <x-ui.header :title="__('Catalog')">
@@ -14,4 +14,6 @@
             <x-admin.stock.catalog.form :updated="true" />
         </form>
     </x-card>
+
+    <livewire:admin.stock.packing.index :model="$this->form->model" />
 </div>

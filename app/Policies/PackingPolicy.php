@@ -4,40 +4,20 @@ declare(strict_types = 1);
 
 namespace App\Policies;
 
-use App\Models\Packing;
-use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Enums\Models\Permission\Can;
+use App\Policies\Traits\CrudPolicyTrait;
 
 final class PackingPolicy
 {
-    use HandlesAuthorization;
+    use CrudPolicyTrait;
 
-    public function viewAny(User $user): bool
+    protected function getViewPermission(): Can
     {
-
+        return Can::StockCatalogView;
     }
 
-    public function view(User $user, Packing $packing): bool
+    protected function getEditPermission(): Can
     {
-    }
-
-    public function create(User $user): bool
-    {
-    }
-
-    public function update(User $user, Packing $packing): bool
-    {
-    }
-
-    public function delete(User $user, Packing $packing): bool
-    {
-    }
-
-    public function restore(User $user, Packing $packing): bool
-    {
-    }
-
-    public function forceDelete(User $user, Packing $packing): bool
-    {
+        return Can::StockCatalogEdit;
     }
 }
