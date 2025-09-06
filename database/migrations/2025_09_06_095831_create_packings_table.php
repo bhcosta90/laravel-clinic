@@ -10,7 +10,7 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('packings', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('tenant_id');
             $table->string('model_type');
             $table->string('model_id');

@@ -35,7 +35,7 @@ final class Delete extends Component
 
     public function delete(): void
     {
-        $this->packing->delete();
+        $this->packing->forceDelete();
 
         $this->dispatch('deleted');
 

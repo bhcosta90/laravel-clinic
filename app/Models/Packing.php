@@ -6,9 +6,12 @@ namespace App\Models;
 
 use App\Abstracts\Model;
 use App\Enums\Models\Packing\Level;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 
 final class Packing extends Model
 {
+    use HasUlids;
+
     protected $fillable = [
         'model_type',
         'model_id',
