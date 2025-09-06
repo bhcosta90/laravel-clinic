@@ -4,8 +4,10 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Stock\Packing;
 
+use App\Enums\Models\Packing\Level;
 use App\Models\Packing;
 use App\Services\PackingService;
+use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
 {
@@ -45,7 +47,12 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'name' => ['required',  'string',  'max:240'],
+            'level'    => ['required', Rule::enum(Level::class)],
+            'quantity' => ['required', 'integer', 'min:1'],
+            'weight'   => ['required', 'numeric', 'min:0'],
+            'length'   => ['required', 'numeric', 'min:0'],
+            'width'    => ['required', 'numeric', 'min:0'],
+            'height'   => ['required', 'numeric', 'min:0'],
         ];
     }
 }
