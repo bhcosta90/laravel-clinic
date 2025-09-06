@@ -4,7 +4,7 @@
         <div class="flex justify-between gap-4 items-end">
             <div class="flex-1">
                 <x-select.styled
-                    :label="__('Patient')"
+                    :label="__('Patient') . ' *'"
                     wire:model="appointment.customer_id"
                     :request="[
                         'url' => route('admin.v1.api.customer.search'),
@@ -21,7 +21,7 @@
         </div>
 
         <x-select.styled
-            :label="__('Professional')"
+            :label="__('Professional') . ' *'"
             wire:model.live="dataAppointment.user_id"
             :request="[
                 'url' => route('admin.v1.api.user.search'),
@@ -38,7 +38,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <x-ui.date
             wire:model="dataAppointment.date"
-            :label="__('Date')"
+            :label="__('Date') . ' *'"
             required
         />
 

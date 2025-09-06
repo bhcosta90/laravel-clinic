@@ -13,7 +13,7 @@
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <x-input
-                label="{{ __('Description') }}"
+                label="{{ __('Description') }} *"
                 wire:model="form.name"
                 required
                 class="w-full"
@@ -22,7 +22,7 @@
             <x-ui.currency
                 required
                 wire:model="form.value"
-                :label="__('Value')"
+                :label="__('Value') . ' *'"
                 class="w-full"
             />
         </div>
@@ -41,7 +41,7 @@
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <x-ui.date
-                label="{{ __('Due date') }}"
+                label="{{ __('Due date') }} *"
                 wire:model="form.due_date"
                 required
                 :format="__('MMMM DD, YYYY')"
@@ -97,7 +97,7 @@
                 />
             @endif
             <x-select.styled
-                :label="__('Payment Method')"
+                :label="__('Payment Method') . ' *'"
                 wire:model="form.payment_method_id"
                 :request="[
                     'url' => route('admin.v1.api.payment-method.search'),
