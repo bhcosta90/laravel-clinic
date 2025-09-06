@@ -9,3 +9,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Catalog\Index::class)->name('index')->can('viewAny', Models\Catalog::class);
 Route::get('/{catalog_hash}/update', Catalog\Update::class)->name('update');
+Route::get('/{catalog_hash}/packing', Catalog\Packing::class)->name('packing');
