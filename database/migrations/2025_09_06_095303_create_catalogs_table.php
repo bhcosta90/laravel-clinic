@@ -14,10 +14,10 @@ return new class() extends Migration {
             $table->string('tenant_id');
             $table->string('name');
             $table->string('sku_code');
+            $table->unsignedTinyInteger('level');
             $table->unsignedTinyInteger('tracking_mode');
             $table->unsignedTinyInteger('status');
             $table->unsignedTinyInteger('hazardous')->nullable();
-            $table->unsignedTinyInteger('level');
             $table->timestamps();
             $table->softDeletes();
 

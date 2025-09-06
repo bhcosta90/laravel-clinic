@@ -12,6 +12,10 @@ final class Form extends \Livewire\Form
     public ?Catalog $model = null;
 
     public $name;
+    public $sku_code;
+    public $tracking_mode;
+    public $hazardous;
+    public $level;
 
     public function setModel(Catalog $model): void
     {
