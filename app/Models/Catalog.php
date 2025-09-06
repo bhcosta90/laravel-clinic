@@ -9,10 +9,13 @@ use App\Enums\Models\Catalog\Hazardous;
 use App\Enums\Models\Catalog\Level;
 use App\Enums\Models\Catalog\Status;
 use App\Enums\Models\Catalog\TrackingMode;
+use App\Traits\Models\DeletingTrait;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 final class Catalog extends Model
 {
+    // use DeletingTrait;
+
     protected $fillable = [
         'name',
         'sku_code',
@@ -32,5 +35,10 @@ final class Catalog extends Model
     public function packings(): MorphMany
     {
         return $this->morphMany(Packing::class, 'model');
+    }
+
+    protected function fieldsUpdatedOnDelete(): array
+    {
+        return ['sku_code'];
     }
 }

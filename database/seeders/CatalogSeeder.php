@@ -19,6 +19,8 @@ final class CatalogSeeder extends Seeder
     {
         $this->addProductCocaCola();
         $this->addProductPepsi();
+
+        Catalog::factory(23)->create();
     }
 
     protected function addProductCocaCola(): void
