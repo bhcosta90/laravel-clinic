@@ -27,18 +27,18 @@ final class Update extends Component
     public function load(Catalog $catalog): void
     {
         $this->form->setModel($catalog);
+
         $this->slide = true;
     }
 
     public function save(): void
     {
-        $model = $this->form->save();
+        $this->form->save();
 
         $this->dispatch('updated');
 
-        $this->form->setModel($model);
+        $this->resetExcept('form');
 
         $this->success();
-        $this->resetExcept('form');
     }
 }

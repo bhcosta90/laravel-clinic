@@ -3,7 +3,7 @@
         <x-button :text="__('Create New Sector')" wire:click="$toggle('slide')" outline />
     @endif
 
-    <x-ui.action size="3xl" :title="__('Create New Customer')">
+    <x-ui.action size="3xl" :title="__('Create New Sector')">
         <form id="sector-create-{{ $id = str()->uuid() }}" wire:submit="save" class="space-y-4">
             <x-admin.stock.sector.form />
         </form>

@@ -6,4 +6,5 @@
         <x-input label="{{ __('Document') }} *" wire:model="form.document" required />
     </div>
 
+    <x-message.required />
 </div>

@@ -11,7 +11,7 @@
         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{{ __('Dates') }}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <x-ui.date
-                label="{{ __('Due date') }}"
+                label="{{ __('Due date') }} *"
                 wire:model="form.due_date"
                 required
                 :format="__('MMMM DD, YYYY')"
@@ -26,4 +26,5 @@
         </div>
     </div>
 
+    <x-message.required />
 </div>

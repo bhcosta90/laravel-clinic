@@ -19,6 +19,7 @@ final class TenantSeeder extends Seeder
 
         if (app()->isLocal()) {
             $default = array_merge($default, [
+                CatalogSeeder::class,
                 UserSeeder::class,
                 CustomerSeeder::class,
                 ProcedureSeeder::class,
@@ -33,8 +34,6 @@ final class TenantSeeder extends Seeder
                 CommissionSeeder::class,
                 AppointmentSeeder::class,
                 TriageSeeder::class,
-                CatalogSeeder::class,
-                EanSeeder::class,
                 LocationModuleSeeder::class,
                 SectorSeeder::class,
             ]);

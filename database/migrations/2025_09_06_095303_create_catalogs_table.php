@@ -9,16 +9,19 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('catalogs', function (Blueprint $table): void {
+        Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
-            $table->uuid('tenant_id')->index();
+            $table->string('tenant_id');
             $table->string('name');
+            $table->string('sku_code');
+            $table->unsignedTinyInteger('level');
             $table->unsignedTinyInteger('tracking_mode');
-            $table->unsignedTinyInteger('hazardous');
-            $table->boolean('temperature_controlled')->nullable();
             $table->unsignedTinyInteger('status');
+            $table->unsignedTinyInteger('hazardous')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['tenant_id', 'sku_code']);
         });
     }
 

@@ -34,7 +34,7 @@ final class Create extends Component
             'role.name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:240',
             ],
             'role.nested_parent' => [
                 'nullable',

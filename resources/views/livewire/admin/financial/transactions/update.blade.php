@@ -1,11 +1,11 @@
 <div>
     @if($slide)
-        <x-ui.action :title="__('Update '.mb_ucfirst($this->form->type->label()).': #:id', ['id' => $this->form->model->id])">
-            <form id="transaction-update-{{ $this->form->model->id }}" wire:submit="save" class="space-y-4">
+        <x-ui.action :title="__('Update '.mb_ucfirst($this->form->type->label()).': #:id', ['id' => $this->form->model->hash_code])">
+            <form id="transaction-update-{{ $this->form->model->hash_code }}" wire:submit="save" class="space-y-4">
                 <x-admin.financial.transactions.form />
             </form>
             <x-slot:footer>
-                <x-button type="submit" form="transaction-update-{{ $this->form->model->id }}" loading="save">
+                <x-button type="submit" form="transaction-update-{{ $this->form->model->hash_code }}" loading="save">
                     @lang('Save')
                 </x-button>
             </x-slot:footer>

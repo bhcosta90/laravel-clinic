@@ -8,5 +8,6 @@
         ]"
         unfiltered
     />
-    <x-input label="{{ __('Description') }}" wire:model="form.description" required />
+    <x-input label="{{ __('Description') }} *" wire:model="form.description" required />
+    <x-message.required />
 </div>

@@ -16,6 +16,6 @@ final class CatalogService extends Service
 
     protected function search(): array
     {
-        return ['name'];
+        return ['name', 'sku_code'];
     }
 }

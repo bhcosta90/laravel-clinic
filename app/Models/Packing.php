@@ -5,23 +5,22 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Abstracts\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Enums\Models\Packing\Level;
 
 final class Packing extends Model
 {
     protected $fillable = [
-        'sku_id',
-        'unit_of_measure',
-        'unit_of_measure',
-        'dun14',
-        'sscc',
-        'gross_weight',
-        'net_weight',
-        'volume',
+        'model_type',
+        'model_id',
+        'level',
+        'quantity',
+        'weight',
+        'length',
+        'width',
+        'height',
     ];
 
-    public function sku(): BelongsTo
-    {
-        return $this->belongsTo(Ean::class);
-    }
+    protected $casts = [
+        'level' => Level::class,
+    ];
 }

@@ -1,10 +1,10 @@
-@php use App\Models\Customer; @endphp
+@php use App\Models\Sector; @endphp
 <div>
     <x-card>
         <x-slot:header>
             <x-ui.header :title="__('Sectors')">
                 <x-slot name="actions">
-                    @can('create', Customer::class)
+                    @can('create', Sector::class)
                         <livewire:admin.stock.sector.create @created="$refresh" />
                     @endcan
                 </x-slot>

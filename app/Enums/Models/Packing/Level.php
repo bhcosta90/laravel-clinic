@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Enums\Models\Ean;
+namespace App\Enums\Models\Packing;
 
-enum UnitOfMeasure: int
+enum Level: int
 {
     case UN      = 1;
     case CX      = 2;
@@ -18,6 +18,7 @@ enum UnitOfMeasure: int
     case M3      = 10;
     case Kit     = 11;
     case Display = 12;
+    case Packing = 13;
 
     public function label(): string
     {

@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('packings', function (Blueprint $table): void {
+        Schema::create('packings', function (Blueprint $table) {
             $table->id();
-            $table->uuid('tenant_id')->index();
-            $table->string('sscc')->nullable();
-            $table->decimal('gross_weight', 30, 4)->nullable();
-            $table->decimal('net_weight', 30, 4)->nullable();
-            $table->decimal('volume', 30, 4)->nullable();
-            $table->boolean('is_promotional')->nullable();
+            $table->string('tenant_id');
+            $table->string('model_type');
+            $table->string('model_id');
+            $table->tinyInteger('level');
+            $table->unsignedBigInteger('quantity');
+            $table->decimal('weight');
+            $table->decimal('length');
+            $table->decimal('width');
+            $table->decimal('height');
             $table->timestamps();
             $table->softDeletes();
         });

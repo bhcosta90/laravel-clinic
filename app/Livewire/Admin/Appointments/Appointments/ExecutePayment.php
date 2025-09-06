@@ -81,7 +81,7 @@ final class ExecutePayment extends Component
             'date'              => ['required', 'date', 'after_or_equal:today'],
             'payment_method_id' => ['nullable', Rule::exists('payment_methods', 'id')],
             'agreement_id'      => ['nullable', Rule::exists('agreements', 'id')],
-            'description'       => ['nullable', 'string', 'max:255'],
+            'description'       => ['nullable', 'string', 'max:240'],
         ];
     }
 }

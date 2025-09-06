@@ -11,7 +11,7 @@ trait WarehouseTrait
     protected static function bootWarehouseTrait(): void
     {
         static::creating(function ($model): void {
-            if (blank($model->warehouse_id) && auth()->check()) {
+            if (blank($model->warehouse_id) && warehouse()) {
                 $model->warehouse_id = warehouse()->id;
             }
         });
