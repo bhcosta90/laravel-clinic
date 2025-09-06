@@ -33,8 +33,6 @@ final class TenantSeeder extends Seeder
                 CommissionSeeder::class,
                 AppointmentSeeder::class,
                 TriageSeeder::class,
-                CatalogSeeder::class,
-                EanSeeder::class,
                 LocationModuleSeeder::class,
                 SectorSeeder::class,
             ]);
