@@ -59,4 +59,5 @@
                 'empty' => __('Select') . '...',
             ]"
     />
+    <x-message.required />
 </div>

@@ -8,6 +8,7 @@ use App\Http\Middleware\ImpersonateMiddleware;
 use Carbon\Carbon;
 use Illuminate\Queue\Queue;
 use Illuminate\Queue\QueueManager;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -31,16 +32,20 @@ final class AppServiceProvider extends ServiceProvider
             ));
 
         $this->configureJob();
+
+        Event::listen('eloquent.deleted: App\Models\Catalog', function ($product): void {
+            \Log::info("Produto deletado direto no listener: {$product->id}");
+        });
     }
 
     private function configureJob(): void
     {
         Queue::createPayloadUsing(function (): array {
-            $userId = ($user = auth()->user())->id;
+            $userId = ($user = auth()->user())?->id;
 
             return [
-                'tenant_id'    => $user->tenant_id,
-                'warehouse_id' => $user->warehouse_id,
+                'tenant_id'    => $user?->tenant_id ?: tenant()->id,
+                'warehouse_id' => $user?->warehouse_id ?: warehouse()->id,
                 'user_id'      => $userId,
             ];
         });

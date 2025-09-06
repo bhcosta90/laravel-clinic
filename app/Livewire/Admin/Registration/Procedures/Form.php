@@ -45,7 +45,7 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'name'         => ['required', 'string', 'max:255'],
+            'name'         => ['required', 'string', 'max:240'],
             'price'        => ['required', 'numeric', 'min:0'],
             'time'         => ['required', 'integer', 'min:1'],
             'description'  => ['nullable', 'string', 'max:1000'],

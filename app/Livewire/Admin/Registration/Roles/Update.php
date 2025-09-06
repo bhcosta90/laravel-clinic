@@ -37,7 +37,7 @@ final class Update extends Component
             'role.name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:240',
             ],
         ];
     }

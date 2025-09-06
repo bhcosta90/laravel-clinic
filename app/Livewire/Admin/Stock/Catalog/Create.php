@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Stock\Catalog;
 
 use App\Livewire\Traits\Alert;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 final class Create extends Component
@@ -16,6 +17,8 @@ final class Create extends Component
 
     public bool $slide = false;
 
+    public bool $showButton = true;
+
     public function render(): View
     {
         return view('livewire.admin.stock.catalog.create');
@@ -23,12 +26,20 @@ final class Create extends Component
 
     public function save(): void
     {
-        $this->form->save();
+        $catalog = $this->form->save();
 
         $this->dispatch('created');
+        $this->dispatch('catalog::created', $catalog->id);
 
-        $this->slide = false;
+        $this->resetExcept('form', 'showButton');
+        $this->form->reset();
 
         $this->success();
+    }
+
+    #[On('catalog::open')]
+    public function open(): void
+    {
+        $this->slide = true;
     }
 }

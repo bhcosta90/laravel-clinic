@@ -7,7 +7,6 @@ namespace App\Livewire\Admin\Stock\Catalog;
 use App\Livewire\Traits\Alert;
 use App\Models\Catalog;
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 final class Update extends Component
@@ -16,29 +15,20 @@ final class Update extends Component
 
     public Form $form;
 
-    public bool $slide = false;
-
     public function render(): View
     {
         return view('livewire.admin.stock.catalog.update');
     }
 
-    #[On('load::catalog')]
-    public function load(Catalog $catalog): void
+    public function mount(): void
     {
-        $this->form->setModel($catalog);
-        $this->slide = true;
+        $this->form->setModel(Catalog::findOrFail(Catalog::decodeHashCode(request()->route('catalog_hash'))));
     }
 
     public function save(): void
     {
-        $model = $this->form->save();
-
-        $this->dispatch('updated');
-
-        $this->form->setModel($model);
+        $this->form->save();
 
         $this->success();
-        $this->resetExcept('form');
     }
 }

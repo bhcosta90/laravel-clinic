@@ -10,7 +10,7 @@
                     required
                 />
 
-                <x-input type="number" :label="__('Temperature')" wire:model="temperature"/>
+                <x-ui.number :label="__('Temperature')" wire:model="temperature"/>
             </div>
 
 
@@ -18,16 +18,16 @@
             <div class="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4 sm:p-5">
                 <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-200">{{ __('Address Range') }}</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <x-input type="number" :label="__('Initial Column') . ' *'" required min="0" wire:model="column_initial"/>
-                    <x-input type="number" :label="__('Final Column') . ' *'" required min="0" wire:model="column_final"/>
+                    <x-ui.number :label="__('Initial Column') . ' *'" required min="0" wire:model="column_initial"/>
+                    <x-ui.number :label="__('Final Column') . ' *'" required min="0" wire:model="column_final"/>
                     <div class="sm:col-span-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Maximum difference of 25 between initial and final column.') }}</div>
 
-                    <x-input type="number" :label="__('Initial Level') . ' *'" required min="0" wire:model="level_initial"/>
-                    <x-input type="number" :label="__('Final Level') . ' *'" required min="0" wire:model="level_final"/>
+                    <x-ui.number :label="__('Initial Level') . ' *'" required min="0" wire:model="level_initial"/>
+                    <x-ui.number :label="__('Final Level') . ' *'" required min="0" wire:model="level_final"/>
                     <div class="sm:col-span-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Maximum difference of 25 between initial and final level.') }}</div>
 
-                    <x-input type="number" :label="__('Initial Position') . ' *'" required min="0" wire:model="position_initial"/>
-                    <x-input type="number" :label="__('Final Position') . ' *'" required min="0" wire:model="position_final"/>
+                    <x-ui.number :label="__('Initial Position') . ' *'" required min="0" wire:model="position_initial"/>
+                    <x-ui.number :label="__('Final Position') . ' *'" required min="0" wire:model="position_final"/>
                     <div class="sm:col-span-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Maximum difference of 25 between initial and final position.') }}</div>
                 </div>
             </div>

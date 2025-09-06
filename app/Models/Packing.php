@@ -5,23 +5,31 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Abstracts\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Enums\Models\Packing\Level;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Packing extends Model
 {
+    use HasUlids;
+
     protected $fillable = [
-        'sku_id',
-        'unit_of_measure',
-        'unit_of_measure',
-        'dun14',
-        'sscc',
-        'gross_weight',
-        'net_weight',
-        'volume',
+        'model_type',
+        'model_id',
+        'level',
+        'quantity',
+        'weight',
+        'length',
+        'width',
+        'height',
     ];
 
-    public function sku(): BelongsTo
+    protected $casts = [
+        'level' => Level::class,
+    ];
+
+    public function barcodes(): HasMany
     {
-        return $this->belongsTo(Ean::class);
+        return $this->hasMany(Barcode::class);
     }
 }

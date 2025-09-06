@@ -51,4 +51,5 @@
             <x-password :label="__('Confirm Password')" wire:model="form.password_confirmation" rules />
         </div>
     </div>
+    <x-message.required />
 </div>

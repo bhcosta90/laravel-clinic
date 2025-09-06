@@ -13,7 +13,7 @@
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <x-input
-                label="{{ __('Description') }}"
+                label="{{ __('Description') }} *"
                 wire:model="form.name"
                 required
                 class="w-full"
@@ -22,7 +22,7 @@
             <x-ui.currency
                 required
                 wire:model="form.value"
-                :label="__('Value')"
+                :label="__('Value') . ' *'"
                 class="w-full"
             />
         </div>
@@ -41,7 +41,7 @@
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <x-ui.date
-                label="{{ __('Due date') }}"
+                label="{{ __('Due date') }} *"
                 wire:model="form.due_date"
                 required
                 :format="__('MMMM DD, YYYY')"
@@ -97,7 +97,7 @@
                 />
             @endif
             <x-select.styled
-                :label="__('Payment Method')"
+                :label="__('Payment Method') . ' *'"
                 wire:model="form.payment_method_id"
                 :request="[
                     'url' => route('admin.v1.api.payment-method.search'),
@@ -127,14 +127,5 @@
             rows="3"
         />
     </div>
-
-    <div class="mt-2 text-sm text-gray-500 dark:text-gray-400 flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-red-500" viewBox="0 0 20 20"
-             fill="currentColor">
-            <path fill-rule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                  clip-rule="evenodd"/>
-        </svg>
-        {{ __('Required fields are marked with an asterisk (*)') }}
-    </div>
+    <x-message.required />
 </div>

@@ -10,13 +10,16 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('packings', function (Blueprint $table): void {
-            $table->id();
-            $table->uuid('tenant_id')->index();
-            $table->string('sscc')->nullable();
-            $table->decimal('gross_weight', 30, 4)->nullable();
-            $table->decimal('net_weight', 30, 4)->nullable();
-            $table->decimal('volume', 30, 4)->nullable();
-            $table->boolean('is_promotional')->nullable();
+            $table->ulid('id')->primary();
+            $table->string('tenant_id');
+            $table->string('model_type');
+            $table->string('model_id');
+            $table->tinyInteger('level');
+            $table->unsignedBigInteger('quantity');
+            $table->decimal('weight', 30, 4);
+            $table->decimal('length', 30, 4);
+            $table->decimal('width', 30, 4);
+            $table->decimal('height', 30, 4);
             $table->timestamps();
             $table->softDeletes();
         });

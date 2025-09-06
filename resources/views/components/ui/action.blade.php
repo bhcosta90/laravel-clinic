@@ -1,5 +1,7 @@
 <x-slide {{$attributes}} wire="slide">
-    {{ $slot }}
+    <div class="text-left">
+        {{ $slot }}
+    </div>
 
     <x-slot:footer>
         {{ $footer ?? null }}

@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Admin\Stock\Catalog\Ean;
+namespace App\Livewire\Admin\Stock\Packing;
 
 use App\Livewire\Traits\Alert;
-use App\Models\Ean;
+use App\Models\Packing;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
@@ -13,7 +13,7 @@ final class Delete extends Component
 {
     use Alert;
 
-    public Ean $ean;
+    public Packing $packing;
 
     public function render(): string
     {
@@ -35,7 +35,7 @@ final class Delete extends Component
 
     public function delete(): void
     {
-        $this->ean->delete();
+        $this->packing->forceDelete();
 
         $this->dispatch('deleted');
 

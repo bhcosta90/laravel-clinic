@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Database\Factories;
 
 use App\Models\Packing;
-use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -15,16 +14,17 @@ final class PackingFactory extends Factory
 
     public function definition(): array
     {
-        $volume = $this->faker->boolean();
-
         return [
-            'tenant_id'    => tenant()?->id ?: Tenant::factory(),
-            'sscc'         => when($this->faker->boolean(), fn () => $this->faker->unique()->ean8()),
-            'gross_weight' => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
-            'net_weight'   => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
-            'volume'       => when($volume, fn (): int | float => $this->faker->numberBetween(1000, 100000) / 100),
-            'created_at'   => Carbon::now(),
-            'updated_at'   => Carbon::now(),
+            'model_type' => $this->faker->word(),
+            'model_id'   => $this->faker->word(),
+            'level'      => $this->faker->randomNumber(),
+            'quantity'   => $this->faker->randomNumber(),
+            'weight'     => $this->faker->randomFloat(),
+            'length'     => $this->faker->randomFloat(),
+            'width'      => $this->faker->randomFloat(),
+            'height'     => $this->faker->randomFloat(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

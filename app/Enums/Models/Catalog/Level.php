@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Enums\Models\Ean;
+namespace App\Enums\Models\Catalog;
 
-enum UnitOfMeasure: int
+enum Level: int
 {
     case UN      = 1;
     case CX      = 2;

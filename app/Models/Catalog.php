@@ -6,36 +6,44 @@ namespace App\Models;
 
 use App\Abstracts\Model;
 use App\Enums\Models\Catalog\Hazardous;
+use App\Enums\Models\Catalog\Level;
 use App\Enums\Models\Catalog\Status;
 use App\Enums\Models\Catalog\TrackingMode;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Events\Catalog\DeletedEvent;
+use App\Traits\Models\DeletingTrait;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 final class Catalog extends Model
 {
+    use DeletingTrait;
+
+    protected $dispatchesEvents = [
+        'deleted' => DeletedEvent::class,
+    ];
+
     protected $fillable = [
-        'tenant_id',
         'name',
+        'sku_code',
         'tracking_mode',
-        'hazardous',
-        'temperature_controlled',
         'status',
+        'hazardous',
+        'level',
     ];
 
     protected $casts = [
-        'temperature_controlled' => 'boolean',
-        'tracking_mode'          => TrackingMode::class,
-        'hazardous'              => Hazardous::class,
-        'status'                 => Status::class,
+        'level'         => Level::class,
+        'tracking_mode' => TrackingMode::class,
+        'status'        => Status::class,
+        'hazardous'     => Hazardous::class,
     ];
 
-    public function tenant(): BelongsTo
+    public function packings(): MorphMany
     {
-        return $this->belongsTo(Tenant::class);
+        return $this->morphMany(Packing::class, 'model');
     }
 
-    public function ean(): MorphMany
+    protected function fieldsUpdatedOnDelete(): array
     {
-        return $this->morphMany(Ean::class, 'model');
+        return ['sku_code'];
     }
 }

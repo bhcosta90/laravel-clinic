@@ -1,6 +1,6 @@
 <div>
     @if($slide)
-        <x-ui.action size="3xl" :title="__('Update Remedy #:id', ['id' => $form->model?->id])">
+        <x-ui.action size="3xl" :title="__('Update Remedy #:id', ['id' => $form->model?->hash_code])">
             <form id="remedy-update" wire:submit="save" class="space-y-4">
                 <x-admin.registration.remedies.form />
             </form>

@@ -56,16 +56,16 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'name'  => ['required', 'string', 'max:255'],
+            'name'  => ['required', 'string', 'max:240'],
             'email' => [
                 'nullable',
                 'string',
                 'email',
-                'max:255',
+                'max:240',
                 Rule::unique(User::class, 'email')->ignore($this->model?->id),
             ],
-            'cellphone'    => ['nullable', 'max:255'],
-            'address'      => ['nullable', 'max:255'],
+            'cellphone'    => ['nullable', 'max:240'],
+            'address'      => ['nullable', 'max:240'],
             'commission'   => ['nullable', 'numeric'],
             'payment_data' => ['nullable', 'string'],
             'role_id'      => ['nullable', Rule::exists(Role::class, 'id')],
