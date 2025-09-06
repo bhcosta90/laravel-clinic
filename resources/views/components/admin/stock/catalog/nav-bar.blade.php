@@ -2,7 +2,7 @@
 <nav class="border-b border-gray-200 dark:border-gray-700">
     <ul class="flex -mb-px text-sm font-medium">
         <li class="me-2">
-            <a href="{{ route('admin.v1.stock.catalog.update', $code) }}"
+            <x-link wire:navigate href="{{ route('admin.v1.stock.catalog.update', $code) }}"
                 @class([
                     'inline-block p-4 border-b-2 rounded-t focus:outline-none',
                     request()->routeIs('admin.v1.stock.catalog.update')
@@ -11,10 +11,10 @@
                 ])
             >
                 {{ __('Catalog') }}
-            </a>
+            </x-link>
         </li>
         <li class="me-2">
-            <a href="{{ route('admin.v1.stock.catalog.packing', $code) }}"
+            <x-link wire:navigate href="{{ route('admin.v1.stock.catalog.packing', $code) }}"
                 @class([
                     'inline-block p-4 border-b-2 rounded-t focus:outline-none',
                     request()->routeIs('admin.v1.stock.catalog.packing')
@@ -23,7 +23,7 @@
                 ])
             >
                 {{ __('Packings') }}
-            </a>
+            </x-link>
         </li>
     </ul>
 </nav>
