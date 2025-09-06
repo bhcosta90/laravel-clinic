@@ -19,6 +19,7 @@ final class Catalog extends Model
         'tracking_mode',
         'status',
         'hazardous',
+        'level',
     ];
 
     protected $casts = [

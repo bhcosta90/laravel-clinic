@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Stock\Catalog;
 
 use App\Enums\Models\Catalog\Hazardous;
+use App\Enums\Models\Catalog\Level;
 use App\Enums\Models\Catalog\Status;
 use App\Enums\Models\Catalog\TrackingMode;
 use App\Models\Catalog;
@@ -52,9 +53,9 @@ final class Form extends \Livewire\Form
         return [
             'name'          => ['required', 'string', 'max:255'],
             'sku_code'      => ['required', 'string', 'max:100', new TenantUnique(Catalog::class, 'sku_code', $this->model?->id)],
-            'level'         => ['required', 'integer', 'min:0'],
+            'level'         => ['required', Rule::enum(Level::class)],
             'tracking_mode' => ['required', Rule::enum(TrackingMode::class)],
-            'hazardous'     => ['required', Rule::enum(Hazardous::class)],
+            'hazardous'     => ['nullable', Rule::enum(Hazardous::class)],
             'status'        => ['required', Rule::enum(Status::class)],
         ];
     }
