@@ -4,14 +4,13 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Stock\Sector;
 
-use App\Models\Sector;
+use App\Services\SectorService;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
-use QuantumTecnology\ControllerBasicsExtension\Builder\BuilderQuery;
 
 final class Index extends Component
 {
@@ -47,9 +46,7 @@ final class Index extends Component
     #[Computed]
     public function rows(): Paginator
     {
-        return app(BuilderQuery::class)->execute(new Sector(), [], [
-            '(byFilter,name;email)' => $this->search,
-        ])
+        return app(SectorService::class)->handle('index', $this->search)
             ->orderBy(...array_values($this->sort))
             ->simplePaginate(perPage: $this->quantity)
             ->withQueryString();

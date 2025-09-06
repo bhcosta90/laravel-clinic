@@ -8,6 +8,7 @@ use App\Http\Middleware\ImpersonateMiddleware;
 use Carbon\Carbon;
 use Illuminate\Queue\Queue;
 use Illuminate\Queue\QueueManager;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -31,6 +32,10 @@ final class AppServiceProvider extends ServiceProvider
             ));
 
         $this->configureJob();
+
+        Event::listen('eloquent.deleted: App\Models\Catalog', function ($product) {
+            \Log::info("Produto deletado direto no listener: {$product->id}");
+        });
     }
 
     private function configureJob(): void

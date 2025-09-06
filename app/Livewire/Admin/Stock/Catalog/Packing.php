@@ -9,20 +9,20 @@ use App\Models\Catalog;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-final class Update extends Component
+final class Packing extends Component
 {
     use Alert;
 
-    public Form $form;
+    public Catalog $catalog;
 
     public function render(): View
     {
-        return view('livewire.admin.stock.catalog.update');
+        return view('livewire.admin.stock.catalog.packing');
     }
 
     public function mount(): void
     {
-        $this->form->setModel(Catalog::findOrFail(Catalog::decodeHashCode(request()->route('catalog_hash'))));
+        $this->catalog = Catalog::findOrFail(Catalog::decodeHashCode(request()->route('catalog_hash')));
     }
 
     public function save(): void

@@ -45,7 +45,7 @@ trait DeletingTrait
             $originalTimestamps = $model->timestamps;
             $model->timestamps  = false;
 
-            $suffix = '-' . now()->format('YmdHis');
+            $suffix = '-DT' . now()->format('YmdHis');
 
             foreach ($fields as $field) {
                 // Skip if attribute not fillable/present

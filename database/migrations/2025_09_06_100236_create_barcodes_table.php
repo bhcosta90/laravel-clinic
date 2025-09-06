@@ -10,9 +10,9 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('barcodes', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('tenant_id');
-            $table->foreignId('packing_id')->constrained('packings');
+            $table->foreignUuid('packing_id')->constrained('packings')->cascadeOnDelete();
             $table->string('code');
             $table->unsignedInteger('type');
             $table->timestamps();
