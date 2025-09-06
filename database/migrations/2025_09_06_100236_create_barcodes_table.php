@@ -12,7 +12,7 @@ return new class() extends Migration {
         Schema::create('barcodes', function (Blueprint $table) {
             $table->id();
             $table->string('tenant_id');
-            $table->foreignUuid('packing_id')->constrained('packings');
+            $table->foreignUuid('packing_id')->constrained('packings')->cascadeOnDelete();
             $table->string('code');
             $table->unsignedInteger('type');
             $table->timestamps();
