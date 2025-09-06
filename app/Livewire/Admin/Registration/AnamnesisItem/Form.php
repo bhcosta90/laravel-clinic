@@ -41,9 +41,9 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'name'               => ['required', 'string', 'max:255'],
+            'name'               => ['required', 'string', 'max:240'],
             'anamnesis_group_id' => ['required', Rule::exists(AnamnesisGroup::class, 'id')],
-            'description'        => ['nullable', 'string', 'max:255'],
+            'description'        => ['nullable', 'string', 'max:240'],
         ];
     }
 }

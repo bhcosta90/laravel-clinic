@@ -50,7 +50,7 @@ final class Form extends \Livewire\Form
             'agreement_id'      => ['required', Rule::exists(Agreement::class, 'id')],
             'payment_method_id' => ['required', Rule::exists(PaymentMethod::class, 'id')],
             'value'             => ['required', 'numeric', 'min:0'],
-            'description'       => ['nullable', 'string', 'max:255'],
+            'description'       => ['nullable', 'string', 'max:240'],
         ];
     }
 }

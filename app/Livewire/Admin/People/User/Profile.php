@@ -33,7 +33,7 @@ final class Profile extends Component
             'user.name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:240',
             ],
             'password' => [
                 'nullable',

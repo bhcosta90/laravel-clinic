@@ -51,7 +51,7 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'name'          => ['required', 'string', 'max:255'],
+            'name'          => ['required', 'string', 'max:240'],
             'sku_code'      => ['required', 'string', 'max:100', new TenantUnique(Catalog::class, 'sku_code', $this->model?->id)],
             'level'         => ['required', Rule::enum(Level::class)],
             'tracking_mode' => ['required', Rule::enum(TrackingMode::class)],

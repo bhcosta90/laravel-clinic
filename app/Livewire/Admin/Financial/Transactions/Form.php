@@ -59,13 +59,13 @@ final class Form extends \Livewire\Form
     public function rules(): array
     {
         return [
-            'name'              => ['required', 'string', 'max:255'],
+            'name'              => ['required', 'string', 'max:240'],
             'user_id'           => ['nullable', Rule::exists(User::class, 'id')],
             'agreement_id'      => ['nullable', Rule::exists(Agreement::class, 'id')],
             'customer_id'       => ['nullable', Rule::exists(Customer::class, 'id')],
             'payment_method_id' => ['required', Rule::exists(PaymentMethod::class, 'id')],
             'value'             => ['required', 'numeric', 'min:0'],
-            'description'       => ['nullable', 'string', 'max:255'],
+            'description'       => ['nullable', 'string', 'max:240'],
             'type'              => ['required', Rule::enum(Type::class)],
             'due_date'          => ['required', 'date', 'after_or_equal:today'],
             'payment_date'      => ['nullable', 'date', 'after_or_equal:today'],

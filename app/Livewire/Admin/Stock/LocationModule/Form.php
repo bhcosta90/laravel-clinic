@@ -41,7 +41,7 @@ final class Form extends \Livewire\Form
             'acronym' => [
                 'required',
                 'string',
-                'max:255',
+                'max:240',
                 new TenantUnique(LocationModule::class, 'acronym', $this->model?->id),
             ],
             'sequence' => ['nullable', 'numeric', 'max:4000000000'],
