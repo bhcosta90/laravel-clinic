@@ -1,14 +1,5 @@
 <div>
-    @if($slide)
-        <x-ui.action size="3xl" :title="__('Update Catalog: #:id', ['id' => $this->form->model?->hash_code])">
-            <form id="catalog-update-{{ $this->form->model?->hash_code }}" wire:submit="save" class="space-y-4">
-                <x-admin.stock.catalog.form />
-            </form>
-            <x-slot:footer>
-                <x-button type="submit" form="catalog-update-{{ $this->form->model?->hash_code }}" loading="save">
-                    @lang('Save')
-                </x-button>
-            </x-slot:footer>
-        </x-ui.action>
-    @endif
+    <form id="catalog-update-{{ $this->form->model?->hash_code }}" wire:submit="save" class="space-y-4">
+        <x-admin.stock.catalog.form :updated="true" />
+    </form>
 </div>

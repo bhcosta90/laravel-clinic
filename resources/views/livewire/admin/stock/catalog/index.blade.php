@@ -30,7 +30,7 @@
             @interact('column_action', $row)
             <div class="flex gap-1 justify-end">
                 @can('update', $row)
-                    <x-button.circle icon="pencil" wire:click="$dispatch('load::catalog', { 'catalog' : '{{ $row->id }}'})" />
+                    <x-button.circle icon="pencil" href="{{ route('admin.v1.stock.catalog.update', $row->hash_code) }}" />
                 @endcan
                 @can('delete', $row)
                     <livewire:admin.stock.catalog.delete :catalog="$row" :key="uniqid('', true)" @deleted="$refresh" />

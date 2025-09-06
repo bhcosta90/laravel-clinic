@@ -1,5 +1,6 @@
+@props(['updated' => false])
 @php use App\Enums\Models\Catalog; @endphp
-<div class="space-y-3">
+<div @class(['space-y-3', $updated => 'grid grid-cols-1 lg:grid-cols-2 gap-4'])>
     <div class="space-y-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 sm:p-6 border border-gray-200 dark:border-gray-700">
         <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h12a2 2 0 012 2H2zM2 8h16v6a2 2 0 01-2 2H4a2 2 0 01-2-2V8z"/></svg>
