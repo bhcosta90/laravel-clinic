@@ -24,11 +24,4 @@ final class Packing extends Component
     {
         $this->catalog = Catalog::findOrFail(Catalog::decodeHashCode(request()->route('catalog_hash')));
     }
-
-    public function save(): void
-    {
-        $this->form->save();
-
-        $this->success();
-    }
 }
