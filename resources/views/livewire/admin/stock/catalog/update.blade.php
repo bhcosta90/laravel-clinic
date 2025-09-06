@@ -6,8 +6,8 @@
                 <button type="button"
                         @click="tab = 'block-1'"
                         :class="tab === 'block-1'
-                            ? 'inline-block p-4 border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 dark:focus-visible:ring-blue-400/60 rounded-t'
-                            : 'cursor-pointer inline-block p-4 border-b-2 border-transparent text-gray-600 hover:text-gray-800 hover:border-gray-300 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:border-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500/40 dark:focus-visible:ring-gray-400/40 rounded-t'">
+                            ? 'inline-block p-4 border-b-2 border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/60 dark:focus-visible:ring-primary-400/60 rounded-t'
+                            : 'cursor-pointer inline-block p-4 border-b-2 border-transparent text-secondary-600 hover:text-secondary-800 hover:border-secondary-300 dark:text-secondary-300 dark:hover:text-secondary-100 dark:hover:border-secondary-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-500/40 dark:focus-visible:ring-secondary-400/40 rounded-t'">
                     {{ __('Catalog') }}
                 </button>
             </li>
@@ -15,8 +15,8 @@
                 <button type="button"
                         @click="tab = 'block-2'"
                         :class="tab === 'block-2'
-                            ? 'inline-block p-4 border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 dark:focus-visible:ring-blue-400/60 rounded-t'
-                            : 'cursor-pointer inline-block p-4 border-b-2 border-transparent text-gray-600 hover:text-gray-800 hover:border-gray-300 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:border-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500/40 dark:focus-visible:ring-gray-400/40 rounded-t'">
+                            ? 'inline-block p-4 border-b-2 border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/60 dark:focus-visible:ring-primary-400/60 rounded-t'
+                            : 'cursor-pointer inline-block p-4 border-b-2 border-transparent text-secondary-600 hover:text-secondary-800 hover:border-secondary-300 dark:text-secondary-300 dark:hover:text-secondary-100 dark:hover:border-secondary-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-500/40 dark:focus-visible:ring-secondary-400/40 rounded-t'">
                     {{ __('Packings') }}
                 </button>
             </li>
