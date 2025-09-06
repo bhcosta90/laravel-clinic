@@ -39,6 +39,4 @@
             @endinteract
         </x-table>
     </x-card>
-
-    <livewire:admin.stock.catalog.update @updated="$refresh" />
 </div>
