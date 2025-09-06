@@ -17,7 +17,9 @@ final class DeleteBarcodeListener
         $catalog = $event->catalog;
 
         foreach ($catalog->packings as $packing) {
-            $packing->forceDelete();
+            foreach ($packing->barcodes as $barcode) {
+                $barcode->delete();
+            }
         }
     }
 }
