@@ -11,7 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('errors', function (Blueprint $table): void {
             $table->ulid('id')->primary();
-            $table->foreignUuid('tenant_id')->constrained('tenants');
+            $table->string('tenant_id');
             $table->foreignId('user_id')->constrained('users');
             $table->string('code');
             $table->unsignedTinyInteger('type');

@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Stock\Catalog\Ean;
 
 use App\Abstracts\Model;
-use App\Enums\Models\Ean\UnitOfMeasure;
+use App\Enums\Models\Packing\Level;
 use App\Models\Ean;
 use App\Rules\TenantUnique;
 use App\Services\EanService;
@@ -61,7 +61,7 @@ final class Form extends \Livewire\Form
             'ean'               => ['required', 'string', 'max:255', new TenantUnique(Ean::class, 'ean', $this->model?->id)],
             'gross_weight'      => ['nullable', 'numeric', 'min:0'],
             'net_weight'        => ['nullable', 'numeric', 'min:0'],
-            'unit_of_measure'   => ['required', 'integer', Rule::enum(UnitOfMeasure::class)],
+            'unit_of_measure'   => ['required', 'integer', Rule::enum(Level::class)],
             'volume'            => ['nullable', 'numeric', 'min:0'],
             'conversion_factor' => ['nullable', 'numeric', 'min:0'],
         ];
