@@ -91,4 +91,5 @@
             @endforeach
         </div>
     </div>
+    <x-message.required />
 </div>

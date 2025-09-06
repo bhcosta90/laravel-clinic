@@ -9,4 +9,5 @@
         <x-toggle wire:model="form.is_agreement" :label="__('Accepts health insurance') . '?'" />
         <x-toggle wire:model="form.is_exam" :label="__('Accepts exam') . '?'" />
     </div>
+    <x-message.required />
 </div>

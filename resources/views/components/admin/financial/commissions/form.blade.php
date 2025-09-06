@@ -26,4 +26,5 @@
         </div>
     </div>
 
+    <x-message.required />
 </div>
