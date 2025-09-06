@@ -13,13 +13,15 @@ return new class() extends Migration {
             $table->id();
             $table->string('tenant_id');
             $table->string('name');
-            $table->string('tracking_mode');
-            $table->string('status');
-            $table->string('hazardous');
+            $table->string('sku_code');
+            $table->unsignedTinyInteger('tracking_mode');
+            $table->unsignedTinyInteger('status');
+            $table->unsignedTinyInteger('hazardous')->nullable();
+            $table->unsignedTinyInteger('level');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['tenant_id', 'name']);
+            $table->unique(['tenant_id', 'sku_code']);
         });
     }
 

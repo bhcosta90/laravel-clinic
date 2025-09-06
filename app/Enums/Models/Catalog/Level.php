@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Enums\Models\Packing;
+namespace App\Enums\Models\Catalog;
 
 enum Level: int
 {
@@ -18,7 +18,6 @@ enum Level: int
     case M3      = 10;
     case Kit     = 11;
     case Display = 12;
-    case Packing = 13;
 
     public function label(): string
     {

@@ -12,7 +12,7 @@ final class Barcode extends Model
 {
     protected $fillable = [
         'packing_id',
-        'ean',
+        'code',
         'type',
     ];
 

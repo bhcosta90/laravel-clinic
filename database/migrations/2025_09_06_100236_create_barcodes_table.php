@@ -13,12 +13,12 @@ return new class() extends Migration {
             $table->id();
             $table->string('tenant_id');
             $table->foreignId('packing_id')->constrained('packings');
-            $table->string('ean');
+            $table->string('code');
             $table->unsignedInteger('type');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['tenant_id', 'packing_id', 'ean']);
+            $table->unique(['tenant_id', 'packing_id', 'code']);
         });
     }
 
