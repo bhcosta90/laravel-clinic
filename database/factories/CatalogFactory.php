@@ -19,7 +19,7 @@ final class CatalogFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'          => $this->faker->name(),
+            'name'          => $this->faker->words(3, true),
             'sku_code'      => mb_strtoupper($this->faker->regexify('[A-Za-z0-9]{6}')),
             'level'         => $this->faker->randomElement(Level::cases()),
             'tracking_mode' => $this->faker->randomElement(TrackingMode::cases()),
