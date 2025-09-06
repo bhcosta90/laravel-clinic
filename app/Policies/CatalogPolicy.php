@@ -1,40 +1,23 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Policies;
 
-use App\Models\Catalog;
-use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Enums\Models\Permission\Can;
+use App\Policies\Traits\CrudPolicyTrait;
 
-class CatalogPolicy{
-    use HandlesAuthorization;
+final class CatalogPolicy
+{
+    use CrudPolicyTrait;
 
-    public function viewAny(User $user): bool
+    protected function getViewPermission(): Can
     {
-        //
+        return Can::StockCatalogView;
     }
 
-    public function view(User $user, Catalog $catalog): bool
+    protected function getEditPermission(): Can
     {
-    }
-
-    public function create(User $user): bool
-    {
-    }
-
-    public function update(User $user, Catalog $catalog): bool
-    {
-    }
-
-    public function delete(User $user, Catalog $catalog): bool
-    {
-    }
-
-    public function restore(User $user, Catalog $catalog): bool
-    {
-    }
-
-    public function forceDelete(User $user, Catalog $catalog): bool
-    {
+        return Can::StockCatalogEdit;
     }
 }
