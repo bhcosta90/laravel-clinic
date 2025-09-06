@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Stock\Packing;
 
+use App\Abstracts\Model;
 use App\Livewire\Traits\Alert;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
@@ -15,9 +16,16 @@ final class Create extends Component
 
     public Form $form;
 
+    public Model $model;
+
     public bool $slide = false;
 
     public bool $showButton = true;
+
+    public function mount(): void
+    {
+        $this->form->setRelation($this->model);
+    }
 
     public function render(): View
     {

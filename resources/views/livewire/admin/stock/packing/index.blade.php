@@ -5,7 +5,7 @@
             <x-ui.header :title="__('Packings')">
                 <x-slot name="actions">
                     @can('create', Packing::class)
-                        <livewire:admin.stock.packing.create @created="$refresh" />
+                        <livewire:admin.stock.packing.create @created="$refresh" :$model />
                     @endcan
                 </x-slot>
             </x-ui.header>

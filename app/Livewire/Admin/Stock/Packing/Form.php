@@ -7,11 +7,13 @@ namespace App\Livewire\Admin\Stock\Packing;
 use App\Enums\Models\Packing\Level;
 use App\Models\Packing;
 use App\Services\PackingService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 
 final class Form extends \Livewire\Form
 {
-    public ?Packing $model = null;
+    public ?Model $relation = null;
+    public ?Packing $model  = null;
 
     public $level;
     public $quantity;
@@ -19,6 +21,11 @@ final class Form extends \Livewire\Form
     public $length;
     public $width;
     public $height;
+
+    public function setRelation(Model $relation): void
+    {
+        $this->relation = $relation;
+    }
 
     public function setModel(Packing $model): void
     {
@@ -40,6 +47,13 @@ final class Form extends \Livewire\Form
 
             return $this->model;
         }
+
+        $keyName = $this->relation->getKeyName();
+
+        $data += [
+            'model_type' => $this->relation::class,
+            'model_id'   => $this->relation->{$keyName},
+        ];
 
         return app(PackingService::class)->handle('store', $data);
     }
