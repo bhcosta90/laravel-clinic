@@ -38,6 +38,7 @@ final class Index extends Component
             ['index' => 'length', 'label' => __('Length'), 'sortable' => false],
             ['index' => 'width', 'label' => __('Width'), 'sortable' => false],
             ['index' => 'height', 'label' => __('Height'), 'sortable' => false],
+            ['index' => 'action', 'sortable' => false],
         ];
     }
 
