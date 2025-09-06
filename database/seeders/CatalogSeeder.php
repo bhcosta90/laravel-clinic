@@ -10,6 +10,7 @@ use App\Enums\Models\Catalog\Status;
 use App\Enums\Models\Catalog\TrackingMode;
 use App\Models\Barcode;
 use App\Models\Catalog;
+use App\Models\Packing;
 use Illuminate\Database\Seeder;
 
 final class CatalogSeeder extends Seeder
@@ -30,6 +31,7 @@ final class CatalogSeeder extends Seeder
             'hazardous'     => null,
         ]);
 
+        /** @var Packing $unitPacking */
         $unitPacking = $product->packings()->create([
             'level'    => \App\Enums\Models\Packing\Level::UN,
             'quantity' => 1,
@@ -50,6 +52,7 @@ final class CatalogSeeder extends Seeder
             'type'       => Type::Alias,
         ]);
 
+        /** @var Packing $casePacking */
         $casePacking = $product->packings()->create([
             'level'    => \App\Enums\Models\Packing\Level::Display,
             'quantity' => 12,
@@ -67,6 +70,7 @@ final class CatalogSeeder extends Seeder
         ]);
 
         // --- Packing: Fardo (6 caixas) ---
+        /** @var Packing $packPacking */
         $packPacking = $product->packings()->create([
             'level'    => \App\Enums\Models\Packing\Level::Packing,
             'quantity' => 72, // 6 caixas x 12 unidades
@@ -84,6 +88,7 @@ final class CatalogSeeder extends Seeder
         ]);
 
         // --- Packing: Pallet (72 fardos) ---
+        /** @var Packing $palletPacking */
         $palletPacking = $product->packings()->create([
             'level'    => \App\Enums\Models\Packing\Level::Pallet,
             'quantity' => 5184, // 72 fardos x 72 unidades cada
