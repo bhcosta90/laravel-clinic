@@ -9,12 +9,17 @@ use App\Enums\Models\Catalog\Hazardous;
 use App\Enums\Models\Catalog\Level;
 use App\Enums\Models\Catalog\Status;
 use App\Enums\Models\Catalog\TrackingMode;
+use App\Events\Catalog\DeletedEvent;
 use App\Traits\Models\DeletingTrait;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 final class Catalog extends Model
 {
-    // use DeletingTrait;
+    use DeletingTrait;
+
+    protected $dispatchesEvents = [
+        'deleted' => DeletedEvent::class,
+    ];
 
     protected $fillable = [
         'name',
