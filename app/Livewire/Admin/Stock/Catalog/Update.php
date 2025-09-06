@@ -29,10 +29,6 @@ final class Update extends Component
     {
         $this->form->save();
 
-        $this->dispatch('updated');
-
-        $this->resetExcept('form');
-
         $this->success();
     }
 }
