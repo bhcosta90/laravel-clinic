@@ -23,7 +23,7 @@ final class CatalogSeeder extends Seeder
         Catalog::factory(23)->create();
     }
 
-    protected function addProductCocaCola(): void
+    private function addProductCocaCola(): void
     {
         $product = Catalog::create([
             'sku_code'      => '1001',
@@ -109,7 +109,7 @@ final class CatalogSeeder extends Seeder
         ]);
     }
 
-    protected function addProductPepsi(): void
+    private function addProductPepsi(): void
     {
         $product = Catalog::create([
             'sku_code'      => '1002',

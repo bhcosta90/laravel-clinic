@@ -60,7 +60,12 @@ trait DeletingTrait
                     $current = $model->getAttribute($field);
                 }
 
-                if (null === $current || '' === $current) {
+                if (null === $current) {
+                    // Nothing to change
+                    continue;
+                }
+
+                if ('' === $current) {
                     // Nothing to change
                     continue;
                 }

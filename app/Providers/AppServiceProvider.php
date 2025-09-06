@@ -33,7 +33,7 @@ final class AppServiceProvider extends ServiceProvider
 
         $this->configureJob();
 
-        Event::listen('eloquent.deleted: App\Models\Catalog', function ($product) {
+        Event::listen('eloquent.deleted: App\Models\Catalog', function ($product): void {
             \Log::info("Produto deletado direto no listener: {$product->id}");
         });
     }

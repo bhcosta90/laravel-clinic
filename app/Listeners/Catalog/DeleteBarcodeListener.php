@@ -8,10 +8,6 @@ use App\Events\Catalog\DeletedEvent;
 
 final class DeleteBarcodeListener
 {
-    public function __construct()
-    {
-    }
-
     public function handle(DeletedEvent $event): void
     {
         $catalog = $event->catalog;

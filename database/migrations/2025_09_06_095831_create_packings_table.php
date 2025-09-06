@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('packings', function (Blueprint $table) {
+        Schema::create('packings', function (Blueprint $table): void {
             $table->ulid('id')->primary();
             $table->string('tenant_id');
             $table->string('model_type');
