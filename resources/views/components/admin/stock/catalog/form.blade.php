@@ -6,8 +6,8 @@
             {{ __('Basic Information') }}
         </h3>
         <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('Provide the item identification details.') }}</p>
+        <x-input label="{{ __('Name') }} *" wire:model="form.name" required :placeholder="__('e.g., Syringe 5ml')" />
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <x-input label="{{ __('Name') }} *" wire:model="form.name" required :placeholder="__('e.g., Syringe 5ml')" />
             <x-input label="{{ __('SKU') }} *" wire:model="form.sku_code" required :placeholder="__('Unique stock code')" />
             <x-ui.select.enum class="sm:col-span-2" label="{{ __('Unit of measure') }} *" wire:model="form.level" required :enum="Catalog\Level::class" />
             <div class="sm:col-span-2 text-xs text-gray-500 dark:text-gray-400">{{ __('Choose a clear name and a unique SKU to identify the item across the system and integrations.') }}</div>
