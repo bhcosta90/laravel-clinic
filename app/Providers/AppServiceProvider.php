@@ -36,11 +36,11 @@ final class AppServiceProvider extends ServiceProvider
     private function configureJob(): void
     {
         Queue::createPayloadUsing(function (): array {
-            $userId = ($user = auth()->user())->id;
+            $userId = ($user = auth()->user())?->id;
 
             return [
-                'tenant_id'    => $user->tenant_id,
-                'warehouse_id' => $user->warehouse_id,
+                'tenant_id'    => $user?->tenant_id ?: tenant()->id,
+                'warehouse_id' => $user?->warehouse_id ?: warehouse()->id,
                 'user_id'      => $userId,
             ];
         });

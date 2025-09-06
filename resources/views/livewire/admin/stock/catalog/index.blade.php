@@ -12,6 +12,11 @@
         </x-slot:header>
 
         <x-table :headers="$this->headers" :$sort :rows="$this->rows" paginate simple-pagination filter loading :quantity="[2, 5, 15, 25]">
+            @interact('column_name', $row)
+            <div>{{ $row->name }}</div>
+            <div>{{ $row->sku_code }}</div>
+            @endinteract
+
             @interact('column_created_at', $row)
                 <x-ui.created_at :date="$row->created_at" />
             @endinteract
