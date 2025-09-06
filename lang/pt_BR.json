@@ -281,6 +281,8 @@
     "Gram": "Grama",
     "Liter": "Litro",
     "Milliliter": "Mililitro",
+    "Provide the item identification details.": "Forneça os detalhes de identificação do item.",
+    "Configure how the item is controlled and any special handling needs.": "Configure como o item é controlado e quaisquer necessidades especiais de manuseio.",
     "Pallet": "Palete",
     "Choose a clear name and a unique SKU to identify the item across the system and integrations.": "Escolha um nome claro e um SKU único para identificar o item em todo o sistema e integrações.",
     "Tracking mode defines how this item is controlled (none, lot, serial, expiry).": "O modo de rastreamento define como este item é controlado (nenhum, lote, série, validade).",
