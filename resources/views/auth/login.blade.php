@@ -7,7 +7,7 @@
         @csrf
 
         <div class="space-y-4">
-            <x-input label="Email *" type="email" name="email" :value="when(app()->isLocal(), fn() => old('email', 'bhcosta90@gmail.com'))" required autofocus autocomplete="username" />
+            <x-input label="Email *" type="email" name="email" :value="when(app()->isLocal(), fn() => old('email', 'demo@test.com'))" required autofocus autocomplete="username" />
 
             <x-password label="Password *" type="password" name="password" required autocomplete="current-password" />
         </div>
