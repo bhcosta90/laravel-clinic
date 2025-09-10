@@ -1,0 +1,1 @@
+<x-button.circle {{ $attributes }} />
