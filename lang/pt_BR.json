@@ -66,6 +66,7 @@
     "Select a permission group from the sidebar to view and manage permissions.": "Selecione um grupo de permissões na barra lateral para visualizar e gerenciar permissões.",
     "Select all permissions": "Selecionar todas as permissões",
     "Select all children": "Selecionar todos os filhos",
+    "Permission Groups": "Grupos de Permissões",
     "(and :count more error)": "(e mais :count erro)",
     "(and :count more errors)": "(e mais :count erros)",
     "Manage and review all registered procedures": "Gerenciar e revisar todos os procedimentos registrados",
