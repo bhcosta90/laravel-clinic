@@ -9,7 +9,7 @@ use Costa\Service\Service;
 
 final class UserService extends Service
 {
-    public function showByCode($code): User
+    public function showByCode(string $code): User
     {
         return User::findOrFail(User::decodeHashCode($code));
     }
