@@ -17,9 +17,11 @@ final class SyncPermission extends Component
 
     public function mount(): void
     {
+        $hash = request()->route('hash');
+
         $this->model = match (request()->route('type')) {
-            'user'  => Models\User::findOrFail(Models\User::decodeHashCode(request()->route('hash'))),
-            'role'  => Models\Role::findOrFail(Models\Role::decodeHashCode(request()->route('hash'))),
+            'user'  => Models\User::findOrFail(Models\User::decodeHashCode($hash)),
+            'role'  => Models\Role::findOrFail(Models\Role::decodeHashCode($hash)),
             default => throw new Exception('Invalid type'),
         };
 
