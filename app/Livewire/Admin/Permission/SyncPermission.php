@@ -108,7 +108,7 @@ final class SyncPermission extends Component
 
         foreach (Can::cases() as $permission) {
             $parts = explode('::', (string) $permission->value);
-            [$parent, $child, $action, $singleKey] = [null, null, null, '__single__'];
+            [, , , $singleKey] = [null, null, null, '__single__'];
 
             if (count($parts) >= 3) {
                 $parent = __(array_shift($parts));
