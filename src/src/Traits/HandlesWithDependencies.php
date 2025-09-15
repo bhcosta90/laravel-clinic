@@ -118,12 +118,7 @@ trait HandlesWithDependencies
         }
 
         $data = $this->mapParamsToValidationData($rules, $params);
-
-        $validator = Validator::make($data, $rules);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
+        Validator::make($data, $rules)->validate();
     }
 
     protected function mapParamsToValidationData(array $rules, array $params): array
