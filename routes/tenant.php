@@ -38,7 +38,7 @@ Route::middleware([
             Route::get('rooms', App\Livewire\Admin\Rooms\Index::class)->name('rooms.index');
             Route::get('roles', App\Livewire\Admin\Roles\Index::class)->name('roles.index');
             Route::get('patients', App\Livewire\Admin\Patients\Index::class)->name('patients.index');
-            Route::get('permissions/{type}/{user_hash}', App\Livewire\Admin\Permission\SyncPermission::class)->name('permissions.sync-permission.index');
+            Route::get('permissions/{type}/{hash}', App\Livewire\Admin\Permission\SyncPermission::class)->name('permissions.sync-permission.index');
         });
     });
 

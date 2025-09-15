@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Livewire\Admin\Permission;
 
 use App\Models\Enums\Permission\Can;
+use App\Models\Permission;
 use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ final class SyncPermission extends Component
     public function mount(): void
     {
         if ('user' === request()->route('type')) {
-            $this->model = app(UserService::class)->showByCode(request()->route('user_hash'));
+            $this->model = app(UserService::class)->showByCode(request()->route('hash'));
         }
 
         $this->model->load('permissions');
@@ -37,7 +38,7 @@ final class SyncPermission extends Component
     {
         $hasPermission = $this->model->permissions->contains('slug', $permissionSlug);
 
-        $permission = PermissionModel::firstOrCreate([
+        $permission = Permission::firstOrCreate([
             'slug' => $permissionSlug,
         ]);
 
