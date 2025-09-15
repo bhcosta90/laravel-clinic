@@ -62,7 +62,7 @@ abstract class Service
         $keyValue = $model->{$keyName};
 
         $data[$keyName] = $keyValue;
-        $this->validateMethod('storeValidate', $data);
+        $this->validateMethod('updateValidate', $data);
         $this->validateMethod('dataValidate', $data);
 
         unset($data[$keyName]);
