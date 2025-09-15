@@ -10,8 +10,6 @@ use Costa\Service\Service;
 
 final class RoleService extends Service
 {
-    use ByCode;
-
     protected function model(): Role
     {
         return new Role();

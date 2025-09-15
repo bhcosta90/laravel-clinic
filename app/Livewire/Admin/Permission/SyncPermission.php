@@ -4,11 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Permission;
 
-use App\Models\Enums\Permission\Can;
-use App\Models\Permission;
-use App\Models\Role;
-use App\Models\User;
-use App\Services;
+use App\Models;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
@@ -17,13 +13,13 @@ use Livewire\Component;
 
 final class SyncPermission extends Component
 {
-    public Model | User | Role | null $model = null;
+    public Model | Models\User | Models\Role | null $model = null;
 
     public function mount(): void
     {
         $this->model = match (request()->route('type')) {
-            'user'  => app(Services\UserService::class)->showByCode(request()->route('hash')),
-            'role'  => app(Services\RoleService::class)->showByCode(request()->route('hash')),
+            'user'  => Models\User::findOrFail(Models\User::decodeHashCode(request()->route('hash'))),
+            'role'  => Models\Role::findOrFail(Models\Role::decodeHashCode(request()->route('hash'))),
             default => throw new Exception('Invalid type'),
         };
 
@@ -43,7 +39,7 @@ final class SyncPermission extends Component
     {
         $hasPermission = $this->model->permissions->contains('slug', $permissionSlug);
 
-        $permission = Permission::firstOrCreate([
+        $permission = Models\Permission::firstOrCreate([
             'slug' => $permissionSlug,
         ]);
 
@@ -62,8 +58,8 @@ final class SyncPermission extends Component
     {
         $key = [];
 
-        foreach (Can::cases() as $permission) {
-            $key[] = Permission::firstOrCreate([
+        foreach (Models\Enums\Permission\Can::cases() as $permission) {
+            $key[] = Models\Permission::firstOrCreate([
                 'slug' => $permission,
             ])->id;
         }
@@ -83,7 +79,7 @@ final class SyncPermission extends Component
 
         foreach ($parentPermissions as $childPermissions) {
             foreach ($childPermissions as $permission) {
-                $permissionIds[] = Permission::firstOrCreate([
+                $permissionIds[] = Models\Permission::firstOrCreate([
                     'slug' => $permission['value'],
                 ])->id;
             }
@@ -108,7 +104,7 @@ final class SyncPermission extends Component
     {
         $permissions = collect();
 
-        foreach (Can::cases() as $permission) {
+        foreach (Models\Enums\Permission\Can::cases() as $permission) {
             $parts             = explode('::', (string) $permission->value);
             [, , , $singleKey] = [null, null, null, '__single__'];
 

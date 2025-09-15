@@ -10,8 +10,6 @@ use Costa\Service\Service;
 
 final class UserService extends Service
 {
-    use ByCode;
-
     protected function model(): User
     {
         return new User();
