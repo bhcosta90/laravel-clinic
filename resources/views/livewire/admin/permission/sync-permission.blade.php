@@ -31,7 +31,7 @@
             </div>
             <div class="ml-3">
                 <p class="text-sm text-primary-700 dark:text-primary-300">
-                    {{ __('Permissions are grouped by module and entity. Check the boxes to grant specific access rights to this') }} @lang('user')
+                    {{ __('Permissions are grouped by module and entity. Check the boxes to grant specific access rights to this ' . request()->route('type')) }}
                 </p>
             </div>
         </div>
@@ -61,7 +61,7 @@
                         class="p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors flex justify-between items-center"
                         :class="{'bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300': activeParent === '{{ $parentName }}'}"
                     >
-                        <div class="font-medium text-secondary-700 dark:text-secondary-300">{{ mb_ucfirst($parentName) }}</div>
+                        <div class="font-medium text-secondary-700 dark:text-secondary-300">{{ $parentName }}</div>
                         <svg
                             :class="{'transform rotate-180': activeParent === '{{ $parentName }}'}"
                             class="w-5 h-5 transition-transform duration-200"
@@ -95,9 +95,9 @@
                             @unless($isSingle)
                                 <div class="border-b border-gray-200 dark:border-gray-600 pb-2 mb-4">
                                     <div class="flex items-center">
-                                        <div class="font-medium text-xl text-secondary-700 dark:text-secondary-300">{{ __($childName) }}</div>
-                                        <div class="ml-2 text-sm text-secondary-500 dark:text-secondary-400">
-                                            {{ __("record " . $childName) }}
+                                        <div class="font-medium text-xl text-secondary-700 dark:text-secondary-300">{{ $childName }}</div>
+                                        <div class="ml-2 text-sm text-secondary-500 dark:text-secondary-400" style="display: none">
+                                            {{ $childName }}
                                         </div>
                                     </div>
                                 </div>
@@ -114,9 +114,9 @@
                                                 class="h-5 w-5"
                                             />
                                             <label for="permission-{{ $action['value'] }}" class="ml-2 block">
-                                                <span class="font-medium text-secondary-700 dark:text-secondary-300">{{ __($action['name']) }}</span>
-                                                <p class="text-sm text-secondary-500 dark:text-secondary-300 mt-1">
-                                                    {{ __($action['name']) }}
+                                                <span class="font-medium text-secondary-700 dark:text-secondary-300">{{ $action['name'] }}</span>
+                                                <p class="text-sm text-secondary-500 dark:text-secondary-300 mt-1" style="display:none">
+                                                    {{ $action['name'] }}
                                                 </p>
                                             </label>
                                         </div>

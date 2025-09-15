@@ -111,17 +111,17 @@ final class SyncPermission extends Component
             [, , , $singleKey] = [null, null, null, '__single__'];
 
             if (count($parts) >= 3) {
-                $parent = __(array_shift($parts));
-                $child  = __(array_shift($parts));
-                $action = __(implode(' ', $parts));
+                $parent = __('permission.' . ucfirst(array_shift($parts)));
+                $child  = __('permission.' . ucfirst(array_shift($parts)));
+                $action = __('permission.' . ucfirst(implode(' ', $parts)));
             } elseif (2 === count($parts)) {
-                $parent = __($parts[0]);
+                $parent = __('permission.' . ucfirst($parts[0]));
                 $child  = $singleKey;
-                $action = __($parts[1]);
+                $action = __('permission.' . ucfirst($parts[1]));
             } else {
-                $parent = __('misc');
+                $parent = __('permission.misc');
                 $child  = $singleKey;
-                $action = __($permission->value);
+                $action = __('permission.' . ucfirst($permission->value));
             }
 
             if (!$permissions->has($parent)) {
