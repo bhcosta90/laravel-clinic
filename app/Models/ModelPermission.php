@@ -12,9 +12,9 @@ final class ModelPermission extends Model
     protected $table = 'model_permission';
 
     protected $fillable = [
+        'permission_id',
         'model_id',
         'model_type',
-        'permission_id',
     ];
 
     public function permission(): BelongsTo
