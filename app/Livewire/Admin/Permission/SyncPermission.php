@@ -81,7 +81,7 @@ final class SyncPermission extends Component
 
         foreach ($parentPermissions as $childPermissions) {
             foreach ($childPermissions as $permission) {
-                $permissionIds[] = PermissionModel::firstOrCreate([
+                $permissionIds[] = Permission::firstOrCreate([
                     'slug' => $permission['value'],
                 ])->id;
             }
