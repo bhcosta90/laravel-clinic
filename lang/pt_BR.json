@@ -1,10 +1,10 @@
 {
-    "Roles": "Funções",
-    "Role report": "Relatório de funções",
-    "Create new role": "Criar nova função",
-    "Creating new role": "Criando nova função",
-    "Updating role": "Atualizando função",
-    "Enter role name": "Digite o nome da função",
+    "Roles": "Perfil",
+    "Role report": "Relatório de perfis",
+    "Create new role": "Criar novo perfil",
+    "Creating new role": "Criando novo perfil",
+    "Updating role": "Atualizando perfil",
+    "Enter role name": "Digite o nome do perfil",
 
     "Select insurance status": "Selecione o status do convênio",
     "Manage and review all registered insurances": "Gerenciar e revisar todos os convênios registrados",
