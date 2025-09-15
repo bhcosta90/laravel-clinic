@@ -104,7 +104,7 @@
                             @endunless
 
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 pl-4">
-                                @foreach($actions as $action)
+                                @foreach($actions->sortBy('name') as $action)
                                     <div class="bg-gray-50 dark:bg-gray-600 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-500 transition-colors">
                                         <div class="flex items-center">
                                             <x-checkbox
