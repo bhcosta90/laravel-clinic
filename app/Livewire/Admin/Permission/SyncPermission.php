@@ -61,7 +61,7 @@ final class SyncPermission extends Component
         $key = [];
 
         foreach (Can::cases() as $permission) {
-            $key[] = PermissionModel::firstOrCreate([
+            $key[] = Permission::firstOrCreate([
                 'slug' => $permission,
             ])->id;
         }
