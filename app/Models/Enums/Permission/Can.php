@@ -46,9 +46,9 @@ enum Can: string
     case TransactionCommissionView = 'transaction::commission::view';
     case TransactionCommissionEdit = 'transaction::commission::edit';
 
+    case AppointmentAppointmentEdit   = 'appointment::appointment::edit';
     case AppointmentAppointmentReport = 'appointment::appointment::report';
     case AppointmentAppointmentView   = 'appointment::appointment::view';
-    case AppointmentAppointmentEdit   = 'appointment::appointment::edit';
 
     case StockLocationImportView = 'stock::location_import::view';
     case StockLocationImportEdit = 'stock::location_import::edit';
