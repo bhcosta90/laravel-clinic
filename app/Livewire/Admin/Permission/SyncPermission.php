@@ -107,14 +107,14 @@ final class SyncPermission extends Component
         $permissions = collect();
 
         foreach (Can::cases() as $permission) {
-            $parts = explode('::', (string) $permission->value);
+            $parts             = explode('::', (string) $permission->value);
             [, , , $singleKey] = [null, null, null, '__single__'];
 
             if (count($parts) >= 3) {
                 $parent = __(array_shift($parts));
                 $child  = __(array_shift($parts));
                 $action = __(implode(' ', $parts));
-            } elseif (count($parts) === 2) {
+            } elseif (2 === count($parts)) {
                 $parent = __($parts[0]);
                 $child  = $singleKey;
                 $action = __($parts[1]);
@@ -127,6 +127,7 @@ final class SyncPermission extends Component
             if (!$permissions->has($parent)) {
                 $permissions[$parent] = collect();
             }
+
             if (!$permissions[$parent]->has($child)) {
                 $permissions[$parent][$child] = collect();
             }
