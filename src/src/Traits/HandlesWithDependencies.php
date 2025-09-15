@@ -114,7 +114,7 @@ trait HandlesWithDependencies
         $rules = $this->$rulesMethod();
 
         if (!is_array($rules)) {
-            throw new RuntimeException("O método {$rulesMethod} deve retornar um array de regras de validação.");
+            throw new RuntimeException("The {$rulesMethod} method should return an array of validation rules.");
         }
 
         $data = $this->mapParamsToValidationData($rules, $params);
