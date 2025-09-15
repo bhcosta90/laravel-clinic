@@ -3,7 +3,6 @@
 declare(strict_types = 1);
 
 use App\Livewire\User\Profile;
-use App\Livewire\Users\Index;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -29,16 +28,15 @@ Route::middleware([
 
     Route::middleware(['auth'])->group(function (): void {
         Route::view('/dashboard', 'dashboard')->name('dashboard');
-
-        Route::get('/users', Index::class)->name('users.index');
-
         Route::get('/user/profile', Profile::class)->name('user.profile');
 
         Route::prefix('admin')->as('admin.')->group(function (): void {
+            Route::get('users', App\Livewire\Users\Index::class)->name('users.index');
             Route::get('insurances', App\Livewire\Admin\Insurances\Index::class)->name('insurances.index');
             Route::get('procedures', App\Livewire\Admin\Procedures\Index::class)->name('procedures.index');
             Route::get('specialties', App\Livewire\Admin\Specialties\Index::class)->name('specialties.index');
             Route::get('rooms', App\Livewire\Admin\Rooms\Index::class)->name('rooms.index');
+            Route::get('roles', App\Livewire\Admin\Roles\Index::class)->name('roles.index');
             Route::get('patients', App\Livewire\Admin\Patients\Index::class)->name('patients.index');
             Route::get('permissions/{type}/{user_hash}', App\Livewire\Admin\Permission\SyncPermission::class)->name('permissions.sync-permission.index');
         });
