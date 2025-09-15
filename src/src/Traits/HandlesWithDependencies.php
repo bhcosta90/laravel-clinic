@@ -7,14 +7,19 @@ namespace Costa\Service\Traits;
 use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use InvalidArgumentException;
 use ReflectionMethod;
 use ReflectionNamedType;
+use RuntimeException;
 
 trait HandlesWithDependencies
 {
     public function handle(string $method, ...$params): mixed
     {
+        $this->validateDataForMethod($method, $params);
+
         $container   = app(Container::class);
         $application = app(Application::class);
 
@@ -96,5 +101,44 @@ trait HandlesWithDependencies
         if ($method) {
             $closure();
         }
+    }
+
+    protected function validateDataForMethod(string $method, array $params): void
+    {
+        $rulesMethod = 'rulesFor' . ucfirst($method);
+
+        if (!method_exists($this, $rulesMethod)) {
+            return;
+        }
+
+        $rules = $this->$rulesMethod();
+
+        if (!is_array($rules)) {
+            throw new RuntimeException("O método {$rulesMethod} deve retornar um array de regras de validação.");
+        }
+
+        $data = $this->mapParamsToValidationData($rules, $params);
+
+        $validator = Validator::make($data, $rules);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+    }
+
+    protected function mapParamsToValidationData(array $rules, array $params): array
+    {
+        // Simples: assume que $params está na mesma ordem das chaves de $rules
+        $data = [];
+        $i    = 0;
+
+        foreach (array_keys($rules) as $key) {
+            if (isset($params[$i])) {
+                $data[$key] = $params[$i];
+            }
+            ++$i;
+        }
+
+        return $data;
     }
 }
