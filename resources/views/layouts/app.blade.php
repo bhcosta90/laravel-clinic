@@ -68,6 +68,7 @@
                     <x-side-bar.item text="{{ __('Rooms') }}" :route="route('admin.rooms.index')" />
                     <x-side-bar.item text="{{ __('Specialties') }}" :route="route('admin.specialties.index')" />
                 </x-side-bar.item>
+
                 <x-side-bar.item text="Welcome Page" icon="arrow-uturn-left" :route="route('welcome')" />
             </x-side-bar>
         </x-slot:menu>
