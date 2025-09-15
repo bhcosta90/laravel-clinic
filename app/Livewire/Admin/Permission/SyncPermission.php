@@ -6,7 +6,8 @@ namespace App\Livewire\Admin\Permission;
 
 use App\Models\Enums\Permission\Can;
 use App\Models\Permission;
-use App\Services\UserService;
+use App\Services;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -18,9 +19,11 @@ final class SyncPermission extends Component
 
     public function mount(): void
     {
-        if ('user' === request()->route('type')) {
-            $this->model = app(UserService::class)->showByCode(request()->route('hash'));
-        }
+        $this->model = match (request()->route('type')) {
+            'user'  => app(Services\UserService::class)->showByCode(request()->route('hash')),
+            'role'  => app(Services\RoleService::class)->showByCode(request()->route('hash')),
+            default => throw new Exception('Invalid type'),
+        };
 
         $this->model->load('permissions');
     }
