@@ -6,6 +6,8 @@ namespace App\Livewire\Admin\Permission;
 
 use App\Models\Enums\Permission\Can;
 use App\Models\Permission;
+use App\Models\Role;
+use App\Models\User;
 use App\Services;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -15,7 +17,7 @@ use Livewire\Component;
 
 final class SyncPermission extends Component
 {
-    public ?Model $model = null;
+    public Model | User | Role | null $model = null;
 
     public function mount(): void
     {
