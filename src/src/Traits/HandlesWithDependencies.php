@@ -8,7 +8,6 @@ use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use InvalidArgumentException;
 use ReflectionMethod;
 use ReflectionNamedType;
@@ -38,7 +37,7 @@ trait HandlesWithDependencies
         foreach ($parameters as $parameter) {
             $name = $parameter->getName();
 
-            // 1) First tries to solve by attribute (ex: #[CurrentUser])
+            // 1) First try to solve it by attribute (ex: #[CurrentUser])
             foreach ($parameter->getAttributes() as $attribute) {
                 $instance = $attribute->newInstance();
 
@@ -90,7 +89,7 @@ trait HandlesWithDependencies
             }
 
             // 5) If you arrived here, we have no value to pass - error
-            throw new InvalidArgumentException("It was not possible to resolve the parameter \${$name} no method {$method} of " . static::class);
+            throw new InvalidArgumentException("It was not possible to resolve the parameter {$name} no method {$method} of " . static::class);
         }
 
         return $bindClass->$method(...$resolved);
