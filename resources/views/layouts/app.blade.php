@@ -55,10 +55,13 @@
                     </div>
                 </x-slot:brand>
                 <x-side-bar.item text="Dashboard" icon="home" :route="route('dashboard')" />
-                <x-side-bar.item text="{{ __('Registrations') }}">
+                <x-side-bar.item text="{{ __('People') }}">
                     <x-side-bar.item text="{{ __('Users') }}" :route="route('admin.users.index')" />
-                    <x-side-bar.item text="{{ __('Insurances') }}" :route="route('admin.insurances.index')" />
                     <x-side-bar.item text="{{ __('Patients') }}" :route="route('admin.patients.index')" />
+                </x-side-bar.item>
+
+                <x-side-bar.item text="{{ __('Registrations') }}">
+                    <x-side-bar.item text="{{ __('Insurances') }}" :route="route('admin.insurances.index')" />
                     <x-side-bar.item text="{{ __('Procedures') }}" :route="route('admin.procedures.index')" />
                     <x-side-bar.item text="{{ __('Rooms') }}" :route="route('admin.rooms.index')" />
                     <x-side-bar.item text="{{ __('Specialties') }}" :route="route('admin.specialties.index')" />
