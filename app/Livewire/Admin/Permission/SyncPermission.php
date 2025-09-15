@@ -49,11 +49,9 @@ final class SyncPermission extends Component
             return;
         }
 
-        if ($hasPermission) {
-            $this->model->permissions()->detach($permission->id);
-        } else {
-            $this->model->permissions()->attach($permission->id);
-        }
+        $hasPermission
+            ? $this->model->permissions()->detach($permission->id)
+            : $this->model->permissions()->attach($permission->id);
 
         $this->model->touch();
     }
