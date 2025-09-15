@@ -4,19 +4,18 @@ declare(strict_types = 1);
 
 namespace Database\Factories;
 
-use App\Models\Specialty;
+use App\Models\Permission;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-final class SpecialtyFactory extends Factory
+final class PermissionFactory extends Factory
 {
-    protected $model = Specialty::class;
+    protected $model = Permission::class;
 
     public function definition(): array
     {
         return [
-            'code'       => $this->faker->unique()->word(),
-            'name'       => $this->faker->name(),
+            'slug'       => $this->faker->slug(), //
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
