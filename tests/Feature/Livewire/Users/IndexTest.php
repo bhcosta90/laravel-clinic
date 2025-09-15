@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-use App\Livewire\Users\Index;
+use App\Livewire\Admin\Users\Index;
 use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;

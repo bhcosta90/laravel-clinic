@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Users;
+namespace App\Livewire\Admin\Users;
 
 use App\Livewire\Traits\Alert;
 use App\Models\User;

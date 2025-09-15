@@ -31,7 +31,7 @@ Route::middleware([
         Route::get('/user/profile', Profile::class)->name('user.profile');
 
         Route::prefix('admin')->as('admin.')->group(function (): void {
-            Route::get('users', App\Livewire\Users\Index::class)->name('users.index');
+            Route::get('users', \App\Livewire\Admin\Users\Index::class)->name('users.index');
             Route::get('insurances', App\Livewire\Admin\Insurances\Index::class)->name('insurances.index');
             Route::get('procedures', App\Livewire\Admin\Procedures\Index::class)->name('procedures.index');
             Route::get('specialties', App\Livewire\Admin\Specialties\Index::class)->name('specialties.index');

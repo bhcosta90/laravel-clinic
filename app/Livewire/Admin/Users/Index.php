@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Users;
+namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -36,7 +36,7 @@ final class Index extends Component
 
     public function render(): View
     {
-        return view('livewire.users.index');
+        return view('livewire.admin.users.index');
     }
 
     #[Computed]

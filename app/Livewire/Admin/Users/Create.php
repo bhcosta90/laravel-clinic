@@ -2,38 +2,34 @@
 
 declare(strict_types = 1);
 
-namespace App\Livewire\Users;
+namespace App\Livewire\Admin\Users;
 
 use App\Livewire\Traits\Alert;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
-final class Update extends Component
+final class Create extends Component
 {
     use Alert;
 
-    public ?User $user = null;
+    public User $user;
 
     public ?string $password = null;
 
     public ?string $password_confirmation = null;
 
-    public bool $modal = false;
+    public bool $slide = false;
+
+    public function mount(): void
+    {
+        $this->user = new User();
+    }
 
     public function render(): View
     {
-        return view('livewire.users.update');
-    }
-
-    #[On('load::user')]
-    public function load(User $user): void
-    {
-        $this->user = $user;
-
-        $this->modal = true;
+        return view('livewire.admin.users.create');
     }
 
     public function rules(): array
@@ -49,7 +45,7 @@ final class Update extends Component
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('users', 'email')->ignore($this->user->id),
+                Rule::unique('users', 'email'),
             ],
             'password' => [
                 'nullable',
@@ -64,12 +60,14 @@ final class Update extends Component
     {
         $this->validate();
 
-        $this->user->password = when(null !== $this->password, bcrypt($this->password), $this->user->password);
+        $this->user->password          = bcrypt($this->password);
+        $this->user->email_verified_at = now();
         $this->user->save();
 
-        $this->dispatch('updated');
+        $this->dispatch('created');
 
-        $this->resetExcept('user');
+        $this->reset();
+        $this->user = new User();
 
         $this->success();
     }

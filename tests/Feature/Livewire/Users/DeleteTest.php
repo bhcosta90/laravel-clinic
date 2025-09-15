@@ -2,10 +2,9 @@
 
 declare(strict_types = 1);
 
-use App\Livewire\Users\Delete;
+use App\Livewire\Admin\Users\Delete;
 use App\Models\User;
 use Livewire\Livewire;
-
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertSoftDeleted;
 
