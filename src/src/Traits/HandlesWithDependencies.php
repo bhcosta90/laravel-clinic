@@ -89,7 +89,7 @@ trait HandlesWithDependencies
             }
 
             // 5) If you arrived here, we have no value to pass - error
-            throw new InvalidArgumentException("It was not possible to resolve the parameter {$name} no method {$method} of " . static::class);
+            throw new InvalidArgumentException("It was not possible to resolve the parameter $name no method $method of " . static::class);
         }
 
         return $bindClass->$method(...$resolved);
@@ -113,7 +113,7 @@ trait HandlesWithDependencies
         $rules = $this->$rulesMethod();
 
         if (!is_array($rules)) {
-            throw new RuntimeException("The {$rulesMethod} method should return an array of validation rules.");
+            throw new RuntimeException("The $rulesMethod method should return an array of validation rules.");
         }
 
         $data = $this->mapParamsToValidationData($rules, $params);
