@@ -4,21 +4,21 @@ declare(strict_types = 1);
 
 namespace App\Services;
 
-use App\Models\User;
+use App\Models\Role;
 use App\Services\Traits\ByCode;
 use Costa\Service\Service;
 
-final class UserService extends Service
+final class RoleService extends Service
 {
     use ByCode;
 
-    protected function model(): User
+    protected function model(): Role
     {
-        return new User();
+        return new Role();
     }
 
     protected function search(): array
     {
-        return ['code', 'name'];
+        return ['name'];
     }
 }
