@@ -3,7 +3,7 @@
         <x-slot:header>
             <x-ui.card.header title="User report" subtitle="Manage and review all registered users">
                 <x-slot name="actions">
-                    <livewire:users.create @created="$refresh" />
+                    <livewire:admin.users.create @created="$refresh" />
                 </x-slot>
             </x-ui.card.header>
         </x-slot:header>
@@ -18,11 +18,11 @@
             <div class="flex gap-2 justify-end">
                 <x-button.circle icon="key" color='neutral' :href="route('admin.permissions.sync-permission.index', ['type' => 'user', 'hash' => $row->hash_code])" />
                 <x-button.circle icon="pencil" wire:click="$dispatch('load::user', { 'user' : '{{ $row->id }}'})" />
-                <livewire:users.delete :user="$row" :key="uniqid('', true)" @deleted="$refresh" />
+                <livewire:admin.users.delete :user="$row" :key="uniqid('', true)" @deleted="$refresh" />
             </div>
             @endinteract
         </x-table>
     </x-card>
 
-    <livewire:users.update @updated="$refresh" />
+    <livewire:admin.users.update @updated="$refresh" />
 </div>

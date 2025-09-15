@@ -16,7 +16,7 @@ beforeEach(function (): void {
 it('renders the update user component', function (): void {
     Livewire::test(Update::class, ['user' => $this->original])
         ->assertOk()
-        ->assertViewIs('livewire.users.update');
+        ->assertViewIs('livewire.admin.users.update');
 });
 
 it('initializes with existing user data', function (): void {

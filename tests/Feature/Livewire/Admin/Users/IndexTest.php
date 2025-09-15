@@ -20,7 +20,7 @@ beforeEach(function (): void {
 it('renders the users index component', function (): void {
     Livewire::test(Index::class)
         ->assertOk()
-        ->assertViewIs('livewire.users.index');
+        ->assertViewIs('livewire.admin.users.index');
 });
 
 it('initializes with default settings', function (): void {

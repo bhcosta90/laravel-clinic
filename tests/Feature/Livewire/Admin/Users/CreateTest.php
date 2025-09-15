@@ -13,7 +13,7 @@ beforeEach(fn () => User::query()->delete());
 it('renders the create user component', function (): void {
     Livewire::test(Create::class)
         ->assertOk()
-        ->assertViewIs('livewire.users.create');
+        ->assertViewIs('livewire.admin.users.create');
 });
 
 it('initializes with a new user', function (): void {
