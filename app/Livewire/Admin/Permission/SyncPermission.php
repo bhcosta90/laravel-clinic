@@ -4,15 +4,23 @@ declare(strict_types = 1);
 
 namespace App\Livewire\Admin\Permission;
 
+use App\Models\Enums\Permission\Can;
+use App\Services\UserService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 
 final class SyncPermission extends Component
 {
-    public Model $model;
+    public ?Model $model = null;
 
     public function mount(): void
     {
+        if ('user' === request()->route('type')) {
+            $this->model = app(UserService::class)->showByCode(request()->route('user_hash'));
+        }
+
         $this->model->load('permissions');
     }
 
@@ -97,7 +105,7 @@ final class SyncPermission extends Component
         $permissions = collect();
 
         foreach (Can::cases() as $permission) {
-            $parts = explode('-', (string) $permission->value);
+            $parts = explode('::', (string) $permission->value);
 
             if (count($parts) >= 3) {
                 // Three-level: parent-child-action (default)

@@ -4,8 +4,10 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Models\Traits\HashCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +25,7 @@ use Illuminate\Support\Carbon;
 final class User extends Authenticatable
 {
     use HasFactory;
+    use HashCode;
     use Notifiable;
     use SoftDeletes;
 
@@ -39,20 +42,21 @@ final class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * Procedures this doctor can perform.
-     */
     public function proceduresPerformed(): BelongsToMany
     {
         return $this->belongsToMany(Procedure::class, 'procedure_user', 'user_id', 'procedure_id')->withTimestamps();
     }
 
-    /**
-     * Specialties this doctor has.
-     */
     public function specialties(): BelongsToMany
     {
         return $this->belongsToMany(Specialty::class, 'specialty_user', 'user_id', 'specialty_id')->withTimestamps();
+    }
+
+    public function permissions(): MorphToMany
+    {
+        return $this->morphToMany(Permission::class, 'model', $table = 'model_permission')
+            ->withTimestamps()
+            ->whereNull($table . '.deleted_at');
     }
 
     protected function casts(): array

@@ -16,6 +16,7 @@
 
             @interact('column_action', $row)
             <div class="flex gap-2 justify-end">
+                <x-button.circle icon="key" color='neutral' :href="route('admin.permissions.sync-permission.index', ['type' => 'user', 'user_hash' => $row->hash_code])" />
                 <x-button.circle icon="pencil" wire:click="$dispatch('load::user', { 'user' : '{{ $row->id }}'})" />
                 <livewire:users.delete :user="$row" :key="uniqid('', true)" @deleted="$refresh" />
             </div>
