@@ -63,6 +63,7 @@
                 </x-side-bar.item>
 
                 <x-side-bar.item text="{{ __('Registrations') }}">
+                    <x-side-bar.item text="{{ __('Roles') }}" :route="route('admin.roles.index')" />
                     <x-side-bar.item text="{{ __('Insurances') }}" :route="route('admin.insurances.index')" />
                     <x-side-bar.item text="{{ __('Procedures') }}" :route="route('admin.procedures.index')" />
                     <x-side-bar.item text="{{ __('Rooms') }}" :route="route('admin.rooms.index')" />

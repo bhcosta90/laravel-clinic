@@ -1,4 +1,11 @@
 {
+    "Roles": "Funções",
+    "Role report": "Relatório de funções",
+    "Create new role": "Criar nova função",
+    "Creating new role": "Criando nova função",
+    "Updating role": "Atualizando função",
+    "Enter role name": "Digite o nome da função",
+
     "Select insurance status": "Selecione o status do convênio",
     "Manage and review all registered insurances": "Gerenciar e revisar todos os convênios registrados",
     "Insurance report": "Relatório de convênios",
@@ -61,6 +68,7 @@
     "Manage Permissions": "Gerenciar Permissões",
     "Last updated": "Última atualização",
     "Permissions are grouped by module and entity. Check the boxes to grant specific access rights to this user": "As permissões são agrupadas por módulo e entidade. Marque as caixas para conceder direitos de acesso específicos a este usuário",
+    "Permissions are grouped by module and entity. Check the boxes to grant specific access rights to this role": "As permissões são agrupadas por módulo e entidade. Marque as caixas para conceder direitos de acesso específicos a esta função",
     "Permission Summary": "Resumo de Permissões",
     "Total permissions granted": "Total de permissões concedidas",
     "No permission group selected": "Nenhum grupo de permissão selecionado",

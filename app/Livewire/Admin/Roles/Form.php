@@ -7,7 +7,6 @@ namespace App\Livewire\Admin\Roles;
 use App\Models\Role;
 use App\Services\RoleService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -51,9 +50,7 @@ final class Form extends Component
     public function rules(): array
     {
         return [
-            'model.code'      => ['required', Rule::unique(Role::class, 'code')->ignore($this->model)],
-            'model.name'      => ['required', 'max:100'],
-            'model.is_active' => ['required', 'boolean'],
+            'model.name' => ['required', 'max:100'],
         ];
     }
 }

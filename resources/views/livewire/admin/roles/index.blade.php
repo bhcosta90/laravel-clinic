@@ -20,6 +20,7 @@
 
             @interact('column_action', $row)
             <div class="flex gap-2 justify-end">
+                <x-button.circle icon="key" color='neutral' :href="route('admin.permissions.sync-permission.index', ['type' => 'role', 'hash' => $row->hash_code])" />
                 <x-ui.button.circle icon="pencil" wire:click="$dispatch('load::role::update', { 'role' : '{{ $row->id }}'})"/>
                 <livewire:admin.roles.delete :role="$row" :key="uniqid('', true)" @deleted="$refresh" />
             </div>
