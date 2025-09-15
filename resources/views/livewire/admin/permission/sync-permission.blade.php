@@ -95,9 +95,9 @@
                             @unless($isSingle)
                                 <div class="border-b border-gray-200 dark:border-gray-600 pb-2 mb-4">
                                     <div class="flex items-center">
-                                        <div class="font-medium text-xl text-secondary-700 dark:text-secondary-300">{{ mb_ucfirst($childName) }}</div>
+                                        <div class="font-medium text-xl text-secondary-700 dark:text-secondary-300">{{ __($childName) }}</div>
                                         <div class="ml-2 text-sm text-secondary-500 dark:text-secondary-400">
-                                            {{ Can::operation($childName) }}
+                                            {{ __("record " . $childName) }}
                                         </div>
                                     </div>
                                 </div>
@@ -114,9 +114,9 @@
                                                 class="h-5 w-5"
                                             />
                                             <label for="permission-{{ $action['value'] }}" class="ml-2 block">
-                                                <span class="font-medium text-secondary-700 dark:text-secondary-300">{{ mb_ucfirst($action['name']) }}</span>
+                                                <span class="font-medium text-secondary-700 dark:text-secondary-300">{{ __($action['name']) }}</span>
                                                 <p class="text-sm text-secondary-500 dark:text-secondary-300 mt-1">
-                                                    {{ Can::action($action['name']) }}
+                                                    {{ __($action['name']) }}
                                                 </p>
                                             </label>
                                         </div>
