@@ -112,7 +112,7 @@ final class SyncPermission extends Component
 
             if (count($parts) >= 3) {
                 $parent = __('permission.' . ucfirst(array_shift($parts)));
-                $child  = __('permission.' . ucfirst(array_shift($parts)));
+                $child  = __('permission.' . ucfirst((string) array_shift($parts)));
                 $action = __('permission.' . ucfirst(implode(' ', $parts)));
             } elseif (2 === count($parts)) {
                 $parent = __('permission.' . ucfirst($parts[0]));
