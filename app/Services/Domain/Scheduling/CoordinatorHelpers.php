@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Services\Domain\Scheduling;
 
 use App\Models\Appointment;
+use App\Models\ClinicSchedule;
 use App\Models\Room;
 use App\Models\UserSchedule;
 use Carbon\Carbon;
@@ -14,7 +15,7 @@ final readonly class CoordinatorHelpers
 {
     public function buildRoomIds(bool $requireRoom, ?string $roomCode): array
     {
-        if (!$requireRoom && (null === $roomCode || '' === $roomCode || '0' === $roomCode || '0' === $roomCode)) {
+        if (!$requireRoom && (null === $roomCode || '' === $roomCode || '0' === $roomCode)) {
             return [];
         }
         $q = Room::query()->where('is_active', true);
@@ -28,7 +29,7 @@ final readonly class CoordinatorHelpers
 
     public function clinicSchedules(): Collection
     {
-        return \App\Models\ClinicSchedule::query()->get()->groupBy('day_of_week');
+        return ClinicSchedule::query()->get()->groupBy('day_of_week');
     }
 
     public function isCapReached(?object $insurer): bool
