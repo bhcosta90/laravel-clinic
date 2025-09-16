@@ -32,9 +32,10 @@ final class Availability
                 return false;
             }
         }
-        $appts = $appointments->get($docId, collect());
 
-        foreach ($appts as $a) {
+        $doctorAppointmentsList = $appointments->get($docId, collect());
+
+        foreach ($doctorAppointmentsList as $a) {
             $aStart = Carbon::parse($a->start_at);
             $aEnd   = Carbon::parse($a->end_at);
 
