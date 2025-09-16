@@ -33,23 +33,23 @@ final readonly class DoctorSlotLogic
 
     private function scanWindow(Carbon $cursor, Carbon $start, Carbon $eff, int $step, DoctorSlotRequest $req, int $doctorId): ?array
     {
-        $cand = $cursor->gt($start) ? $this->rounding->roundUpToSlot($start, $cursor, $step) : $start->copy();
-        while ($cand->addMinutes(0)->lt($eff)) {
-            $candEnd = $cand->copy()->addMinutes($req->duration);
+        $candidate = $cursor->gt($start) ? $this->rounding->roundUpToSlot($start, $cursor, $step) : $start->copy();
+        while ($candidate->addMinutes(0)->lt($eff)) {
+            $candidateEnd = $candidate->copy()->addMinutes($req->duration);
 
-            if ($candEnd->gt($eff)) {
+            if ($candidateEnd->gt($eff)) {
                 break;
             }
 
-            if ($this->availability->isDoctorAvailable($req->doctorBlocksByDoc, $req->appointmentsByDoc, $doctorId, $cand, $candEnd) && !$this->availability->patientConflicts($req->patientAppointments, $cand, $candEnd)) {
-                $maxEnd = $this->expandMaxEnd($cand, $eff, $step, $req, $doctorId);
+            if ($this->availability->isDoctorAvailable($req->doctorBlocksByDoc, $req->appointmentsByDoc, $doctorId, $candidate, $candidateEnd) && !$this->availability->patientConflicts($req->patientAppointments, $candidate, $candidateEnd)) {
+                $maxEnd = $this->expandMaxEnd($candidate, $eff, $step, $req, $doctorId);
                 $roomId = null;
 
                 if ($req->requireRoom || ($req->roomCode && '0' !== $req->roomCode)) {
-                    $roomId = ($req->pickRoom)($cand, $candEnd);
+                    $roomId = ($req->pickRoom)($candidate, $candidateEnd);
 
                     if (null === $roomId) {
-                        $cand->addMinutes($step);
+                        $candidate->addMinutes($step);
 
                         continue;
                     }
@@ -58,13 +58,13 @@ final readonly class DoctorSlotLogic
                 return [
                     'doctor_id'        => $doctorId,
                     'room_id'          => $roomId,
-                    'start_at'         => $cand->copy(),
-                    'end_at'           => $candEnd,
-                    'possible_end_min' => $cand->copy()->addMinutes($req->durationMin),
+                    'start_at'         => $candidate->copy(),
+                    'end_at'           => $candidateEnd,
+                    'possible_end_min' => $candidate->copy()->addMinutes($req->durationMin),
                     'possible_end_max' => $maxEnd,
                 ];
             }
-            $cand->addMinutes($step);
+            $candidate->addMinutes($step);
         }
 
         return null;
