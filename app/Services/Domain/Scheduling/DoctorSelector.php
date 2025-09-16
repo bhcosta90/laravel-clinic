@@ -18,8 +18,6 @@ final readonly class DoctorSelector
             $q->where('id', $doctorId);
         }
 
-        $procedure = null;
-
         if ($procedureCode && '0' !== $procedureCode) {
             $procedure = Procedure::query()->where('code', $procedureCode)->first();
 
