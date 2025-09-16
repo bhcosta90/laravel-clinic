@@ -39,7 +39,6 @@ final readonly class SchedulingCoordinator
 
         $durationMin = $r->defaultFirstVisitMinutes;
         $durationMax = $r->defaultFirstVisitMinutes;
-        $procedure   = null;
 
         if ($r->procedureCode && '0' !== $r->procedureCode) {
             $procedure = Procedure::query()->where('code', $r->procedureCode)->first();
