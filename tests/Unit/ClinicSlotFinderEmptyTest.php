@@ -17,7 +17,6 @@ it('returns empty when clinic schedules are empty', function (): void {
         requireRoom: false,
         roomCode: null,
         maxSlots: 1,
-        roomIds: [],
         pickRoom: fn (): null => null,
     );
     expect($slots->count())->toBe(0);

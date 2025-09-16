@@ -62,7 +62,7 @@ final readonly class SchedulingCoordinator
 
         // Clinic-general path (only if clinic schedules exist); otherwise fall back to doctor-based search
         if ((null === $r->doctorId || 0 === $r->doctorId) && (null === $r->specialtyCode || '' === $r->specialtyCode || '0' === $r->specialtyCode) && (null === $r->procedureCode || '' === $r->procedureCode || '0' === $r->procedureCode) && $clinicSchedules->isNotEmpty()) {
-            return $this->clinicFinder->find($clinicSchedules, $minDate, $endSearch, $r->defaultFirstVisitMinutes, $r->requireRoom, $r->roomCode, $r->maxSlots, $roomIds, $pickRoom);
+            return $this->clinicFinder->find($clinicSchedules, $minDate, $endSearch, $r->defaultFirstVisitMinutes, $r->requireRoom, $r->roomCode, $r->maxSlots, $pickRoom);
         }
 
         $doctorReq = new DoctorSlotRequest(

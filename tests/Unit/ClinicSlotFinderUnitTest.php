@@ -33,7 +33,6 @@ it('clinic slot finder covers edge branches', function (): void {
         requireRoom: true,
         roomCode: null,
         maxSlots: null,
-        roomIds: [],
         pickRoom: fn (Carbon $s, Carbon $e): null => null,
     );
     expect($slots1->count())->toBe(0);
@@ -47,9 +46,8 @@ it('clinic slot finder covers edge branches', function (): void {
         requireRoom: false,
         roomCode: null,
         maxSlots: 1,
-        roomIds: [],
         pickRoom: fn (Carbon $s, Carbon $e): null => null,
     );
-    expect($slots2->count())->toBe(1);
-    expect($slots2->first()['start_at']->toDateTimeString())->toBe('2025-09-02 10:00:00');
+    expect($slots2->count())->toBe(1)
+        ->and($slots2->first()['start_at']->toDateTimeString())->toBe('2025-09-02 10:00:00');
 });

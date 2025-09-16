@@ -18,7 +18,7 @@ final readonly class ClinicSlotFinder
     /**
      * @param Collection $clinicSchedules grouped by day_of_week
      */
-    public function find(Collection $clinicSchedules, Carbon $minDate, Carbon $endSearch, int $defaultMinutes, bool $requireRoom, ?string $roomCode, ?int $maxSlots, array $roomIds, callable $pickRoom): Collection
+    public function find(Collection $clinicSchedules, Carbon $minDate, Carbon $endSearch, int $defaultMinutes, bool $requireRoom, ?string $roomCode, ?int $maxSlots, callable $pickRoom): Collection
     {
         $slots = collect();
 
