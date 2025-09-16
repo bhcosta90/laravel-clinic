@@ -33,16 +33,13 @@ final readonly class DoctorSlotFinder
 
                     continue;
                 }
-                $dow = (int) $cursor->dayOfWeek;
+                $dow = $cursor->dayOfWeek;
                 $day = $schedules->get($dow, collect());
 
                 if ($day->isNotEmpty()) {
                     foreach ($day as $schedule) {
-                        $start = $cursor->copy()->setTimeFromTimeString($schedule->start_time);
-                        $end   = $cursor->copy()->setTimeFromTimeString($schedule->end_time);
-                        $eff   = $req->endSearch->lt($end) ? $req->endSearch->copy() : $end;
-                        $step  = (int) $schedule->slot_minutes;
-                        $slot  = $this->logic->scanSchedules(collect([$schedule]), $cursor, $req, $doctor->id, $req->endSearch, $step);
+                        $step = (int) $schedule->slot_minutes;
+                        $slot = $this->logic->scanSchedules(collect([$schedule]), $cursor, $req, $doctor->id, $req->endSearch, $step);
 
                         if (null !== $slot && [] !== $slot) {
                             $slots->push($slot);
