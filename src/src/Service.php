@@ -44,7 +44,7 @@ abstract class Service
             $newFilters['(' . $key . ')'] = $value;
         }
 
-        return app(BuilderQuery::class)->execute($this->model(), $this->includes(), $newFilters);
+        return app(BuilderQuery::class)->execute($this->model(), $this->includes(), [], $newFilters);
     }
 
     final public function store(array $data): Model
