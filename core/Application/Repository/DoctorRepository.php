@@ -7,7 +7,7 @@ namespace Core\Application\Repository;
 use App\Models\User as Doctor;
 use App\Models\UserSchedule;
 use Core\Application\Repository\Traits\Doctor\DoctorScheduleTrait;
-use Core\Domain\Entities\Aggregate\ScheduleAggregate;
+use Core\Domain\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Entities\Requests\Doctor\DoctorCreateRequest;
 use Core\Domain\Repository\DoctorRepositoryInterface;

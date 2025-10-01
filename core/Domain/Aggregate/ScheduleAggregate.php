@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Core\Domain\Entities\Aggregate;
+namespace Core\Domain\Aggregate;
 
 use Core\Domain\Enum\DayEnum;
 

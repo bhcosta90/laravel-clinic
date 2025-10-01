@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Core\Application\Handler\Doctor\Schedule;
 
-use Core\Domain\Entities\Aggregate\ScheduleAggregate;
+use Core\Domain\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;

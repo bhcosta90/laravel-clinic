@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Core\Application\Repository\Traits\Doctor;
 
 use App\Models\UserSchedule;
-use Core\Domain\Entities\Aggregate\ScheduleAggregate;
+use Core\Domain\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Illuminate\Database\Eloquent\Model;
 

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Core\Domain\Repository;
 
-use Core\Domain\Entities\Aggregate\ScheduleAggregate;
+use Core\Domain\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Shared\Domain\BaseDomain;
 use Core\Shared\Domain\Contracts\RepositoryInterface;

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 use App\Models\User;
 use App\Models\UserSchedule;
-use Core\Domain\Entities\Aggregate\ScheduleAggregate;
+use Core\Domain\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Enum\DayEnum;
 use Core\Domain\Repository\DoctorRepositoryInterface;

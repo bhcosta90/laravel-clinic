@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Core\Domain\Entities;
 
-use Core\Domain\Entities\Aggregate\ScheduleAggregate;
+use Core\Domain\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\Requests\Doctor\DoctorCreateRequest;
 use Core\Domain\Entities\Requests\Doctor\DoctorUpdateRequest;
 use Core\Shared\Domain\BaseDomain;

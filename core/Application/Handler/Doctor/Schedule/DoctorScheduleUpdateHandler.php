@@ -6,7 +6,7 @@ namespace Core\Application\Handler\Doctor\Schedule;
 
 use Core\Application\Data\DoctorScheduleOutput;
 use Core\Application\Handler\Doctor\Schedule\Data\DoctorScheduleUpdateInput;
-use Core\Domain\Entities\Aggregate\ScheduleAggregate;
+use Core\Domain\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
