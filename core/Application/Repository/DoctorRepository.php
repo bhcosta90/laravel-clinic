@@ -4,7 +4,7 @@ namespace Core\Application\Repository;
 
 use App\Models\User as Doctor;
 use App\Models\UserSchedule;
-use Core\Application\Repository\Traits\Doctor\ScheduleTrait;
+use Core\Application\Repository\Traits\Doctor\DoctorScheduleTrait;
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Entities\Requests\Doctor\DoctorCreateRequest;
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DoctorRepository implements DoctorRepositoryInterface
 {
-    use ScheduleTrait;
+    use DoctorScheduleTrait;
 
     public function find(
         int|string $id,

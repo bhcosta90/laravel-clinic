@@ -7,7 +7,7 @@ use Core\Domain\Entities\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Illuminate\Database\Eloquent\Model;
 
-trait ScheduleTrait
+trait DoctorScheduleTrait
 {
     abstract protected function getModelById(int|string $id): ?Model;
 
