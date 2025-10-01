@@ -28,7 +28,7 @@ final class GraphBuilder
             $fields = new FieldParser()->normalize($fields);
         }
 
-        if ($onlyFields && is_array($onlyFields)) {
+        if ($onlyFields) {
             $fields = $this->filterFields($fields, $onlyFields);
         }
 
