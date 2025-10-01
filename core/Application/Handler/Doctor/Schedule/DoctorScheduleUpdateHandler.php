@@ -3,9 +3,9 @@
 namespace Core\Application\Handler\Doctor\Schedule;
 
 use Core\Application\Data\DoctorScheduleOutput;
+use Core\Application\Handler\Doctor\Schedule\Data\DoctorScheduleUpdateInput;
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
-use Core\Domain\Enum\DayEnum;
 use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Domain\Support\DaySupport;
 use Core\Shared\Application\Exception\NotFoundException;
@@ -17,14 +17,14 @@ class DoctorScheduleUpdateHandler
         protected DaySupport $dayWeekSupport,
     ) {}
 
-    public function execute(
-        int|string $id,
-        int|string $doctorId,
-        ?DayEnum $dayOfWeek,
-        ?string $startTime,
-        ?string $endTime,
-        ?int $slotMinutes,
-    ): DoctorScheduleOutput {
+    public function execute(DoctorScheduleUpdateInput $input): DoctorScheduleOutput
+    {
+        $id = $input->id;
+        $doctorId = $input->doctorId;
+        $dayOfWeek = $input->dayOfWeek;
+        $startTime = $input->startTime;
+        $endTime = $input->endTime;
+        $slotMinutes = $input->slotMinutes;
 
         $aggregate = new ScheduleAggregate(id: $id);
 
