@@ -13,7 +13,7 @@ class ScheduleController
         return response()->json([
             'data' => $handler->execute(
                 $doctorId,
-                DayEnum::from(DayEnum::{ucfirst($procedureRequest->day_of_week)}->value),
+                $this->convertDayWeek($procedureRequest->day_of_week),
                 $procedureRequest->start_time,
                 $procedureRequest->end_time,
                 $procedureRequest->slot_minutes,
@@ -27,7 +27,7 @@ class ScheduleController
             'data' => $handler->execute(
                 $scheduleId,
                 $doctorId,
-                when($procedureRequest->day_of_week, fn () => DayEnum::from(DayEnum::{ucfirst($procedureRequest->day_of_week)}->value)),
+                when($procedureRequest->day_of_week, fn () => $this->convertDayWeek($procedureRequest->day_of_week)),
                 $procedureRequest->start_time,
                 $procedureRequest->end_time,
                 $procedureRequest->slot_minutes,
@@ -43,5 +43,10 @@ class ScheduleController
                 $doctorId,
             ),
         ]);
+    }
+
+    protected function convertDayWeek(string $dayOfWeek): DayEnum
+    {
+        return DayEnum::from(DayEnum::{ucfirst($dayOfWeek)}->value);
     }
 }
