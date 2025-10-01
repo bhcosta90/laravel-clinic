@@ -15,10 +15,6 @@ abstract class BaseDomain
 {
     public readonly int | string $id;
 
-    public DateTimeImmutable $createdAt;
-
-    public DateTimeImmutable $updatedAt;
-
     // Adapter global (estático)
     private static ?ValidatorAdapterInterface $globalValidatorAdapter = null;
 
@@ -27,9 +23,7 @@ abstract class BaseDomain
 
     public function __construct(string | int | null $id = null)
     {
-        $this->id        = $id ?: Uuid::uuid7()->toString();
-        $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTimeImmutable();
+        $this->id = $id ?: Uuid::uuid7()->toString();
 
         $this->validatorAdapter = static::$globalValidatorAdapter ?: new RakitValidatorAdapter();
     }
