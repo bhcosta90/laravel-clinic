@@ -11,9 +11,15 @@ use Core\Application\Builder\GraphBuilder;
 use Core\Application\Builder\QueryBuilder;
 use Core\Application\Handler\Doctor as Handler;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 final class DoctorController
 {
+    private array $allowedIncludes = [
+        'id',
+        'name',
+    ];
+
     public function index(QueryBuilder $queryBuilder, GraphBuilder $graphBuilder, DoctorIndexRequest $request)
     {
         $queryBuilderResponse = $queryBuilder->execute(new User())
@@ -21,7 +27,7 @@ final class DoctorController
             ->orderBy($request->get('order_column', 'id'), $request->get('order_direction'))
             ->simplePaginate();
 
-        $graphBuilderResponse = $graphBuilder->execute($queryBuilderResponse, fields: $request->get('fields', ['id']));
+        $graphBuilderResponse = $this->getCollection($graphBuilder, $queryBuilderResponse, $request);
 
         return response()->json([
             'doctors' => $graphBuilderResponse,
@@ -35,7 +41,7 @@ final class DoctorController
             ->where('id', $doctorId)
             ->sole();
 
-        $graphBuilderResponse = $graphBuilder->execute($queryBuilderResponse, fields: $request->get('fields', ['id']));
+        $graphBuilderResponse = $this->getCollection($graphBuilder, $queryBuilderResponse, $request);
 
         return response()->json([
             'doctor' => $graphBuilderResponse,
@@ -66,5 +72,14 @@ final class DoctorController
         return response()->json([
             'data' => $handler->execute($id),
         ]);
+    }
+
+    public function getCollection(GraphBuilder $graphBuilder, $queryBuilderResponse, Request $request): Collection
+    {
+        return $graphBuilder->execute(
+            $queryBuilderResponse,
+            fields: $request->get('fields', ['id']),
+            onlyFields: $this->allowedIncludes,
+        );
     }
 }
