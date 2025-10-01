@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Core\Domain\Enum\DayEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,4 +24,8 @@ class UserSchedule extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $casts = [
+        'day_of_week' => DayEnum::class,
+    ];
 }

@@ -5,6 +5,7 @@ namespace Core\Application\Handler\Doctor\Schedule;
 use Core\Application\Data\DoctorScheduleOutput;
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
+use Core\Domain\Enum\DayEnum;
 use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Domain\Support\DaySupport;
 use Core\Shared\Application\Exception\NotFoundException;
@@ -23,9 +24,12 @@ class DoctorScheduleCreateHandler
         string $endTime,
         int $slotMinutes,
     ): DoctorScheduleOutput {
-        if (is_string($dayOfWeek)) {
-            $dayOfWeek = $this->dayWeekSupport->byInt($dayOfWeek);
-        }
+        /** @var DayEnum $dayOfWeek */
+        $dayOfWeek = match (true) {
+            is_string($dayOfWeek) => DayEnum::from(DayEnum::{ucfirst($dayOfWeek)}->value),
+            is_int($dayOfWeek) => DayEnum::from($dayOfWeek),
+            default => throw new \InvalidArgumentException('Invalid day of week'),
+        };
 
         $aggregate = new ScheduleAggregate($dayOfWeek, $startTime, $endTime, $slotMinutes);
 
@@ -43,7 +47,7 @@ class DoctorScheduleCreateHandler
         return new DoctorScheduleOutput(
             id: $schedule->id,
             doctor_id: $doctor->id,
-            day_of_week: $this->dayWeekSupport->byString($schedule->dayOfWeek),
+            day_of_week: $dayOfWeek->name,
             start_time: $schedule->startTime,
             end_time: $schedule->endTime,
             slot_minutes: $schedule->slotMinutes,

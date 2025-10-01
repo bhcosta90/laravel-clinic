@@ -48,16 +48,12 @@ class DoctorEntity extends BaseDomain
         $this->validator()
             ->data([
                 'day_of_week' => $dayOfWeek,
+                'slot_minutes' => $slotMinutes,
             ])
-            ->field('day_of_week')->required()->min(0)->max(6)
+            ->field('slot_minutes')->required()->min(1)
             ->validate();
 
-        // Basic validations
         $errors = [];
-        if ($slotMinutes <= 0) {
-            $errors['slot_minutes'][] = 'slot_minutes must be greater than 0';
-        }
-
         $startSeconds = $this->parseTimeToSeconds($startTime);
         $endSeconds = $this->parseTimeToSeconds($endTime);
 
@@ -74,7 +70,7 @@ class DoctorEntity extends BaseDomain
         // Check overlap with existing schedules for the same day
         if (empty($errors)) {
             foreach ($this->schedules as $schedule) {
-                if ((int) $schedule['day_of_week'] !== $dayOfWeek) {
+                if ($schedule['day_of_week'] !== $dayOfWeek) {
                     continue;
                 }
 

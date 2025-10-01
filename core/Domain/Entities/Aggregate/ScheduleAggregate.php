@@ -2,10 +2,12 @@
 
 namespace Core\Domain\Entities\Aggregate;
 
+use Core\Domain\Enum\DayEnum;
+
 class ScheduleAggregate
 {
     public function __construct(
-        public ?int $dayOfWeek = null,
+        public ?DayEnum $dayOfWeek = null,
         public ?string $startTime = null,
         public ?string $endTime = null,
         public ?int $slotMinutes = null,

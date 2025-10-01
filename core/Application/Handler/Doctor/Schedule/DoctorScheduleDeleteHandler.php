@@ -19,7 +19,7 @@ class DoctorScheduleDeleteHandler
         int|string $doctorId,
     ): DeleteOutput {
         /** @var DoctorEntity $doctor */
-        $doctor = $this->repository->find($doctorId);
+        $doctor = $this->repository->find($doctorId, new ScheduleAggregate(id: $id));
 
         /** @var ScheduleAggregate $schedule */
         $schedule = $this->repository->findSchedule($doctor, $id);
