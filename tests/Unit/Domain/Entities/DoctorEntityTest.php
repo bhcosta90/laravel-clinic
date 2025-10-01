@@ -11,12 +11,12 @@ beforeEach(function () {
     $this->entity = new DoctorEntity(new DoctorCreateRequest(name: 'testing'));
 });
 
-test('000', function () {
+test('should update doctor name', function () {
     $this->entity->update(new DoctorUpdateRequest(name: 'testing 123'));
     expect($this->entity->name)->toBe('testing 123');
 });
 
-test('100', function () {
+test('should add a schedule', function () {
     expect($this->entity->schedules)->toHaveCount(0);
 
     $this->entity->addSchedule(new ScheduleAggregate(
@@ -29,7 +29,7 @@ test('100', function () {
     expect($this->entity->schedules)->toHaveCount(1);
 });
 
-test('102', function () {
+test('should add schedules for different days', function () {
     expect($this->entity->schedules)->toHaveCount(0);
 
     $this->entity->addSchedule(new ScheduleAggregate(
@@ -48,7 +48,7 @@ test('102', function () {
     expect($this->entity->schedules)->toHaveCount(2);
 });
 
-test('101', function () {
+test('should throw when start time is after end time', function () {
     expect(fn () => $this->entity->addSchedule(new ScheduleAggregate(
         dayOfWeek: DayEnum::Monday,
         startTime: '02:00',
@@ -57,7 +57,7 @@ test('101', function () {
     )))->toThrow(ValidationException::class);
 });
 
-test('103', function () {
+test('should throw for invalid time formats', function () {
     expect(fn () => $this->entity->addSchedule(new ScheduleAggregate(
         dayOfWeek: DayEnum::Monday,
         startTime: '00:00',
@@ -76,10 +76,9 @@ test('103', function () {
             endTime: '00:00',
             slotMinutes: 60,
         )))->toThrow(ValidationException::class);
-
 });
 
-test('200', function () {
+test('should not allow overlapping schedules', function () {
     $this->entity->addSchedule(new ScheduleAggregate(
         dayOfWeek: DayEnum::Monday,
         startTime: '03:00',
