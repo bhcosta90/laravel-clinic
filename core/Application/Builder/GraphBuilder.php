@@ -22,7 +22,7 @@ final class GraphBuilder
      * @param Model|Paginator|Collection $data
      * @param array|string               $fields GraphQL-like fields (e.g., "id title comments { id }")
      */
-    public function execute(mixed $data, array | string $fields, ?array $onlyFields = null, array $options = []): Collection
+    public function execute($data, array | string $fields, ?array $onlyFields = null, array $options = []): Collection
     {
         if (is_string($fields)) {
             $fields = new FieldParser()->normalize($fields);

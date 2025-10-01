@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace Core\Application\Builder;
 
+use Core\Application\Builder\QueryBuilder\Support\ApplyFilter;
+use Core\Application\Builder\QueryBuilder\Support\FieldParser;
+use Core\Application\Builder\QueryBuilder\Support\FilterParser;
+use Core\Application\Builder\QueryBuilder\Support\IncludesBuilder;
+use Core\Application\Builder\QueryBuilder\Support\RelationUtils;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use QuantumTecnology\ControllerBasicsExtension\Builder\QueryBuilder\Support\ApplyFilter;
-use QuantumTecnology\ControllerBasicsExtension\Builder\QueryBuilder\Support\FieldParser;
-use QuantumTecnology\ControllerBasicsExtension\Builder\QueryBuilder\Support\FilterParser;
-use QuantumTecnology\ControllerBasicsExtension\Builder\QueryBuilder\Support\IncludesBuilder;
-use QuantumTecnology\ControllerBasicsExtension\Builder\QueryBuilder\Support\RelationUtils;
 
 final class QueryBuilder
 {
