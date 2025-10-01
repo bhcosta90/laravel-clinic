@@ -7,12 +7,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Api\V1\Traits\ReadTrait;
 use App\Http\Requests\DoctorRequest;
 use App\Models\User;
-use Core\Application\Builder\GraphBuilder;
-use Core\Application\Builder\QueryBuilder;
 use Core\Application\Handler\Doctor as Handler;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Response;
-use Illuminate\Support\Collection;
 
 final class DoctorController
 {
@@ -44,18 +42,13 @@ final class DoctorController
         ]);
     }
 
-    private function baseQuery(QueryBuilder $queryBuilder): Builder
+    protected function model(): Model
     {
-        return $queryBuilder->execute(new User())
-            ->where('is_doctor', true);
+        return new User();
     }
 
-    private function getCollection(GraphBuilder $graphBuilder, $queryBuilderResponse): Collection
+    protected function defaultQuery(Builder $queryBuilder)
     {
-        return $graphBuilder->execute(
-            $queryBuilderResponse,
-            fields: request()->get('fields', ['id']),
-            onlyFields: $this->allowedIncludes,
-        );
+        return $queryBuilder->where('is_doctor', true);
     }
 }
