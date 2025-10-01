@@ -24,12 +24,11 @@ final class TestMemoryRunCommand extends Command
         $chunkSize = (int) ($this->option('chunk') ?? 1000);
         $limit     = null !== $countOpt && '' !== $countOpt ? (int) $countOpt : null;
 
-        // Evita overhead de memória do log de queries
         DB::connection()->disableQueryLog();
-
-        // Coleta GC antes de começar e mede memória real
         gc_collect_cycles();
-        $beforeMem = memory_get_usage(true);
+
+        // Medição real: memória usada pelos objetos (sem overhead do PHP)
+        $beforeMem = memory_get_usage(false);
         $startTime = microtime(true);
 
         $rows   = 0;
@@ -87,7 +86,7 @@ final class TestMemoryRunCommand extends Command
                     $q->limit($limit);
                 }
 
-                foreach ($q->cursor() as $_row) {
+                foreach ($q->cursor() as $_) {
                     ++$rows;
                 }
 
@@ -99,9 +98,7 @@ final class TestMemoryRunCommand extends Command
                 if ($limit) {
                     $q->limit($limit);
                 }
-                $q->chunk(max(1, $chunkSize), function ($chunk) use (&$rows) {
-                    $rows += $chunk->count();
-                });
+                $q->chunk(max(1, $chunkSize), function ($chunk) use (&$rows) { $rows += $chunk->count(); });
 
                 break;
 
@@ -112,19 +109,12 @@ final class TestMemoryRunCommand extends Command
         }
 
         $elapsed = microtime(true) - $startTime;
-        $peakMem = memory_get_peak_usage(true) - $beforeMem; // memória real incremental
 
-        $this->line(sprintf('Método: %s', $method));
+        // Pico real de memória usado pelos objetos
+        $peakMem = memory_get_peak_usage(false) - $beforeMem;
 
-        if ($limit) {
-            $this->line(sprintf('Limite: %d', $limit));
-        }
-
-        if ('chunk' === $method) {
-            $this->line(sprintf('Chunk size: %d', $chunkSize));
-        }
-        $this->line(sprintf('Linhas processadas: %d', $rows));
-        $this->line(sprintf('Tempo total: %ss', number_format($elapsed, 4)));
+        $this->line("Linhas processadas: {$rows}");
+        $this->line('Tempo total: ' . number_format($elapsed, 4) . 's');
         $this->line('Pico de memória incremental (real): ' . number_format($peakMem / 1024 / 1024, 4) . ' MB');
 
         unset($result);
