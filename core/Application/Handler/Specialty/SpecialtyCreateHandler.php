@@ -16,10 +16,8 @@ final readonly class SpecialtyCreateHandler
     ) {
     }
 
-    public function execute(
-        ?string $code,
-        string $name,
-    ): SpecialtyOutput {
+    public function execute(?string $code, string $name): SpecialtyOutput
+    {
 
         if (null === $code) {
             $code = $this->repository->generateCode(6);

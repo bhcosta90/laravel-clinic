@@ -17,10 +17,8 @@ final readonly class ProcedureUpdateHandler
     ) {
     }
 
-    public function execute(
-        int | string $id,
-        array $data,
-    ): ProcedureOutput {
+    public function execute(int | string $id, array $data): ProcedureOutput
+    {
 
         $entity = $this->repository->find($id);
 

@@ -16,10 +16,8 @@ final readonly class PatientCreateHandler
     ) {
     }
 
-    public function execute(
-        ?string $code,
-        string $name,
-    ): PatientOutput {
+    public function execute(?string $code, string $name): PatientOutput
+    {
 
         if (null === $code) {
             $code = $this->repository->generateCode(6);

@@ -17,10 +17,8 @@ final readonly class RoomUpdateHandler
     ) {
     }
 
-    public function execute(
-        int | string $id,
-        array $data,
-    ): RoomOutput {
+    public function execute(int | string $id, array $data): RoomOutput
+    {
 
         /** @var RoomEntity $entity */
         $entity = $this->repository->find($id);

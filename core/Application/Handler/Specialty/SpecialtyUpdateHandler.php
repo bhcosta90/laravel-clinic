@@ -17,10 +17,8 @@ final readonly class SpecialtyUpdateHandler
     ) {
     }
 
-    public function execute(
-        int | string $id,
-        array $data,
-    ): SpecialtyOutput {
+    public function execute(int | string $id, array $data): SpecialtyOutput
+    {
 
         $entity = $this->repository->find($id);
 

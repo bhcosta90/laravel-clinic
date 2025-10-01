@@ -16,12 +16,8 @@ final readonly class ProcedureCreateHandler
     ) {
     }
 
-    public function execute(
-        ?string $code,
-        string $name,
-        int $minDurationMinutes,
-        int $maxDurationMinutes,
-    ): ProcedureOutput {
+    public function execute(?string $code, string $name, int $minDurationMinutes, int $maxDurationMinutes): ProcedureOutput
+    {
 
         if (null === $code) {
             $code = $this->repository->generateCode(6);

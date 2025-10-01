@@ -16,11 +16,8 @@ final readonly class RoomCreateHandler
     ) {
     }
 
-    public function execute(
-        ?string $code,
-        string $name,
-        ?bool $isActive,
-    ): RoomOutput {
+    public function execute(?string $code, string $name, ?bool $isActive): RoomOutput
+    {
 
         if (null === $code) {
             $code = $this->repository->generateCode(6);

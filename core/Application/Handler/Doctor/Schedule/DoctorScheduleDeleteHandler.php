@@ -17,10 +17,8 @@ final readonly class DoctorScheduleDeleteHandler
     ) {
     }
 
-    public function execute(
-        int | string $id,
-        int | string $doctorId,
-    ): DeleteOutput {
+    public function execute(int | string $id, int | string $doctorId): DeleteOutput
+    {
         /** @var DoctorEntity $doctor */
         $doctor = $this->repository->find($doctorId, new ScheduleAggregate(id: $id));
 

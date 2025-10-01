@@ -16,9 +16,8 @@ final readonly class DoctorCreateHandler
     ) {
     }
 
-    public function execute(
-        string $name,
-    ): DoctorOutput {
+    public function execute(string $name): DoctorOutput
+    {
 
         $req = new DoctorCreateRequest(
             name: $name,

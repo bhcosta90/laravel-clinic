@@ -17,10 +17,8 @@ final readonly class PatientUpdateHandler
     ) {
     }
 
-    public function execute(
-        int | string $id,
-        array $data,
-    ): PatientOutput {
+    public function execute(int | string $id, array $data): PatientOutput
+    {
 
         $entity = $this->repository->find($id);
 
