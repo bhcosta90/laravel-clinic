@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Doctor;
 
 use App\Http\Requests\DoctorScheduleRequest;
 use Core\Application\Handler\Doctor\Schedule as Handler;
+use Core\Domain\Enum\DayEnum;
 
 class ScheduleController
 {
@@ -12,7 +13,7 @@ class ScheduleController
         return response()->json([
             'data' => $handler->execute(
                 $doctorId,
-                $procedureRequest->day_of_week,
+                DayEnum::from(DayEnum::{ucfirst($procedureRequest->day_of_week)}->value),
                 $procedureRequest->start_time,
                 $procedureRequest->end_time,
                 $procedureRequest->slot_minutes,
@@ -26,7 +27,7 @@ class ScheduleController
             'data' => $handler->execute(
                 $scheduleId,
                 $doctorId,
-                $procedureRequest->day_of_week,
+                when($procedureRequest->day_of_week, fn () => DayEnum::from(DayEnum::{ucfirst($procedureRequest->day_of_week)}->value)),
                 $procedureRequest->start_time,
                 $procedureRequest->end_time,
                 $procedureRequest->slot_minutes,
