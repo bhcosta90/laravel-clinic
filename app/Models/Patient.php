@@ -18,4 +18,9 @@ final class Patient extends Model
         'code',
         'name',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
 }

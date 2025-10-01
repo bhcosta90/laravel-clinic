@@ -61,7 +61,7 @@ trait ReadTrait
 
     protected function getKeyName()
     {
-        return $this->model()->getKeyName();
+        return $this->model()->getRouteKeyName();
     }
 
     private function getCollection(GraphBuilder $graphBuilder, $queryBuilderResponse): Collection

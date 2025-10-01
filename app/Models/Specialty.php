@@ -18,4 +18,9 @@ final class Specialty extends Model
         'code',
         'name',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
 }

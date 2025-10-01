@@ -23,4 +23,9 @@ final class Room extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
 }
