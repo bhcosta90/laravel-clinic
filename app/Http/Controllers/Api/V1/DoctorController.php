@@ -74,7 +74,7 @@ final class DoctorController
         ]);
     }
 
-    public function getCollection(GraphBuilder $graphBuilder, $queryBuilderResponse, Request $request): Collection
+    private function getCollection(GraphBuilder $graphBuilder, $queryBuilderResponse, Request $request): Collection
     {
         return $graphBuilder->execute(
             $queryBuilderResponse,
