@@ -71,9 +71,9 @@ class FluentValidator
     /**
      * @throws ValidationException
      */
-    public function validate(): void
+    public function validate(array $moreErrors = []): void
     {
-        $errors = $this->adapter->validate($this->data, $this->rules);
+        $errors = $this->adapter->validate($this->data, $this->rules) + $moreErrors;
         if (! empty($errors)) {
             throw new ValidationException($errors);
         }

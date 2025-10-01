@@ -6,7 +6,6 @@ use Core\Domain\Entities\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\Requests\Doctor\DoctorCreateRequest;
 use Core\Domain\Entities\Requests\Doctor\DoctorUpdateRequest;
 use Core\Shared\Domain\BaseDomain;
-use Core\Shared\Domain\Exception\ValidationException;
 
 class DoctorEntity extends BaseDomain
 {
@@ -44,15 +43,6 @@ class DoctorEntity extends BaseDomain
         $endTime = $aggregate->endTime;
         $slotMinutes = $aggregate->slotMinutes;
 
-        // Validate day of week
-        $this->validator()
-            ->data([
-                'day_of_week' => $dayOfWeek,
-                'slot_minutes' => $slotMinutes,
-            ])
-            ->field('slot_minutes')->required()->min(1)
-            ->validate();
-
         $errors = [];
         $startSeconds = $this->parseTimeToSeconds($startTime);
         $endSeconds = $this->parseTimeToSeconds($endTime);
@@ -84,9 +74,13 @@ class DoctorEntity extends BaseDomain
             }
         }
 
-        if ($errors) {
-            throw new ValidationException($errors);
-        }
+        $this->validator()
+            ->data([
+                'day_of_week' => $dayOfWeek,
+                'slot_minutes' => $slotMinutes,
+            ])
+            ->field('slot_minutes')->required()->min(1)
+            ->validate($errors);
 
         $this->schedules[] = [
             'id' => $aggregate->id,

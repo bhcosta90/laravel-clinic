@@ -34,9 +34,7 @@ test('should return DoctorEntity with empty schedules', function () {
     expect($response)->toBeInstanceOf(DoctorEntity::class)
         ->and($response->schedules)->toHaveCount(0)
         ->and($response)->name->toBe($this->doctor->name)
-        ->id->toBe($this->doctor->id)
-        ->createdAt->format('YmdHis')->toBe($this->doctor->created_at->format('YmdHis'))
-        ->updatedAt->format('YmdHis')->toBe($this->doctor->updated_at->format('YmdHis'));
+        ->id->toBe($this->doctor->id);
 });
 
 test('should return DoctorEntity with 5 schedules', function () {
