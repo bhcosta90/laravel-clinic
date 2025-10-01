@@ -25,11 +25,12 @@ class DoctorScheduleUpdateHandler
         ?string $endTime,
         ?int $slotMinutes,
     ): DoctorScheduleOutput {
-        /** @var DayEnum $dayOfWeek */
-        $dayOfWeek = match (true) {
-            is_string($dayOfWeek) => DayEnum::from(DayEnum::{ucfirst($dayOfWeek)}->value),
-            is_int($dayOfWeek) => DayEnum::from($dayOfWeek),
-        };
+
+        if ($dayOfWeek) {
+            $dayOfWeek = is_string($dayOfWeek)
+                ? DayEnum::from(DayEnum::{ucfirst($dayOfWeek)}->value)
+                : DayEnum::from($dayOfWeek);
+        }
 
         $aggregate = new ScheduleAggregate(id: $id);
 
