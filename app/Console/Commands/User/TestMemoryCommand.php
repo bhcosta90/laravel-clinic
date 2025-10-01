@@ -36,6 +36,10 @@ final class TestMemoryCommand extends Command
             'DB::table'           => 'dbTable',
             'Eloquent cursor'     => 'cursor',
             'Eloquent chunk'      => 'chunk',
+            'Eloquent lazy'       => 'lazy',
+            'Eloquent chunkById'  => 'chunkById',
+            'Eloquent pluck'      => 'pluck',
+            // 'Eloquent cursorPaginate' => 'cursorPaginate',
         ];
 
         $results = [];
@@ -51,18 +55,17 @@ final class TestMemoryCommand extends Command
             $peak = null;
 
             if ($output) {
-                // Extrai Linhas e Pico de Memória da saída
                 preg_match('/Linhas processadas: (\d+)/', $output, $m1);
                 preg_match('/Pico de memória incremental.*: ([\d\.]+) MB/', $output, $m2);
-                $rows = $m1[1] ?? null;
-                $peak = $m2[1] ?? null;
+                $rows = $m1[1] ?? '-';
+                $peak = $m2[1] ?? '-';
             }
 
             $results[] = [
                 'Método'            => $label,
-                'Linhas'            => $rows ?? '-',
+                'Linhas'            => $rows,
                 'Tempo (s)'         => $time,
-                'Pico memória (MB)' => $peak ?? '-',
+                'Pico memória (MB)' => $peak,
             ];
         }
 

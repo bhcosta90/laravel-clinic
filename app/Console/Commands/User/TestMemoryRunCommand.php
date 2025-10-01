@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 final class TestMemoryRunCommand extends Command
 {
     protected $signature = 'user:test-memory-run
-        {method : all|newQuery|toBase|dbTable|cursor|chunk}
+        {method : all|newQuery|toBase|dbTable|cursor|chunk|lazy|chunkById|pluck|cursorPaginate}
         {--count= : Limite de linhas a serem lidas}
         {--chunk=1000 : Tamanho do chunk para o método chunk}';
 
@@ -27,7 +27,6 @@ final class TestMemoryRunCommand extends Command
         DB::connection()->disableQueryLog();
         gc_collect_cycles();
 
-        // Medição real: memória usada pelos objetos (sem overhead do PHP)
         $beforeMem = memory_get_usage(false);
         $startTime = microtime(true);
 
@@ -102,15 +101,63 @@ final class TestMemoryRunCommand extends Command
 
                 break;
 
+            case 'lazy':
+                $q = User::query()->select('id', 'name', 'email');
+
+                if ($limit) {
+                    $q->limit($limit);
+                }
+
+                foreach ($q->lazy($chunkSize) as $_) {
+                    ++$rows;
+                }
+
+                break;
+
+            case 'chunkById':
+                $q = User::query()->select('id', 'name', 'email');
+
+                if ($limit) {
+                    $q->limit($limit);
+                }
+                $q->chunkById($chunkSize, function ($chunk) use (&$rows) { $rows += $chunk->count(); });
+
+                break;
+
+            case 'pluck':
+                $q = User::query();
+
+                if ($limit) {
+                    $q->take($limit);
+                }
+                $result = $q->pluck('email');
+                $rows   = count($result);
+
+                break;
+
+            case 'cursorPaginate':
+                $q = User::query()->select('id', 'name', 'email');
+
+                if ($limit) {
+                    $q->limit($limit);
+                }
+                $page = 1;
+
+                do {
+                    $paginator = $q->cursorPaginate($chunkSize, ['*'], 'page', $page);
+                    $rows += $paginator->count();
+                    ++$page;
+                } while ($paginator->hasMorePages());
+
+                break;
+
             default:
-                $this->error('Método inválido. Use: all|newQuery|toBase|dbTable|cursor|chunk');
+                $this->error('Método inválido.');
 
                 return 1;
         }
 
         $elapsed = microtime(true) - $startTime;
-
-        // Pico real de memória usado pelos objetos
         $peakMem = memory_get_peak_usage(false) - $beforeMem;
 
         $this->line("Linhas processadas: {$rows}");
