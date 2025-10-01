@@ -10,6 +10,7 @@ use App\Models\User;
 use Core\Application\Builder\GraphBuilder;
 use Core\Application\Builder\QueryBuilder;
 use Core\Application\Handler\Doctor as Handler;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -22,8 +23,7 @@ final class DoctorController
 
     public function index(QueryBuilder $queryBuilder, GraphBuilder $graphBuilder, DoctorIndexRequest $request)
     {
-        $queryBuilderResponse = $queryBuilder->execute(new User())
-            ->where('is_doctor', true)
+        $queryBuilderResponse = $this->baseQuery($queryBuilder)
             ->orderBy($request->get('order_column', 'id'), $request->get('order_direction'))
             ->simplePaginate();
 
@@ -36,8 +36,7 @@ final class DoctorController
 
     public function show(QueryBuilder $queryBuilder, GraphBuilder $graphBuilder, Request $request, int $doctorId)
     {
-        $queryBuilderResponse = $queryBuilder->execute(new User())
-            ->where('is_doctor', true)
+        $queryBuilderResponse = $this->baseQuery($queryBuilder)
             ->where('id', $doctorId)
             ->sole();
 
@@ -72,6 +71,12 @@ final class DoctorController
         return response()->json([
             'data' => $handler->execute($id),
         ]);
+    }
+
+    private function baseQuery(QueryBuilder $queryBuilder): Builder
+    {
+        return $queryBuilder->execute(new User())
+            ->where('is_doctor', true);
     }
 
     private function getCollection(GraphBuilder $graphBuilder, $queryBuilderResponse, Request $request): Collection
