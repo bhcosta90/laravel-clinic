@@ -10,6 +10,7 @@ use Core\Application\Repository\Traits\Doctor\DoctorScheduleTrait;
 use Core\Domain\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Entities\Requests\Doctor\DoctorCreateRequest;
+use Core\Domain\Enum\DayEnum;
 use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
@@ -93,8 +94,10 @@ final readonly class DoctorRepository implements DoctorRepositoryInterface
             }))
             ->where('user_id', $entity->id)
             ->when($aggregate->id, fn ($query) => $query->where('id', $aggregate->id))
+            ->toBase()
+            ->get()
             ->each(fn ($item) => $entity->addSchedule(new ScheduleAggregate(
-                dayOfWeek: $item->day_of_week,
+                dayOfWeek: DayEnum::from((int) $item->day_of_week),
                 startTime: $item->start_time,
                 endTime: $item->end_time,
                 slotMinutes: $item->slot_minutes,
