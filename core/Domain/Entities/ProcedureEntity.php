@@ -8,7 +8,7 @@ use Core\Domain\Entities\Requests\Procedure\ProcedureCreateRequest;
 use Core\Domain\Entities\Requests\Procedure\ProcedureUpdateRequest;
 use Core\Shared\Domain\BaseDomain;
 
-final readonly class ProcedureEntity extends BaseDomain
+final class ProcedureEntity extends BaseDomain
 {
     protected string $name;
 

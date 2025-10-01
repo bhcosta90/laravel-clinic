@@ -8,7 +8,7 @@ use Core\Domain\Entities\Requests\Patient\PatientCreateRequest;
 use Core\Domain\Entities\Requests\Patient\PatientUpdateRequest;
 use Core\Shared\Domain\BaseDomain;
 
-final readonly class PatientEntity extends BaseDomain
+final class PatientEntity extends BaseDomain
 {
     protected string $name;
 
