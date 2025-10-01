@@ -20,16 +20,14 @@ class DoctorScheduleUpdateHandler
     public function execute(
         int|string $id,
         int|string $doctorId,
-        null|int|string $dayOfWeek,
+        ?string $dayOfWeek,
         ?string $startTime,
         ?string $endTime,
         ?int $slotMinutes,
     ): DoctorScheduleOutput {
 
         if ($dayOfWeek) {
-            $dayOfWeek = is_string($dayOfWeek)
-                ? DayEnum::from(DayEnum::{ucfirst($dayOfWeek)}->value)
-                : DayEnum::from($dayOfWeek);
+            $dayOfWeek = DayEnum::from(DayEnum::{ucfirst($dayOfWeek)}->value);
         }
 
         $aggregate = new ScheduleAggregate(id: $id);
