@@ -22,7 +22,7 @@ class DoctorRepository implements DoctorRepositoryInterface
     ): ?BaseDomain {
         $domain = $this->convertModelToDomain($this->getModelById($id));
 
-        if ($aggregate && ($aggregate->dayOfWeek || $aggregate->startTime || $aggregate->endTime || $aggregate->id)) {
+        if ($aggregate) {
             $this->getSchedule($domain, $aggregate);
         }
 
