@@ -43,9 +43,15 @@ trait ReadTrait
 
         $graphBuilderResponse = $this->getCollection($graphBuilder, $queryBuilderResponse);
 
-        return response()->json([
+        $response = collect([
             'data' => $graphBuilderResponse,
         ]);
+
+        if (app()->isLocal() && $this->allowedIncludes ?? null) {
+            $response->prepend($this->allowedIncludes, 'allowed_fields');
+        }
+
+        return response()->json($response);
     }
 
     protected function defaultQuery(Builder $queryBuilder)
