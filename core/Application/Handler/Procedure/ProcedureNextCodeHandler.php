@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Procedure;
 
 use Core\Domain\Repository\ProcedureRepositoryInterface;
 
-class ProcedureNextCodeHandler
+final class ProcedureNextCodeHandler
 {
     public function __construct(
-        protected ProcedureRepositoryInterface $repository
-    ) {}
+        private ProcedureRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(): string
     {

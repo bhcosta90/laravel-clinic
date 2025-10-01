@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Domain\Entities;
 
 use Core\Domain\Entities\Requests\Room\RoomCreateRequest;
 use Core\Domain\Entities\Requests\Room\RoomUpdateRequest;
 use Core\Shared\Domain\BaseDomain;
 
-class RoomEntity extends BaseDomain
+final class RoomEntity extends BaseDomain
 {
     protected string $name;
 
@@ -14,10 +16,10 @@ class RoomEntity extends BaseDomain
 
     protected readonly string $code;
 
-    public function __construct(RoomCreateRequest $request, string|int|null $id = null)
+    public function __construct(RoomCreateRequest $request, string | int | null $id = null)
     {
-        $this->name = $request->name;
-        $this->code = $request->code;
+        $this->name     = $request->name;
+        $this->code     = $request->code;
         $this->isActive = $request->isActive;
         $this->validate();
         parent::__construct($id);

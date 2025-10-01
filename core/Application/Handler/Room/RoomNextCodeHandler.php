@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Room;
 
 use Core\Domain\Repository\RoomRepositoryInterface;
 
-class RoomNextCodeHandler
+final class RoomNextCodeHandler
 {
     public function __construct(
-        protected RoomRepositoryInterface $repository
-    ) {}
+        private RoomRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(): string
     {

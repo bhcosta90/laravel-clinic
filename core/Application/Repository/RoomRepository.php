@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Repository;
 
 use App\Models\Room;
@@ -9,9 +11,9 @@ use Core\Domain\Repository\RoomRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-class RoomRepository implements RoomRepositoryInterface
+final class RoomRepository implements RoomRepositoryInterface
 {
-    public function find(int|string $id): ?BaseDomain
+    public function find(int | string $id): ?BaseDomain
     {
         return $this->convertModelToDomain($this->getModelById($id));
     }
@@ -23,11 +25,11 @@ class RoomRepository implements RoomRepositoryInterface
 
     public function store(BaseDomain $domain): BaseDomain
     {
-        $model = new Room;
+        $model = new Room();
         $model->fill([
-            'uuid' => $domain->id,
-            'code' => $domain->code,
-            'name' => $domain->name,
+            'uuid'      => $domain->id,
+            'code'      => $domain->code,
+            'name'      => $domain->name,
             'is_active' => $domain->isActive,
         ]);
         $model->save();
@@ -39,7 +41,7 @@ class RoomRepository implements RoomRepositoryInterface
     {
         $model = $this->getModelById($domain->id);
         $model->fill([
-            'name' => $domain->name,
+            'name'      => $domain->name,
             'is_active' => $domain->isActive,
         ]);
         $model->save();
@@ -53,27 +55,27 @@ class RoomRepository implements RoomRepositoryInterface
 
         do {
             $code = mb_strtoupper(str()->random($min));
-            $i++;
+            ++$i;
 
-            if ($i % $min === 0) {
-                $min++;
+            if (0 === $i % $min) {
+                ++$min;
             }
         } while ($this->model()->query()->where('code', $code)->exists());
 
         return (string) $code;
     }
 
-    protected function model(): Model
+    private function model(): Model
     {
-        return new Room;
+        return new Room();
     }
 
-    protected function getModelById(int|string $id): ?Model
+    private function getModelById(int | string $id): ?Model
     {
         return $this->model()->query()->where('uuid', $id)->first();
     }
 
-    protected function convertModelToDomain(?object $model): ?RoomEntity
+    private function convertModelToDomain(?object $model): ?RoomEntity
     {
         return when($model, fn () => new RoomEntity(new RoomCreateRequest(
             name: $model->name,

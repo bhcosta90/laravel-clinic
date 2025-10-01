@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Patient;
 
 use Core\Application\Data\PatientOutput;
@@ -7,18 +9,19 @@ use Core\Domain\Entities\PatientEntity;
 use Core\Domain\Entities\Requests\Patient\PatientCreateRequest;
 use Core\Domain\Repository\PatientRepositoryInterface;
 
-class PatientCreateHandler
+final class PatientCreateHandler
 {
     public function __construct(
-        protected PatientRepositoryInterface $repository
-    ) {}
+        private PatientRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
         ?string $code,
         string $name,
     ): PatientOutput {
 
-        if ($code === null) {
+        if (null === $code) {
             $code = $this->repository->generateCode(6);
         }
 

@@ -1,24 +1,27 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Room;
 
 use Core\Domain\Repository\RoomRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class RoomDeleteHandler
+final class RoomDeleteHandler
 {
     public function __construct(
-        protected RoomRepositoryInterface $repository
-    ) {}
+        private RoomRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
-        int|string $id,
+        int | string $id,
     ): DeleteOutput {
 
         $entity = $this->repository->find($id);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException('Room not found');
         }
 

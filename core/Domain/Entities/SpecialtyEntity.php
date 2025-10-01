@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Domain\Entities;
 
 use Core\Domain\Entities\Requests\Specialty\SpecialtyCreateRequest;
 use Core\Domain\Entities\Requests\Specialty\SpecialtyUpdateRequest;
 use Core\Shared\Domain\BaseDomain;
 
-class SpecialtyEntity extends BaseDomain
+final class SpecialtyEntity extends BaseDomain
 {
     protected string $name;
 
     protected readonly string $code;
 
-    public function __construct(SpecialtyCreateRequest $request, string|int|null $id = null)
+    public function __construct(SpecialtyCreateRequest $request, string | int | null $id = null)
     {
         $this->name = $request->name;
         $this->code = $request->code;

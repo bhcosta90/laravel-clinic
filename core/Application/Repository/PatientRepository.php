@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Repository;
 
 use App\Models\Patient;
@@ -9,9 +11,9 @@ use Core\Domain\Repository\PatientRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-class PatientRepository implements PatientRepositoryInterface
+final class PatientRepository implements PatientRepositoryInterface
 {
-    public function find(int|string $id): ?BaseDomain
+    public function find(int | string $id): ?BaseDomain
     {
         return $this->convertModelToDomain($this->getModelById($id));
     }
@@ -23,7 +25,7 @@ class PatientRepository implements PatientRepositoryInterface
 
     public function store(BaseDomain $domain): BaseDomain
     {
-        $model = new Patient;
+        $model = new Patient();
         $model->fill([
             'uuid' => $domain->id,
             'code' => $domain->code,
@@ -51,27 +53,27 @@ class PatientRepository implements PatientRepositoryInterface
 
         do {
             $code = mb_strtoupper(str()->random($min));
-            $i++;
+            ++$i;
 
-            if ($i % $min === 0) {
-                $min++;
+            if (0 === $i % $min) {
+                ++$min;
             }
         } while ($this->model()->query()->where('code', $code)->exists());
 
         return (string) $code;
     }
 
-    protected function model(): Model
+    private function model(): Model
     {
-        return new Patient;
+        return new Patient();
     }
 
-    protected function getModelById(int|string $id): ?Model
+    private function getModelById(int | string $id): ?Model
     {
         return $this->model()->query()->where('uuid', $id)->first();
     }
 
-    protected function convertModelToDomain(?object $model): ?PatientEntity
+    private function convertModelToDomain(?object $model): ?PatientEntity
     {
         return when($model, fn () => new PatientEntity(new PatientCreateRequest(
             name: $model->name,

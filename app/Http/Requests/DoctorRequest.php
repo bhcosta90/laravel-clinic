@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class DoctorRequest extends FormRequest
+final class DoctorRequest extends FormRequest
 {
     public function rules(): array
     {

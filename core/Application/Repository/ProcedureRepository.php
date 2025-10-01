@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Repository;
 
 use App\Models\Procedure;
@@ -9,9 +11,9 @@ use Core\Domain\Repository\ProcedureRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-class ProcedureRepository implements ProcedureRepositoryInterface
+final class ProcedureRepository implements ProcedureRepositoryInterface
 {
-    public function find(int|string $id): ?BaseDomain
+    public function find(int | string $id): ?BaseDomain
     {
         return $this->convertModelToDomain($this->getModelById($id));
     }
@@ -23,11 +25,11 @@ class ProcedureRepository implements ProcedureRepositoryInterface
 
     public function store(BaseDomain $domain): BaseDomain
     {
-        $model = new Procedure;
+        $model = new Procedure();
         $model->fill([
-            'uuid' => $domain->id,
-            'code' => $domain->code,
-            'name' => $domain->name,
+            'uuid'                 => $domain->id,
+            'code'                 => $domain->code,
+            'name'                 => $domain->name,
             'min_duration_minutes' => $domain->minDurationMinutes,
             'max_duration_minutes' => $domain->maxDurationMinutes,
         ]);
@@ -40,7 +42,7 @@ class ProcedureRepository implements ProcedureRepositoryInterface
     {
         $model = $this->getModelById($domain->id);
         $model->fill([
-            'name' => $domain->name,
+            'name'                 => $domain->name,
             'min_duration_minutes' => $domain->minDurationMinutes,
             'max_duration_minutes' => $domain->maxDurationMinutes,
         ]);
@@ -55,27 +57,27 @@ class ProcedureRepository implements ProcedureRepositoryInterface
 
         do {
             $code = mb_strtoupper(str()->random($min));
-            $i++;
+            ++$i;
 
-            if ($i % $min === 0) {
-                $min++;
+            if (0 === $i % $min) {
+                ++$min;
             }
         } while ($this->model()->query()->where('code', $code)->exists());
 
         return (string) $code;
     }
 
-    protected function model(): Model
+    private function model(): Model
     {
-        return new Procedure;
+        return new Procedure();
     }
 
-    protected function getModelById(int|string $id): ?Model
+    private function getModelById(int | string $id): ?Model
     {
         return $this->model()->query()->where('uuid', $id)->first();
     }
 
-    protected function convertModelToDomain(?object $model): ?ProcedureEntity
+    private function convertModelToDomain(?object $model): ?ProcedureEntity
     {
         return when($model, fn () => new ProcedureEntity(new ProcedureCreateRequest(
             name: $model->name,

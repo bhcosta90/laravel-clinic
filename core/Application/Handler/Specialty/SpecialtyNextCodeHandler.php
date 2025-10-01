@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Specialty;
 
 use Core\Domain\Repository\SpecialtyRepositoryInterface;
 
-class SpecialtyNextCodeHandler
+final class SpecialtyNextCodeHandler
 {
     public function __construct(
-        protected SpecialtyRepositoryInterface $repository
-    ) {}
+        private SpecialtyRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(): string
     {

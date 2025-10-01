@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Specialty;
 
 use Core\Application\Data\SpecialtyOutput;
@@ -7,18 +9,19 @@ use Core\Domain\Entities\Requests\Specialty\SpecialtyCreateRequest;
 use Core\Domain\Entities\SpecialtyEntity;
 use Core\Domain\Repository\SpecialtyRepositoryInterface;
 
-class SpecialtyCreateHandler
+final class SpecialtyCreateHandler
 {
     public function __construct(
-        protected SpecialtyRepositoryInterface $repository
-    ) {}
+        private SpecialtyRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
         ?string $code,
         string $name,
     ): SpecialtyOutput {
 
-        if ($code === null) {
+        if (null === $code) {
             $code = $this->repository->generateCode(6);
         }
 

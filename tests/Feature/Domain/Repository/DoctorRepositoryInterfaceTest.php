@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use App\Models\User;
 use App\Models\UserSchedule;
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
@@ -38,7 +40,7 @@ test('should return DoctorEntity with empty schedules', function () {
 });
 
 test('should return DoctorEntity with 5 schedules', function () {
-    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate);
+    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate());
 
     expect($response)->toBeInstanceOf(DoctorEntity::class)
         ->and($response->schedules)->toHaveCount(5);
@@ -46,7 +48,7 @@ test('should return DoctorEntity with 5 schedules', function () {
 
 test('should add a new schedule and persist it', function () {
     /** @var DoctorEntity $response */
-    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate);
+    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate());
 
     $response->addSchedule(new ScheduleAggregate(
         dayOfWeek: DayEnum::Thursday,
@@ -57,23 +59,23 @@ test('should add a new schedule and persist it', function () {
 
     $schedule = $this->handler->storeSchedule($response);
 
-    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate);
+    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate());
     expect($response->schedules)->toHaveCount(6);
 
     assertDatabaseHas(UserSchedule::class, [
-        'id' => $schedule->id,
-        'day_of_week' => DayEnum::Thursday,
-        'start_time' => '00:00',
-        'end_time' => '01:00',
+        'id'           => $schedule->id,
+        'day_of_week'  => DayEnum::Thursday,
+        'start_time'   => '00:00',
+        'end_time'     => '01:00',
         'slot_minutes' => 60,
-        'user_id' => $this->doctor->id,
-        'deleted_at' => null,
+        'user_id'      => $this->doctor->id,
+        'deleted_at'   => null,
     ]);
 });
 
 test('should find a schedule by id and return null for invalid id', function () {
     /** @var DoctorEntity $response */
-    $doctor = $this->handler->find($this->doctor->id, new ScheduleAggregate);
+    $doctor     = $this->handler->find($this->doctor->id, new ScheduleAggregate());
     $scheduleId = $doctor->schedules[0]['id'];
 
     $response = $this->handler->findSchedule($doctor, $scheduleId);
@@ -89,7 +91,7 @@ test('should find a schedule by id and return null for invalid id', function () 
 
 test('should update a schedule and return null for invalid id', function () {
     /** @var DoctorEntity $response */
-    $schedule = $this->handler->find($this->doctor->id, new ScheduleAggregate);
+    $schedule   = $this->handler->find($this->doctor->id, new ScheduleAggregate());
     $scheduleId = $schedule->schedules[0]['id'];
 
     $response = $this->handler->updateSchedule($schedule, new ScheduleAggregate(
@@ -107,13 +109,13 @@ test('should update a schedule and return null for invalid id', function () {
         ->id->toBe($scheduleId);
 
     assertDatabaseHas(UserSchedule::class, [
-        'id' => $scheduleId,
-        'day_of_week' => DayEnum::Thursday,
-        'start_time' => '00:00',
-        'end_time' => '01:00',
+        'id'           => $scheduleId,
+        'day_of_week'  => DayEnum::Thursday,
+        'start_time'   => '00:00',
+        'end_time'     => '01:00',
         'slot_minutes' => 60,
-        'user_id' => $this->doctor->id,
-        'deleted_at' => null,
+        'user_id'      => $this->doctor->id,
+        'deleted_at'   => null,
     ]);
 
     $response = $this->handler->updateSchedule($schedule, new ScheduleAggregate(
@@ -128,7 +130,7 @@ test('should update a schedule and return null for invalid id', function () {
 
 test('should delete a schedule and return false for invalid id', function () {
     /** @var DoctorEntity $response */
-    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate);
+    $response   = $this->handler->find($this->doctor->id, new ScheduleAggregate());
     $scheduleId = $response->schedules[0]['id'];
 
     expect($this->handler->deleteSchedule($response, new ScheduleAggregate(id: $scheduleId)))->toBeTrue()

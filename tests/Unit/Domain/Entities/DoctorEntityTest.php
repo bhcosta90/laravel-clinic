@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Entities\Requests\Doctor\DoctorCreateRequest;

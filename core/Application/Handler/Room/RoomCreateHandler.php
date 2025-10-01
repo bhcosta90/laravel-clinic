@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Room;
 
 use Core\Application\Data\RoomOutput;
@@ -7,11 +9,12 @@ use Core\Domain\Entities\Requests\Room\RoomCreateRequest;
 use Core\Domain\Entities\RoomEntity;
 use Core\Domain\Repository\RoomRepositoryInterface;
 
-class RoomCreateHandler
+final class RoomCreateHandler
 {
     public function __construct(
-        protected RoomRepositoryInterface $repository
-    ) {}
+        private RoomRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
         ?string $code,
@@ -19,7 +22,7 @@ class RoomCreateHandler
         ?bool $isActive,
     ): RoomOutput {
 
-        if ($code === null) {
+        if (null === $code) {
             $code = $this->repository->generateCode(6);
         }
 

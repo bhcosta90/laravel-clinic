@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Controllers\Api\V1\Doctor;
 
 use App\Http\Requests\DoctorScheduleRequest;
 use Core\Application\Handler\Doctor\Schedule as Handler;
 use Core\Domain\Enum\DayEnum;
 
-class ScheduleController
+final class ScheduleController
 {
     public function store(DoctorScheduleRequest $procedureRequest, Handler\DoctorScheduleCreateHandler $handler, int $doctorId)
     {
@@ -45,7 +47,7 @@ class ScheduleController
         ]);
     }
 
-    protected function convertDayWeek(string $dayOfWeek): DayEnum
+    private function convertDayWeek(string $dayOfWeek): DayEnum
     {
         return DayEnum::from(DayEnum::{ucfirst($dayOfWeek)}->value);
     }

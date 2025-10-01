@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Doctor\Schedule;
 
 use Core\Application\Data\DoctorScheduleOutput;
@@ -7,22 +9,21 @@ use Core\Application\Handler\Doctor\Schedule\Data\DoctorScheduleCreateInput;
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Repository\DoctorRepositoryInterface;
-use Core\Domain\Support\DaySupport;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class DoctorScheduleCreateHandler
+final class DoctorScheduleCreateHandler
 {
     public function __construct(
-        protected DoctorRepositoryInterface $repository,
-        protected DaySupport $dayWeekSupport,
-    ) {}
+        private DoctorRepositoryInterface $repository,
+    ) {
+    }
 
     public function execute(DoctorScheduleCreateInput $input): DoctorScheduleOutput
     {
-        $doctorId = $input->doctorId;
-        $dayOfWeek = $input->dayOfWeek;
-        $startTime = $input->startTime;
-        $endTime = $input->endTime;
+        $doctorId    = $input->doctorId;
+        $dayOfWeek   = $input->dayOfWeek;
+        $startTime   = $input->startTime;
+        $endTime     = $input->endTime;
         $slotMinutes = $input->slotMinutes;
 
         $aggregate = new ScheduleAggregate($dayOfWeek, $startTime, $endTime, $slotMinutes);
@@ -30,7 +31,7 @@ class DoctorScheduleCreateHandler
         /** @var DoctorEntity $doctor */
         $doctor = $this->repository->find($doctorId, $aggregate);
 
-        if ($doctor === null) {
+        if (null === $doctor) {
             throw new NotFoundException('Doctor not found');
         }
 

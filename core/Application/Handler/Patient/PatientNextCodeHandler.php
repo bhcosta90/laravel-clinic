@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Patient;
 
 use Core\Domain\Repository\PatientRepositoryInterface;
 
-class PatientNextCodeHandler
+final class PatientNextCodeHandler
 {
     public function __construct(
-        protected PatientRepositoryInterface $repository
-    ) {}
+        private PatientRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(): string
     {

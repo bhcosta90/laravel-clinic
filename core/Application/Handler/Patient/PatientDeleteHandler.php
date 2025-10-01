@@ -1,24 +1,27 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Patient;
 
 use Core\Domain\Repository\PatientRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class PatientDeleteHandler
+final class PatientDeleteHandler
 {
     public function __construct(
-        protected PatientRepositoryInterface $repository
-    ) {}
+        private PatientRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
-        int|string $id,
+        int | string $id,
     ): DeleteOutput {
 
         $entity = $this->repository->find($id);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException('Patient not found');
         }
 

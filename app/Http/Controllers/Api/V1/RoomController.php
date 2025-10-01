@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\RoomRequest;
 use Core\Application\Handler\Room as Handler;
 
-class RoomController
+final class RoomController
 {
     public function show(Handler\RoomShowHandler $handler, string $id)
     {

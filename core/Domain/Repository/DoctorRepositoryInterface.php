@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Domain\Repository;
 
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
@@ -10,7 +12,7 @@ use Core\Shared\Domain\Contracts\RepositoryInterface;
 interface DoctorRepositoryInterface extends RepositoryInterface
 {
     public function find(
-        int|string $id,
+        int | string $id,
         ?ScheduleAggregate $aggregate = null
     ): ?BaseDomain;
 
@@ -20,5 +22,5 @@ interface DoctorRepositoryInterface extends RepositoryInterface
 
     public function deleteSchedule(DoctorEntity $entity, ScheduleAggregate $aggregate): bool;
 
-    public function findSchedule(DoctorEntity $doctor, int|string $id): ?ScheduleAggregate;
+    public function findSchedule(DoctorEntity $doctor, int | string $id): ?ScheduleAggregate;
 }

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\PatientRequest;
 use Core\Application\Handler\Patient as Handler;
 
-class PatientController
+final class PatientController
 {
     public function show(Handler\PatientShowHandler $handler, string $id)
     {

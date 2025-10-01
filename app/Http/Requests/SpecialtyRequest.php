@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
 use App\Models\Specialty;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class SpecialtyRequest extends FormRequest
+final class SpecialtyRequest extends FormRequest
 {
     public function rules(): array
     {

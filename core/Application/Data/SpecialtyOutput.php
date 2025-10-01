@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Data;
 
-class SpecialtyOutput
+final class SpecialtyOutput
 {
     public function __construct(
-        public int|string $id,
+        public int | string $id,
         public string $name,
         public string $code,
-    ) {}
+    ) {
+    }
 }

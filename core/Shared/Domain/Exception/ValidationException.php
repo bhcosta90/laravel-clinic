@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Shared\Domain\Exception;
 
 use Core\Shared\Application\Exception\BaseException;
 
-class ValidationException extends BaseException
+final class ValidationException extends BaseException
 {
     private array $errors = [];
 

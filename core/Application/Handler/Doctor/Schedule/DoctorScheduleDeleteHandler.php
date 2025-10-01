@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Doctor\Schedule;
 
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
@@ -8,15 +10,16 @@ use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class DoctorScheduleDeleteHandler
+final class DoctorScheduleDeleteHandler
 {
     public function __construct(
-        protected DoctorRepositoryInterface $repository,
-    ) {}
+        private DoctorRepositoryInterface $repository,
+    ) {
+    }
 
     public function execute(
-        int|string $id,
-        int|string $doctorId,
+        int | string $id,
+        int | string $doctorId,
     ): DeleteOutput {
         /** @var DoctorEntity $doctor */
         $doctor = $this->repository->find($doctorId, new ScheduleAggregate(id: $id));
@@ -24,13 +27,13 @@ class DoctorScheduleDeleteHandler
         /** @var ScheduleAggregate $schedule */
         $schedule = $this->repository->findSchedule($doctor, $id);
 
-        if ($schedule === null) {
+        if (null === $schedule) {
             throw new NotFoundException('Schedule not found');
         }
 
         $entity = $this->repository->findSchedule($doctor, $id);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException('Doctor not found');
         }
 

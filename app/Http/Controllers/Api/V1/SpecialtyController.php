@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\SpecialtyRequest;
 use Core\Application\Handler\Specialty as Handler;
 
-class SpecialtyController
+final class SpecialtyController
 {
     public function show(Handler\SpecialtyShowHandler $handler, string $id)
     {

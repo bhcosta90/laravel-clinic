@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
 use Core\Domain\Enum\DayEnum;
@@ -8,9 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserSchedule extends Model
+final class UserSchedule extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -20,12 +23,12 @@ class UserSchedule extends Model
         'slot_minutes',
     ];
 
+    protected $casts = [
+        'day_of_week' => DayEnum::class,
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
-    protected $casts = [
-        'day_of_week' => DayEnum::class,
-    ];
 }

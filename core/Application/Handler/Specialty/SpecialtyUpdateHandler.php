@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Specialty;
 
 use Core\Application\Data\SpecialtyOutput;
@@ -8,20 +10,21 @@ use Core\Domain\Entities\SpecialtyEntity;
 use Core\Domain\Repository\SpecialtyRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class SpecialtyUpdateHandler
+final class SpecialtyUpdateHandler
 {
     public function __construct(
-        protected SpecialtyRepositoryInterface $repository
-    ) {}
+        private SpecialtyRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
-        int|string $id,
+        int | string $id,
         array $data,
     ): SpecialtyOutput {
 
         $entity = $this->repository->find($id);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException('Specialty not found');
         }
 

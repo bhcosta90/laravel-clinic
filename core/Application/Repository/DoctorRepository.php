@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Repository;
 
 use App\Models\User as Doctor;
@@ -12,12 +14,12 @@ use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-class DoctorRepository implements DoctorRepositoryInterface
+final class DoctorRepository implements DoctorRepositoryInterface
 {
     use DoctorScheduleTrait;
 
     public function find(
-        int|string $id,
+        int | string $id,
         ?ScheduleAggregate $aggregate = null
     ): ?BaseDomain {
         $domain = $this->convertModelToDomain($this->getModelById($id));
@@ -36,9 +38,9 @@ class DoctorRepository implements DoctorRepositoryInterface
 
     public function store(BaseDomain $domain): BaseDomain
     {
-        $model = new Doctor;
+        $model = new Doctor();
         $model->fill([
-            'name' => $domain->name,
+            'name'      => $domain->name,
             'is_doctor' => true,
         ]);
         $model->save();
@@ -59,10 +61,10 @@ class DoctorRepository implements DoctorRepositoryInterface
 
     protected function model(): Model
     {
-        return new Doctor;
+        return new Doctor();
     }
 
-    protected function getModelById(int|string $id): ?Model
+    protected function getModelById(int | string $id): ?Model
     {
         return $this->model()->query()->find($id);
     }
@@ -78,7 +80,7 @@ class DoctorRepository implements DoctorRepositoryInterface
     {
         $dayOfWeek = $aggregate->dayOfWeek;
         $startTime = when($aggregate->startTime, fn () => now()->setTimeFromTimeString($aggregate->startTime)->format('H:i'));
-        $endTime = when($aggregate->endTime, fn () => now()->setTimeFromTimeString($aggregate->endTime)->format('H:i'));
+        $endTime   = when($aggregate->endTime, fn () => now()->setTimeFromTimeString($aggregate->endTime)->format('H:i'));
 
         UserSchedule::when($dayOfWeek, fn ($query) => $query->where('day_of_week', $dayOfWeek))
             ->when($startTime && $endTime, fn ($query) => $query->where(function ($query) use ($startTime, $endTime) {

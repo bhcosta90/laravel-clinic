@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Doctor;
 
 use Core\Application\Data\DoctorOutput;
@@ -7,11 +9,12 @@ use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Entities\Requests\Doctor\DoctorCreateRequest;
 use Core\Domain\Repository\DoctorRepositoryInterface;
 
-class DoctorCreateHandler
+final class DoctorCreateHandler
 {
     public function __construct(
-        protected DoctorRepositoryInterface $repository
-    ) {}
+        private DoctorRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
         string $name,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Domain\Entities;
 
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
@@ -7,13 +9,13 @@ use Core\Domain\Entities\Requests\Doctor\DoctorCreateRequest;
 use Core\Domain\Entities\Requests\Doctor\DoctorUpdateRequest;
 use Core\Shared\Domain\BaseDomain;
 
-class DoctorEntity extends BaseDomain
+final class DoctorEntity extends BaseDomain
 {
     protected string $name;
 
     protected array $schedules = [];
 
-    public function __construct(DoctorCreateRequest $request, string|int|null $id = null)
+    public function __construct(DoctorCreateRequest $request, string | int | null $id = null)
     {
         $this->name = $request->name;
         $this->validate();
@@ -38,21 +40,23 @@ class DoctorEntity extends BaseDomain
 
     public function addSchedule(ScheduleAggregate $aggregate): void
     {
-        $dayOfWeek = $aggregate->dayOfWeek;
-        $startTime = $aggregate->startTime;
-        $endTime = $aggregate->endTime;
+        $dayOfWeek   = $aggregate->dayOfWeek;
+        $startTime   = $aggregate->startTime;
+        $endTime     = $aggregate->endTime;
         $slotMinutes = $aggregate->slotMinutes;
 
-        $errors = [];
+        $errors       = [];
         $startSeconds = $this->parseTimeToSeconds($startTime);
-        $endSeconds = $this->parseTimeToSeconds($endTime);
+        $endSeconds   = $this->parseTimeToSeconds($endTime);
 
-        if ($startSeconds === null) {
+        if (null === $startSeconds) {
             $errors['start_time'][] = 'Invalid time format. Expected HH:MM:SS';
         }
-        if ($endSeconds === null) {
+
+        if (null === $endSeconds) {
             $errors['end_time'][] = 'Invalid time format. Expected HH:MM:SS';
         }
+
         if (empty($errors) && $startSeconds >= $endSeconds) {
             $errors['time'][] = 'start_time must be earlier than end_time';
         }
@@ -65,10 +69,11 @@ class DoctorEntity extends BaseDomain
                 }
 
                 $existingStart = $this->parseTimeToSeconds($schedule['start_time']);
-                $existingEnd = $this->parseTimeToSeconds($schedule['end_time']);
+                $existingEnd   = $this->parseTimeToSeconds($schedule['end_time']);
 
                 if ($startSeconds < $existingEnd && $endSeconds > $existingStart && ($aggregate->id !== $schedule['id'] || is_null($aggregate->id))) {
                     $errors['schedule'][] = 'Schedule time range conflicts with an existing schedule for this day.';
+
                     break;
                 }
             }
@@ -76,17 +81,17 @@ class DoctorEntity extends BaseDomain
 
         $this->validator()
             ->data([
-                'day_of_week' => $dayOfWeek,
+                'day_of_week'  => $dayOfWeek,
                 'slot_minutes' => $slotMinutes,
             ])
             ->field('slot_minutes')->required()->min(1)
             ->validate($errors);
 
         $this->schedules[] = [
-            'id' => $aggregate->id,
-            'day_of_week' => $dayOfWeek,
-            'start_time' => $startTime,
-            'end_time' => $endTime,
+            'id'           => $aggregate->id,
+            'day_of_week'  => $dayOfWeek,
+            'start_time'   => $startTime,
+            'end_time'     => $endTime,
             'slot_minutes' => $slotMinutes,
         ];
     }
@@ -95,12 +100,14 @@ class DoctorEntity extends BaseDomain
     {
         // Expecting format HH:MM or HH:MM:SS
         $parts = explode(':', $time);
+
         if (count($parts) < 2 || count($parts) > 3) {
             return null;
         }
         $h = (int) ($parts[0] ?? 0);
         $m = (int) ($parts[1] ?? 0);
         $s = (int) ($parts[2] ?? 0);
+
         if ($h < 0 || $h > 23 || $m < 0 || $m > 59 || $s < 0 || $s > 59) {
             return null;
         }

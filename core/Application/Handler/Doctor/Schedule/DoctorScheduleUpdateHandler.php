@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Doctor\Schedule;
 
 use Core\Application\Data\DoctorScheduleOutput;
@@ -7,23 +9,22 @@ use Core\Application\Handler\Doctor\Schedule\Data\DoctorScheduleUpdateInput;
 use Core\Domain\Entities\Aggregate\ScheduleAggregate;
 use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Repository\DoctorRepositoryInterface;
-use Core\Domain\Support\DaySupport;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class DoctorScheduleUpdateHandler
+final class DoctorScheduleUpdateHandler
 {
     public function __construct(
-        protected DoctorRepositoryInterface $repository,
-        protected DaySupport $dayWeekSupport,
-    ) {}
+        private DoctorRepositoryInterface $repository,
+    ) {
+    }
 
     public function execute(DoctorScheduleUpdateInput $input): DoctorScheduleOutput
     {
-        $id = $input->id;
-        $doctorId = $input->doctorId;
-        $dayOfWeek = $input->dayOfWeek;
-        $startTime = $input->startTime;
-        $endTime = $input->endTime;
+        $id          = $input->id;
+        $doctorId    = $input->doctorId;
+        $dayOfWeek   = $input->dayOfWeek;
+        $startTime   = $input->startTime;
+        $endTime     = $input->endTime;
         $slotMinutes = $input->slotMinutes;
 
         $aggregate = new ScheduleAggregate(id: $id);
@@ -33,13 +34,13 @@ class DoctorScheduleUpdateHandler
 
         $schedule = $this->repository->findSchedule($doctor, $id);
 
-        if ($schedule === null) {
+        if (null === $schedule) {
             throw new NotFoundException('Schedule not found');
         }
 
-        $dayOfWeek = $dayOfWeek ?? $schedule->dayOfWeek;
-        $startTime = $startTime ?? $schedule->startTime;
-        $endTime = $endTime ?? $schedule->endTime;
+        $dayOfWeek   = $dayOfWeek ?? $schedule->dayOfWeek;
+        $startTime   = $startTime ?? $schedule->startTime;
+        $endTime     = $endTime ?? $schedule->endTime;
         $slotMinutes = $slotMinutes ?? $schedule->slotMinutes;
 
         $aggregate = new ScheduleAggregate($dayOfWeek, $startTime, $endTime, $slotMinutes, $schedule->id);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Doctor;
 
 use Core\Application\Data\DoctorOutput;
@@ -8,20 +10,21 @@ use Core\Domain\Entities\Requests\Doctor\DoctorUpdateRequest;
 use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class DoctorUpdateHandler
+final class DoctorUpdateHandler
 {
     public function __construct(
-        protected DoctorRepositoryInterface $repository
-    ) {}
+        private DoctorRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
-        int|string $id,
+        int | string $id,
         array $data,
     ): DoctorOutput {
 
         $entity = $this->repository->find($id);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException('Doctor not found');
         }
 

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Shared\Domain\Validator;
 
 use Core\Shared\Domain\Contracts\ValidatorAdapterInterface;
 use Core\Shared\Domain\Exception\ValidationException;
 
-class FluentValidator
+final class FluentValidator
 {
     private array $data = [];
 
@@ -18,7 +20,7 @@ class FluentValidator
     public function __construct(?ValidatorAdapterInterface $adapter = null)
     {
         // Por padrão, usa Rakit
-        $this->adapter = $adapter ?? new RakitValidatorAdapter;
+        $this->adapter = $adapter ?? new RakitValidatorAdapter();
     }
 
     public function data(array $data): self
@@ -31,7 +33,8 @@ class FluentValidator
     public function field(string $field): self
     {
         $this->currentField = $field;
-        if (! isset($this->rules[$field])) {
+
+        if (!isset($this->rules[$field])) {
             $this->rules[$field] = [];
         }
 
@@ -74,7 +77,8 @@ class FluentValidator
     public function validate(array $moreErrors = []): void
     {
         $errors = $this->adapter->validate($this->data, $this->rules) + $moreErrors;
-        if (! empty($errors)) {
+
+        if (!empty($errors)) {
             throw new ValidationException($errors);
         }
     }

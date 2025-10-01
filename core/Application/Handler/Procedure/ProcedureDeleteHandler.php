@@ -1,24 +1,27 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Procedure;
 
 use Core\Domain\Repository\ProcedureRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class ProcedureDeleteHandler
+final class ProcedureDeleteHandler
 {
     public function __construct(
-        protected ProcedureRepositoryInterface $repository
-    ) {}
+        private ProcedureRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
-        int|string $id,
+        int | string $id,
     ): DeleteOutput {
 
         $entity = $this->repository->find($id);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException('Procedure not found');
         }
 

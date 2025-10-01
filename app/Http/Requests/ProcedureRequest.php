@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
 use App\Models\Procedure;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ProcedureRequest extends FormRequest
+final class ProcedureRequest extends FormRequest
 {
     public function rules(): array
     {
         $isRequired = Rule::requiredIf(fn () => blank($this->route('procedure')));
 
         return [
-            'code' => [Rule::unique(Procedure::class)->ignore($this->route('procedure'))],
-            'name' => [$isRequired],
+            'code'                 => [Rule::unique(Procedure::class)->ignore($this->route('procedure'))],
+            'name'                 => [$isRequired],
             'min_duration_minutes' => [
                 $isRequired,
                 'integer',

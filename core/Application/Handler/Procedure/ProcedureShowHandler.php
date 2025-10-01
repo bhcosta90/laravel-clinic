@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Procedure;
 
 use Core\Application\Data\ProcedureOutput;
@@ -7,20 +9,21 @@ use Core\Domain\Entities\ProcedureEntity;
 use Core\Domain\Repository\ProcedureRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class ProcedureShowHandler
+final class ProcedureShowHandler
 {
     public function __construct(
-        protected ProcedureRepositoryInterface $repository
-    ) {}
+        private ProcedureRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
-        int|string $id,
+        int | string $id,
     ): ProcedureOutput {
 
         /** @var ProcedureEntity $entity */
         $entity = $this->repository->find($id);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException('Procedure not found');
         }
 

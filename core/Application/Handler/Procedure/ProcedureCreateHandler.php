@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Procedure;
 
 use Core\Application\Data\ProcedureOutput;
@@ -7,11 +9,12 @@ use Core\Domain\Entities\ProcedureEntity;
 use Core\Domain\Entities\Requests\Procedure\ProcedureCreateRequest;
 use Core\Domain\Repository\ProcedureRepositoryInterface;
 
-class ProcedureCreateHandler
+final class ProcedureCreateHandler
 {
     public function __construct(
-        protected ProcedureRepositoryInterface $repository
-    ) {}
+        private ProcedureRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
         ?string $code,
@@ -20,7 +23,7 @@ class ProcedureCreateHandler
         int $maxDurationMinutes,
     ): ProcedureOutput {
 
-        if ($code === null) {
+        if (null === $code) {
             $code = $this->repository->generateCode(6);
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core\Application\Handler\Room;
 
 use Core\Application\Data\RoomOutput;
@@ -8,21 +10,22 @@ use Core\Domain\Entities\RoomEntity;
 use Core\Domain\Repository\RoomRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-class RoomUpdateHandler
+final class RoomUpdateHandler
 {
     public function __construct(
-        protected RoomRepositoryInterface $repository
-    ) {}
+        private RoomRepositoryInterface $repository
+    ) {
+    }
 
     public function execute(
-        int|string $id,
+        int | string $id,
         array $data,
     ): RoomOutput {
 
         /** @var RoomEntity $entity */
         $entity = $this->repository->find($id);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException('Room not found');
         }
 

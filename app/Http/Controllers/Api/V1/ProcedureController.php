@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\ProcedureRequest;
 use Core\Application\Handler\Procedure as Handler;
 
-class ProcedureController
+final class ProcedureController
 {
     public function show(Handler\ProcedureShowHandler $handler, string $id)
     {
