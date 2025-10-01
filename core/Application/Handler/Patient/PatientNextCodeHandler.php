@@ -6,7 +6,7 @@ namespace Core\Application\Handler\Patient;
 
 use Core\Domain\Repository\PatientRepositoryInterface;
 
-final class PatientNextCodeHandler
+final readonly class PatientNextCodeHandler
 {
     public function __construct(
         private PatientRepositoryInterface $repository

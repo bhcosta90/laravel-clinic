@@ -10,7 +10,7 @@ use Core\Domain\Entities\Requests\Procedure\ProcedureUpdateRequest;
 use Core\Domain\Repository\ProcedureRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class ProcedureUpdateHandler
+final readonly class ProcedureUpdateHandler
 {
     public function __construct(
         private ProcedureRepositoryInterface $repository

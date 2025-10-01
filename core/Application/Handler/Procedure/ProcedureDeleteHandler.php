@@ -8,7 +8,7 @@ use Core\Domain\Repository\ProcedureRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class ProcedureDeleteHandler
+final readonly class ProcedureDeleteHandler
 {
     public function __construct(
         private ProcedureRepositoryInterface $repository

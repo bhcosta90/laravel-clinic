@@ -9,7 +9,7 @@ use Core\Domain\Entities\ProcedureEntity;
 use Core\Domain\Repository\ProcedureRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class ProcedureShowHandler
+final readonly class ProcedureShowHandler
 {
     public function __construct(
         private ProcedureRepositoryInterface $repository

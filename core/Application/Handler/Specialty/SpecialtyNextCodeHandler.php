@@ -6,7 +6,7 @@ namespace Core\Application\Handler\Specialty;
 
 use Core\Domain\Repository\SpecialtyRepositoryInterface;
 
-final class SpecialtyNextCodeHandler
+final readonly class SpecialtyNextCodeHandler
 {
     public function __construct(
         private SpecialtyRepositoryInterface $repository

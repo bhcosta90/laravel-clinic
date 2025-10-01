@@ -7,7 +7,7 @@ namespace Core\Shared\Domain\Validator;
 use Core\Shared\Domain\Contracts\ValidatorAdapterInterface;
 use Rakit\Validation\Validator as RakitValidator;
 
-final class RakitValidatorAdapter implements ValidatorAdapterInterface
+final readonly class RakitValidatorAdapter implements ValidatorAdapterInterface
 {
     public function validate(array $data, array $rules): array
     {

@@ -6,7 +6,7 @@ namespace Core\Application\Handler\Procedure;
 
 use Core\Domain\Repository\ProcedureRepositoryInterface;
 
-final class ProcedureNextCodeHandler
+final readonly class ProcedureNextCodeHandler
 {
     public function __construct(
         private ProcedureRepositoryInterface $repository

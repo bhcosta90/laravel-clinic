@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Core\Domain\Entities\Requests\Specialty;
 
-final class SpecialtyCreateRequest
+final readonly class SpecialtyCreateRequest
 {
     public function __construct(
         public string $name,

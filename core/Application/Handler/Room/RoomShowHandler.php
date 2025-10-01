@@ -9,7 +9,7 @@ use Core\Domain\Entities\RoomEntity;
 use Core\Domain\Repository\RoomRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class RoomShowHandler
+final readonly class RoomShowHandler
 {
     public function __construct(
         private RoomRepositoryInterface $repository

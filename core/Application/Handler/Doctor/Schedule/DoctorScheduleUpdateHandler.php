@@ -11,7 +11,7 @@ use Core\Domain\Entities\DoctorEntity;
 use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class DoctorScheduleUpdateHandler
+final readonly class DoctorScheduleUpdateHandler
 {
     public function __construct(
         private DoctorRepositoryInterface $repository,

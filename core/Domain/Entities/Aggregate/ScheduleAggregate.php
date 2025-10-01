@@ -6,7 +6,7 @@ namespace Core\Domain\Entities\Aggregate;
 
 use Core\Domain\Enum\DayEnum;
 
-final class ScheduleAggregate
+final readonly class ScheduleAggregate
 {
     public function __construct(
         public ?DayEnum $dayOfWeek = null,

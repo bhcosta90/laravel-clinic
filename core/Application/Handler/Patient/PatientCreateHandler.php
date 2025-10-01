@@ -9,7 +9,7 @@ use Core\Domain\Entities\PatientEntity;
 use Core\Domain\Entities\Requests\Patient\PatientCreateRequest;
 use Core\Domain\Repository\PatientRepositoryInterface;
 
-final class PatientCreateHandler
+final readonly class PatientCreateHandler
 {
     public function __construct(
         private PatientRepositoryInterface $repository

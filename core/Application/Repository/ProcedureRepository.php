@@ -11,7 +11,7 @@ use Core\Domain\Repository\ProcedureRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-final class ProcedureRepository implements ProcedureRepositoryInterface
+final readonly class ProcedureRepository implements ProcedureRepositoryInterface
 {
     public function find(int | string $id): ?BaseDomain
     {

@@ -9,7 +9,7 @@ use Core\Domain\Entities\Requests\Room\RoomCreateRequest;
 use Core\Domain\Entities\RoomEntity;
 use Core\Domain\Repository\RoomRepositoryInterface;
 
-final class RoomCreateHandler
+final readonly class RoomCreateHandler
 {
     public function __construct(
         private RoomRepositoryInterface $repository

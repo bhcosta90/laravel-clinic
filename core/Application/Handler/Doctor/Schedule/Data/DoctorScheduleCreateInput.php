@@ -6,7 +6,7 @@ namespace Core\Application\Handler\Doctor\Schedule\Data;
 
 use Core\Domain\Enum\DayEnum;
 
-final class DoctorScheduleCreateInput
+final readonly class DoctorScheduleCreateInput
 {
     public function __construct(
         public int | string $doctorId,

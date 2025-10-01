@@ -9,7 +9,7 @@ use Core\Domain\Entities\PatientEntity;
 use Core\Domain\Repository\PatientRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class PatientShowHandler
+final readonly class PatientShowHandler
 {
     public function __construct(
         private PatientRepositoryInterface $repository

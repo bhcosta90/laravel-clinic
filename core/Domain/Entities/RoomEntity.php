@@ -8,7 +8,7 @@ use Core\Domain\Entities\Requests\Room\RoomCreateRequest;
 use Core\Domain\Entities\Requests\Room\RoomUpdateRequest;
 use Core\Shared\Domain\BaseDomain;
 
-final class RoomEntity extends BaseDomain
+final readonly class RoomEntity extends BaseDomain
 {
     protected string $name;
 

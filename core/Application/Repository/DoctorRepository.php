@@ -14,7 +14,7 @@ use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-final class DoctorRepository implements DoctorRepositoryInterface
+final readonly class DoctorRepository implements DoctorRepositoryInterface
 {
     use DoctorScheduleTrait;
 

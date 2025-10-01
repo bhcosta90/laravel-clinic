@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Core\Application\Data;
 
-final class ProcedureOutput
+final readonly class ProcedureOutput
 {
     public function __construct(
         public int | string $id,

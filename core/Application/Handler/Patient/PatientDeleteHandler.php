@@ -8,7 +8,7 @@ use Core\Domain\Repository\PatientRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class PatientDeleteHandler
+final readonly class PatientDeleteHandler
 {
     public function __construct(
         private PatientRepositoryInterface $repository

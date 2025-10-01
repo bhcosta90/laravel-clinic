@@ -10,7 +10,7 @@ use Core\Domain\Entities\Requests\Patient\PatientUpdateRequest;
 use Core\Domain\Repository\PatientRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class PatientUpdateHandler
+final readonly class PatientUpdateHandler
 {
     public function __construct(
         private PatientRepositoryInterface $repository

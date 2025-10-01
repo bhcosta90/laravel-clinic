@@ -11,7 +11,7 @@ use Core\Domain\Repository\RoomRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-final class RoomRepository implements RoomRepositoryInterface
+final readonly class RoomRepository implements RoomRepositoryInterface
 {
     public function find(int | string $id): ?BaseDomain
     {

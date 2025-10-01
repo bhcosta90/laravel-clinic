@@ -9,7 +9,7 @@ use Core\Domain\Entities\Requests\Specialty\SpecialtyCreateRequest;
 use Core\Domain\Entities\SpecialtyEntity;
 use Core\Domain\Repository\SpecialtyRepositoryInterface;
 
-final class SpecialtyCreateHandler
+final readonly class SpecialtyCreateHandler
 {
     public function __construct(
         private SpecialtyRepositoryInterface $repository

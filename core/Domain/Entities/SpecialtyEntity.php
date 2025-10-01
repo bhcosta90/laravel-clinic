@@ -8,7 +8,7 @@ use Core\Domain\Entities\Requests\Specialty\SpecialtyCreateRequest;
 use Core\Domain\Entities\Requests\Specialty\SpecialtyUpdateRequest;
 use Core\Shared\Domain\BaseDomain;
 
-final class SpecialtyEntity extends BaseDomain
+final readonly class SpecialtyEntity extends BaseDomain
 {
     protected string $name;
 

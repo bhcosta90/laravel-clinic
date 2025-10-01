@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Core\Domain\Entities\Requests\Procedure;
 
-final class ProcedureUpdateRequest
+final readonly class ProcedureUpdateRequest
 {
     public function __construct(
         public string $name,

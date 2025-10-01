@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Core\Domain\Support;
 
-final class DaySupport
+final readonly class DaySupport
 {
     public function byInt(string $week): int
     {

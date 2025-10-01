@@ -10,7 +10,7 @@ use Core\Domain\Repository\DoctorRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class DoctorScheduleDeleteHandler
+final readonly class DoctorScheduleDeleteHandler
 {
     public function __construct(
         private DoctorRepositoryInterface $repository,

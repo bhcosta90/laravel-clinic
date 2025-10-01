@@ -9,7 +9,7 @@ use Core\Domain\Entities\SpecialtyEntity;
 use Core\Domain\Repository\SpecialtyRepositoryInterface;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class SpecialtyShowHandler
+final readonly class SpecialtyShowHandler
 {
     public function __construct(
         private SpecialtyRepositoryInterface $repository

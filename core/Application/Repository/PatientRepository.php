@@ -11,7 +11,7 @@ use Core\Domain\Repository\PatientRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-final class PatientRepository implements PatientRepositoryInterface
+final readonly class PatientRepository implements PatientRepositoryInterface
 {
     public function find(int | string $id): ?BaseDomain
     {

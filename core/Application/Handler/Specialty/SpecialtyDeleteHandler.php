@@ -8,7 +8,7 @@ use Core\Domain\Repository\SpecialtyRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class SpecialtyDeleteHandler
+final readonly class SpecialtyDeleteHandler
 {
     public function __construct(
         private SpecialtyRepositoryInterface $repository

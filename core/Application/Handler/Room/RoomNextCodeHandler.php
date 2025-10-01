@@ -6,7 +6,7 @@ namespace Core\Application\Handler\Room;
 
 use Core\Domain\Repository\RoomRepositoryInterface;
 
-final class RoomNextCodeHandler
+final readonly class RoomNextCodeHandler
 {
     public function __construct(
         private RoomRepositoryInterface $repository

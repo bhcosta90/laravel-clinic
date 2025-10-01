@@ -11,7 +11,7 @@ use Core\Domain\Repository\SpecialtyRepositoryInterface;
 use Core\Shared\Domain\BaseDomain;
 use Illuminate\Database\Eloquent\Model;
 
-final class SpecialtyRepository implements SpecialtyRepositoryInterface
+final readonly class SpecialtyRepository implements SpecialtyRepositoryInterface
 {
     public function find(int | string $id): ?BaseDomain
     {

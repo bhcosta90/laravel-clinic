@@ -8,7 +8,7 @@ use Core\Domain\Repository\RoomRepositoryInterface;
 use Core\Shared\Application\Data\DeleteOutput;
 use Core\Shared\Application\Exception\NotFoundException;
 
-final class RoomDeleteHandler
+final readonly class RoomDeleteHandler
 {
     public function __construct(
         private RoomRepositoryInterface $repository

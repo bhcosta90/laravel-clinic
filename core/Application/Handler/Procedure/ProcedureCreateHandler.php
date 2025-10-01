@@ -9,7 +9,7 @@ use Core\Domain\Entities\ProcedureEntity;
 use Core\Domain\Entities\Requests\Procedure\ProcedureCreateRequest;
 use Core\Domain\Repository\ProcedureRepositoryInterface;
 
-final class ProcedureCreateHandler
+final readonly class ProcedureCreateHandler
 {
     public function __construct(
         private ProcedureRepositoryInterface $repository
