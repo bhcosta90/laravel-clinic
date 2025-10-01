@@ -73,6 +73,22 @@ test('300', function () {
     ]);
 });
 
+test('401', function () {
+    /** @var DoctorEntity $response */
+    $doctor = $this->handler->find($this->doctor->id, new ScheduleAggregate);
+    $scheduleId = $doctor->schedules[0]['id'];
+
+    $response = $this->handler->findSchedule($doctor, $scheduleId);
+
+    expect($response)->dayOfWeek->toBe(DayEnum::Monday)
+        ->startTime->toBe('00:00')
+        ->endTime->toBe('01:00')
+        ->id->toBe($scheduleId);
+
+    $response = $this->handler->findSchedule($doctor, 0);
+    expect($response)->toBeNull();
+});
+
 test('400', function () {
     /** @var DoctorEntity $response */
     $schedule = $this->handler->find($this->doctor->id, new ScheduleAggregate);
@@ -119,4 +135,37 @@ test('500', function () {
 
     expect($this->handler->deleteSchedule($response, new ScheduleAggregate(id: $scheduleId)))->toBeTrue()
         ->and($this->handler->deleteSchedule($response, new ScheduleAggregate(id: 0)))->toBeFalse();
+});
+
+test('600', function () {
+    /** @var DoctorEntity $response */
+    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate(
+        dayOfWeek: DayEnum::Monday,
+        startTime: '00:00',
+        endTime: '00:30',
+        slotMinutes: 60,
+    ));
+    expect($response->schedules)->toHaveCount(1);
+});
+
+test('601', function () {
+    /** @var DoctorEntity $response */
+    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate(
+        dayOfWeek: DayEnum::Monday,
+        startTime: '00:30',
+        endTime: '01:01',
+        slotMinutes: 60,
+    ));
+    expect($response->schedules)->toHaveCount(2);
+});
+
+test('602', function () {
+    /** @var DoctorEntity $response */
+    $response = $this->handler->find($this->doctor->id, new ScheduleAggregate(
+        dayOfWeek: DayEnum::Monday,
+        startTime: '04:00',
+        endTime: '04:30',
+        slotMinutes: 60,
+    ));
+    expect($response->schedules)->toHaveCount(2);
 });
