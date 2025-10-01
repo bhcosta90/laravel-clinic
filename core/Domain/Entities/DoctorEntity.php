@@ -67,7 +67,7 @@ class DoctorEntity extends BaseDomain
                 $existingStart = $this->parseTimeToSeconds($schedule['start_time']);
                 $existingEnd = $this->parseTimeToSeconds($schedule['end_time']);
 
-                if ($startSeconds < $existingEnd && $endSeconds > $existingStart && $aggregate->id !== $schedule['id']) {
+                if ($startSeconds < $existingEnd && $endSeconds > $existingStart && ($aggregate->id !== $schedule['id'] || is_null($aggregate->id))) {
                     $errors['schedule'][] = 'Schedule time range conflicts with an existing schedule for this day.';
                     break;
                 }
