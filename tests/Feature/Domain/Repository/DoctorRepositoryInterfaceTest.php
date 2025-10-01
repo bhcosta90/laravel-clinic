@@ -28,7 +28,7 @@ beforeEach(function () {
     $this->handler = app(DoctorRepositoryInterface::class);
 });
 
-test('100', function () {
+test('should return DoctorEntity with empty schedules', function () {
     $response = $this->handler->find($this->doctor->id);
 
     expect($response)->toBeInstanceOf(DoctorEntity::class)
@@ -39,14 +39,14 @@ test('100', function () {
         ->updatedAt->format('YmdHis')->toBe($this->doctor->updated_at->format('YmdHis'));
 });
 
-test('200', function () {
+test('should return DoctorEntity with 5 schedules', function () {
     $response = $this->handler->find($this->doctor->id, new ScheduleAggregate);
 
     expect($response)->toBeInstanceOf(DoctorEntity::class)
         ->and($response->schedules)->toHaveCount(5);
 });
 
-test('300', function () {
+test('should add a new schedule and persist it', function () {
     /** @var DoctorEntity $response */
     $response = $this->handler->find($this->doctor->id, new ScheduleAggregate);
 
@@ -73,7 +73,7 @@ test('300', function () {
     ]);
 });
 
-test('401', function () {
+test('should find a schedule by id and return null for invalid id', function () {
     /** @var DoctorEntity $response */
     $doctor = $this->handler->find($this->doctor->id, new ScheduleAggregate);
     $scheduleId = $doctor->schedules[0]['id'];
@@ -89,7 +89,7 @@ test('401', function () {
     expect($response)->toBeNull();
 });
 
-test('400', function () {
+test('should update a schedule and return null for invalid id', function () {
     /** @var DoctorEntity $response */
     $schedule = $this->handler->find($this->doctor->id, new ScheduleAggregate);
     $scheduleId = $schedule->schedules[0]['id'];
@@ -128,7 +128,7 @@ test('400', function () {
     expect($response)->toBeNull();
 });
 
-test('500', function () {
+test('should delete a schedule and return false for invalid id', function () {
     /** @var DoctorEntity $response */
     $response = $this->handler->find($this->doctor->id, new ScheduleAggregate);
     $scheduleId = $response->schedules[0]['id'];
@@ -137,7 +137,7 @@ test('500', function () {
         ->and($this->handler->deleteSchedule($response, new ScheduleAggregate(id: 0)))->toBeFalse();
 });
 
-test('600', function () {
+test('should filter schedules by aggregate (1 match)', function () {
     /** @var DoctorEntity $response */
     $response = $this->handler->find($this->doctor->id, new ScheduleAggregate(
         dayOfWeek: DayEnum::Monday,
@@ -148,7 +148,7 @@ test('600', function () {
     expect($response->schedules)->toHaveCount(1);
 });
 
-test('601', function () {
+test('should filter schedules by aggregate (2 matches)', function () {
     /** @var DoctorEntity $response */
     $response = $this->handler->find($this->doctor->id, new ScheduleAggregate(
         dayOfWeek: DayEnum::Monday,
@@ -159,7 +159,7 @@ test('601', function () {
     expect($response->schedules)->toHaveCount(2);
 });
 
-test('602', function () {
+test('should filter schedules by aggregate (2 matches, different time)', function () {
     /** @var DoctorEntity $response */
     $response = $this->handler->find($this->doctor->id, new ScheduleAggregate(
         dayOfWeek: DayEnum::Monday,
