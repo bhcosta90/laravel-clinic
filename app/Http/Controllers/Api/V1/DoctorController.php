@@ -4,65 +4,36 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\Doctor\DoctorIndexRequest;
+use App\Http\Controllers\Api\V1\Traits\ReadTrait;
 use App\Http\Requests\DoctorRequest;
 use App\Models\User;
 use Core\Application\Builder\GraphBuilder;
 use Core\Application\Builder\QueryBuilder;
 use Core\Application\Handler\Doctor as Handler;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 
 final class DoctorController
 {
+    use ReadTrait;
+
     private array $allowedIncludes = [
         'id',
         'name',
     ];
 
-    public function index(QueryBuilder $queryBuilder, GraphBuilder $graphBuilder, DoctorIndexRequest $request)
-    {
-        $queryBuilderResponse = $this->baseQuery($queryBuilder)
-            ->orderBy($request->get('order_column', 'id'), $request->get('order_direction'))
-            ->simplePaginate();
-
-        $graphBuilderResponse = $this->getCollection($graphBuilder, $queryBuilderResponse, $request);
-
-        return response()->json([
-            'doctors' => $graphBuilderResponse,
-        ]);
-    }
-
-    public function show(QueryBuilder $queryBuilder, GraphBuilder $graphBuilder, Request $request, int $doctorId)
-    {
-        $queryBuilderResponse = $this->baseQuery($queryBuilder)
-            ->where('id', $doctorId)
-            ->sole();
-
-        $graphBuilderResponse = $this->getCollection($graphBuilder, $queryBuilderResponse, $request);
-
-        return response()->json([
-            'doctor' => $graphBuilderResponse,
-        ]);
-    }
-
     public function store(DoctorRequest $procedureRequest, Handler\DoctorCreateHandler $handler)
     {
         return response()->json([
-            'data' => $handler->execute(
-                $procedureRequest->name,
-            ),
-        ]);
+            'data' => $handler->execute($procedureRequest->name),
+        ], Response::HTTP_CREATED);
     }
 
     public function update(DoctorRequest $procedureRequest, Handler\DoctorUpdateHandler $handler, string $id)
     {
         return response()->json([
-            'data' => $handler->execute(
-                $id,
-                $procedureRequest->validated(),
-            ),
+            'data' => $handler->execute($id, $procedureRequest->validated()),
         ]);
     }
 
@@ -79,11 +50,11 @@ final class DoctorController
             ->where('is_doctor', true);
     }
 
-    private function getCollection(GraphBuilder $graphBuilder, $queryBuilderResponse, Request $request): Collection
+    private function getCollection(GraphBuilder $graphBuilder, $queryBuilderResponse): Collection
     {
         return $graphBuilder->execute(
             $queryBuilderResponse,
-            fields: $request->get('fields', ['id']),
+            fields: request()->get('fields', ['id']),
             onlyFields: $this->allowedIncludes,
         );
     }
