@@ -12,10 +12,10 @@ final class ProcedureRequest extends FormRequest
 {
     public function rules(): array
     {
-        $isRequired = Rule::requiredIf(fn () => blank($this->route('procedure')));
+        $isRequired = Rule::requiredIf(fn () => blank($this->route('search')));
 
         return [
-            'code'                 => [Rule::unique(Procedure::class)->ignore($this->route('procedure'))],
+            'code'                 => [Rule::unique(Procedure::class)->ignore($this->route('search'))],
             'name'                 => [$isRequired],
             'min_duration_minutes' => [
                 $isRequired,

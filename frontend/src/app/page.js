@@ -1,13 +1,14 @@
 "use client";
 import Select from "@/components/Select";
+import {Header} from "@/components/Header";
 
 export default function Home() {
 
     return (
     <div>
-        testing
+        <Header/>
         <Select
-            apiUrl="http://127.0.0.1:8600/api/v1/procedures?fields=uuid name"
+            apiUrl="procedures"
             onSelect={() => {}}
             labelField='data.name'
             valueField='data.uuid'

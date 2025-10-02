@@ -1,5 +1,6 @@
+// https://nextjs.org/docs/app/getting-started/server-and-client-components
 import React, { useState, useEffect, useRef, memo } from "react";
-import axios from "axios";
+import { GET } from '@/app/api/search/route'
 
 // Helper to safely resolve nested fields like "data.name"
 const getByPath = (obj, path) => {
@@ -10,7 +11,6 @@ const getByPath = (obj, path) => {
 };
 
 const DropdownItem = memo(({ option, onClick, highlight, renderItem, labelField }) => {
-    console.log(option)
     return <div
         onClick={() => onClick(option)}
         className={`px-3 py-2 cursor-pointer border-b border-gray-100 dark:border-gray-700 ${
@@ -67,9 +67,7 @@ const Select = ({
     const fetchOptions = async (q, pg = 1, reset = false) => {
         setLoading(true);
         try {
-            const { data } = await axios.get(apiUrl, {
-                params: { ...extraParams, search: q, page: pg },
-            });
+            const data = await GET(apiUrl, q)
 
             const newOptions = dataField.split(".").reduce((acc, key) => acc[key], data) || [];
 
