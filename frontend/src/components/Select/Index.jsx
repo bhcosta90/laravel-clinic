@@ -157,9 +157,18 @@ const Select = ({
             return;
         }
 
-        if (e.key === "ArrowDown") setHighlightIndex((i) => Math.min(i + 1, optionsRef.length - 1));
-        if (e.key === "ArrowUp") setHighlightIndex((i) => Math.max(i - 1, 0));
-        if (e.key === "Enter" && highlightIndex >= 0) handleSelect(optionsRef.current[highlightIndex]);
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setHighlightIndex((i) => Math.min(i + 1, optionsRef.length - 1));
+        }
+        if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setHighlightIndex((i) => Math.max(i - 1, 0));
+        }
+        if (e.key === "Enter" && highlightIndex >= 0) {
+            e.preventDefault();
+            handleSelect(optionsRef[highlightIndex]);
+        }
         if (e.key === "Escape") setIsOpen(false);
     };
 
@@ -220,6 +229,24 @@ const Select = ({
         };
     }, [isOpen]);
 
+    // Ensure highlighted item stays in view when navigating with arrow keys
+    useEffect(() => {
+        if (!isOpen || highlightIndex < 0) return;
+        const parent = dropdownRef.current;
+        if (!parent) return;
+        const el = parent.querySelector(`[data-index="${highlightIndex}"]`);
+        if (!el) return;
+        const elTop = el.offsetTop;
+        const elBottom = elTop + el.offsetHeight;
+        const viewTop = parent.scrollTop;
+        const viewBottom = viewTop + parent.clientHeight;
+        if (elTop < viewTop) {
+            parent.scrollTop = elTop;
+        } else if (elBottom > viewBottom) {
+            parent.scrollTop = elBottom - parent.clientHeight;
+        }
+    }, [highlightIndex, isOpen, optionsRef]);
+
     return (
         <div className="relative font-sans" ref={containerRef}>
             <div className="flex flex-wrap items-center gap-1 border rounded px-2 py-1 bg-white dark:bg-gray-800">
@@ -275,7 +302,7 @@ const Select = ({
                     )}
 
                     {optionsRef.map((group, index) => (
-                        <div key={index + new Date().getTime()}>
+                        <div key={index + new Date().getTime()} data-index={index}>
                             {groupField && (
                                 <div className="px-3 py-1 font-semibold bg-gray-100 dark:bg-gray-700">{group}</div>
                             )}
