@@ -157,6 +157,22 @@ const Select = ({
             return;
         }
 
+        // Clear selection on Backspace for single-select when optional and input is empty
+        if (
+            e.key === "Backspace" &&
+            !multiple &&
+            !required &&
+            (!query || query.length === 0) &&
+            selected.length > 0
+        ) {
+            setSelected([]);
+            if (onSelect !== undefined) {
+                onSelect(null);
+            }
+            e.preventDefault();
+            return;
+        }
+
         if (e.key === "ArrowDown") {
             e.preventDefault();
             setHighlightIndex((i) => Math.min(i + 1, optionsRef.length - 1));
