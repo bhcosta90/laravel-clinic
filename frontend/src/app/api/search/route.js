@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import {NextResponse} from "next/server";
 import axios from "axios";
 
 export async function GET({apiUrl, page, search, ...extraParams}) {
@@ -20,7 +20,7 @@ export async function GET({apiUrl, page, search, ...extraParams}) {
     // }
 
     const res = await axios.get(url, {
-        params: { ...extraParams, search, page },
+        params: {...extraParams, search: search, page},
     })
 
     return res.data;

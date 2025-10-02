@@ -1,6 +1,6 @@
 "use client";
 import {useState} from "react";
-import Select from "@/components/Select";
+import Select from "@/components/Select/Index";
 
 export const Header = () => {
     return <div>
