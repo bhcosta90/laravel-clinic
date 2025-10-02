@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\Traits\ReadTrait;
 use App\Http\Requests\ProcedureRequest;
 use App\Models\Procedure;
 use Core\Application\Handler\Procedure as Handler;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 final class ProcedureController
@@ -52,5 +53,9 @@ final class ProcedureController
     protected function model(): Model
     {
         return new Procedure();
+    }
+    protected function defaultQuery(Builder $queryBuilder)
+    {
+        return $queryBuilder->when(request('search'), fn($query) => $query->whereLike('name', '%' . request('search') . '%'));
     }
 }
