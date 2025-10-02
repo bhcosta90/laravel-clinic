@@ -302,7 +302,7 @@ const Select = ({
                     )}
 
                     {optionsRef.map((group, index) => (
-                        <div key={index + new Date().getTime()} data-index={index}>
+                        <div key={getByPath(group, valueField) ?? index} data-index={index}>
                             {groupField && (
                                 <div className="px-3 py-1 font-semibold bg-gray-100 dark:bg-gray-700">{group}</div>
                             )}
