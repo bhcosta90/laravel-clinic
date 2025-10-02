@@ -278,24 +278,33 @@ const Select = ({
     return (
         <div className="relative font-sans" ref={containerRef}>
             <div className="flex flex-wrap items-center gap-1 border rounded px-2 py-1 bg-white dark:bg-gray-800">
-                {selected.map((item) => (
-                    <span
+                {selected.map((item) => {
+                    const canDeleted = (required && !multiple) || (multiple && required && selected.length === 1);
+
+                    return <span
                         key={getByPath(item, valueField) ? `selected-${getByPath(item, valueField)}` : `selected-${getByPath(item, labelField)}`}
-                        className="flex items-center bg-blue-100 dark:bg-blue-600 text-blue-800 dark:text-white px-2 py-0.5 rounded-full text-sm"
+                        className={`flex items-center bg-blue-100 dark:bg-blue-600 text-blue-800 dark:text-white px-2 py-0.5 rounded-full text-sm${!canDeleted ? " cursor-pointer" : ""}`}
+                        onClick={(e) => {
+                            if(canDeleted) return;
+
+                            e.stopPropagation();
+                            removeSelection(getByPath(item, valueField));
+                        }}
                     >
                         {renderItem ? renderItem(item) : getByPath(item, labelField)}
-                        <button
-                            type="button"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                removeSelection(getByPath(item, valueField));
-                            }}
-                            className="ml-1 text-gray-500 dark:text-gray-200 hover:text-gray-800 dark:hover:text-white focus:outline-none"
-                        >
-              ×
-            </button>
-          </span>
-                ))}
+                        {!canDeleted && (
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeSelection(getByPath(item, valueField));
+                                }}
+                                className="ml-1 text-gray-500 dark:text-gray-200 hover:text-gray-800 dark:hover:text-white focus:outline-none">
+                                ×
+                            </button>
+                        )}
+                    </span>
+                })}
                 <input
                     ref={inputRef}
                     type="text"
