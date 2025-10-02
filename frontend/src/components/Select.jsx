@@ -2,6 +2,14 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import axios from "axios";
 
+// Helper to safely resolve nested fields like "data.name"
+const getByPath = (obj, path) => {
+    if (!obj || !path) return undefined;
+    if (typeof path !== "string") return obj[path];
+    if (path.indexOf(".") === -1) return obj[path];
+    return path.split(".").reduce((acc, key) => (acc != null ? acc[key] : undefined), obj);
+};
+
 const DropdownItem = memo(({ option, onClick, highlight, renderItem, labelField }) => {
     console.log(option)
     return <div
@@ -10,7 +18,7 @@ const DropdownItem = memo(({ option, onClick, highlight, renderItem, labelField 
             highlight ? "bg-blue-100 dark:bg-blue-600" : "hover:bg-blue-50 dark:hover:bg-blue-500/20"
         }`}
     >
-        {renderItem ? renderItem(option) : option[labelField]}
+        {renderItem ? renderItem(option) : getByPath(option, labelField)}
     </div>
 });
 
@@ -175,10 +183,10 @@ const Select = ({
             <div className="flex flex-wrap items-center gap-1 border rounded px-2 py-1 bg-white dark:bg-gray-800">
                 {selected.map((item) => (
                     <span
-                        key={item[valueField] ? `selected-${item[valueField]}` : `selected-${item[labelField]}`}
+                        key={item[valueField] ? `selected-${item[valueField]}` : `selected-${getByPath(item, labelField)}`}
                         className="flex items-center bg-blue-100 dark:bg-blue-600 text-blue-800 dark:text-white px-2 py-0.5 rounded-full text-sm"
                     >
-            {renderItem ? renderItem(item) : item[labelField]}
+            {renderItem ? renderItem(item) : getByPath(item, labelField)}
                         <button
                             type="button"
                             onClick={(e) => {
