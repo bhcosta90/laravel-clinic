@@ -12,7 +12,6 @@ export const Header = () => {
             renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
-            multiple
         />
     </div>
 }
