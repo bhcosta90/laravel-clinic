@@ -36,6 +36,9 @@ const Select = ({
     const [optionsRef, setOptionRef] = useState([]); // mantém todos os itens
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
+    const containerRef = useRef(null);
+
+    const [placement, setPlacement] = useState('bottom');
 
     // Debounce search
     useEffect(() => {
@@ -194,8 +197,31 @@ const Select = ({
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    // Decide dropdown placement (top/bottom) similar to native select
+    useEffect(() => {
+        if (!isOpen) return;
+        const computePlacement = () => {
+            if (!containerRef.current) return;
+            const rect = containerRef.current.getBoundingClientRect();
+            const viewportH = window.innerHeight || document.documentElement.clientHeight;
+            const spaceBelow = viewportH - rect.bottom;
+            const spaceAbove = rect.top;
+            const desired = 240; // ~max-h-60 (15rem)
+            const nextPlacement = spaceBelow < desired && spaceAbove > spaceBelow ? 'top' : 'bottom';
+            setPlacement(nextPlacement);
+        };
+        computePlacement();
+        const onWinChange = () => computePlacement();
+        window.addEventListener('resize', onWinChange);
+        window.addEventListener('scroll', onWinChange, true);
+        return () => {
+            window.removeEventListener('resize', onWinChange);
+            window.removeEventListener('scroll', onWinChange, true);
+        };
+    }, [isOpen]);
+
     return (
-        <div className="relative font-sans">
+        <div className="relative font-sans" ref={containerRef}>
             <div className="flex flex-wrap items-center gap-1 border rounded px-2 py-1 bg-white dark:bg-gray-800">
                 {selected.map((item) => (
                     <span
@@ -242,7 +268,7 @@ const Select = ({
                 <div
                     ref={dropdownRef}
                     onScroll={handleScroll}
-                    className="absolute w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded shadow-lg max-h-60 overflow-y-auto z-50"
+                    className={`absolute w-full ${placement === 'top' ? 'mb-1 bottom-full' : 'mt-1 top-full'} bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded shadow-lg max-h-60 overflow-y-auto z-50`}
                 >
                     {!loading && optionsRef.length === 0 && (
                         <div className="px-3 py-2 text-gray-500 dark:text-gray-400">{noResultsMessage}</div>

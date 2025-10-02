@@ -4,6 +4,7 @@ export default function Home() {
 
     return (
         <div>
+            <Header/>
             {Array.from({ length: 100 }, (_, i) => (
                 <div key={i}>Item {i + 1}</div>
             ))}
