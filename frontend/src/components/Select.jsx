@@ -1,4 +1,4 @@
-// https://nextjs.org/docs/app/getting-started/server-and-client-components
+"use client";
 import React, { useState, useEffect, useRef, memo } from "react";
 import { GET } from '@/app/api/search/route'
 
@@ -111,13 +111,17 @@ const Select = ({
                 if (selected.length < maxSelection) {
                     const newSelected = [...selected, option];
                     setSelected(newSelected);
-                    onSelect(newSelected);
+                    if(onSelect !== undefined){
+                        onSelect(newSelected);
+                    }
                 }
             }
         } else {
             const newSelected = [option];
             setSelected(newSelected);
-            onSelect(option);
+            if(onSelect !== undefined) {
+                onSelect(option);
+            }
             setIsOpen(false);
         }
         setQuery("");
@@ -126,12 +130,16 @@ const Select = ({
     const removeSelection = (value) => {
         const newSelected = selected.filter((s) => getByPath(s, valueField) !== value);
         setSelected(newSelected);
-        onSelect(multiple ? newSelected : null);
+        if(onSelect !== undefined) {
+            onSelect(multiple ? newSelected : null);
+        }
     };
 
     const clearAll = () => {
         setSelected([]);
-        onSelect(multiple ? [] : null);
+        if(onSelect !== undefined) {
+            onSelect(multiple ? [] : null);
+        }
     };
 
     const handleKeyDown = (e) => {
