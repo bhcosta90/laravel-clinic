@@ -8,7 +8,7 @@ export default function Home() {
     <div>
         <Header/>
         <Select
-            apiUrl="procedures"
+            apiUrl="procedures?fields=uuid name"
             onSelect={() => {}}
             labelField='data.name'
             valueField='data.uuid'
