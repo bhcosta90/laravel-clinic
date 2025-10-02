@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef, memo } from "react";
 import { GET } from '@/app/api/search/route'
+import axios from "axios";
 
 // Helper to safely resolve nested fields like "data.name"
 const getByPath = (obj, path) => {
@@ -65,9 +66,13 @@ const Select = ({
     }, [debouncedQuery, JSON.stringify(extraParams), isOpen]);
 
     const fetchOptions = async (q, pg = 1, reset = false) => {
+
         setLoading(true);
+
         try {
-            const data = await GET(apiUrl, q)
+            const data = await GET({
+                apiUrl, page, q, ...extraParams
+            })
 
             const newOptions = dataField.split(".").reduce((acc, key) => acc[key], data) || [];
 
@@ -90,7 +95,7 @@ const Select = ({
 
             const more = hasMoreField.split(".").reduce((acc, key) => acc[key], data) ?? false;
             setHasMore(more);
-            setPage(pg);
+            setPage(pg + 1);
         } catch (err) {
             console.error(err);
         } finally {
@@ -98,10 +103,13 @@ const Select = ({
         }
     };
 
-    const handleScroll = (e) => {
+    const handleScroll = async (e) => {
         const { scrollTop, scrollHeight, clientHeight } = e.target;
-        if (scrollTop + clientHeight >= scrollHeight - 10 && hasMore && !loading) {
-            fetchOptions(debouncedQuery, page + 1);
+
+        if(!hasMore || loading) return;
+
+        if (scrollTop + clientHeight >= scrollHeight - 10) {
+            await fetchOptions(debouncedQuery, page);
         }
     };
 
