@@ -129,7 +129,7 @@ const Select = ({
 
     const handleKeyDown = (e) => {
         if (e.key === "ArrowDown") setHighlightIndex((i) => Math.min(i + 1, optionsRef.current.length - 1));
-        if (e.key === "ArrowUp") setHighlightIndex((i) => Math.max(i - 0, 0));
+        if (e.key === "ArrowUp") setHighlightIndex((i) => Math.max(i - 1, 0));
         if (e.key === "Enter" && highlightIndex >= 0) handleSelect(optionsRef.current[highlightIndex]);
         if (e.key === "Escape") setIsOpen(false);
     };
@@ -218,35 +218,34 @@ const Select = ({
                     onScroll={handleScroll}
                     className="absolute w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded shadow-lg max-h-60 overflow-y-auto z-50"
                 >
+                    {!loading && Object.keys(groupedOptions).length === 0 && (
+                        <div className="px-3 py-2 text-gray-500 dark:text-gray-400">{noResultsMessage}</div>
+                    )}
+
+                    {Object.entries(groupedOptions).map(([group, items]) => (
+                        <div key={group}>
+                            {groupField && (
+                                <div className="px-3 py-1 font-semibold bg-gray-100 dark:bg-gray-700">{group}</div>
+                            )}
+                            {items.map((option, idx) => (
+                                <DropdownItem
+                                    key={option.id ? `option-${option.id}` : `option-${group}-${idx}`}
+                                    option={option}
+                                    onClick={handleSelect}
+                                    highlight={highlightIndex === idx}
+                                    renderItem={renderItem}
+                                    labelField={labelField}
+                                />
+                            ))}
+                        </div>
+                    ))}
+
                     {loading && Array.from({ length: loadingSkeletonCount }).map((_, idx) => (
                         <div
                             key={`skeleton-${idx}`}
                             className="h-8 bg-gray-200 dark:bg-gray-700 animate-pulse my-1 rounded"
                         />
                     ))}
-
-                    {!loading && Object.keys(groupedOptions).length === 0 && (
-                        <div className="px-3 py-2 text-gray-500 dark:text-gray-400">{noResultsMessage}</div>
-                    )}
-
-                    {!loading &&
-                        Object.entries(groupedOptions).map(([group, items]) => (
-                            <div key={group}>
-                                {groupField && (
-                                    <div className="px-3 py-1 font-semibold bg-gray-100 dark:bg-gray-700">{group}</div>
-                                )}
-                                {items.map((option, idx) => (
-                                    <DropdownItem
-                                        key={option.id ? `option-${option.id}` : `option-${group}-${idx}`}
-                                        option={option}
-                                        onClick={handleSelect}
-                                        highlight={highlightIndex === idx}
-                                        renderItem={renderItem}
-                                        labelField={labelField}
-                                    />
-                                ))}
-                            </div>
-                        ))}
                 </div>
             )}
         </div>
