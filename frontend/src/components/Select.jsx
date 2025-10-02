@@ -143,6 +143,22 @@ const Select = ({
     };
 
     const handleKeyDown = (e) => {
+        // Remove last selected on Backspace when multiple and input is empty
+        if (
+            e.key === "Backspace" &&
+            multiple &&
+            (!query || query.length === 0) &&
+            selected.length > 0
+        ) {
+            const newSelected = selected.slice(0, -1);
+            setSelected(newSelected);
+            if (onSelect !== undefined) {
+                onSelect(newSelected);
+            }
+            e.preventDefault(); // avoid navigating back in some environments
+            return;
+        }
+
         if (e.key === "ArrowDown") setHighlightIndex((i) => Math.min(i + 1, optionsRef.current.length - 1));
         if (e.key === "ArrowUp") setHighlightIndex((i) => Math.max(i - 1, 0));
         if (e.key === "Enter" && highlightIndex >= 0) handleSelect(optionsRef.current[highlightIndex]);
@@ -191,7 +207,7 @@ const Select = ({
                         key={getByPath(item, valueField) ? `selected-${getByPath(item, valueField)}` : `selected-${getByPath(item, labelField)}`}
                         className="flex items-center bg-blue-100 dark:bg-blue-600 text-blue-800 dark:text-white px-2 py-0.5 rounded-full text-sm"
                     >
-            {renderItem ? renderItem(item) : getByPath(item, labelField)}
+                        {renderItem ? renderItem(item) : getByPath(item, labelField)}
                         <button
                             type="button"
                             onClick={(e) => {
