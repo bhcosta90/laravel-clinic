@@ -50,7 +50,7 @@ const Select = ({
     const [highlightIndex, setHighlightIndex] = useState(-1);
     const [isOpen, setIsOpen] = useState(false);
 
-    const optionsRef = useRef([]); // mantém todos os itens
+    const [optionsRef, setOptionRef] = useState([]); // mantém todos os itens
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
 
@@ -62,6 +62,8 @@ const Select = ({
 
     // Fetch options quando query muda
     useEffect(() => {
+        if(optionsRef.length > 0) return;
+
         if (isOpen) fetchOptions(debouncedQuery, 1, true);
     }, [debouncedQuery, JSON.stringify(extraParams), isOpen]);
 
@@ -77,14 +79,14 @@ const Select = ({
             const newOptions = dataField.split(".").reduce((acc, key) => acc[key], data) || [];
 
             if (reset) {
-                optionsRef.current = newOptions;
+                setOptionRef(newOptions ?? [])
                 if (dropdownRef.current) dropdownRef.current.scrollTop = 0;
             } else {
                 // Salvar scroll atual
                 const scrollTop = dropdownRef.current?.scrollTop ?? 0;
                 const scrollHeightBefore = dropdownRef.current?.scrollHeight ?? 0;
 
-                optionsRef.current.push(...newOptions);
+                setOptionRef(prev => [...prev, ...newOptions]);
 
                 // Restaurar scroll proporcional
                 if (dropdownRef.current) {
@@ -257,25 +259,24 @@ const Select = ({
                     onScroll={handleScroll}
                     className="absolute w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded shadow-lg max-h-60 overflow-y-auto z-50"
                 >
-                    {!loading && Object.keys(groupedOptions).length === 0 && (
-                        <div className="px-3 py-2 text-gray-500 dark:text-gray-400">{noResultsMessage}</div>
-                    )}
+                    {/*{!loading && Object.keys(groupedOptions).length === 0 && (*/}
+                    {/*    <div className="px-3 py-2 text-gray-500 dark:text-gray-400">{noResultsMessage}</div>*/}
+                    {/*)}*/}
 
-                    {Object.entries(groupedOptions).map(([group, items]) => (
-                        <div key={group}>
+                    {optionsRef.map((group, index) => (
+                        <div key={index + new Date().getTime()}>
                             {groupField && (
                                 <div className="px-3 py-1 font-semibold bg-gray-100 dark:bg-gray-700">{group}</div>
                             )}
-                            {items.map((option, idx) => (
+                            {/*{items.map((option, idx) => (*/}
                                 <DropdownItem
-                                    key={getByPath(option, valueField) ? `option-${getByPath(option, valueField)}` : `option-${group}-${idx}`}
-                                    option={option}
+                                    option={group}
                                     onClick={handleSelect}
-                                    highlight={highlightIndex === idx}
+                                    highlight={highlightIndex === index}
                                     renderItem={renderItem}
                                     labelField={labelField}
                                 />
-                            ))}
+                            {/*))}*/}
                         </div>
                     ))}
 
