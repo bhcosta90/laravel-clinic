@@ -110,7 +110,7 @@ const Select = ({
 
     const handleSelect = (option) => {
         if (multiple) {
-            if (!selected.some((s) => s[valueField] === option[valueField])) {
+            if (!selected.some((s) => getByPath(s, valueField) === getByPath(option, valueField))) {
                 if (selected.length < maxSelection) {
                     const newSelected = [...selected, option];
                     setSelected(newSelected);
@@ -127,7 +127,7 @@ const Select = ({
     };
 
     const removeSelection = (value) => {
-        const newSelected = selected.filter((s) => s[valueField] !== value);
+        const newSelected = selected.filter((s) => getByPath(s, valueField) !== value);
         setSelected(newSelected);
         onSelect(multiple ? newSelected : null);
     };
@@ -183,7 +183,7 @@ const Select = ({
             <div className="flex flex-wrap items-center gap-1 border rounded px-2 py-1 bg-white dark:bg-gray-800">
                 {selected.map((item) => (
                     <span
-                        key={item[valueField] ? `selected-${item[valueField]}` : `selected-${getByPath(item, labelField)}`}
+                        key={getByPath(item, valueField) ? `selected-${getByPath(item, valueField)}` : `selected-${getByPath(item, labelField)}`}
                         className="flex items-center bg-blue-100 dark:bg-blue-600 text-blue-800 dark:text-white px-2 py-0.5 rounded-full text-sm"
                     >
             {renderItem ? renderItem(item) : getByPath(item, labelField)}
@@ -191,7 +191,7 @@ const Select = ({
                             type="button"
                             onClick={(e) => {
                                 e.stopPropagation();
-                                removeSelection(item[valueField]);
+                                removeSelection(getByPath(item, valueField));
                             }}
                             className="ml-1 text-gray-500 dark:text-gray-200 hover:text-gray-800 dark:hover:text-white focus:outline-none"
                         >
@@ -239,7 +239,7 @@ const Select = ({
                             )}
                             {items.map((option, idx) => (
                                 <DropdownItem
-                                    key={option[valueField] ? `option-${option[valueField]}` : `option-${group}-${idx}`}
+                                    key={getByPath(option, valueField) ? `option-${getByPath(option, valueField)}` : `option-${group}-${idx}`}
                                     option={option}
                                     onClick={handleSelect}
                                     highlight={highlightIndex === idx}

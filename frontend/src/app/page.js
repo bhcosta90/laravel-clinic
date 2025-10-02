@@ -12,7 +12,7 @@ export default function Home() {
             apiUrl="http://127.0.0.1:8600/api/v1/procedures?fields=uuid name"
             onSelect={() => {}}
             labelField='data.name'
-            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
+            //renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
         />
     </div>
   );
