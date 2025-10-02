@@ -2,8 +2,9 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import axios from "axios";
 
-const DropdownItem = memo(({ option, onClick, highlight, renderItem, labelField }) => (
-    <div
+const DropdownItem = memo(({ option, onClick, highlight, renderItem, labelField }) => {
+    console.log(option)
+    return <div
         onClick={() => onClick(option)}
         className={`px-3 py-2 cursor-pointer border-b border-gray-100 dark:border-gray-700 ${
             highlight ? "bg-blue-100 dark:bg-blue-600" : "hover:bg-blue-50 dark:hover:bg-blue-500/20"
@@ -11,13 +12,14 @@ const DropdownItem = memo(({ option, onClick, highlight, renderItem, labelField 
     >
         {renderItem ? renderItem(option) : option[labelField]}
     </div>
-));
+});
 
 const Select = ({
         apiUrl,
         onSelect,
         extraParams = {},
         labelField = "name",
+        valueField = "id",
         required = false,
         placeholder = "Buscar...",
         dataField = "data",
@@ -100,7 +102,7 @@ const Select = ({
 
     const handleSelect = (option) => {
         if (multiple) {
-            if (!selected.some((s) => s.id === option.id)) {
+            if (!selected.some((s) => s[valueField] === option[valueField])) {
                 if (selected.length < maxSelection) {
                     const newSelected = [...selected, option];
                     setSelected(newSelected);
@@ -116,8 +118,8 @@ const Select = ({
         setQuery("");
     };
 
-    const removeSelection = (id) => {
-        const newSelected = selected.filter((s) => s.id !== id);
+    const removeSelection = (value) => {
+        const newSelected = selected.filter((s) => s[valueField] !== value);
         setSelected(newSelected);
         onSelect(multiple ? newSelected : null);
     };
@@ -173,7 +175,7 @@ const Select = ({
             <div className="flex flex-wrap items-center gap-1 border rounded px-2 py-1 bg-white dark:bg-gray-800">
                 {selected.map((item) => (
                     <span
-                        key={item.id ? `selected-${item.id}` : `selected-${item[labelField]}`}
+                        key={item[valueField] ? `selected-${item[valueField]}` : `selected-${item[labelField]}`}
                         className="flex items-center bg-blue-100 dark:bg-blue-600 text-blue-800 dark:text-white px-2 py-0.5 rounded-full text-sm"
                     >
             {renderItem ? renderItem(item) : item[labelField]}
@@ -181,7 +183,7 @@ const Select = ({
                             type="button"
                             onClick={(e) => {
                                 e.stopPropagation();
-                                removeSelection(item.id);
+                                removeSelection(item[valueField]);
                             }}
                             className="ml-1 text-gray-500 dark:text-gray-200 hover:text-gray-800 dark:hover:text-white focus:outline-none"
                         >
@@ -229,7 +231,7 @@ const Select = ({
                             )}
                             {items.map((option, idx) => (
                                 <DropdownItem
-                                    key={option.id ? `option-${option.id}` : `option-${group}-${idx}`}
+                                    key={option[valueField] ? `option-${option[valueField]}` : `option-${group}-${idx}`}
                                     option={option}
                                     onClick={handleSelect}
                                     highlight={highlightIndex === idx}
