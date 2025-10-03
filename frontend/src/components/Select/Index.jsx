@@ -3,12 +3,15 @@ import React, {useState, useEffect, useRef, Suspense, memo} from "react";
 import {GET} from '@/app/api/search/route'
 import getByPath from "@/utils/getByPath";
 
-const SelectDropdownList = memo(({option, onClick, highlight, renderItem, labelField, itemClasses}) => {
+const SelectDropdownList = memo(({option, onClick, highlight, selected: isSelected, renderItem, labelField, itemClasses}) => {
+    const stateClass = highlight
+        ? "bg-primary/10 text-primary"
+        : isSelected
+            ? "bg-primary/5 text-primary"
+            : "hover:bg-base-200";
     return <div
         onClick={() => onClick(option)}
-        className={`${itemClasses} cursor-pointer border-b border-base-200 last:border-b-0 ${
-            highlight ? "bg-primary/10 text-primary" : "hover:bg-base-200"
-        }`}
+        className={`${itemClasses} cursor-pointer border-b border-base-200 last:border-b-0 ${stateClass}`}
     >
         {renderItem ? renderItem(option) : getByPath(option, labelField)}
     </div>
@@ -433,6 +436,7 @@ const Select = ({
                                     option={group}
                                     onClick={handleSelect}
                                     highlight={highlightIndex === index}
+                                    selected={selected.some((s) => getByPath(s, valueField) === getByPath(group, valueField))}
                                     renderItem={renderItem}
                                     labelField={labelField}
                                     itemClasses={`${sz.itemPadding} ${sz.itemText}`}
