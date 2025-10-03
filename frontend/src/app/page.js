@@ -3,7 +3,7 @@ import {Header} from "@/components/Header";
 export default function Home() {
 
     return (
-        <div>
+        <div data-theme="mytheme">
             <Header/>
             {Array.from({length: 100}, (_, i) => (
                 <div key={i}>Item {i + 1}</div>
