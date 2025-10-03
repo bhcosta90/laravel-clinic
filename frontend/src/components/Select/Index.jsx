@@ -398,7 +398,7 @@ const Select = ({
                     onFocus={() => setIsOpen(true)}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className={`grow min-w-[50px] bg-transparent px-1 py-0 outline-none border-0 focus:outline-none h-full`}
+                    className={`flex-1 min-w-[1ch] bg-transparent px-1 py-0 outline-none border-0 focus:outline-none self-center`}
                 />
                 {!multiple && !required && selected.length > 0 && (
                     <button
