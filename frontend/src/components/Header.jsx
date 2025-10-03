@@ -3,8 +3,8 @@ import {useState} from "react";
 import Select from "@/components/Select/Index";
 
 export const Header = () => {
-    return <div>
-        <div className={'grid grid-cols-2 w-full'}>
+    return <div className={'space-y-4 '}>
+        <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-xs w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
@@ -19,7 +19,7 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'grid grid-cols-2 w-full'}>
+        <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-sm w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
@@ -33,7 +33,7 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'grid grid-cols-2 w-full'}>
+        <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-md w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
@@ -47,7 +47,7 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'grid grid-cols-2 w-full'}>
+        <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-lg w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
@@ -61,7 +61,7 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'grid grid-cols-2 w-full'}>
+        <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-xl w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
