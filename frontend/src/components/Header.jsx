@@ -83,7 +83,6 @@ export const Header = () => {
             renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
-            multiple
         />
 
         <Select
@@ -95,6 +94,17 @@ export const Header = () => {
             labelField='data.name'
             valueField='data.uuid'
             required
+        />
+
+        <Select
+            apiUrl="procedures?fields=uuid name"
+            onSelect={(newSelected) => {
+                console.log(newSelected)
+            }}
+            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
+            labelField='data.name'
+            valueField='data.uuid'
+            multiple
         />
 
         <Select

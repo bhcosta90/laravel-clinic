@@ -15,10 +15,10 @@ const SelectDropdownList = memo(({option, onClick, highlight, renderItem, labelF
 });
 const Select = ({
                     apiUrl,
-                    onSelect,
+                    labelField,
+                    valueField,
+                    onSelect = null,
                     extraParams = {},
-                    labelField = "name",
-                    valueField = "id",
                     required = false,
                     placeholder = "Buscar...",
                     dataField = "data",
