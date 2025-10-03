@@ -16,6 +16,7 @@ trait ReadTrait
 
     public function index(QueryBuilder $queryBuilder, GraphBuilder $graphBuilder)
     {
+        sleep(10);
         $queryBuilderResponse = $this->baseQuery($queryBuilder)
             ->orderBy(request()->get('order_column', $this->getKeyName()), request()->get('order_direction', 'asc'))
             ->simplePaginate();

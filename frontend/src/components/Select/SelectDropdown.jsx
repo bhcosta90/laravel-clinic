@@ -26,8 +26,8 @@ export default function SelectDropdown({
             ref={dropdownRef}
             className={`absolute w-full ${
                 placement === "top" ? "mb-1 bottom-full" : "mt-1 top-full"
-            } bg-base-100 border border-base-300 rounded-box shadow-xl max-h-60 z-50`}
-            style={{ height: "15rem" }} // mesma altura do max-h-60 (≈240px)
+            } bg-base-100 border border-base-300 rounded-box shadow-xl max-h-[15rem] z-50`}
+            style={{ height: "15rem" }} // mesma altura do max-h-[15rem] (≈240px)
         >
             {!loading && items.length === 0 && (
                 <div className="px-3 py-2 text-base-content/60">{noResultsMessage}</div>
