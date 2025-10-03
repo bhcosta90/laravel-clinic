@@ -299,7 +299,7 @@ const Select = ({
                                     e.stopPropagation();
                                     removeSelection(getByPath(item, valueField));
                                 }}
-                                className="ml-1 text-gray-500 dark:text-gray-200 hover:text-gray-800 dark:hover:text-white focus:outline-none">
+                                className="ml-1 text-gray-500 dark:text-gray-200 hover:text-gray-800 dark:hover:text-white focus:outline-none cursor-pointer">
                                 ×
                             </button>
                         )}
