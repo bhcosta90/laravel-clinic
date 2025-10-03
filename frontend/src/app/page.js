@@ -1,8 +1,9 @@
 import AdminLayout from "@/components/admin/AdminLayout";
+import {Header} from "@/components/Header";
 
 export default function Home() {
   return (
-    <AdminLayout user={{ name: "Bruno Costa", avatarUrl: null }}>
+    <AdminLayout>
       <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
         <div className="card bg-base-100 border border-base-300 shadow-sm">
           <div className="card-body">

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-export default function AdminLayout({ children, user = { name: "Usuário", avatarUrl: null }, onLogout = null }) {
+export default function AdminLayout({ children, onLogout = null }) {
   return (
     <div className="min-h-screen w-full bg-base-100 text-base-content flex">
       {/* Sidebar */}
@@ -56,16 +56,15 @@ export default function AdminLayout({ children, user = { name: "Usuário", avata
           </div>
           {/* Right: user */}
           <div className="flex items-center gap-3">
-            <span className="text-sm opacity-80 hidden sm:inline">{user.name}</span>
+            <span className="text-sm opacity-80 hidden sm:inline">{'Bruno Costa'}</span>
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  {user.avatarUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={user.avatarUrl} alt={user.name} />
+                  {null ? (
+                    <img src={user.avatarUrl} alt={'Bruno Henrique da Costa'} />
                   ) : (
                     <div className="bg-neutral text-neutral-content w-full h-full grid place-items-center text-xs">
-                      {user.name?.slice(0, 2)?.toUpperCase() || "US"}
+                      {'BR'}
                     </div>
                   )}
                 </div>
