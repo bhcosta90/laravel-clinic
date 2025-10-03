@@ -20,7 +20,7 @@ const Select = ({
   renderItem,
   multiple = false,
   maxSelection = Infinity,
-  loadingSkeletonCount = 6,
+  loadingSkeletonCount = 5,
   noResultsMessage = "Nenhum resultado",
   initialValues = [],
   size = 'md',
