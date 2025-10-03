@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-export default function AdminLayout({ children, user = { name: "Usuário", avatarUrl: null } }) {
+export default function AdminLayout({ children, user = { name: "Usuário", avatarUrl: null }, onLogout = null }) {
   return (
     <div className="min-h-screen w-full bg-base-100 text-base-content flex">
       {/* Sidebar */}
@@ -49,7 +49,7 @@ export default function AdminLayout({ children, user = { name: "Usuário", avata
       {/* Main area */}
       <div className="flex-1 min-w-0 flex flex-col">
         {/* Header */}
-        <header className="navbar bg-base-100/80 backdrop-blur border-b border-base-300 h-16 px-4">
+        <header className="navbar bg-base-100/80 backdrop-blur border-b border-base-300 h-16 px-4 relative z-20">
           {/* Left: mobile menu placeholder (non-functional minimal) */}
           <div className="flex-1">
             <button className="md:hidden btn btn-ghost btn-sm">☰</button>
@@ -57,17 +57,38 @@ export default function AdminLayout({ children, user = { name: "Usuário", avata
           {/* Right: user */}
           <div className="flex items-center gap-3">
             <span className="text-sm opacity-80 hidden sm:inline">{user.name}</span>
-            <div className="avatar">
-              <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                {user.avatarUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={user.avatarUrl} alt={user.name} />
-                ) : (
-                  <div className="bg-neutral text-neutral-content w-full h-full grid place-items-center text-xs">
-                    {user.name?.slice(0, 2)?.toUpperCase() || "US"}
-                  </div>
-                )}
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  {user.avatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={user.avatarUrl} alt={user.name} />
+                  ) : (
+                    <div className="bg-neutral text-neutral-content w-full h-full grid place-items-center text-xs">
+                      {user.name?.slice(0, 2)?.toUpperCase() || "US"}
+                    </div>
+                  )}
+                </div>
               </div>
+              <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-base-100 rounded-box border border-base-300 w-52">
+                <li className="menu-title opacity-70"><span>Minha conta</span></li>
+                <li><a>Perfil</a></li>
+                <li><a>Configurações</a></li>
+                <li>
+                  <button
+                    className="text-error"
+                    onClick={() => {
+                      if (typeof onLogout === 'function') {
+                        onLogout();
+                      } else if (typeof window !== 'undefined') {
+                        window.location.href = '/logout';
+                      }
+                    }}
+                  >
+                    Sair
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </header>
