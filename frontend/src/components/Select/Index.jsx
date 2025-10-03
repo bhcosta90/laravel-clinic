@@ -95,10 +95,8 @@ const Select = ({
             containerGap: 'gap-3',
             containerPadding: 'px-3.5 py-2.5',
             text: 'text-xl',
-            // DaisyUI does not provide input-xl, map to lg
             inputSize: 'input-lg',
             chipSize: 'badge-lg',
-            // Slightly larger clear/remove buttons
             btnSize: 'btn-lg',
             itemPadding: 'px-4 py-3',
             itemText: 'text-lg',
