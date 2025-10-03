@@ -4,8 +4,8 @@ import Select from "@/components/Select/Index";
 
 export const Header = () => {
     return <div>
-        <div className={'flex'}>
-            <input type="text" className={'input input-xs'}/>
+        <div className={'grid grid-cols-2 w-full'}>
+            <input type="text" className={'input input-xs w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
                 onSelect={(newSelected) => {
@@ -15,10 +15,11 @@ export const Header = () => {
                 labelField='data.name'
                 valueField='data.uuid'
                 size={'xs'}
+                className="w-full"
             />
         </div>
 
-        <div className={'flex'}>
+        <div className={'grid grid-cols-2'}>
             <input type="text" className={'input input-sm'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
@@ -32,7 +33,7 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'flex'}>
+        <div className={'grid grid-cols-2'}>
             <input type="text" className={'input input-md'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
@@ -46,7 +47,7 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'flex'}>
+        <div className={'grid grid-cols-2'}>
             <input type="text" className={'input input-lg'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
@@ -60,7 +61,7 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'flex'}>
+        <div className={'grid grid-cols-2'}>
             <input type="text" className={'input input-xl'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
