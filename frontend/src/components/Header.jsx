@@ -7,7 +7,7 @@ export const Header = () => {
         <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-xs w-full'}/>
             <Select
-                apiUrl="procedures?fields=uuid name"
+                apiUrl="procedures?fields=uuid name&order_column=name"
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
@@ -22,7 +22,7 @@ export const Header = () => {
         <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-sm w-full'}/>
             <Select
-                apiUrl="procedures?fields=uuid name"
+                apiUrl="procedures?fields=uuid name&order_column=name"
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
@@ -36,7 +36,7 @@ export const Header = () => {
         <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-md w-full'}/>
             <Select
-                apiUrl="procedures?fields=uuid name"
+                apiUrl="procedures?fields=uuid name&order_column=name"
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
@@ -50,7 +50,7 @@ export const Header = () => {
         <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-lg w-full'}/>
             <Select
-                apiUrl="procedures?fields=uuid name"
+                apiUrl="procedures?fields=uuid name&order_column=name"
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
@@ -64,7 +64,7 @@ export const Header = () => {
         <div className={'grid grid-cols-2 gap-x-2 w-full'}>
             <input type="text" className={'input input-xl w-full'}/>
             <Select
-                apiUrl="procedures?fields=uuid name"
+                apiUrl="procedures?fields=uuid name&order_column=name"
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
@@ -76,7 +76,7 @@ export const Header = () => {
         </div>
 
         <Select
-            apiUrl="procedures?fields=uuid name"
+            apiUrl="procedures?fields=uuid name&order_column=name"
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
@@ -86,7 +86,7 @@ export const Header = () => {
         />
 
         <Select
-            apiUrl="procedures?fields=uuid name"
+            apiUrl="procedures?fields=uuid name&order_column=name"
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
@@ -97,7 +97,7 @@ export const Header = () => {
         />
 
         <Select
-            apiUrl="procedures?fields=uuid name"
+            apiUrl="procedures?fields=uuid name&order_column=name"
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
@@ -108,7 +108,7 @@ export const Header = () => {
         />
 
         <Select
-            apiUrl="procedures?fields=uuid name"
+            apiUrl="procedures?fields=uuid name&order_column=name"
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
@@ -120,7 +120,7 @@ export const Header = () => {
         />
 
         <Select
-            apiUrl="procedures?fields=uuid name"
+            apiUrl="procedures?fields=uuid name&order_column=name"
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
@@ -130,7 +130,7 @@ export const Header = () => {
         />
 
         <Select
-            apiUrl="procedures?fields=uuid name"
+            apiUrl="procedures?fields=uuid name&order_column=name"
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
