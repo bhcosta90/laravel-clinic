@@ -32,6 +32,8 @@ const Select = ({
                     highlightSearch = true,
                     initialValues = [],
                     size = 'md',
+                    options = null,
+                    pageSize = 50,
                 }) => {
     const [query, setQuery] = useState("");
     const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -109,14 +111,30 @@ const Select = ({
         return () => clearTimeout(handler);
     }, [query]);
 
-    // Fetch options quando query muda
+    const isLocal = !apiUrl && Array.isArray(options);
+    const [localFiltered, setLocalFiltered] = useState([]);
+
+    // Fetch or filter options when query changes / open toggles
     useEffect(() => {
         setPage(1);
-        if (isOpen) {
-            fetchOptions(debouncedQuery, 1, true)
+        if (!isOpen) return;
+
+        if (isLocal) {
+            const all = (options || []).filter((opt) => {
+                if (!debouncedQuery) return true;
+                const label = getByPath(opt, labelField);
+                return (label ?? "").toString().toLowerCase().includes(debouncedQuery.toLowerCase());
+            });
+            setLocalFiltered(all);
+            const first = all.slice(0, pageSize);
+            setOptionRef(first);
+            setHasMore(all.length > first.length);
+            if (dropdownRef.current) dropdownRef.current.scrollTop = 0;
+            setLoading(false);
+        } else {
+            fetchOptions(debouncedQuery, 1, true);
         }
-        ;
-    }, [debouncedQuery, JSON.stringify(extraParams), isOpen]);
+    }, [debouncedQuery, JSON.stringify(extraParams), isOpen, isLocal, Array.isArray(options) ? options.length : 0, pageSize]);
 
     const fetchOptions = async (search, pg = 1, reset = false) => {
 
@@ -162,7 +180,19 @@ const Select = ({
         if (!hasMore || loading) return;
 
         if (scrollTop + clientHeight >= scrollHeight - 10) {
-            await fetchOptions(debouncedQuery, page);
+            if (isLocal) {
+                const nextStart = optionsRef.length;
+                const nextEnd = nextStart + pageSize;
+                const nextSlice = localFiltered.slice(nextStart, nextEnd);
+                if (nextSlice.length > 0) {
+                    setOptionRef(prev => [...prev, ...nextSlice]);
+                    setHasMore(nextEnd < localFiltered.length);
+                } else {
+                    setHasMore(false);
+                }
+            } else {
+                await fetchOptions(debouncedQuery, page);
+            }
         }
     };
 
