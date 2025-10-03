@@ -121,28 +121,30 @@ export default function useSelectLogic({
     }
   };
 
-  const handleScroll = async (e) => {
-    const {scrollTop, scrollHeight, clientHeight} = e.target;
-    if (!hasMore || loading) return;
-    if (scrollTop + clientHeight >= scrollHeight - 10) {
-      if (isLocal) {
-        const nextStart = items.length;
-        const nextEnd = nextStart + pageSize;
-        const nextSlice = localFiltered.slice(nextStart, nextEnd);
-        if (nextSlice.length > 0) {
-          setItems(prev => [...prev, ...nextSlice]);
-          setHasMore(nextEnd < localFiltered.length);
+    const loadMoreItems = async () => {
+        if (!hasMore || loading) return;
+
+        if (isLocal) {
+            const nextStart = items.length;
+            const nextEnd = nextStart + pageSize;
+            const nextSlice = localFiltered.slice(nextStart, nextEnd);
+            if (nextSlice.length > 0) {
+                setItems(prev => [...prev, ...nextSlice]);
+                setHasMore(nextEnd < localFiltered.length);
+            } else {
+                setHasMore(false);
+            }
         } else {
-          setHasMore(false);
+            await fetchOptions(debouncedQuery, page);
         }
-      } else {
-        await fetchOptions(debouncedQuery, page);
-      }
-    }
-  };
+    };
 
-
-
+    const handleScroll = async (e) => {
+        const { scrollTop, scrollHeight, clientHeight } = e.target;
+        if (scrollTop + clientHeight >= scrollHeight - 10) {
+            await loadMoreItems();
+        }
+    };
 
   const onSelectInternal = (option) => {
     if (disabled) return;
@@ -190,7 +192,7 @@ export default function useSelectLogic({
     // config misc
     placement,
     // handlers
-    handleScroll, handleKeyDown, onSelectInternal, removeSelection, clearAll,
+    handleScroll, handleKeyDown, onSelectInternal, removeSelection, clearAll, loadMoreItems,
     // data loaders
     fetchOptions,
     // consts

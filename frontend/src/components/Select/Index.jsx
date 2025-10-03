@@ -42,7 +42,7 @@ const Select = ({
     // config
     placement,
     // handlers
-    handleScroll, handleKeyDown, onSelectInternal, removeSelection, clearAll,
+      loadMoreItems, handleKeyDown, onSelectInternal, removeSelection, clearAll,
   } = useSelectLogic({
     apiUrl,
     options,
@@ -142,7 +142,7 @@ const Select = ({
         isOpen={isOpen}
         placement={placement}
         dropdownRef={dropdownRef}
-        handleScroll={handleScroll}
+        loadMoreItems={loadMoreItems}
         items={items}
         loading={loading}
         loadingSkeletonCount={loadingSkeletonCount}
