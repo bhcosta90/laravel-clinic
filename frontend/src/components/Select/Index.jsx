@@ -49,7 +49,6 @@ const Select = ({
 
     const [placement, setPlacement] = useState('bottom');
 
-    // Size maps for DaisyUI-like sizing
     const sizeMap = {
         xs: {
             containerGap: 'gap-1',
@@ -95,7 +94,7 @@ const Select = ({
             containerGap: 'gap-3',
             containerPadding: 'px-3.5 py-2.5',
             text: 'text-xl',
-            inputSize: 'input-lg',
+            inputSize: 'input-xl',
             chipSize: 'badge-lg',
             btnSize: 'btn-lg',
             itemPadding: 'px-4 py-3',
