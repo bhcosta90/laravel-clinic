@@ -84,7 +84,7 @@ export const Header = () => {
             }}
             labelField='data.name'
             valueField='data.uuid'
-            placeholder={'Select simples sem obrigatório e múltiplo'}
+            placeholder={'Select simples'}
         />
 
         <Select
@@ -107,6 +107,20 @@ export const Header = () => {
             valueField='data.uuid'
             multiple
             placeholder={'Select com múltiplo'}
+        />
+
+        <Select
+            apiUrl="procedures?fields=uuid name&order_column=name"
+            onSelect={(newSelected) => {
+                console.log(newSelected)
+            }}
+            labelField='data.name'
+            valueField='data.uuid'
+            initialValues={Array.from({ length: 5 }, (_, i) => ({
+                data: { uuid: `uuid-${i + 1}`, name: `Opção ${i + 1}` }
+            }))}
+            multiple
+            placeholder={'Select com múltiplo com opcoes'}
         />
 
         <Select
