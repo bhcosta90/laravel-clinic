@@ -112,7 +112,7 @@ export const Header = () => {
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div className={'p-5'}>{u.data.name} ({u.data.name})</div>}
+            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
             multiple
@@ -126,7 +126,7 @@ export const Header = () => {
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div className={'p-5'}>{u.data.name} ({u.data.name})</div>}
+            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
         />
