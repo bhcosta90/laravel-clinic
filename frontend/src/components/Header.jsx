@@ -120,6 +120,16 @@ export const Header = () => {
         />
 
         <Select
+            apiUrl="procedures?fields=uuid name"
+            onSelect={(newSelected) => {
+                console.log(newSelected)
+            }}
+            renderItem={(u) => <div className={'p-8'}>{u.data.name} ({u.data.name})</div>}
+            labelField='data.name'
+            valueField='data.uuid'
+        />
+
+        <Select
             options={Array.from({ length: 100 }, (_, i) => ({
                 data: { uuid: `uuid-${i + 1}`, name: `Option ${i + 1}` }
             }))}
