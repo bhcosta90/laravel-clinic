@@ -3,11 +3,11 @@ import React, {useState, useEffect, useRef, Suspense, memo} from "react";
 import {GET} from '@/app/api/search/route'
 import getByPath from "@/utils/getByPath";
 
-const SelectDropdownList = memo(({option, onClick, highlight, renderItem, labelField}) => {
+const SelectDropdownList = memo(({option, onClick, highlight, renderItem, labelField, itemClasses}) => {
     return <div
         onClick={() => onClick(option)}
-        className={`px-3 py-2 cursor-pointer border-b border-gray-100 dark:border-gray-700 ${
-            highlight ? "bg-blue-100 dark:bg-blue-600" : "hover:bg-blue-50 dark:hover:bg-blue-500/20"
+        className={`${itemClasses} cursor-pointer border-b border-base-200 last:border-b-0 ${
+            highlight ? "bg-primary/10 text-primary" : "hover:bg-base-200"
         }`}
     >
         {renderItem ? renderItem(option) : getByPath(option, labelField)}
@@ -31,6 +31,7 @@ const Select = ({
                     noResultsMessage = "Nenhum resultado",
                     highlightSearch = true,
                     initialValues = [],
+                    size = 'md',
                 }) => {
     const [query, setQuery] = useState("");
     const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -47,6 +48,63 @@ const Select = ({
     const containerRef = useRef(null);
 
     const [placement, setPlacement] = useState('bottom');
+
+    // Size maps for DaisyUI-like sizing
+    const sizeMap = {
+        xs: {
+            containerGap: 'gap-1',
+            containerPadding: 'px-1 py-0.5',
+            text: 'text-xs',
+            inputSize: 'input-xs',
+            chipSize: 'badge-xs',
+            btnSize: 'btn-xs',
+            itemPadding: 'px-2 py-1',
+            itemText: 'text-xs',
+        },
+        sm: {
+            containerGap: 'gap-1.5',
+            containerPadding: 'px-2 py-1',
+            text: 'text-sm',
+            inputSize: 'input-sm',
+            chipSize: 'badge-sm',
+            btnSize: 'btn-sm',
+            itemPadding: 'px-3 py-1.5',
+            itemText: 'text-sm',
+        },
+        md: {
+            containerGap: 'gap-2',
+            containerPadding: 'px-2.5 py-1.5',
+            text: 'text-base',
+            inputSize: 'input-md',
+            chipSize: 'badge-md',
+            btnSize: 'btn-sm',
+            itemPadding: 'px-3 py-2',
+            itemText: 'text-base',
+        },
+        lg: {
+            containerGap: 'gap-2',
+            containerPadding: 'px-3 py-2',
+            text: 'text-lg',
+            inputSize: 'input-lg',
+            chipSize: 'badge-lg',
+            btnSize: 'btn-md',
+            itemPadding: 'px-4 py-2.5',
+            itemText: 'text-lg',
+        },
+        xl: {
+            containerGap: 'gap-3',
+            containerPadding: 'px-3.5 py-2.5',
+            text: 'text-xl',
+            // DaisyUI does not provide input-xl, map to lg
+            inputSize: 'input-lg',
+            chipSize: 'badge-lg',
+            // Slightly larger clear/remove buttons
+            btnSize: 'btn-lg',
+            itemPadding: 'px-4 py-3',
+            itemText: 'text-lg',
+        },
+    };
+    const sz = sizeMap[size] || sizeMap.md;
 
     // Debounce search
     useEffect(() => {
@@ -276,14 +334,14 @@ const Select = ({
     }, [highlightIndex, isOpen, optionsRef]);
 
     return (
-        <div className="relative font-sans" ref={containerRef}>
-            <div className="flex flex-wrap items-center gap-1 border rounded px-2 py-1 bg-white dark:bg-gray-800">
+        <div className="relative font-sans form-control w-full" ref={containerRef}>
+            <div className={`input input-bordered ${sz.inputSize} flex flex-wrap items-center ${sz.containerGap} ${sz.text} bg-base-100` }>
                 {selected.map((item) => {
                     const canDeleted = (required && !multiple) || (multiple && required && selected.length === 1);
 
                     return <span
                         key={getByPath(item, valueField) ? `selected-${getByPath(item, valueField)}` : `selected-${getByPath(item, labelField)}`}
-                        className={`flex items-center bg-blue-100 dark:bg-blue-600 text-blue-800 dark:text-white px-2 py-0.5 rounded-full text-sm${!canDeleted ? " cursor-pointer" : ""}`}
+                        className={`badge ${sz.chipSize} badge-outline badge-primary gap-1 items-center${!canDeleted ? " cursor-pointer" : ""}`}
                         onClick={(e) => {
                             if(canDeleted) return;
 
@@ -292,14 +350,14 @@ const Select = ({
                         }}
                     >
                         {renderItem ? renderItem(item) : getByPath(item, labelField)}
-                        {!canDeleted && (
+                        {multiple && !canDeleted && (
                             <button
                                 type="button"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     removeSelection(getByPath(item, valueField));
                                 }}
-                                className="ml-1 text-gray-500 dark:text-gray-200 hover:text-gray-800 dark:hover:text-white focus:outline-none cursor-pointer">
+                                className={`btn btn-ghost ${sz.btnSize} btn-circle ml-1`}>
                                 ×
                             </button>
                         )}
@@ -313,15 +371,15 @@ const Select = ({
                     onFocus={() => setIsOpen(true)}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="flex-1 min-w-[50px] outline-none bg-transparent px-1 py-1 text-sm text-gray-900 dark:text-white"
+                    className={`grow min-w-[50px] bg-transparent px-1 py-0 outline-none border-0 focus:outline-none h-full`}
                 />
-                {!required && selected.length > 0 && (
+                {!multiple && !required && selected.length > 0 && (
                     <button
                         onClick={(e) => {
                             e.stopPropagation();
                             clearAll();
                         }}
-                        className="ml-1 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white focus:outline-none"
+                        className={`btn btn-ghost ${sz.btnSize} btn-circle ml-1`}
                     >
                         ×
                     </button>
@@ -332,16 +390,16 @@ const Select = ({
                 <div
                     ref={dropdownRef}
                     onScroll={handleScroll}
-                    className={`absolute w-full ${placement === 'top' ? 'mb-1 bottom-full' : 'mt-1 top-full'} bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded shadow-lg max-h-60 overflow-y-auto z-50`}
+                    className={`absolute w-full ${placement === 'top' ? 'mb-1 bottom-full' : 'mt-1 top-full'} bg-base-100 border border-base-300 rounded-box shadow-xl max-h-60 overflow-y-auto z-50`}
                 >
                     {!loading && optionsRef.length === 0 && (
-                        <div className="px-3 py-2 text-gray-500 dark:text-gray-400">{noResultsMessage}</div>
+                        <div className="px-3 py-2 text-base-content/60">{noResultsMessage}</div>
                     )}
 
                     {optionsRef.map((group, index) => (
                         <div key={getByPath(group, valueField) ?? index} data-index={index}>
                             {groupField && (
-                                <div className="px-3 py-1 font-semibold bg-gray-100 dark:bg-gray-700">{group}</div>
+                                <div className="px-3 py-1 font-semibold bg-base-200 text-base-content/80">{group}</div>
                             )}
                             <Suspense fallback={<span />}>
                                 <SelectDropdownList
@@ -350,6 +408,7 @@ const Select = ({
                                     highlight={highlightIndex === index}
                                     renderItem={renderItem}
                                     labelField={labelField}
+                                    itemClasses={`${sz.itemPadding} ${sz.itemText}`}
                                 />
                             </Suspense>
                         </div>
@@ -358,7 +417,7 @@ const Select = ({
                     {loading && Array.from({length: loadingSkeletonCount}).map((_, idx) => (
                         <div
                             key={`skeleton-${idx}`}
-                            className="h-8 bg-gray-200 dark:bg-gray-700 animate-pulse my-1 rounded"
+                            className="skeleton h-8 my-1"
                         />
                     ))}
                 </div>
