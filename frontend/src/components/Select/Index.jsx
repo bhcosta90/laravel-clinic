@@ -331,8 +331,8 @@ const Select = ({
     }, [highlightIndex, isOpen, optionsRef]);
 
     return (
-        <div className="relative font-sans form-control w-full" ref={containerRef}>
-            <div className={`input input-bordered ${sz.inputSize} flex flex-wrap items-center ${sz.containerGap} ${sz.text} bg-base-100` }>
+        <div className="relative form-control w-full" ref={containerRef}>
+            <div className={`w-full input input-bordered ${sz.inputSize} flex flex-wrap items-center ${sz.containerGap} ${sz.text} bg-base-100` }>
                 {selected.map((item) => {
                     const canDeleted = (required && !multiple) || (multiple && required && selected.length === 1);
 

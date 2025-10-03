@@ -19,8 +19,8 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'grid grid-cols-2'}>
-            <input type="text" className={'input input-sm'}/>
+        <div className={'grid grid-cols-2 w-full'}>
+            <input type="text" className={'input input-sm w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
                 onSelect={(newSelected) => {
@@ -33,8 +33,8 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'grid grid-cols-2'}>
-            <input type="text" className={'input input-md'}/>
+        <div className={'grid grid-cols-2 w-full'}>
+            <input type="text" className={'input input-md w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
                 onSelect={(newSelected) => {
@@ -47,8 +47,8 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'grid grid-cols-2'}>
-            <input type="text" className={'input input-lg'}/>
+        <div className={'grid grid-cols-2 w-full'}>
+            <input type="text" className={'input input-lg w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
                 onSelect={(newSelected) => {
@@ -61,8 +61,8 @@ export const Header = () => {
             />
         </div>
 
-        <div className={'grid grid-cols-2'}>
-            <input type="text" className={'input input-xl'}/>
+        <div className={'grid grid-cols-2 w-full'}>
+            <input type="text" className={'input input-xl w-full'}/>
             <Select
                 apiUrl="procedures?fields=uuid name"
                 onSelect={(newSelected) => {
@@ -102,7 +102,7 @@ export const Header = () => {
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
+            renderItem={(u) => <div className={'p-5'}>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
             multiple
