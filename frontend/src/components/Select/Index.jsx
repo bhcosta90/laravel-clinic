@@ -362,7 +362,7 @@ const Select = ({
 
     return (
         <div className="relative form-control w-full" ref={containerRef}>
-            <div className={`w-full input input-bordered ${sz.inputSize} flex flex-wrap items-center ${sz.containerGap} ${sz.text} bg-base-100` }>
+            <div className={`w-full input input-bordered ${sz.inputSize} flex flex-wrap ${multiple ? 'items-start h-auto py-2' : 'items-center'} ${sz.containerGap} ${sz.text} bg-base-100`}>
                 {selected.map((item) => {
                     const canDeleted = (required && !multiple) || (multiple && required && selected.length === 1);
 
@@ -398,7 +398,7 @@ const Select = ({
                     onFocus={() => setIsOpen(true)}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className={`flex-1 min-w-[1ch] bg-transparent px-1 py-0 outline-none border-0 focus:outline-none self-center`}
+                    className={`flex-1 min-w-[1ch] bg-transparent px-1 py-0 outline-none border-0 focus:outline-none ${multiple ? 'self-start' : 'self-center'}`}
                 />
                 {!multiple && !required && selected.length > 0 && (
                     <button
