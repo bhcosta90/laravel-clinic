@@ -11,11 +11,11 @@ export const Header = () => {
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
-                renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
                 labelField='data.name'
                 valueField='data.uuid'
                 size={'xs'}
                 className="w-full"
+                placeholder={'Tamanho xs'}
             />
         </div>
 
@@ -26,10 +26,10 @@ export const Header = () => {
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
-                renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
                 labelField='data.name'
                 valueField='data.uuid'
                 size={'sm'}
+                placeholder={'Tamanho sm'}
             />
         </div>
 
@@ -40,10 +40,10 @@ export const Header = () => {
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
-                renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
                 labelField='data.name'
                 valueField='data.uuid'
                 size={'md'}
+                placeholder={'Tamanho md'}
             />
         </div>
 
@@ -54,10 +54,10 @@ export const Header = () => {
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
-                renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
                 labelField='data.name'
                 valueField='data.uuid'
                 size={'lg'}
+                placeholder={'Tamanho lg'}
             />
         </div>
 
@@ -68,21 +68,23 @@ export const Header = () => {
                 onSelect={(newSelected) => {
                     console.log(newSelected)
                 }}
-                renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
                 labelField='data.name'
                 valueField='data.uuid'
                 size={'xl'}
+                placeholder={'Tamanho xl'}
             />
         </div>
 
+        <hr />
+
         <Select
             apiUrl="procedures?fields=uuid name&order_column=name"
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
+            placeholder={'Select simples sem obrigatório e múltiplo'}
         />
 
         <Select
@@ -90,10 +92,10 @@ export const Header = () => {
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
             required
+            placeholder={'Select com obrigatório'}
         />
 
         <Select
@@ -101,10 +103,10 @@ export const Header = () => {
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
             multiple
+            placeholder={'Select com múltiplo'}
         />
 
         <Select
@@ -112,11 +114,11 @@ export const Header = () => {
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
             multiple
             required
+            placeholder={'Select com múltiplo e obrigatório'}
         />
 
         <Select
@@ -127,6 +129,7 @@ export const Header = () => {
             renderItem={(u) => <div className={'p-8'}>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
+            placeholder={'Select com renderização personalizada'}
         />
 
         <Select
@@ -134,7 +137,6 @@ export const Header = () => {
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div className={'p-8'}>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
             placeholder={'Select desabilitado'}
@@ -143,14 +145,14 @@ export const Header = () => {
 
         <Select
             options={Array.from({ length: 100 }, (_, i) => ({
-                data: { uuid: `uuid-${i + 1}`, name: `Option ${i + 1}` }
+                data: { uuid: `uuid-${i + 1}`, name: `Opção ${i + 1}` }
             }))}
             onSelect={(newSelected) => {
                 console.log(newSelected)
             }}
-            renderItem={(u) => <div>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
+            placeholder={'Select com opções'}
         />
     </div>
 }
