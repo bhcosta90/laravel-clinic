@@ -8,6 +8,7 @@ export default function SelectChips({
   labelField,
   multiple,
   required,
+  disabled = false,
   sz,
   renderItem,
   onRemove,
@@ -18,11 +19,11 @@ export default function SelectChips({
       {selected.map((item) => {
         const value = getByPath(item, valueField);
         const key = value ?? getByPath(item, labelField);
-        const canDeleted = (required && !multiple) || (multiple && required && selected.length === 1);
+        const canDeleted = disabled || (required && !multiple) || (multiple && required && selected.length === 1);
         return (
           <span
             key={`selected-${key}`}
-            className={`badge ${sz.chipSize} badge-outline badge-primary gap-1 items-center${!canDeleted ? " cursor-pointer" : ""}`}
+            className={`badge ${sz.chipSize} badge-outline badge-primary gap-1 items-center${!canDeleted ? " cursor-pointer" : ""} ${disabled ? 'opacity-60' : ''}`}
             onClick={(e) => {
               if (canDeleted) return;
               e.stopPropagation();

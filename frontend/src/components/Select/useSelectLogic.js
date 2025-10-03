@@ -22,6 +22,7 @@ export default function useSelectLogic({
   loadingSkeletonCount,
   initialSelected = [],
   maxSelection = Infinity,
+  disabled = false,
 }) {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -48,6 +49,14 @@ export default function useSelectLogic({
       setHighlightIndex(-1);
     }
   });
+
+  // Close if becomes disabled
+  useEffect(() => {
+    if (disabled) {
+      setIsOpen(false);
+      setHighlightIndex(-1);
+    }
+  }, [disabled]);
   useHighlightInView({ isOpen, highlightIndex, dropdownRef, items });
 
   const isLocal = useMemo(() => !apiUrl && Array.isArray(options), [apiUrl, options]);
@@ -136,6 +145,7 @@ export default function useSelectLogic({
 
 
   const onSelectInternal = (option) => {
+    if (disabled) return;
     if (multiple) {
       const exists = selected.some((s) => getByPath(s, valueField) === getByPath(option, valueField));
       if (!exists) {
