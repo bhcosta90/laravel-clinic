@@ -158,6 +158,16 @@ export const Header = () => {
         />
 
         <Select
+            apiUrl="specialties?fields=uuid name&order_column=name"
+            onSelect={(newSelected) => {
+                console.log(newSelected)
+            }}
+            labelField='data.name'
+            valueField='data.uuid'
+            placeholder={'Select especialista'}
+        />
+
+        <Select
             options={Array.from({ length: 100 }, (_, i) => ({
                 data: { uuid: `uuid-${i + 1}`, name: `Opção ${i + 1}` }
             }))}
