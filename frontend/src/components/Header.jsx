@@ -1,6 +1,5 @@
 "use client";
-import {useState} from "react";
-import Select from "@/components/Select/Index";
+import Select  from "@/components/Select/Index";
 
 export const Header = () => {
     return <div className={'space-y-4 '}>
@@ -84,7 +83,7 @@ export const Header = () => {
             }}
             labelField='data.name'
             valueField='data.uuid'
-            placeholder={'Select simples'}
+            placeholder={'Selecionar ->  simples'}
         />
 
         <Select
@@ -95,7 +94,7 @@ export const Header = () => {
             labelField='data.name'
             valueField='data.uuid'
             required
-            placeholder={'Select com obrigatório'}
+            placeholder={'Selecionar ->  com obrigatório'}
         />
 
         <Select
@@ -106,7 +105,7 @@ export const Header = () => {
             labelField='data.name'
             valueField='data.uuid'
             multiple
-            placeholder={'Select com múltiplo'}
+            placeholder={'Selecionar ->  com múltiplo'}
         />
 
         <Select
@@ -120,7 +119,7 @@ export const Header = () => {
                 data: { uuid: `uuid-${i + 1}`, name: `Opção ${i + 1}` }
             }))}
             multiple
-            placeholder={'Select com múltiplo com opcoes'}
+            placeholder={'Selecionar ->  com múltiplo com opcoes'}
         />
 
         <Select
@@ -132,7 +131,7 @@ export const Header = () => {
             valueField='data.uuid'
             multiple
             required
-            placeholder={'Select com múltiplo e obrigatório'}
+            placeholder={'Selecionar ->  com múltiplo e obrigatório'}
         />
 
         <Select
@@ -143,7 +142,7 @@ export const Header = () => {
             renderItem={(u) => <div className={'p-8'}>{u.data.name} ({u.data.name})</div>}
             labelField='data.name'
             valueField='data.uuid'
-            placeholder={'Select com renderização personalizada'}
+            placeholder={'Selecionar ->  com renderização personalizada'}
         />
 
         <Select
@@ -153,7 +152,7 @@ export const Header = () => {
             }}
             labelField='data.name'
             valueField='data.uuid'
-            placeholder={'Select desabilitado'}
+            placeholder={'Selecionar ->  desabilitado'}
             disabled={true}
         />
 
@@ -164,7 +163,20 @@ export const Header = () => {
             }}
             labelField='data.name'
             valueField='data.uuid'
-            placeholder={'Select especialista'}
+            placeholder={'Selecionar ->  especialista'}
+        />
+
+        <Select
+            apiUrl="procedures?fields=uuid name&order_column=name"
+            onSelect={(newSelected) => {
+                console.log(newSelected)
+            }}
+            labelField='data.name'
+            valueField='data.uuid'
+            placeholder={'Selecionar ->  procedimento e adiciona o que nao existe'}
+            creatable={(newSelected) => {
+                console.log(newSelected)
+            }}
         />
 
         <Select
@@ -176,7 +188,7 @@ export const Header = () => {
             }}
             labelField='data.name'
             valueField='data.uuid'
-            placeholder={'Select com opções'}
+            placeholder={'Selecionar ->  com opções'}
         />
     </div>
 }
