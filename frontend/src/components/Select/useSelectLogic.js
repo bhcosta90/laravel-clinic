@@ -140,12 +140,6 @@ export default function useSelectLogic({
         }
     };
 
-    const handleScroll = async (e) => {
-        const { scrollTop, scrollHeight, clientHeight } = e.target;
-        if (scrollTop + clientHeight >= scrollHeight - 10) {
-            await loadMoreItems();
-        }
-    };
 
   const onSelectInternal = (option) => {
     if (disabled) return;
@@ -239,7 +233,7 @@ export default function useSelectLogic({
     // config misc
     placement,
     // handlers
-    handleScroll, handleKeyDown, onSelectInternal, removeSelection, clearAll, loadMoreItems,
+    handleKeyDown, onSelectInternal, removeSelection, clearAll, loadMoreItems,
     // data loaders
     fetchOptions,
     // consts
