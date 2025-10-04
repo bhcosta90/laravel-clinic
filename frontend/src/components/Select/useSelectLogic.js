@@ -23,6 +23,7 @@ export default function useSelectLogic({
   initialSelected = [],
   maxSelection = Infinity,
   disabled = false,
+  creatable = undefined,
 }) {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -153,12 +154,56 @@ export default function useSelectLogic({
       if (!exists) {
         setSelected((prev) => (prev.length < maxSelection ? [...prev, option] : prev));
       }
+      // keep dropdown open for multiple
+      setIsOpen(true);
     } else {
       setSelected([option]);
       setIsOpen(false);
     }
+    // reset query and highlight to allow search to continue
     setQuery("");
+    setHighlightIndex(-1);
     if (inputRef.current) inputRef.current.focus({ preventScroll: true });
+  };
+
+  // Helper: set object value by path (e.g., "data.name")
+  const setByPath = (obj, path, value) => {
+    if (!path) return;
+    const keys = path.split('.');
+    let cur = obj;
+    for (let i = 0; i < keys.length - 1; i++) {
+      const k = keys[i];
+      if (typeof cur[k] !== 'object' || cur[k] === null) cur[k] = {};
+      cur = cur[k];
+    }
+    cur[keys[keys.length - 1]] = value;
+  };
+
+  const onCreateFromQuery = async () => {
+    if (!creatable) return;
+    const raw = (query || '').trim();
+    if (!raw) return;
+
+    // If multiple mode and user typed multiple tokens (comma/semicolon/newline), create all
+    const parts = multiple ? raw.split(/[\n,;]+/).map(s => s.trim()).filter(Boolean) : [raw];
+
+    for (const text of parts) {
+      let maybeOption;
+      try {
+        maybeOption = await Promise.resolve(creatable(text));
+      } catch (e) {
+        console.error(e);
+      }
+
+      let option = maybeOption;
+      if (!option || typeof option !== 'object') {
+        option = {};
+        setByPath(option, labelField, text);
+        setByPath(option, valueField, text);
+      }
+
+      onSelectInternal(option);
+    }
   };
 
   const handleKeyDown = useKeyboardNav({
@@ -171,6 +216,8 @@ export default function useSelectLogic({
     setIsOpen,
     setHighlightIndex,
     onSelect: onSelectInternal,
+    highlightIndex,
+    onCreate: creatable ? onCreateFromQuery : undefined,
   });
 
   const removeSelection = (value) => {

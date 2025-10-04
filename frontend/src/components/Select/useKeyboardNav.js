@@ -10,6 +10,8 @@ export default function useKeyboardNav({
   setIsOpen,
   setHighlightIndex,
   onSelect,
+  highlightIndex,
+  onCreate,
 }) {
   return function handleKeyDown(e) {
     if (
@@ -37,8 +39,21 @@ export default function useKeyboardNav({
     }
     if (e.key === "Enter") {
       e.preventDefault();
-      const idx = typeof items?.length === 'number' ? Math.max(0, Math.min(items.length - 1, typeof e?.currentTarget?.dataset?.index === 'number' ? e.currentTarget.dataset.index : 0)) : -1;
-      if (idx >= 0) onSelect(items[idx]);
+      // Prefer selecting the highlighted item when available
+      const idx = typeof highlightIndex === 'number' && highlightIndex >= 0 ? highlightIndex : -1;
+      if (idx >= 0 && items && items.length > 0) {
+        onSelect(items[idx]);
+        return;
+      }
+      // If no highlight and creatable is available with a non-empty query, create a new option
+      if (onCreate && query && query.trim().length > 0) {
+        onCreate();
+        return;
+      }
+      // Fallback: select the first item if present
+      if (items && items.length > 0) {
+        onSelect(items[0]);
+      }
     }
     if (e.key === "Escape") setIsOpen(false);
   };

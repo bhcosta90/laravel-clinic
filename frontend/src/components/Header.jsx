@@ -177,6 +177,7 @@ export const Header = () => {
             creatable={(newSelected) => {
                 console.log(newSelected)
             }}
+            multiple
         />
 
         <Select
@@ -189,6 +190,11 @@ export const Header = () => {
             labelField='data.name'
             valueField='data.uuid'
             placeholder={'Selecionar ->  com opções'}
+            creatable={(label) => {
+                console.log('Criar novo item:', label);
+                // opcionalmente retornar um objeto da opção criada
+                return { data: { uuid: label, name: label } };
+            }}
         />
     </div>
 }

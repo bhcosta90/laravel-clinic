@@ -27,6 +27,7 @@ const Select = ({
   options = null,
   pageSize = 50,
   disabled = false,
+  creatable = undefined,
 }) => {
   const sz = getSize(size);
 
@@ -58,6 +59,7 @@ const Select = ({
     initialSelected: initialValues,
     maxSelection,
     disabled,
+    creatable,
   });
 
   // Notify parent on selection changes
