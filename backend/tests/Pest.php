@@ -13,6 +13,7 @@ declare(strict_types=1);
 |
 */
 
+use App\Models\User;
 use Illuminate\Support\Sleep;
 
 pest()->extend(Tests\TestCase::class)
@@ -24,6 +25,8 @@ pest()->extend(Tests\TestCase::class)
         Sleep::fake();
 
         $this->freezeTime();
+
+        auth()->login(User::factory()->create());
     })
     ->in('Browser', 'Feature', 'Unit');
 

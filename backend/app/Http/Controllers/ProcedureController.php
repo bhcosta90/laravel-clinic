@@ -50,6 +50,6 @@ final class ProcedureController
 
         $action->execute($procedure);
 
-        return response()->json();
+        return response()->json(status: 204);
     }
 }

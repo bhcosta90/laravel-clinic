@@ -52,6 +52,6 @@ final class SpecialtyController
 
         $action->execute($specialty);
 
-        return response()->json();
+        return response()->json(status: 204);
     }
 }
