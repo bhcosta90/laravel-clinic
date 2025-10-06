@@ -8,6 +8,9 @@ use App\Models\Specialty;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Specialty>
+ */
 final class SpecialtyFactory extends Factory
 {
     protected $model = Specialty::class;

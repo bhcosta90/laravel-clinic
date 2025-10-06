@@ -10,6 +10,6 @@ final class SpecialtyCreateAction
 {
     public function execute(string $name): Specialty
     {
-        return Specialty::create(compact('name'));
+        return Specialty::query()->create(['name' => $name]);
     }
 }

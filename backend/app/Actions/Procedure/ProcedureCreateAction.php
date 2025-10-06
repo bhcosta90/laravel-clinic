@@ -10,6 +10,6 @@ final class ProcedureCreateAction
 {
     public function execute(string $name): Procedure
     {
-        return Procedure::create(compact('name'));
+        return Procedure::query()->create(['name' => $name]);
     }
 }

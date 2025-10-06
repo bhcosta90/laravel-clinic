@@ -9,6 +9,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Doctor>
+ */
 final class DoctorFactory extends Factory
 {
     protected $model = Doctor::class;

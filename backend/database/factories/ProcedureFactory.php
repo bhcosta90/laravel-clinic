@@ -8,6 +8,9 @@ use App\Models\Procedure;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Procedure>
+ */
 final class ProcedureFactory extends Factory
 {
     protected $model = Procedure::class;

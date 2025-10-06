@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('doctors', function (Blueprint $table) {
+        Schema::create('doctors', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('doctor_specialty', function (Blueprint $table) {
+        Schema::create('doctor_specialty', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
             $table->foreignId('specialty_id')->constrained('specialties')->onDelete('cascade');

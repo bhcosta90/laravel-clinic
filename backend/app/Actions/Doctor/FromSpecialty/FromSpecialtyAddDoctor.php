@@ -13,7 +13,7 @@ final class FromSpecialtyAddDoctor
      */
     public function execute(Doctor $doctor, array $specialties): void
     {
-        if (empty($specialties)) {
+        if ($specialties === []) {
             return;
         }
         $doctor->specialties()->attach($specialties);

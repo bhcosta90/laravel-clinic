@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('specialties', function (Blueprint $table) {
+        Schema::create('specialties', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->timestamps();

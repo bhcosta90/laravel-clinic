@@ -13,7 +13,7 @@ final class FromSpecialtyRemoveDoctor
      */
     public function execute(Doctor $doctor, array $specialties): void
     {
-        if (empty($specialties)) {
+        if ($specialties === []) {
             return;
         }
         $doctor->specialties()->detach($specialties);

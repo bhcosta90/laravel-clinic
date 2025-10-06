@@ -10,6 +10,6 @@ final class DoctorUpdateAction
 {
     public function execute(Doctor $model, string $name, string $crm): Doctor
     {
-        return tap($model)->update(compact('name', 'crm'));
+        return tap($model)->update(['name' => $name, 'crm' => $crm]);
     }
 }

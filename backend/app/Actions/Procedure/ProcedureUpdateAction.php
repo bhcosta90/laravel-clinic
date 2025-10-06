@@ -10,6 +10,6 @@ final class ProcedureUpdateAction
 {
     public function execute(Procedure $model, string $name): Procedure
     {
-        return tap($model)->update(compact('name'));
+        return tap($model)->update(['name' => $name]);
     }
 }

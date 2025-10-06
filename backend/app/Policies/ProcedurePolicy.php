@@ -4,45 +4,43 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
-use App\Models\Procedure;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 final class ProcedurePolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool
+    public function viewAny(): bool
     {
         return true;
     }
 
-    public function view(User $user, Procedure $procedure): bool
+    public function view(): bool
     {
         return true;
     }
 
-    public function create(User $user): bool
+    public function create(): bool
     {
         return true;
     }
 
-    public function update(User $user, Procedure $procedure): bool
+    public function update(): bool
     {
         return true;
     }
 
-    public function delete(User $user, Procedure $procedure): bool
+    public function delete(): bool
     {
         return true;
     }
 
-    public function restore(User $user, Procedure $procedure): bool
+    public function restore(): bool
     {
         return true;
     }
 
-    public function forceDelete(User $user, Procedure $procedure): bool
+    public function forceDelete(): bool
     {
         return true;
     }

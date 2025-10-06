@@ -13,7 +13,7 @@ final class FromDoctorRemoveSpecialty
      */
     public function execute(Specialty $specialty, array $doctorsIds): void
     {
-        if (empty($doctorsIds)) {
+        if ($doctorsIds === []) {
             return;
         }
 

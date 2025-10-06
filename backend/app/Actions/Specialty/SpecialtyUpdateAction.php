@@ -10,6 +10,6 @@ final class SpecialtyUpdateAction
 {
     public function execute(Specialty $model, string $name): Specialty
     {
-        return tap($model)->update(compact('name'));
+        return tap($model)->update(['name' => $name]);
     }
 }
