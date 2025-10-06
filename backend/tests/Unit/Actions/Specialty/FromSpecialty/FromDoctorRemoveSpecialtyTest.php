@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Actions\Specialty\FromDoctorRemoveSpecialty;
+use App\Actions\Specialty\FromDoctor\FromDoctorRemoveSpecialty;
 use App\Models\Doctor;
 use App\Models\Specialty;
 

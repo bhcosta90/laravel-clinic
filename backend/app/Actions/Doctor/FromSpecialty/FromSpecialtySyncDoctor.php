@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Doctor;
+namespace App\Actions\Doctor\FromSpecialty;
 
 use App\Models\Doctor;
 
-final class FromSpecialtyRemoveDoctor
+final class FromSpecialtySyncDoctor
 {
     /**
      * @param  array<int>  $specialties
      */
     public function execute(Doctor $doctor, array $specialties): void
     {
-        if (empty($specialties)) {
-            return;
-        }
-        $doctor->specialties()->detach($specialties);
+        $doctor->specialties()->sync($specialties);
     }
 }

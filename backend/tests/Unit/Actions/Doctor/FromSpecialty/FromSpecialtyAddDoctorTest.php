@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Actions\Doctor\FromSpecialtyAddDoctor;
+use App\Actions\Doctor\FromSpecialty\FromSpecialtyAddDoctor;
 use App\Models\Doctor;
 use App\Models\Specialty;
 

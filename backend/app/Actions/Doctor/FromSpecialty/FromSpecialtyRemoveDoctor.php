@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Doctor;
+namespace App\Actions\Doctor\FromSpecialty;
 
 use App\Models\Doctor;
 
-final class FromSpecialtyAddDoctor
+final class FromSpecialtyRemoveDoctor
 {
     /**
      * @param  array<int>  $specialties
@@ -16,6 +16,6 @@ final class FromSpecialtyAddDoctor
         if (empty($specialties)) {
             return;
         }
-        $doctor->specialties()->attach($specialties);
+        $doctor->specialties()->detach($specialties);
     }
 }

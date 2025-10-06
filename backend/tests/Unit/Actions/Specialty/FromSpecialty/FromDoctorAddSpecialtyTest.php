@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Actions\Specialty\FromDoctorAddSpecialty;
+use App\Actions\Specialty\FromDoctor\FromDoctorAddSpecialty;
 use App\Models\Doctor;
 use App\Models\Specialty;
-
 use function Pest\Laravel\assertDatabaseCount;
 
 test('adds specialty to a doctors', function () {

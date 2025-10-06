@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Actions\Specialty\FromDoctorSyncSpecialty;
+use App\Actions\Specialty\FromDoctor\FromDoctorSyncSpecialty;
 use App\Models\Doctor;
 use App\Models\Specialty;
-
 use function Pest\Laravel\assertDatabaseCount;
 
 test('sync specialty from a doctors', function () {

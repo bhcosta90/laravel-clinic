@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Specialty;
+namespace App\Actions\Specialty\FromDoctor;
 
 use App\Models\Specialty;
 
