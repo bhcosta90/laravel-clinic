@@ -10,6 +10,9 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 final readonly class LoginRule implements ValidationRule
 {
+    /**
+     * @param  array<string>  $reserved
+     */
     public function __construct(
         private ?User $user = null,
         private array $reserved = [

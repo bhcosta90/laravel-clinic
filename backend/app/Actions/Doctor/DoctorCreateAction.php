@@ -14,6 +14,9 @@ final class DoctorCreateAction
     {
         $user = User::query()->create(['username' => $crm] + ['password' => $password]);
 
-        return $user->doctor()->create(['name' => $name, 'crm' => $crm]);
+        /** @var Doctor $response */
+        $response = $user->doctor()->create(['name' => $name, 'crm' => $crm]);
+
+        return $response;
     }
 }

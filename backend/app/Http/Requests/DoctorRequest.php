@@ -9,6 +9,9 @@ use Illuminate\Validation\Rules\Password;
 
 final class DoctorRequest extends FormRequest
 {
+    /**
+     * @return array<string, array<Password|string>>
+     */
     public function rules(): array
     {
         return [
@@ -16,10 +19,5 @@ final class DoctorRequest extends FormRequest
             'crm' => ['required'],
             'password' => ['nullable', Password::default()],
         ];
-    }
-
-    public function authorize(): bool
-    {
-        return true;
     }
 }

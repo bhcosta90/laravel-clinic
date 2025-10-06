@@ -8,15 +8,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 final class SpecialtyRequest extends FormRequest
 {
+    /**
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
         return [
             'name' => ['required'],
         ];
-    }
-
-    public function authorize(): bool
-    {
-        return true;
     }
 }
