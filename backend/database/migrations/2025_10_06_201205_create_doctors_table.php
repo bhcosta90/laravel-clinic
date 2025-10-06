@@ -18,10 +18,18 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('doctor_specialty', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
+            $table->foreignId('specialty_id')->constrained('specialties')->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     public function down(): void
     {
+        Schema::dropIfExists('doctor_specialty');
         Schema::dropIfExists('doctors');
     }
 };
