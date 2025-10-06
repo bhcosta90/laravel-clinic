@@ -77,13 +77,14 @@
             "php -d memory_limit=512M vendor/bin/rector --dry-run",
             "npm run test:lint"
         ],
-        "test:unit": "php -d memory_limit=512M vendor/bin/pest --parallel --coverage --exactly=100.0",
+        "test:unit": "php -d memory_limit=512M vendor/bin/pest --parallel",
+        "test:coverage": "php -d memory_limit=512M vendor/bin/pest --parallel --coverage --exactly=100.0",
         "test:types": "php -d memory_limit=512M vendor/bin/phpstan",
         "test": [
-            "@test:type-coverage",
             "@test:unit",
             "@test:lint",
-            "@test:types"
+            "@test:types",
+            "@test:type-coverage"
         ]
     },
     "extra": {

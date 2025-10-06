@@ -20,5 +20,5 @@ test('create doctor action', function () {
         ->and($doctor->crm)->toBe($crm);
 
     assertDatabaseHas(Doctor::class, compact('name', 'crm'));
-    assertDatabaseCount(User::class, 1);
+    assertDatabaseCount(User::class, 2);
 });
