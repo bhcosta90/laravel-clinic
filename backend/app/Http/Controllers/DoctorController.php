@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Actions\Doctor\DoctorCreateAction;
+use App\Actions\Doctor\DoctorDeleteAction;
+use App\Actions\Doctor\DoctorUpdateAction;
 use App\Http\Requests\DoctorRequest;
 use App\Http\Resources\DoctorResource;
 use App\Models\Doctor;
@@ -20,11 +23,18 @@ final class DoctorController
         return DoctorResource::collection(Doctor::all());
     }
 
-    public function store(DoctorRequest $request)
+    public function store(DoctorRequest $request, DoctorCreateAction $action)
     {
         $this->authorize('create', Doctor::class);
+        $data = $request->validated();
 
-        return new DoctorResource(Doctor::create($request->validated()));
+        return new DoctorResource($action->execute(
+            $data['name'],
+            $data['crm'],
+            $password = ($data['password'] ?: str()->random(8)),
+        ))->additional([
+            'password' => $password,
+        ]);
     }
 
     public function show(Doctor $doctor)
@@ -34,20 +44,21 @@ final class DoctorController
         return new DoctorResource($doctor);
     }
 
-    public function update(DoctorRequest $request, Doctor $doctor)
+    public function update(DoctorRequest $request, Doctor $doctor, DoctorUpdateAction $action)
     {
         $this->authorize('update', $doctor);
+        $data = $request->validated();
 
-        $doctor->update($request->validated());
+        $action->execute($doctor, $data['name'], $data['crm']);
 
         return new DoctorResource($doctor);
     }
 
-    public function destroy(Doctor $doctor)
+    public function destroy(Doctor $doctor, DoctorDeleteAction $action)
     {
         $this->authorize('delete', $doctor);
 
-        $doctor->delete();
+        $action->execute($doctor);
 
         return response()->json();
     }

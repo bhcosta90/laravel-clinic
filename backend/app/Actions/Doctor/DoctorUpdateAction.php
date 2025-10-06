@@ -8,7 +8,7 @@ use App\Models\Doctor;
 
 final class DoctorUpdateAction
 {
-    public function execute(Doctor $model, string $name, string $crm)
+    public function execute(Doctor $model, string $name, string $crm): Doctor
     {
         return tap($model)->update(compact('name', 'crm'));
     }

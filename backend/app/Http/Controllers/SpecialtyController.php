@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Actions\Specialty\SpecialtyCreateAction;
+use App\Actions\Specialty\SpecialtyDeleteAction;
+use App\Actions\Specialty\SpecialtyUpdateAction;
 use App\Http\Requests\SpecialtyRequest;
 use App\Http\Resources\SpecialtyResource;
 use App\Models\Specialty;
@@ -20,11 +23,11 @@ final class SpecialtyController
         return SpecialtyResource::collection(Specialty::all());
     }
 
-    public function store(SpecialtyRequest $request)
+    public function store(SpecialtyRequest $request, SpecialtyCreateAction $action)
     {
         $this->authorize('create', Specialty::class);
 
-        return new SpecialtyResource(Specialty::create($request->validated()));
+        return new SpecialtyResource($action->execute($request->validated()['name']));
     }
 
     public function show(Specialty $specialty)
@@ -34,20 +37,20 @@ final class SpecialtyController
         return new SpecialtyResource($specialty);
     }
 
-    public function update(SpecialtyRequest $request, Specialty $specialty)
+    public function update(SpecialtyRequest $request, Specialty $specialty, SpecialtyUpdateAction $action)
     {
         $this->authorize('update', $specialty);
 
         $specialty->update($request->validated());
 
-        return new SpecialtyResource($specialty);
+        return new SpecialtyResource($action->execute($specialty, $request->validated()['name']));
     }
 
-    public function destroy(Specialty $specialty)
+    public function destroy(Specialty $specialty, SpecialtyDeleteAction $action)
     {
         $this->authorize('delete', $specialty);
 
-        $specialty->delete();
+        $action->execute($specialty);
 
         return response()->json();
     }

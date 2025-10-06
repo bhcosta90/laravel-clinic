@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Actions\Procedure\ProcedureCreateAction;
+use App\Actions\Procedure\ProcedureDeleteAction;
+use App\Actions\Procedure\ProcedureUpdateAction;
 use App\Http\Requests\ProcedureRequest;
 use App\Http\Resources\ProcedureResource;
 use App\Models\Procedure;
@@ -20,11 +23,11 @@ final class ProcedureController
         return ProcedureResource::collection(Procedure::all());
     }
 
-    public function store(ProcedureRequest $request)
+    public function store(ProcedureRequest $request, ProcedureCreateAction $action)
     {
         $this->authorize('create', Procedure::class);
 
-        return new ProcedureResource(Procedure::create($request->validated()));
+        return new ProcedureResource($action->execute($request->validated()['name']));
     }
 
     public function show(Procedure $procedure)
@@ -34,20 +37,18 @@ final class ProcedureController
         return new ProcedureResource($procedure);
     }
 
-    public function update(ProcedureRequest $request, Procedure $procedure)
+    public function update(ProcedureRequest $request, Procedure $procedure, ProcedureUpdateAction $action)
     {
         $this->authorize('update', $procedure);
 
-        $procedure->update($request->validated());
-
-        return new ProcedureResource($procedure);
+        return new ProcedureResource($action->execute($procedure, $request->validated()['name']));
     }
 
-    public function destroy(Procedure $procedure)
+    public function destroy(Procedure $procedure, ProcedureDeleteAction $action)
     {
         $this->authorize('delete', $procedure);
 
-        $procedure->delete();
+        $action->execute($procedure);
 
         return response()->json();
     }
