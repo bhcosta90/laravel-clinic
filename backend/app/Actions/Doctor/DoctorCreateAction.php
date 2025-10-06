@@ -10,7 +10,7 @@ use SensitiveParameter;
 
 final class DoctorCreateAction
 {
-    public function execute(string $name, string $crm, #[SensitiveParameter] ?string $password = null): Doctor
+    public function execute(string $name, string $crm, #[SensitiveParameter] string $password): Doctor
     {
         $user = User::create(['username' => $crm] + compact('password'));
 
