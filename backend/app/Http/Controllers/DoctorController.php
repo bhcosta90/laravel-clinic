@@ -13,7 +13,6 @@ use App\Models\Doctor;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Response;
 
 final class DoctorController
 {
@@ -58,7 +57,7 @@ final class DoctorController
         return new DoctorResource($doctor);
     }
 
-    public function destroy(Doctor $doctor, DoctorDeleteAction $action): Response
+    public function destroy(Doctor $doctor, DoctorDeleteAction $action): JsonResponse
     {
         $this->authorize('delete', $doctor);
 
