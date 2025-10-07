@@ -12,7 +12,7 @@ final class DoctorCreateAction
 {
     public function execute(string $name, string $crm, #[SensitiveParameter] string $password): Doctor
     {
-        $user = User::query()->create(['username' => $crm] + compact('password'));
+        $user = User::query()->create(['username' => $crm] + ['password' => $password]);
 
         return $user->doctor()->create(['name' => $name, 'crm' => $crm]);
     }
