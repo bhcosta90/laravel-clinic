@@ -10,37 +10,37 @@ final class ProcedurePolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(): bool
+    public function viewAny(): true
     {
         return true;
     }
 
-    public function view(): bool
+    public function view(): true
     {
         return true;
     }
 
-    public function create(): bool
+    public function create(): true
     {
         return true;
     }
 
-    public function update(): bool
+    public function update(): true
     {
         return true;
     }
 
-    public function delete(): bool
+    public function delete(): true
     {
         return true;
     }
 
-    public function restore(): bool
+    public function restore(): true
     {
         return true;
     }
 
-    public function forceDelete(): bool
+    public function forceDelete(): true
     {
         return true;
     }
