@@ -16,14 +16,14 @@ final class DoctorVerifyTimeOff
         DateTimeInterface $endAt,
         ?int $id = null,
     ): Builder {
-        return $doctor->timeOff()->where(function ($query) use ($startAt, $endAt): void {
+        return $doctor->timeOff()->where(function (Builder $query) use ($startAt, $endAt): void {
             $query->whereBetween('start_at', [$startAt, $endAt])
                 ->orWhereBetween('end_at', [$startAt, $endAt])
-                ->orWhere(function ($q) use ($startAt, $endAt): void {
+                ->orWhere(function (Builder $q) use ($startAt, $endAt): void {
                     $q->where('start_at', '<', $startAt)
                         ->where('end_at', '>', $endAt);
                 });
         })
-            ->when($id, fn ($query) => $query->where('id', '!=', $id));
+            ->when($id, fn (Builder $query) => $query->where('id', '!=', $id));
     }
 }
