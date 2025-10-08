@@ -17,9 +17,4 @@ final class DoctorTimeOffRequest extends FormRequest
             'reason' => ['required'],
         ];
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }

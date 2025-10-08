@@ -27,6 +27,7 @@ final readonly class DoctorTimeOffCreateAction
             'time_off' => ['The doctor already has a time off during this period.'],
         ]));
 
+        /** @var DoctorTimeOff */
         return $doctor->timeOff()->create([
             'start_at' => $startAt,
             'end_at' => $endAt,
