@@ -13,7 +13,7 @@ final class DoctorVerifyTimeOff
         Doctor $doctor,
         DateTimeInterface $startAt,
         DateTimeInterface $endAt,
-        ?int $id,
+        ?int $id = null,
     ): bool {
         return $doctor->timeOff()->where(function ($query) use ($startAt, $endAt) {
             $query->whereBetween('start_at', [$startAt, $endAt])
