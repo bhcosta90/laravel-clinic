@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreignId('doctor_id')->constrained('doctors');
             $table->dateTime('start_at');
             $table->dateTime('end_at');
-            $table->string('reason');
+            $table->string('reason')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,13 +16,14 @@ final class DoctorVerifyTimeOff
         ?int $id,
     ): bool {
         return $doctor->timeOff()->where(function ($query) use ($startAt, $endAt) {
-            $query->whereBetween('start_time', [$startAt, $endAt])
-                ->orWhereBetween('end_time', [$startAt, $endAt])
+            $query->whereBetween('start_at', [$startAt, $endAt])
+                ->orWhereBetween('end_at', [$startAt, $endAt])
                 ->orWhere(function ($q) use ($startAt, $endAt) {
-                    $q->where('start_time', '<', $startAt)
-                        ->where('end_time', '>', $endAt);
+                    $q->where('start_at', '<', $startAt)
+                        ->where('end_at', '>', $endAt);
                 });
         })
-            ->when($id, fn ($query) => $query->where('id', '!=', $id))->exists();
+            ->when($id, fn ($query) => $query->where('id', '!=', $id))
+            ->exists();
     }
 }
