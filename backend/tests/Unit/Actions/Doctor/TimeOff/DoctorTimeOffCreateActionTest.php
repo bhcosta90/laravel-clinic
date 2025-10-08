@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Actions\Doctor\TimeOff\RoomTimeOffCreateAction;
+use App\Actions\Doctor\TimeOff\DoctorTimeOffCreateAction;
 use App\Models\Doctor;
 use App\Models\DoctorTimeOff;
 use Illuminate\Validation\ValidationException;
@@ -16,7 +16,7 @@ test('should not allow overlapping time off', function () {
         'end_at' => '2024-06-01 11:00:00',
     ]);
 
-    $service = app(RoomTimeOffCreateAction::class);
+    $service = app(DoctorTimeOffCreateAction::class);
     expect(fn () => $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00')))
         ->toThrow(ValidationException::class);
 });
@@ -28,7 +28,7 @@ test('should create time off when no overlap', function () {
         'end_at' => '2024-06-01 14:00:00',
     ]);
 
-    $service = app(RoomTimeOffCreateAction::class);
+    $service = app(DoctorTimeOffCreateAction::class);
     $result = $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00'));
 
     expect($result)->toBeInstanceOf(DoctorTimeOff::class);
