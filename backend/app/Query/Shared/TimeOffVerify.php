@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Query\Shared;
 
 use App\Models\Doctor;
+use App\Models\Room;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
 
 final class TimeOffVerify
 {
     public function execute(
-        Doctor $doctor,
+        Doctor|Room $doctor,
         DateTimeInterface $startAt,
         DateTimeInterface $endAt,
         ?int $id = null,

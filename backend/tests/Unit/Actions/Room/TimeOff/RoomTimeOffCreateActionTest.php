@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-use App\Actions\Doctor\TimeOff\RoomTimeOffCreateAction;
-use App\Models\Doctor;
-use App\Models\DoctorTimeOff;
+use App\Actions\Room\TimeOff\RoomTimeOffCreateAction;
+use App\Models\Room;
+use App\Models\RoomTimeOff;
 use Illuminate\Validation\ValidationException;
 
 use function Pest\Laravel\assertDatabaseCount;
 
 test('should not allow overlapping time off', function () {
-    $doctor = Doctor::factory()->create();
+    $doctor = Room::factory()->create();
     $doctor->timeOff()->create([
         'start_at' => '2024-06-01 09:00:00',
         'end_at' => '2024-06-01 11:00:00',
@@ -22,7 +22,7 @@ test('should not allow overlapping time off', function () {
 });
 
 test('should create time off when no overlap', function () {
-    $doctor = Doctor::factory()->create();
+    $doctor = Room::factory()->create();
     $doctor->timeOff()->create([
         'start_at' => '2024-06-01 13:00:00',
         'end_at' => '2024-06-01 14:00:00',
@@ -31,7 +31,7 @@ test('should create time off when no overlap', function () {
     $service = app(RoomTimeOffCreateAction::class);
     $result = $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00'));
 
-    expect($result)->toBeInstanceOf(DoctorTimeOff::class);
+    expect($result)->toBeInstanceOf(RoomTimeOff::class);
 
-    assertDatabaseCount(DoctorTimeOff::class, 2);
+    assertDatabaseCount(RoomTimeOff::class, 2);
 });
