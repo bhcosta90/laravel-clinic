@@ -20,21 +20,21 @@ final class DoctorTimeOffController
         return DoctorTimeOffResource::collection(DoctorTimeOff::all());
     }
 
-    public function store(DoctorTimeOffRequest $request)
+    public function store(DoctorTimeOffRequest $request): DoctorTimeOffResource
     {
         $this->authorize('create', DoctorTimeOff::class);
 
-        return new DoctorTimeOffResource(DoctorTimeOff::create($request->validated()));
+        return new DoctorTimeOffResource(DoctorTimeOff::query()->create($request->validated()));
     }
 
-    public function show(DoctorTimeOff $doctorTimeOff)
+    public function show(DoctorTimeOff $doctorTimeOff): DoctorTimeOffResource
     {
         $this->authorize('view', $doctorTimeOff);
 
         return new DoctorTimeOffResource($doctorTimeOff);
     }
 
-    public function update(DoctorTimeOffRequest $request, DoctorTimeOff $doctorTimeOff)
+    public function update(DoctorTimeOffRequest $request, DoctorTimeOff $doctorTimeOff): DoctorTimeOffResource
     {
         $this->authorize('update', $doctorTimeOff);
 

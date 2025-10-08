@@ -15,10 +15,10 @@ final class DoctorVerifyTimeOff
         DateTimeInterface $endAt,
         ?int $id = null,
     ): bool {
-        return $doctor->timeOff()->where(function ($query) use ($startAt, $endAt) {
+        return $doctor->timeOff()->where(function ($query) use ($startAt, $endAt): void {
             $query->whereBetween('start_at', [$startAt, $endAt])
                 ->orWhereBetween('end_at', [$startAt, $endAt])
-                ->orWhere(function ($q) use ($startAt, $endAt) {
+                ->orWhere(function ($q) use ($startAt, $endAt): void {
                     $q->where('start_at', '<', $startAt)
                         ->where('end_at', '>', $endAt);
                 });

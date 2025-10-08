@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('doctor_time_offs', function (Blueprint $table) {
+        Schema::create('doctor_time_offs', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('doctor_id')->constrained('doctors');
             $table->dateTime('start_at');
