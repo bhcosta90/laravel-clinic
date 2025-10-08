@@ -14,9 +14,4 @@ final class RoomRequest extends FormRequest
             'name' => ['required'],
         ];
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }
