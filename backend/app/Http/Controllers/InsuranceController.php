@@ -8,12 +8,14 @@ use App\Http\Requests\InsuranceRequest;
 use App\Http\Resources\InsuranceResource;
 use App\Models\Insurance;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 final class InsuranceController
 {
     use AuthorizesRequests;
 
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         $this->authorize('viewAny', Insurance::class);
 
@@ -43,7 +45,7 @@ final class InsuranceController
         return new InsuranceResource($insurance);
     }
 
-    public function destroy(Insurance $insurance)
+    public function destroy(Insurance $insurance): JsonResponse
     {
         $this->authorize('delete', $insurance);
 

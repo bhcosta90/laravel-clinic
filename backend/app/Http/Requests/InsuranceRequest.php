@@ -19,9 +19,4 @@ final class InsuranceRequest extends FormRequest
             'max_appointments_per_patient_month' => ['required', 'integer'],
         ];
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }

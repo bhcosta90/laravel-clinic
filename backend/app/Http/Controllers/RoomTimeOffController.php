@@ -8,12 +8,14 @@ use App\Http\Requests\RoomTimeOffRequest;
 use App\Http\Resources\RoomTimeOffResource;
 use App\Models\RoomTimeOff;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 final class RoomTimeOffController
 {
     use AuthorizesRequests;
 
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         $this->authorize('viewAny', RoomTimeOff::class);
 
@@ -43,7 +45,7 @@ final class RoomTimeOffController
         return new RoomTimeOffResource($roomTimeOff);
     }
 
-    public function destroy(RoomTimeOff $roomTimeOff)
+    public function destroy(RoomTimeOff $roomTimeOff): JsonResponse
     {
         $this->authorize('delete', $roomTimeOff);
 
