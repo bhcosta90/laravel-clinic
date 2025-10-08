@@ -21,7 +21,7 @@ final readonly class DoctorTimeOffCreateAction
         ?string $reason = null,
     ): DoctorTimeOff {
 
-        $existTimeOff = $this->verifyTimeOff->execute($doctor, $startAt, $endAt, null);
+        $existTimeOff = $this->verifyTimeOff->execute($doctor, $startAt, $endAt);
 
         if ($existTimeOff) {
             throw ValidationException::withMessages([
