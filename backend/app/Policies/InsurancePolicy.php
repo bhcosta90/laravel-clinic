@@ -12,17 +12,38 @@ final class InsurancePolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool {}
+    public function viewAny(User $user): true
+    {
+        return true;
+    }
 
-    public function view(User $user, Insurance $insurance): bool {}
+    public function view(User $user, Insurance $insurance): true
+    {
+        return true;
+    }
 
-    public function create(User $user): bool {}
+    public function create(User $user): true
+    {
+        return true;
+    }
 
-    public function update(User $user, Insurance $insurance): bool {}
+    public function update(User $user, Insurance $insurance): true
+    {
+        return true;
+    }
 
-    public function delete(User $user, Insurance $insurance): bool {}
+    public function delete(User $user, Insurance $insurance): true
+    {
+        return true;
+    }
 
-    public function restore(User $user, Insurance $insurance): bool {}
+    public function restore(User $user, Insurance $insurance): true
+    {
+        return true;
+    }
 
-    public function forceDelete(User $user, Insurance $insurance): bool {}
+    public function forceDelete(User $user, Insurance $insurance): true
+    {
+        return true;
+    }
 }
