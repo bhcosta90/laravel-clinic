@@ -32,25 +32,25 @@ final class RoomController
         return new RoomResource($action->execute($request->validated()['name']));
     }
 
-    public function show(Room $procedure): RoomResource
+    public function show(Room $room): RoomResource
     {
-        $this->authorize('view', $procedure);
+        $this->authorize('view', $room);
 
-        return new RoomResource($procedure);
+        return new RoomResource($room);
     }
 
-    public function update(RoomRequest $request, Room $procedure, RoomUpdateAction $action): RoomResource
+    public function update(RoomRequest $request, Room $room, RoomUpdateAction $action): RoomResource
     {
-        $this->authorize('update', $procedure);
+        $this->authorize('update', $room);
 
-        return new RoomResource($action->execute($procedure, $request->validated()['name']));
+        return new RoomResource($action->execute($room, $request->validated()['name']));
     }
 
-    public function destroy(Room $procedure, RoomDeleteAction $action): JsonResponse
+    public function destroy(Room $room, RoomDeleteAction $action): JsonResponse
     {
-        $this->authorize('delete', $procedure);
+        $this->authorize('delete', $room);
 
-        $action->execute($procedure);
+        $action->execute($room);
 
         return response()->json(status: 204);
     }
