@@ -12,8 +12,8 @@ final class DoctorTimeOffRequest extends FormRequest
     {
         return [
             'doctor_id' => ['required', 'exists:doctors'],
-            'start_at' => ['required', 'date'],
-            'end_at' => ['required', 'date'],
+            'start_at' => ['required', 'date', 'date_format:Y-m-d H:i'],
+            'end_at' => ['required', 'date', 'date_format:Y-m-d H:i'],
             'reason' => ['required'],
         ];
     }

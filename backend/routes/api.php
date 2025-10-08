@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn (): View => view('welcome'));
 
+Route::prefix('doctors')->group(function () {
+    Route::apiResource('time-offs', Controllers\Doctor\TimeOffController::class);
+});
+
+Route::prefix('rooms')->group(function () {
+    Route::apiResource('time-offs', Controllers\Doctor\TimeOffController::class);
+});
+
 Route::apiResource('doctors', Controllers\DoctorController::class);
 Route::apiResource('specialties', Controllers\SpecialtyController::class);
 Route::apiResource('procedures', Controllers\ProcedureController::class);
