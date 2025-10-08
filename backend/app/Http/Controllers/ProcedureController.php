@@ -22,7 +22,7 @@ final readonly class ProcedureController
     {
         $this->authorize('viewAny', Procedure::class);
 
-        return ProcedureResource::collection(Procedure::all());
+        return ProcedureResource::collection(Procedure::query()->simplePaginate());
     }
 
     public function store(ProcedureRequest $request, ProcedureCreateAction $action): ProcedureResource

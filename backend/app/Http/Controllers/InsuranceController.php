@@ -19,7 +19,7 @@ final class InsuranceController
     {
         $this->authorize('viewAny', Insurance::class);
 
-        return InsuranceResource::collection(Insurance::all());
+        return InsuranceResource::collection(Insurance::query()->simplePaginate());
     }
 
     public function store(InsuranceRequest $request): InsuranceResource

@@ -22,7 +22,7 @@ final readonly class RoomController
     {
         $this->authorize('viewAny', Room::class);
 
-        return RoomResource::collection(Room::all());
+        return RoomResource::collection(Room::query()->simplePaginate());
     }
 
     public function store(RoomRequest $request, RoomCreateAction $action): RoomResource

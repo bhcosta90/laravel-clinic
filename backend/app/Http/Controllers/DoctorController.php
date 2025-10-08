@@ -22,7 +22,7 @@ final readonly class DoctorController
     {
         $this->authorize('viewAny', Doctor::class);
 
-        return DoctorResource::collection(Doctor::all());
+        return DoctorResource::collection(Doctor::query()->simplePaginate());
     }
 
     public function store(DoctorRequest $request, DoctorCreateAction $action): JsonResponse

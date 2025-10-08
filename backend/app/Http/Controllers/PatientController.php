@@ -22,7 +22,7 @@ final class PatientController
     {
         $this->authorize('viewAny', Patient::class);
 
-        return PatientResource::collection(Patient::all());
+        return PatientResource::collection(Patient::query()->simplePaginate());
     }
 
     public function store(PatientRequest $request, PatientCreateAction $action): PatientResource

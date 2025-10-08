@@ -22,7 +22,7 @@ final readonly class SpecialtyController
     {
         $this->authorize('viewAny', Specialty::class);
 
-        return SpecialtyResource::collection(Specialty::all());
+        return SpecialtyResource::collection(Specialty::query()->simplePaginate());
     }
 
     public function store(SpecialtyRequest $request, SpecialtyCreateAction $action): SpecialtyResource
