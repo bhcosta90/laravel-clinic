@@ -11,13 +11,13 @@ test('doctor index returns 200', function () {
 });
 
 test('doctor store returns 201', function () {
-    $response = $this->post(action([DoctorController::class, 'store'], ['name' => 'Doctor Test', 'crm' => '123456']));
+    $response = $this->post(action([DoctorController::class, 'store'], ['name' => 'Shared Test', 'crm' => '123456']));
     $response->assertStatus(201);
 });
 
 test('doctor store with password returns 201 and hashes password', function () {
     $response = $this->post(action([DoctorController::class, 'store'], [
-        'name' => 'Doctor Test',
+        'name' => 'Shared Test',
         'crm' => '123456',
         'password' => 'secret123',
     ]));
@@ -41,7 +41,7 @@ test('doctor update returns 200', function () {
 
     $response = $this->put(action([DoctorController::class, 'update'], [
         'doctor' => $doctor->id,
-        'name' => 'Doctor Test',
+        'name' => 'Shared Test',
         'crm' => '123456',
     ]));
     $response->assertStatus(200);

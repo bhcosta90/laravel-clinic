@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Query\Doctor;
+namespace App\Query\Shared;
 
 use App\Models\Doctor;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
 
-final class DoctorVerifyTimeOff
+final class TimeOffVerify
 {
     public function execute(
         Doctor $doctor,

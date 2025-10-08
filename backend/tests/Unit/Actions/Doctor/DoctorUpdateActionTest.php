@@ -10,7 +10,7 @@ use function Pest\Laravel\assertDatabaseHas;
 test('update doctor action', function () {
     $doctor = Doctor::factory()->create();
 
-    $newName = 'Updated Doctor';
+    $newName = 'Updated Shared';
     $newCrm = 'new-crm';
 
     $response = app(DoctorUpdateAction::class)->execute($doctor, $newName, $newCrm);

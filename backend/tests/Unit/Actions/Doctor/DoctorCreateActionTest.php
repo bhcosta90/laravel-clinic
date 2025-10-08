@@ -10,7 +10,7 @@ use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 
 test('create doctor action', function () {
-    $name = 'Test Doctor';
+    $name = 'Test Shared';
     $crm = 'crm';
 
     $doctor = app(DoctorCreateAction::class)->execute($name, $crm, 'password');

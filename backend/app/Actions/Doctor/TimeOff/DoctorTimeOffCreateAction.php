@@ -6,13 +6,13 @@ namespace App\Actions\Doctor\TimeOff;
 
 use App\Models\Doctor;
 use App\Models\DoctorTimeOff;
-use App\Query\Doctor\DoctorVerifyTimeOff;
+use App\Query\Shared\TimeOffVerify;
 use DateTimeInterface;
 use Illuminate\Validation\ValidationException;
 
 final readonly class DoctorTimeOffCreateAction
 {
-    public function __construct(private DoctorVerifyTimeOff $verifyTimeOff) {}
+    public function __construct(private TimeOffVerify $verifyTimeOff) {}
 
     public function execute(
         Doctor $doctor,
