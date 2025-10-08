@@ -8,7 +8,7 @@ use App\Models\Doctor;
 use App\Models\User;
 use SensitiveParameter;
 
-final class DoctorCreateAction
+final readonly class DoctorCreateAction
 {
     public function execute(string $name, string $crm, #[SensitiveParameter] string $password): Doctor
     {

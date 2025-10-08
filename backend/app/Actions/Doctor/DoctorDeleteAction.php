@@ -6,7 +6,7 @@ namespace App\Actions\Doctor;
 
 use App\Models\Doctor;
 
-final class DoctorDeleteAction
+final readonly class DoctorDeleteAction
 {
     public function execute(Doctor $doctor): bool
     {

@@ -6,7 +6,7 @@ namespace App\Actions\Specialty\FromDoctor;
 
 use App\Models\Specialty;
 
-final class FromDoctorRemoveSpecialty
+final readonly class FromDoctorRemoveSpecialty
 {
     /**
      * @param  array<int>  $doctorsIds

@@ -6,7 +6,7 @@ namespace App\Actions\Room;
 
 use App\Models\Room;
 
-final class RoomUpdateAction
+final readonly class RoomUpdateAction
 {
     public function execute(Room $model, string $name): Room
     {

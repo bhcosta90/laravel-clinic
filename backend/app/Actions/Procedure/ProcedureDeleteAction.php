@@ -6,7 +6,7 @@ namespace App\Actions\Procedure;
 
 use App\Models\Procedure;
 
-final class ProcedureDeleteAction
+final readonly class ProcedureDeleteAction
 {
     public function execute(Procedure $model): bool
     {

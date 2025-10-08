@@ -6,7 +6,7 @@ namespace App\Actions\Specialty;
 
 use App\Models\Specialty;
 
-final class SpecialtyDeleteAction
+final readonly class SpecialtyDeleteAction
 {
     public function execute(Specialty $model): bool
     {

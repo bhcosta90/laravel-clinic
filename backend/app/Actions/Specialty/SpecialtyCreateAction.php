@@ -6,7 +6,7 @@ namespace App\Actions\Specialty;
 
 use App\Models\Specialty;
 
-final class SpecialtyCreateAction
+final readonly class SpecialtyCreateAction
 {
     public function execute(string $name): Specialty
     {

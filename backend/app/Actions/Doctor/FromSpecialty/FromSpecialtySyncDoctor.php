@@ -6,7 +6,7 @@ namespace App\Actions\Doctor\FromSpecialty;
 
 use App\Models\Doctor;
 
-final class FromSpecialtySyncDoctor
+final readonly class FromSpecialtySyncDoctor
 {
     /**
      * @param  array<int>  $specialties

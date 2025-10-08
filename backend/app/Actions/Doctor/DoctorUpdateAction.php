@@ -6,7 +6,7 @@ namespace App\Actions\Doctor;
 
 use App\Models\Doctor;
 
-final class DoctorUpdateAction
+final readonly class DoctorUpdateAction
 {
     public function execute(Doctor $model, string $name, string $crm): Doctor
     {

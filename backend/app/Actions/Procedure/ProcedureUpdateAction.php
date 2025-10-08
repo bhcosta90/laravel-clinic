@@ -6,7 +6,7 @@ namespace App\Actions\Procedure;
 
 use App\Models\Procedure;
 
-final class ProcedureUpdateAction
+final readonly class ProcedureUpdateAction
 {
     public function execute(Procedure $model, string $name): Procedure
     {

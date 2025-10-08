@@ -6,7 +6,7 @@ namespace App\Actions\Room;
 
 use App\Models\Room;
 
-final class RoomDeleteAction
+final readonly class RoomDeleteAction
 {
     public function execute(Room $model): bool
     {
