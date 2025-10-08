@@ -8,9 +8,6 @@ use App\Models\Specialty;
 
 final readonly class FromDoctorSyncSpecialty
 {
-    /**
-     * @param  array<int>  $doctorsIds
-     */
     public function execute(Specialty $specialty, array $doctorsIds): void
     {
         $specialty->doctors()->sync($doctorsIds);

@@ -8,9 +8,6 @@ use App\Models\Doctor;
 
 final readonly class FromSpecialtyRemoveDoctor
 {
-    /**
-     * @param  array<int>  $specialties
-     */
     public function execute(Doctor $doctor, array $specialties): void
     {
         if ($specialties === []) {

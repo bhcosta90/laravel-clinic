@@ -8,9 +8,6 @@ use App\Models\Specialty;
 
 final readonly class FromDoctorAddSpecialty
 {
-    /**
-     * @param  array<int>  $doctors
-     */
     public function execute(Specialty $specialty, array $doctors): void
     {
         if ($doctors === []) {
