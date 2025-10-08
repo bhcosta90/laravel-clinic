@@ -21,14 +21,11 @@ final class Insurance extends Model
         'max_appointments_per_patient_month',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'allowed_weekdays' => 'array',
-            'min_days_in_advance' => 'integer',
-            'max_monthly_appointments' => 'integer',
-            'max_total_appointments' => 'integer',
-            'max_appointments_per_patient_month' => 'integer',
-        ];
-    }
+    protected $casts = [
+        'allowed_weekdays' => 'array',
+        'min_days_in_advance' => 'integer',
+        'max_monthly_appointments' => 'integer',
+        'max_total_appointments' => 'integer',
+        'max_appointments_per_patient_month' => 'integer',
+    ];
 }
