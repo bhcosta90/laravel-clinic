@@ -17,9 +17,4 @@ final class RoomTimeOffRequest extends FormRequest
             'reason' => ['nullable'],
         ];
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }
