@@ -20,21 +20,21 @@ final class InsuranceController
         return InsuranceResource::collection(Insurance::all());
     }
 
-    public function store(InsuranceRequest $request)
+    public function store(InsuranceRequest $request): InsuranceResource
     {
         $this->authorize('create', Insurance::class);
 
-        return new InsuranceResource(Insurance::create($request->validated()));
+        return new InsuranceResource(Insurance::query()->create($request->validated()));
     }
 
-    public function show(Insurance $insurance)
+    public function show(Insurance $insurance): InsuranceResource
     {
         $this->authorize('view', $insurance);
 
         return new InsuranceResource($insurance);
     }
 
-    public function update(InsuranceRequest $request, Insurance $insurance)
+    public function update(InsuranceRequest $request, Insurance $insurance): InsuranceResource
     {
         $this->authorize('update', $insurance);
 

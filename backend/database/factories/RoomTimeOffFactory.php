@@ -9,6 +9,9 @@ use App\Models\RoomTimeOff;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RoomTimeOff>
+ */
 final class RoomTimeOffFactory extends Factory
 {
     protected $model = RoomTimeOff::class;

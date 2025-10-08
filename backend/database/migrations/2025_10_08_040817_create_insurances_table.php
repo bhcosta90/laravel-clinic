@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('insurances', function (Blueprint $table) {
+        Schema::create('insurances', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->unsignedInteger('min_days_in_advance');

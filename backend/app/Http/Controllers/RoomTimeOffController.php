@@ -20,21 +20,21 @@ final class RoomTimeOffController
         return RoomTimeOffResource::collection(RoomTimeOff::all());
     }
 
-    public function store(RoomTimeOffRequest $request)
+    public function store(RoomTimeOffRequest $request): RoomTimeOffResource
     {
         $this->authorize('create', RoomTimeOff::class);
 
-        return new RoomTimeOffResource(RoomTimeOff::create($request->validated()));
+        return new RoomTimeOffResource(RoomTimeOff::query()->create($request->validated()));
     }
 
-    public function show(RoomTimeOff $roomTimeOff)
+    public function show(RoomTimeOff $roomTimeOff): RoomTimeOffResource
     {
         $this->authorize('view', $roomTimeOff);
 
         return new RoomTimeOffResource($roomTimeOff);
     }
 
-    public function update(RoomTimeOffRequest $request, RoomTimeOff $roomTimeOff)
+    public function update(RoomTimeOffRequest $request, RoomTimeOff $roomTimeOff): RoomTimeOffResource
     {
         $this->authorize('update', $roomTimeOff);
 
