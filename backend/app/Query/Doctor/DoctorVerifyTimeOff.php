@@ -7,7 +7,6 @@ namespace App\Query\Doctor;
 use App\Models\Doctor;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class DoctorVerifyTimeOff
 {
@@ -16,7 +15,7 @@ final class DoctorVerifyTimeOff
         DateTimeInterface $startAt,
         DateTimeInterface $endAt,
         ?int $id = null,
-    ): HasMany {
+    ): bool {
         return $doctor->timeOff()->where(function (Builder $query) use ($startAt, $endAt): void {
             $query->whereBetween('start_at', [$startAt, $endAt])
                 ->orWhereBetween('end_at', [$startAt, $endAt])
@@ -25,6 +24,6 @@ final class DoctorVerifyTimeOff
                         ->where('end_at', '>', $endAt);
                 });
         })
-            ->when($id, fn (Builder $query) => $query->where('id', '!=', $id));
+            ->when($id, fn (Builder $query) => $query->where('id', '!=', $id))->exists();
     }
 }

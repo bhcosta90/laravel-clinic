@@ -13,7 +13,7 @@ test('returns true when there is a time off conflict due to overlapping interval
     ]);
 
     $service = app(DoctorVerifyTimeOff::class);
-    $result = $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00'))->exists();
+    $result = $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00'));
 
     expect($result)->toBeTrue();
 });
@@ -26,7 +26,7 @@ test('returns false when there is no time off conflict', function () {
     ]);
 
     $service = app(DoctorVerifyTimeOff::class);
-    $result = $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00'))->exists();
+    $result = $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00'));
 
     expect($result)->toBeFalse();
 });
@@ -39,7 +39,7 @@ test('ignores time off with the same id as provided', function () {
     ]);
 
     $service = app(DoctorVerifyTimeOff::class);
-    $result = $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00'), $timeOff->id)->exists();
+    $result = $service->execute($doctor, new DateTimeImmutable('2024-06-01 10:00'), new DateTimeImmutable('2024-06-01 12:00'), $timeOff->id);
 
     expect($result)->toBeFalse();
 });
