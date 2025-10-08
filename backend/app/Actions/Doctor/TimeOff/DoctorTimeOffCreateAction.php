@@ -21,9 +21,7 @@ final readonly class DoctorTimeOffCreateAction
         ?string $reason = null,
     ): DoctorTimeOff {
 
-        $existTimeOff = $this->verifyTimeOff->execute($doctor, $startAt, $endAt);
-
-        throw_if($existTimeOff, ValidationException::withMessages([
+        throw_if($this->verifyTimeOff->execute($doctor, $startAt, $endAt), ValidationException::withMessages([
             'time_off' => ['The doctor already has a time off during this period.'],
         ]));
 
