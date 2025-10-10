@@ -23,7 +23,7 @@ test('doctor store with password returns 201 and hashes password', function () {
     ]));
     $response->assertStatus(201);
 
-    $doctor = Doctor::where('crm', '123456')->first();
+    $doctor = Doctor::query()->where('crm', '123456')->first();
     expect(Illuminate\Support\Facades\Hash::check('secret123', $doctor->user->password))->toBeTrue();
 });
 
