@@ -17,7 +17,7 @@ use App\Models\User;
 use Illuminate\Support\Sleep;
 
 pest()->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\LazilyRefreshDatabase::class)
+    ->use(Illuminate\Foundation\Testing\DatabaseTransactions::class)
     ->beforeEach(function () {
         Str::createRandomStringsNormally();
         Str::createUuidsNormally();
